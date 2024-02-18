@@ -3,7 +3,7 @@
     /// <summary>
     /// Specifies the intended applications.
     /// </summary>
-    public enum Application
+    public enum Application : int
     {
         /// <summary>
         /// Best for most VoIP/videoconference applications where listening quality and intelligibility matter most.

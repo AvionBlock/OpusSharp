@@ -3,7 +3,7 @@
     /// <summary>
     /// Specifies the type of opus error.
     /// </summary>
-    public enum OpusError
+    public enum OpusError : int
     {
         /// <summary>
         /// No error.

@@ -25,10 +25,8 @@ namespace OpusSharp
         [DllImport("opus", EntryPoint = "opus_encoder_destroy", CallingConvention = CallingConvention.Cdecl)]
         public static extern void opus_encoder_destroy(IntPtr st);
 
-        /* No idea how to convert ... to C# literal.
         [DllImport("opus", EntryPoint = "opus_encoder_ctl", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_encoder_ctl(IntPtr st, int request, ...);
-        */
+        public static extern int opus_encoder_ctl(IntPtr st, int request, int value);
         #endregion
 
         #region Decoder
@@ -47,10 +45,8 @@ namespace OpusSharp
         [DllImport("opus", EntryPoint = "opus_decode_float", CallingConvention = CallingConvention.Cdecl)]
         public static extern int opus_decode_float(IntPtr st, IntPtr data, int len, IntPtr pcm, int frame_size, int decode_fec);
 
-        /* No idea how to convert ... to C# literal.
         [DllImport("opus", EntryPoint = "opus_decoder_ctl", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_decoder_ctl(IntPtr st, int request, ...);
-        */
+        public static extern int opus_decoder_ctl(IntPtr st, int request, int value);
 
         [DllImport("opus", EntryPoint = "opus_decoder_destroy", CallingConvention = CallingConvention.Cdecl)]
         public static extern void opus_decoder_destroy(IntPtr st);
