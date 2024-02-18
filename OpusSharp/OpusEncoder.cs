@@ -12,6 +12,7 @@ namespace OpusSharp
 
         private int bitrate;
         private int complexity;
+        private int packetLossPerc;
         private OpusSignal signal;
         private bool isDisposed;
 
@@ -36,6 +37,15 @@ namespace OpusSharp
                 complexity = value;
             }
         }
+        public int PacketLossPerc
+        {
+            get => packetLossPerc;
+            set
+            {
+                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.SET_PACKET_LOSS_PERC, value));
+                PacketLossPerc = value;
+            }
+        }
         public OpusSignal Signal
         {
             get => signal;
@@ -58,6 +68,7 @@ namespace OpusSharp
             Bitrate = 32000;
             Complexity = 1;
             Signal = OpusSignal.Auto;
+            PacketLossPerc = 0;
         }
 
         public unsafe int Encode(byte[] input, int frame_size, byte[] output)
@@ -98,7 +109,7 @@ namespace OpusSharp
             if (!isDisposed)
             {
                 if (Encoder != IntPtr.Zero)
-                    NativeOpus.opus_decoder_destroy(Encoder);
+                    NativeOpus.opus_encoder_destroy(Encoder);
 
                 if (!isDisposed)
                     isDisposed = true;
