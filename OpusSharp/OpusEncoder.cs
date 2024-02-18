@@ -16,9 +16,24 @@ namespace OpusSharp
         private OpusSignal signal;
         private bool isDisposed;
 
+        /// <summary>
+        /// The coding mode that the encoder is set to.
+        /// </summary>
         public Application OpusApplication { get; }
+
+        /// <summary>
+        /// Sampling rate of input signal (Hz) This must be one of 8000, 12000, 16000, 24000, or 48000.
+        /// </summary>
         public int SampleRate { get; }
+
+        /// <summary>
+        /// Number of channels (1 or 2) in input signal.
+        /// </summary>
         public int Channels { get; }
+
+        /// <summary>
+        /// Configures the bitrate in the encoder.
+        /// </summary>
         public int Bitrate 
         { 
             get => bitrate; 
@@ -28,6 +43,9 @@ namespace OpusSharp
                 bitrate = value;
             }
         }
+        /// <summary>
+        /// Configures the encoder's computational complexity. The supported range is 0-10 inclusive with 10 representing the highest complexity.
+        /// </summary>
         public int Complexity
         {
             get => complexity;
@@ -37,6 +55,9 @@ namespace OpusSharp
                 complexity = value;
             }
         }
+        /// <summary>
+        /// Configures the encoder's expected packet loss percentage. Loss percentage in the range 0-100, inclusive (default: 0).
+        /// </summary>
         public int PacketLossPerc
         {
             get => packetLossPerc;
@@ -46,6 +67,9 @@ namespace OpusSharp
                 PacketLossPerc = value;
             }
         }
+        /// <summary>
+        /// Configures the type of signal being encoded.
+        /// </summary>
         public OpusSignal Signal
         {
             get => signal;
@@ -56,7 +80,12 @@ namespace OpusSharp
             }
         }
 
-
+        /// <summary>
+        /// Creates and initializes an opus encoder.
+        /// </summary>
+        /// <param name="SampleRate">Sampling rate of input signal (Hz) This must be one of 8000, 12000, 16000, 24000, or 48000.</param>
+        /// <param name="Channels">Number of channels (1 or 2) in input signal.</param>
+        /// <param name="Application">The coding mode that the encoder should set to.</param>
         public OpusEncoder(int SampleRate, int Channels, Application Application)
         {
             this.SampleRate = SampleRate;
@@ -66,11 +95,20 @@ namespace OpusSharp
             Encoder = NativeOpus.opus_encoder_create(SampleRate, Channels, (int)Application, out var Error);
             CheckError((int)Error);
             Bitrate = 32000;
-            Complexity = 1;
+            Complexity = 0;
             Signal = OpusSignal.Auto;
             PacketLossPerc = 0;
         }
 
+        /// <summary>
+        /// Encodes an Opus frame.
+        /// </summary>
+        /// <param name="input">Input signal (interleaved if 2 channels). length is frame_size*channels*sizeof(short)</param>
+        /// <param name="frame_size">Number of samples per channel in the input signal. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
+        /// <param name="output">Output payload</param>
+        /// <param name="inputOffset">Offset to start reading in the input.</param>
+        /// <param name="outputOffset">Offset to start writing in the output.</param>
+        /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see Error codes) on failure.</returns>
         public unsafe int Encode(byte[] input, int frame_size, byte[] output, int inputOffset = 0, int outputOffset = 0)
         {
             int result = (int)OpusError.OK;
@@ -82,6 +120,15 @@ namespace OpusSharp
             return result;
         }
 
+        /// <summary>
+        /// Encodes an Opus frame.
+        /// </summary>
+        /// <param name="input">Input in float format (interleaved if 2 channels), with a normal range of +/-1.0. Samples with a range beyond +/-1.0 are supported but will be clipped by decoders using the integer API and should only be used if it is known that the far end supports extended dynamic range. length is frame_size*channels*sizeof(float)</param>
+        /// <param name="frame_size">Number of samples per channel in the input signal. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
+        /// <param name="output">Output payload</param>
+        /// <param name="inputOffset">Offset to start reading in the input.</param>
+        /// <param name="outputOffset">Offset to start writing in the output.</param>
+        /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see Error codes) on failure.</returns>
         public unsafe int EncodeFloat(float[] input, int frame_size, byte[] output, int inputOffset = 0, int outputOffset = 0)
         {
             int result = (int)OpusError.OK;
@@ -92,7 +139,11 @@ namespace OpusSharp
             CheckError(result);
             return result;
         }
-
+        /// <summary>
+        /// Gets the size of an OpusEncoder structure.
+        /// </summary>
+        /// <param name="channels">Number of channels. This must be 1 or 2.</param>
+        /// <returns>The size in bytes.</returns>
         public int GetSize(int channels)
         {
             return NativeOpus.opus_encoder_get_size(channels);
