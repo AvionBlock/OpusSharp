@@ -8,23 +8,112 @@ namespace OpusSharp
     /// </summary>
     public class OpusEncoder : IDisposable
     {
-        protected IntPtr Encoder {  get; }
+        protected IntPtr Encoder { get; }
 
+        private int bitrate;
+        private int complexity;
+        private OpusSignal signal;
+        private bool isDisposed;
+
+        public Application OpusApplication { get; }
         public int SampleRate { get; }
         public int Channels { get; }
+        public int Bitrate 
+        { 
+            get => bitrate; 
+            set
+            {
+                NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.SET_BITRATE, value);
+                bitrate = value;
+            }
+        }
+        public int Complexity
+        {
+            get => complexity;
+            set
+            {
+                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.SET_COMPLEXITY, value));
+                complexity = value;
+            }
+        }
+        public OpusSignal Signal
+        {
+            get => signal;
+            set
+            {
+                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.SET_SIGNAL, (int)value));
+                signal = value;
+            }
+        }
 
 
         public OpusEncoder(int SampleRate, int Channels, Application Application)
         {
             this.SampleRate = SampleRate;
             this.Channels = Channels;
+            OpusApplication = Application;
 
             Encoder = NativeOpus.opus_encoder_create(SampleRate, Channels, (int)Application, out var Error);
+            CheckError((int)Error);
+            Bitrate = 32000;
+            Complexity = 1;
+            Signal = OpusSignal.Auto;
+        }
+
+        public unsafe int Encode(byte[] input, int frame_size, byte[] output)
+        {
+            int result = (int)OpusError.OK;
+            fixed (byte* inPtr = input)
+            fixed (byte* outPtr = output)
+                NativeOpus.opus_encode(Encoder, (IntPtr)inPtr, frame_size, (IntPtr)outPtr, output.Length);
+
+            CheckError(result);
+            return result;
+        }
+
+        public unsafe int EncodeFloat(float[] input, int frame_size, byte[] output)
+        {
+            int result = (int)OpusError.OK;
+            fixed (float* inPtr = input)
+            fixed (byte* outPtr = output)
+                NativeOpus.opus_encode_float(Encoder, (IntPtr)inPtr, frame_size, (IntPtr)outPtr, output.Length);
+
+            CheckError(result);
+            return result;
+        }
+
+        public int GetSize(int channels)
+        {
+            return NativeOpus.opus_encoder_get_size(channels);
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected void Dispose(bool disposing)
+        {
+            if (!isDisposed)
+            {
+                if (Encoder != IntPtr.Zero)
+                    NativeOpus.opus_decoder_destroy(Encoder);
+
+                if (!isDisposed)
+                    isDisposed = true;
+            }
+        }
+
+        ~OpusEncoder()
+        {
+            Dispose(false);
+        }
+
+        protected static void CheckError(int result)
+        {
+            if (result < 0)
+                throw new Exception($"Opus Error: {(OpusError)result}");
         }
     }
 }
