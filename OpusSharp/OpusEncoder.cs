@@ -71,23 +71,23 @@ namespace OpusSharp
             PacketLossPerc = 0;
         }
 
-        public unsafe int Encode(byte[] input, int frame_size, byte[] output)
+        public unsafe int Encode(byte[] input, int frame_size, byte[] output, int inputOffset = 0, int outputOffset = 0)
         {
             int result = (int)OpusError.OK;
             fixed (byte* inPtr = input)
             fixed (byte* outPtr = output)
-                NativeOpus.opus_encode(Encoder, (IntPtr)inPtr, frame_size, (IntPtr)outPtr, output.Length);
+                NativeOpus.opus_encode(Encoder, (IntPtr)inPtr + inputOffset, frame_size, (IntPtr)outPtr + outputOffset, output.Length - outputOffset);
 
             CheckError(result);
             return result;
         }
 
-        public unsafe int EncodeFloat(float[] input, int frame_size, byte[] output)
+        public unsafe int EncodeFloat(float[] input, int frame_size, byte[] output, int inputOffset = 0, int outputOffset = 0)
         {
             int result = (int)OpusError.OK;
             fixed (float* inPtr = input)
             fixed (byte* outPtr = output)
-                NativeOpus.opus_encode_float(Encoder, (IntPtr)inPtr, frame_size, (IntPtr)outPtr, output.Length);
+                NativeOpus.opus_encode_float(Encoder, (IntPtr)inPtr + inputOffset, frame_size, (IntPtr)outPtr + outputOffset, output.Length - outputOffset);
 
             CheckError(result);
             return result;
