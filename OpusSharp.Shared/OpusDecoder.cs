@@ -1,5 +1,4 @@
 ﻿using OpusSharp.Enums;
-using System;
 
 namespace OpusSharp
 {
