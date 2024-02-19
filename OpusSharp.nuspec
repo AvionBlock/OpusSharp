@@ -11,14 +11,14 @@
 
 	<files>
 		<!-- Android -->
-		<file src="OpusSharp.Android/bin/Release/opus.dll" target="lib/monoandroid/opus.dll"/>
-		<file src="OpusSharp.Android/bin/Release/opus.pdb" target="lib/monoandroid/opus.pdb"/>
+		<file src="OpusSharp.Android/bin/Release/net8.0-android/opus.dll" target="lib/monoandroid/opus.dll"/>
+		<file src="OpusSharp.Android/bin/Release/net8.0-android/opus.pdb" target="lib/monoandroid/opus.pdb"/>
 		<!-- iOS -->
 		<!-- Windows -->
-		<file src="OpusSharp.Wpf/bin/Release/opus.dll" target="lib/win/opus.dll" />
-		<file src="OpusSharp.Wpf/bin/Release/opus.pdb" target="lib/win/opus.pdb" />
+		<file src="OpusSharp.Wpf/bin/Release/net8.0-windows/opus.dll" target="lib/win/opus.dll" />
+		<file src="OpusSharp.Wpf/bin/Release/net8.0-windows/opus.pdb" target="lib/win/opus.pdb" />
 		<!-- netstandard2.0 -->
-		<file src="OpusSharp.Standard/bin/Release/netstandard2.0/OpusSharp.dll" target="lib/netstandard2.0/OpusSharp.dll" />
-		<file src="OpusSharp.Standard/bin/Release/netstandard2.0/OpusSharp.pdb" target="lib/netstandard2.0/OpusSharp.pdb" />
+		<file src="OpusSharp.Standard/bin/Release/netstandard2.1/OpusSharp.dll" target="lib/netstandard2.1/OpusSharp.dll" />
+		<file src="OpusSharp.Standard/bin/Release/netstandard2.1/OpusSharp.pdb" target="lib/netstandard2.1/OpusSharp.pdb" />
 	</files>
 </package>
