@@ -6,6 +6,30 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>OpusSharp</RootNamespace>
     <PackageId>OpusSharp</PackageId>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Product>OpusSharp</Product>
+    <AssemblyName>opus</AssemblyName>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <AndroidJavaSource Remove="lib\armabi-v7a\**" />
+    <AndroidLibrary Remove="lib\armabi-v7a\**" />
+    <AndroidNativeLibrary Remove="lib\armabi-v7a\**" />
+    <Compile Remove="lib\armabi-v7a\**" />
+    <EmbeddedResource Remove="lib\armabi-v7a\**" />
+    <JavaSourceJar Remove="lib\armabi-v7a\**" />
+    <None Remove="lib\armabi-v7a\**" />
+    <ProguardConfiguration Remove="lib\armabi-v7a\**" />
+    <TransformFile Remove="lib\armabi-v7a\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="lib\arm64-v8a\" />
+    <Folder Include="lib\x86_64\" />
+  </ItemGroup>
   <Import Project="..\OpusSharp.Shared\OpusSharp.Shared.projitems" Label="Shared" />
 </Project>

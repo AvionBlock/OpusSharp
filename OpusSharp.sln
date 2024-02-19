@@ -11,6 +11,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpusSharp.Android", "OpusSh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpusSharp.iOS", "OpusSharp.iOS\OpusSharp.iOS.csproj", "{53857C29-3305-4F29-9078-3B347D3D644B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpusSharp.Wpf", "OpusSharp.Wpf\OpusSharp.Wpf.csproj", "{9A7DC3F3-F4CD-42B7-9E11-B813462733B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{06668FA9-B8FC-4392-9F59-267F34E404E9}"
+	ProjectSection(SolutionItems) = preProject
+		OpusSharp.nuspec = OpusSharp.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +50,14 @@ Global
 		{53857C29-3305-4F29-9078-3B347D3D644B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{53857C29-3305-4F29-9078-3B347D3D644B}.Release|x64.ActiveCfg = Release|Any CPU
 		{53857C29-3305-4F29-9078-3B347D3D644B}.Release|x64.Build.0 = Release|Any CPU
+		{9A7DC3F3-F4CD-42B7-9E11-B813462733B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A7DC3F3-F4CD-42B7-9E11-B813462733B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A7DC3F3-F4CD-42B7-9E11-B813462733B7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9A7DC3F3-F4CD-42B7-9E11-B813462733B7}.Debug|x64.Build.0 = Debug|Any CPU
+		{9A7DC3F3-F4CD-42B7-9E11-B813462733B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A7DC3F3-F4CD-42B7-9E11-B813462733B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A7DC3F3-F4CD-42B7-9E11-B813462733B7}.Release|x64.ActiveCfg = Release|Any CPU
+		{9A7DC3F3-F4CD-42B7-9E11-B813462733B7}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +69,7 @@ Global
 		OpusSharp.Shared\OpusSharp.Shared.projitems*{20c0bfed-846b-4147-9bf4-6045cf687874}*SharedItemsImports = 5
 		OpusSharp.Shared\OpusSharp.Shared.projitems*{53857c29-3305-4f29-9078-3b347d3d644b}*SharedItemsImports = 5
 		OpusSharp.Shared\OpusSharp.Shared.projitems*{8c82c153-8e4a-48f4-8645-fa6c8e3d48e7}*SharedItemsImports = 13
+		OpusSharp.Shared\OpusSharp.Shared.projitems*{9a7dc3f3-f4cd-42b7-9e11-b813462733b7}*SharedItemsImports = 5
 		OpusSharp.Shared\OpusSharp.Shared.projitems*{c9c09121-8e78-4c6a-8f81-37ea25553a9b}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal
