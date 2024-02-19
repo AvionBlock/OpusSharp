@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>OpusSharp</RootNamespace>
+    <PackageId>OpusSharp</PackageId>
+  </PropertyGroup>
+  <Import Project="..\OpusSharp.Shared\OpusSharp.Shared.projitems" Label="Shared" />
+</Project>

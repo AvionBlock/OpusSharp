@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>OpusSharp</RootNamespace>
+    <AssemblyName>OpusSharp</AssemblyName>
+  </PropertyGroup>
+
+  <Import Project="..\OpusSharp.Shared\OpusSharp.Shared.projitems" Label="Shared" />
+
+</Project>
