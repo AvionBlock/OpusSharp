@@ -11,8 +11,8 @@
 
 	<files>
 		<!-- Android -->
-		<file src="OpusSharp.Android/bin/Release/net8.0-android/OpusSharp.dll" target="lib/MonoAndroid81/OpusSharp.dll"/>
-		<file src="OpusSharp.Android/bin/Release/net8.0-android/OpusSharp.pdb" target="lib/MonoAndroid81/OpusSharp.pdb"/>
+		<file src="OpusSharp.Android/bin/Release/net8.0-android/OpusSharp.dll" target="lib/monoandroid/OpusSharp.dll"/>
+		<file src="OpusSharp.Android/bin/Release/net8.0-android/OpusSharp.pdb" target="lib/monoandroid/OpusSharp.pdb"/>
 		<!-- iOS -->
 		<!-- netstandard2.0 -->
 		<file src="OpusSharp.Standard/bin/Release/netstandard2.1/OpusSharp.dll" target="lib/netstandard2.1/OpusSharp.dll" />
