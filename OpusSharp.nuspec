@@ -11,17 +11,18 @@
 		<dependencies>
 			<group targetFramework="netstandard2.0">
 			</group>
+			<group targetFramework="monoandroid">
+			</group>
 		</dependencies>
 	</metadata>
 
 	<files>
-		<!-- Native Android Maui -->
-		<file src="OpusSharp.Android/bin/Release/net8.0-android/OpusSharp.dll" target="lib/MonoAndroid10/OpusSharp.dll" />
-		<file src="OpusSharp.Android/bin/Release/net8.0-android/OpusSharp.pdb" target="lib/MonoAndroid10/OpusSharp.pdb" />
-
-		<!-- Native Android Xamarin -->
+		<!-- Native Android -->
+		<file src="OpusSharp.Android/bin/Release/net8.0-android/OpusSharp.dll" target="lib/monoandroid/OpusSharp.dll" />
+		<file src="OpusSharp.Android/bin/Release/net8.0-android/OpusSharp.pdb" target="lib/monoandroid/OpusSharp.pdb" />
+		<file src="OpusSharp.Android/bin/Release/net8.0-android/OpusSharp.aar" target="lib/monoandroid/OpusSharp.aar" />
 		
-		<!-- iOS -->
+		<!-- Native iOS -->
 		<!-- netstandard2.0 -->
 		<file src="OpusSharp.Standard/bin/Release/netstandard2.0/OpusSharp.dll" target="lib/netstandard2.0/OpusSharp.dll" />
 		<file src="OpusSharp.Standard/bin/Release/netstandard2.0/OpusSharp.pdb" target="lib/netstandard2.0/OpusSharp.pdb" />
