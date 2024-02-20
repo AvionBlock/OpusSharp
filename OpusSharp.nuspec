@@ -7,15 +7,23 @@
 		<description>Wrapper library for opus.</description>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<copyright>Copyright MIT</copyright>
+
+		<dependencies>
+			<group targetFramework="netstandard2.0">
+			</group>
+		</dependencies>
 	</metadata>
 
 	<files>
-		<!-- Android -->
-		<file src="OpusSharp.Android/bin/Release/net8.0-android/OpusSharp.dll" target="lib/monoandroid/OpusSharp.dll"/>
-		<file src="OpusSharp.Android/bin/Release/net8.0-android/OpusSharp.pdb" target="lib/monoandroid/OpusSharp.pdb"/>
+		<!-- Native Android Maui -->
+		<file src="OpusSharp.Android/bin/Release/net8.0-android/OpusSharp.dll" target="lib/MonoAndroid10/OpusSharp.dll" />
+		<file src="OpusSharp.Android/bin/Release/net8.0-android/OpusSharp.pdb" target="lib/MonoAndroid10/OpusSharp.pdb" />
+
+		<!-- Native Android Xamarin -->
+		
 		<!-- iOS -->
 		<!-- netstandard2.0 -->
-		<file src="OpusSharp.Standard/bin/Release/netstandard2.1/OpusSharp.dll" target="lib/netstandard2.1/OpusSharp.dll" />
-		<file src="OpusSharp.Standard/bin/Release/netstandard2.1/OpusSharp.pdb" target="lib/netstandard2.1/OpusSharp.pdb" />
+		<file src="OpusSharp.Standard/bin/Release/netstandard2.0/OpusSharp.dll" target="lib/netstandard2.0/OpusSharp.dll" />
+		<file src="OpusSharp.Standard/bin/Release/netstandard2.0/OpusSharp.pdb" target="lib/netstandard2.0/OpusSharp.pdb" />
 	</files>
 </package>

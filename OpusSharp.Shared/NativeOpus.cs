@@ -7,7 +7,7 @@ namespace OpusSharp
     internal static class NativeOpus
     {
 #if ANDROID
-        private const string DllName = "libopus-share.so";
+        private const string DllName = "libopus.so";
 #elif IOS
         private const string DllName = "__Internal";
 #else

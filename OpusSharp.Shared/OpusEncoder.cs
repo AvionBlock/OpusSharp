@@ -64,7 +64,7 @@ namespace OpusSharp
             set
             {
                 CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.SET_PACKET_LOSS_PERC, value));
-                PacketLossPerc = value;
+                packetLossPerc = value;
             }
         }
         /// <summary>
