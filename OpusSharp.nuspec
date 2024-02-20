@@ -22,6 +22,10 @@
 		<file src="OpusSharp.Android/bin/Release/net8.0-android/OpusSharp.pdb" target="lib/monoandroid/OpusSharp.pdb" />
 		<file src="OpusSharp.Android/bin/Release/net8.0-android/OpusSharp.aar" target="lib/monoandroid/OpusSharp.aar" />
 		
+		<!-- Native Windows -->
+		<file src="OpusSharp.Windows/runtimes/win-x64/native/opus.dll" target="runtimes/win-x64/native" />
+		<file src="OpusSharp.Windows/runtimes/win-x86/native/opus.dll" target="runtimes/win-x64/native" />
+		
 		<!-- Native iOS -->
 		<!-- netstandard2.0 -->
 		<file src="OpusSharp.Standard/bin/Release/netstandard2.0/OpusSharp.dll" target="lib/netstandard2.0/OpusSharp.dll" />

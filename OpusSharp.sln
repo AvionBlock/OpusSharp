@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpusSharp.Android", "OpusSh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusSharp.Standard", "OpusSharp.Standard\OpusSharp.Standard.csproj", "{3B96E291-DA80-469B-863D-52652FE3AE64}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpusSharp.Windows", "OpusSharp.Windows\OpusSharp.Windows.csproj", "{7F610AB2-3235-4E08-B9CB-13246A9DAFCF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,14 @@ Global
 		{3B96E291-DA80-469B-863D-52652FE3AE64}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3B96E291-DA80-469B-863D-52652FE3AE64}.Release|x64.ActiveCfg = Release|Any CPU
 		{3B96E291-DA80-469B-863D-52652FE3AE64}.Release|x64.Build.0 = Release|Any CPU
+		{7F610AB2-3235-4E08-B9CB-13246A9DAFCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F610AB2-3235-4E08-B9CB-13246A9DAFCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F610AB2-3235-4E08-B9CB-13246A9DAFCF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7F610AB2-3235-4E08-B9CB-13246A9DAFCF}.Debug|x64.Build.0 = Debug|Any CPU
+		{7F610AB2-3235-4E08-B9CB-13246A9DAFCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F610AB2-3235-4E08-B9CB-13246A9DAFCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F610AB2-3235-4E08-B9CB-13246A9DAFCF}.Release|x64.ActiveCfg = Release|Any CPU
+		{7F610AB2-3235-4E08-B9CB-13246A9DAFCF}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
