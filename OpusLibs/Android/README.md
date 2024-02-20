@@ -30,3 +30,6 @@ Copy each `.so` file into their respective folders in you're application like so
         - libopus.so
 
 `For Visual Studio Users`: Make sure that when you add each `.so` file to set the build action to `AndroidNativeLibrary` by right clicking on the file, clicking `properties` then select from the dropdown next to `Build Action`.
+
+# Credits
+Makefile was yoinked and edited from https://github.com/theeasiestway/android-opus-codec/blob/develop/app/src/main/jni/Android.mk
