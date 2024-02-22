@@ -114,7 +114,7 @@ namespace OpusSharp
             int result = (int)OpusError.OK;
             fixed (byte* inPtr = input)
             fixed (byte* outPtr = output)
-                NativeOpus.opus_encode(Encoder, (IntPtr)inPtr + inputOffset, frame_size, (IntPtr)outPtr + outputOffset, output.Length - outputOffset);
+                NativeOpus.opus_encode(Encoder, (IntPtr)inPtr + inputOffset, frame_size * Channels * sizeof(float), (IntPtr)outPtr + outputOffset, output.Length - outputOffset);
 
             CheckError(result);
             return result;
@@ -134,7 +134,7 @@ namespace OpusSharp
             int result = (int)OpusError.OK;
             fixed (float* inPtr = input)
             fixed (byte* outPtr = output)
-                NativeOpus.opus_encode_float(Encoder, (IntPtr)inPtr + inputOffset, frame_size, (IntPtr)outPtr + outputOffset, output.Length - outputOffset);
+                NativeOpus.opus_encode_float(Encoder, (IntPtr)inPtr + inputOffset, frame_size * Channels, (IntPtr)outPtr + outputOffset, output.Length - outputOffset);
 
             CheckError(result);
             return result;

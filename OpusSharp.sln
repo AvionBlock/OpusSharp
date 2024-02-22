@@ -58,6 +58,7 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		OpusSharp.Shared\OpusSharp.Shared.projitems*{0fe03535-7720-4d52-a53d-9820070754ab}*SharedItemsImports = 5
 		OpusSharp.Shared\OpusSharp.Shared.projitems*{3b96e291-da80-469b-863d-52652fe3ae64}*SharedItemsImports = 5
+		OpusSharp.Shared\OpusSharp.Shared.projitems*{7f610ab2-3235-4e08-b9cb-13246a9dafcf}*SharedItemsImports = 5
 		OpusSharp.Shared\OpusSharp.Shared.projitems*{8c82c153-8e4a-48f4-8645-fa6c8e3d48e7}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

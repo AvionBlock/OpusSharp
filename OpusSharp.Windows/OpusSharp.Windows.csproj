@@ -6,6 +6,9 @@
     <Nullable>enable</Nullable>
     <AssemblyName>OpusSharp</AssemblyName>
     <RootNamespace>OpusSharp</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+
+  <Import Project="..\OpusSharp.Shared\OpusSharp.Shared.projitems" Label="Shared" />
 
 </Project>
