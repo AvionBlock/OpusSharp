@@ -34,7 +34,7 @@ namespace OpusSharp
         /// <summary>
         /// Configures the bitrate in the encoder.
         /// </summary>
-        public int Bitrate 
+        public int Bitrate
         { 
             get => bitrate; 
             set
