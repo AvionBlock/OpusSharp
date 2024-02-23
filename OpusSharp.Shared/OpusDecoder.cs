@@ -20,12 +20,22 @@ namespace OpusSharp
             CheckError((int)Error);
         }
 
+        public unsafe int Decode(byte[]? input, int inputLength, short[] output, int frame_size, bool decodeFEC = false, int inputOffset = 0, int outputOffset = 0)
+        {
+            int result = 0;
+            fixed (byte* inPtr = input)
+            fixed (short* outPtr = output)
+                result = NativeOpus.opus_decode(Decoder, inPtr + inputOffset, inputLength, outPtr + outputOffset, frame_size, decodeFEC ? 1 : 0);
+            CheckError(result);
+            return result * sizeof(short) * Channels;
+        }
+
         public unsafe int Decode(byte[]? input, int inputLength, byte[] output, int frame_size, bool decodeFEC = false, int inputOffset = 0, int outputOffset = 0)
         {
             int result = 0;
             fixed (byte* inPtr = input)
             fixed (byte* outPtr = output)
-                result = NativeOpus.opus_decode(Decoder, (IntPtr)inPtr + inputOffset, inputLength, (IntPtr)outPtr + outputOffset, frame_size, decodeFEC ? 1 : 0);
+                result = NativeOpus.opus_decode(Decoder, inPtr + inputOffset, inputLength, outPtr + outputOffset, frame_size / 2, decodeFEC ? 1 : 0);
             CheckError(result);
             return result * sizeof(short) * Channels;
         }
@@ -35,7 +45,7 @@ namespace OpusSharp
             int result = 0;
             fixed (byte* inPtr = input)
             fixed (float* outPtr = output)
-                result = NativeOpus.opus_decode(Decoder, (IntPtr)inPtr + inputOffset, inputLength, (IntPtr)outPtr + outputOffset, frame_size, decodeFEC ? 1 : 0);
+                result = NativeOpus.opus_decode_float(Decoder, inPtr + inputOffset, inputLength, outPtr + outputOffset, frame_size, decodeFEC ? 1 : 0);
             CheckError(result);
             return result * sizeof(float) * Channels;
         }

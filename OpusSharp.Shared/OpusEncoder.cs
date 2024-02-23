@@ -109,12 +109,32 @@ namespace OpusSharp
         /// <param name="inputOffset">Offset to start reading in the input.</param>
         /// <param name="outputOffset">Offset to start writing in the output.</param>
         /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see Error codes) on failure.</returns>
+        public unsafe int Encode(short[] input, int frame_size, byte[] output, int inputOffset = 0, int outputOffset = 0)
+        {
+            int result = (int)OpusError.OK;
+            fixed (short* inPtr = input)
+            fixed (byte* outPtr = output)
+                result = NativeOpus.opus_encode(Encoder, inPtr + inputOffset, frame_size, outPtr + outputOffset, output.Length - outputOffset);
+
+            CheckError(result);
+            return result;
+        }
+
+        /// <summary>
+        /// Encodes an Opus frame.
+        /// </summary>
+        /// <param name="input">Input signal (interleaved if 2 channels). length is frame_size*channels*sizeof(short)</param>
+        /// <param name="frame_size">Number of samples per channel in the input signal. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
+        /// <param name="output">Output payload</param>
+        /// <param name="inputOffset">Offset to start reading in the input.</param>
+        /// <param name="outputOffset">Offset to start writing in the output.</param>
+        /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see Error codes) on failure.</returns>
         public unsafe int Encode(byte[] input, int frame_size, byte[] output, int inputOffset = 0, int outputOffset = 0)
         {
             int result = (int)OpusError.OK;
             fixed (byte* inPtr = input)
             fixed (byte* outPtr = output)
-                result = NativeOpus.opus_encode(Encoder, (IntPtr)inPtr + inputOffset, frame_size, (IntPtr)outPtr + outputOffset, output.Length - outputOffset);
+                result = NativeOpus.opus_encode(Encoder, inPtr + inputOffset, frame_size / 2, outPtr + outputOffset, output.Length - outputOffset);
 
             CheckError(result);
             return result;
@@ -134,7 +154,7 @@ namespace OpusSharp
             int result = (int)OpusError.OK;
             fixed (float* inPtr = input)
             fixed (byte* outPtr = output)
-                result = NativeOpus.opus_encode_float(Encoder, (IntPtr)inPtr + inputOffset, frame_size, (IntPtr)outPtr + outputOffset, output.Length - outputOffset);
+                result = NativeOpus.opus_encode_float(Encoder, inPtr + inputOffset, frame_size, outPtr + outputOffset, output.Length - outputOffset);
 
             CheckError(result);
             return result;

@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace OpusSharp
 {
-    internal static class NativeOpus
+    internal static unsafe class NativeOpus
     {
 #if ANDROID
         private const string DllName = "libopus.so";
@@ -22,10 +22,13 @@ namespace OpusSharp
         public static extern int opus_encoder_init(IntPtr st, int Fs, int channels, int application);
 
         [DllImport(DllName, EntryPoint = "opus_encode", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_encode(IntPtr st, IntPtr pcm, int frame_size, IntPtr data, int max_data_bytes);
+        public static extern int opus_encode(IntPtr st, short* pcm, int frame_size, byte* data, int max_data_bytes);
+
+        [DllImport(DllName, EntryPoint = "opus_encode", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int opus_encode(IntPtr st, byte* pcm, int frame_size, byte* data, int max_data_bytes);
 
         [DllImport(DllName, EntryPoint = "opus_encode_float", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_encode_float(IntPtr st, IntPtr pcm, int frame_size, IntPtr data, int max_data_bytes);
+        public static extern int opus_encode_float(IntPtr st, float* pcm, int frame_size, byte* data, int max_data_bytes);
 
         [DllImport(DllName, EntryPoint = "opus_encoder_destroy", CallingConvention = CallingConvention.Cdecl)]
         public static extern void opus_encoder_destroy(IntPtr st);
@@ -45,10 +48,13 @@ namespace OpusSharp
         public static extern int opus_decoder_init(IntPtr st, int Fs, int channels);
 
         [DllImport(DllName, EntryPoint = "opus_decode", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_decode(IntPtr st, IntPtr data, int len, IntPtr pcm, int frame_size, int decode_fec);
+        public static extern int opus_decode(IntPtr st, byte* data, int len, short* pcm, int frame_size, int decode_fec);
+
+        [DllImport(DllName, EntryPoint = "opus_decode", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int opus_decode(IntPtr st, byte* data, int len, byte* pcm, int frame_size, int decode_fec);
 
         [DllImport(DllName, EntryPoint = "opus_decode_float", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_decode_float(IntPtr st, IntPtr data, int len, IntPtr pcm, int frame_size, int decode_fec);
+        public static extern int opus_decode_float(IntPtr st, byte* data, int len, float* pcm, int frame_size, int decode_fec);
 
         [DllImport(DllName, EntryPoint = "opus_decoder_ctl", CallingConvention = CallingConvention.Cdecl)]
         public static extern int opus_decoder_ctl(IntPtr st, int request, int value);
@@ -57,16 +63,16 @@ namespace OpusSharp
         public static extern void opus_decoder_destroy(IntPtr st);
 
         [DllImport(DllName, EntryPoint = "opus_packet_parse", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_packet_parse(IntPtr data, int len, IntPtr out_toc, IntPtr frames, short size, IntPtr payload_offset);
+        public static extern int opus_packet_parse(byte* data, int len, byte* out_toc, byte* frames, short size, int* payload_offset);
 
         [DllImport(DllName, EntryPoint = "opus_packet_get_bandwidth", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_packet_get_bandwidth(IntPtr data);
+        public static extern int opus_packet_get_bandwidth(byte* data);
 
         [DllImport(DllName, EntryPoint = "opus_packet_get_samples_per_frame", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_packet_get_samples_per_frame(IntPtr data, int Fs);
+        public static extern int opus_packet_get_samples_per_frame(byte* data, int Fs);
 
         [DllImport(DllName, EntryPoint = "opus_packet_get_nb_channels", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_packet_nb_channels(IntPtr data);
+        public static extern int opus_packet_nb_channels(byte* data);
 
         /* No Idea
         [DllImport(DllName, EntryPoint = "opus_packet_get_nb_frames", CallingConvention = CallingConvention.Cdecl)]
@@ -84,7 +90,7 @@ namespace OpusSharp
         */
 
         [DllImport(DllName, EntryPoint = "opus_pcm_soft_clip", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_pcm_soft_clip(IntPtr pcm, int frame_size, int channels, IntPtr softclip_mem);
+        public static extern int opus_pcm_soft_clip(float* pcm, int frame_size, int channels, float* softclip_mem);
         #endregion
     }
 }
