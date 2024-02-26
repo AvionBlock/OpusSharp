@@ -1,6 +1,7 @@
 ﻿using OpusSharp.Enums;
 using OpusSharp.SafeHandlers;
 using System;
+using System.Text;
 
 namespace OpusSharp
 {
@@ -27,12 +28,12 @@ namespace OpusSharp
         {
             get
             {
-                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.GET_BITRATE, out int value));
+                EncoderCtl(Enums.EncoderCtl.GET_BITRATE, out int value);
                 return value;
             }
             set
             {
-                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.SET_BITRATE, value));
+                EncoderCtl(Enums.EncoderCtl.SET_BITRATE, value);
             }
         }
         /// <summary>
@@ -42,12 +43,12 @@ namespace OpusSharp
         {
             get
             {
-                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.GET_APPLICATION, out int value));
+                EncoderCtl(Enums.EncoderCtl.GET_APPLICATION, out int value);
                 return (Enums.Application)value;
             }
             set
             {
-                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.SET_APPLICATION, (int)value));
+                EncoderCtl(Enums.EncoderCtl.SET_APPLICATION, (int)value);
             }
         }
         /// <summary>
@@ -57,12 +58,12 @@ namespace OpusSharp
         {
             get
             {
-                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.GET_COMPLEXITY, out int value));
+                EncoderCtl(Enums.EncoderCtl.GET_COMPLEXITY, out int value);
                 return value;
             }
             set
             {
-                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.SET_COMPLEXITY, value));
+                EncoderCtl(Enums.EncoderCtl.SET_COMPLEXITY, value);
             }
         }
         /// <summary>
@@ -72,12 +73,12 @@ namespace OpusSharp
         {
             get
             {
-                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.GET_PACKET_LOSS_PERC, out int value));
+                EncoderCtl(Enums.EncoderCtl.GET_PACKET_LOSS_PERC, out int value);
                 return value;
             }
             set
             {
-                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.SET_PACKET_LOSS_PERC, value));
+                EncoderCtl(Enums.EncoderCtl.SET_PACKET_LOSS_PERC, value);
             }
         }
         /// <summary>
@@ -87,12 +88,12 @@ namespace OpusSharp
         {
             get
             {
-                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.GET_SIGNAL, out int value));
+                EncoderCtl(Enums.EncoderCtl.GET_SIGNAL, out int value);
                 return (OpusSignal)value;
             }
             set
             {
-                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.SET_SIGNAL, (int)value));
+                EncoderCtl(Enums.EncoderCtl.SET_SIGNAL, (int)value);
             }
         }
         /// <summary>
@@ -102,12 +103,12 @@ namespace OpusSharp
         {
             get
             {
-                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.GET_VBR, out int value));
+                EncoderCtl(Enums.EncoderCtl.GET_VBR, out int value);
                 return value == 1;
             }
             set
             {
-                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.SET_VBR, value == true? 1 : 0));
+                EncoderCtl(Enums.EncoderCtl.SET_VBR, value == true ? 1 : 0);
             }
         }
         #endregion
@@ -200,6 +201,27 @@ namespace OpusSharp
         public int GetSize(int channels)
         {
             return NativeOpus.opus_encoder_get_size(channels);
+        }
+
+        /// <summary>
+        /// Requests a CTL on the encoder.
+        /// </summary>
+        /// <param name="ctl">The encoder CTL to request.</param>
+        /// <param name="value">The value to input.</param>
+        public void EncoderCtl(Enums.EncoderCtl ctl, int value)
+        {
+            CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)ctl, value));
+        }
+
+        /// <summary>
+        /// Requests a CTL on the encoder.
+        /// </summary>
+        /// <param name="ctl">The encoder CTL to request.</param>
+        /// <param name="value">The value that is outputted from the CTL.</param>
+        public void EncoderCtl(Enums.EncoderCtl ctl, out int value)
+        {
+            CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)ctl, out int val));
+            value = val;
         }
 
         public void Dispose()

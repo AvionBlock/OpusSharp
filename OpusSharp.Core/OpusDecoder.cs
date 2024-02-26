@@ -27,12 +27,12 @@ namespace OpusSharp
         {
             get
             {
-                CheckError(NativeOpus.opus_decoder_ctl(Decoder, (int)DecoderCtl.GET_GAIN, out int value));
+                DecoderCtl(Enums.DecoderCtl.GET_GAIN, out int value);
                 return value;
             }
             set
             {
-                CheckError(NativeOpus.opus_decoder_ctl(Decoder, (int)DecoderCtl.SET_GAIN, value));
+                DecoderCtl(Enums.DecoderCtl.SET_GAIN, value);
             }
         }
         /// <summary>
@@ -42,7 +42,7 @@ namespace OpusSharp
         {
             get
             {
-                CheckError(NativeOpus.opus_decoder_ctl(Decoder, (int)DecoderCtl.GET_LAST_PACKET_DURATION, out int value));
+                DecoderCtl(Enums.DecoderCtl.GET_LAST_PACKET_DURATION, out int value);
                 return value;
             }
         }
@@ -53,7 +53,7 @@ namespace OpusSharp
         {
             get
             {
-                CheckError(NativeOpus.opus_decoder_ctl(Decoder, (int)DecoderCtl.GET_PITCH, out int value));
+                DecoderCtl(Enums.DecoderCtl.GET_PITCH, out int value);
                 return value;
             }
         }
@@ -137,6 +137,27 @@ namespace OpusSharp
                 result = NativeOpus.opus_decode_float(Decoder, inPtr + inputOffset, inputLength, outPtr + outputOffset, frame_size, decodeFEC ? 1 : 0);
             CheckError(result);
             return result * Channels;
+        }
+
+        /// <summary>
+        /// Requests a CTL on the decoder.
+        /// </summary>
+        /// <param name="ctl">The decoder CTL to request.</param>
+        /// <param name="value">The value to input.</param>
+        public void DecoderCtl(Enums.DecoderCtl ctl, int value)
+        {
+            CheckError(NativeOpus.opus_decoder_ctl(Decoder, (int)ctl, value));
+        }
+
+        /// <summary>
+        /// Requests a CTL on the decoder.
+        /// </summary>
+        /// <param name="ctl">The decoder CTL to request.</param>
+        /// <param name="value">The value that is outputted from the CTL.</param>
+        public void DecoderCtl(Enums.DecoderCtl ctl, out int value)
+        {
+            CheckError(NativeOpus.opus_decoder_ctl(Decoder, (int)ctl, out int val));
+            value = val;
         }
 
         public void Dispose()
