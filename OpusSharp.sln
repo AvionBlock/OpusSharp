@@ -3,13 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusSharp.Android", "OpusSharp.Android\OpusSharp.Android.csproj", "{0FE03535-7720-4D52-A53D-9820070754AB}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "OpusSharp", "OpusSharp\OpusSharp.shproj", "{3E0613CD-3DFF-4EA5-B1BE-B0F952E8AF48}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusSharp.Core", "OpusSharp.Core\OpusSharp.Core.csproj", "{F33D5B16-AB0A-4D11-BD56-9F29938D6DC1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpusSharp.Windows", "OpusSharp.Windows\OpusSharp.Windows.csproj", "{BE56C5C8-6F40-4DBA-8078-0DBE08E1C8D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +13,6 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0FE03535-7720-4D52-A53D-9820070754AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0FE03535-7720-4D52-A53D-9820070754AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0FE03535-7720-4D52-A53D-9820070754AB}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{0FE03535-7720-4D52-A53D-9820070754AB}.Debug|x64.Build.0 = Debug|Any CPU
-		{0FE03535-7720-4D52-A53D-9820070754AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0FE03535-7720-4D52-A53D-9820070754AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0FE03535-7720-4D52-A53D-9820070754AB}.Release|x64.ActiveCfg = Release|Any CPU
-		{0FE03535-7720-4D52-A53D-9820070754AB}.Release|x64.Build.0 = Release|Any CPU
 		{F33D5B16-AB0A-4D11-BD56-9F29938D6DC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F33D5B16-AB0A-4D11-BD56-9F29938D6DC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F33D5B16-AB0A-4D11-BD56-9F29938D6DC1}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -35,25 +21,11 @@ Global
 		{F33D5B16-AB0A-4D11-BD56-9F29938D6DC1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F33D5B16-AB0A-4D11-BD56-9F29938D6DC1}.Release|x64.ActiveCfg = Release|Any CPU
 		{F33D5B16-AB0A-4D11-BD56-9F29938D6DC1}.Release|x64.Build.0 = Release|Any CPU
-		{BE56C5C8-6F40-4DBA-8078-0DBE08E1C8D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BE56C5C8-6F40-4DBA-8078-0DBE08E1C8D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BE56C5C8-6F40-4DBA-8078-0DBE08E1C8D3}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{BE56C5C8-6F40-4DBA-8078-0DBE08E1C8D3}.Debug|x64.Build.0 = Debug|Any CPU
-		{BE56C5C8-6F40-4DBA-8078-0DBE08E1C8D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BE56C5C8-6F40-4DBA-8078-0DBE08E1C8D3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BE56C5C8-6F40-4DBA-8078-0DBE08E1C8D3}.Release|x64.ActiveCfg = Release|Any CPU
-		{BE56C5C8-6F40-4DBA-8078-0DBE08E1C8D3}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {442131D7-4D4A-4408-86C4-35D0873B9DD2}
-	EndGlobalSection
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		OpusSharp\OpusSharp.projitems*{0fe03535-7720-4d52-a53d-9820070754ab}*SharedItemsImports = 5
-		OpusSharp\OpusSharp.projitems*{3e0613cd-3dff-4ea5-b1be-b0f952e8af48}*SharedItemsImports = 13
-		OpusSharp\OpusSharp.projitems*{be56c5c8-6f40-4dba-8078-0dbe08e1c8d3}*SharedItemsImports = 5
-		OpusSharp\OpusSharp.projitems*{f33d5b16-ab0a-4d11-bd56-9f29938d6dc1}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

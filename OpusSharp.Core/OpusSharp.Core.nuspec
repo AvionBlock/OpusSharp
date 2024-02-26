@@ -7,10 +7,6 @@
 		<description>Standard library for OpusSharp.</description>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<copyright>Copyright MIT</copyright>
-
-		<dependencies>
-            <group targetFramework="netstandard2.0" />
-		</dependencies>
 	</metadata>
 
 	<files>

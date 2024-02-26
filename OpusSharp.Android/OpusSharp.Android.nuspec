@@ -6,16 +6,12 @@
     <description>Contains android opus binaries for OpusSharp.</description>
     <authors>The Opus Audio Codec Authors</authors>
     <projectUrl>https://opus-codec.org/</projectUrl>
-
-    <dependencies>
-      <group targetFramework="MonoAndroid">
-			</group>
-    </dependencies>
   </metadata>
 
   <files>
-    <file src="bin/Release/net7.0-android/OpusSharp.dll" target="lib/monoandroid/OpusSharp.dll" />
-		<file src="bin/Release/net7.0-android/OpusSharp.pdb" target="lib/monoandroid/OpusSharp.pdb" />
-		<file src="bin/Release/net7.0-android/OpusSharp.aar" target="lib/monoandroid/OpusSharp.aar" />
+    <file src="lib/arm64-v8a/libopus.so" target="runtimes/android-arm64/native" />
+    <file src="lib/armeabi-v7a/libopus.so" target="runtimes/android-arm/native" />
+    <file src="lib/x86/libopus.so" target="runtimes/android-x86/native" />
+    <file src="lib/x86_64/libopus.so" target="runtimes/android-x64/native" />
   </files>
 </package>
