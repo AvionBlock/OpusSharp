@@ -1,15 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0-android</TargetFramework>
-    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+    <TargetFramework>net7.0-android</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyName>OpusSharp</AssemblyName>
-    <RootNamespace>OpusSharp</RootNamespace>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <SupportedOSPlatformVersion>30.0</SupportedOSPlatformVersion>
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\OpusSharp.Standard\OpusSharp.Standard.csproj" />
-  </ItemGroup>
   <Import Project="..\OpusSharp\OpusSharp.projitems" Label="Shared" />
 </Project>

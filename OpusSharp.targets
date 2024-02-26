@@ -1,0 +1,10 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<VersionPrefix>1.0.0</VersionPrefix>
+		<LangVersion>latest</LangVersion>
+		<Authors>SineVector241</Authors>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	</PropertyGroup>
+	
+	
+</Project>

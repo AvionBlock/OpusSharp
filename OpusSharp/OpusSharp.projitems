@@ -20,4 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)SafeHandlers\OpusDecoderSafeHandle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SafeHandlers\OpusEncoderSafeHandle.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)OpusSharp.nuspec" />
+  </ItemGroup>
 </Project>

@@ -38,12 +38,12 @@ namespace OpusSharp
         /// <summary>
         /// The coding mode that the encoder is set to.
         /// </summary>
-        public Application OpusApplication
+        public Enums.Application OpusApplication
         {
             get
             {
                 CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.GET_APPLICATION, out int value));
-                return (Application)value;
+                return (Enums.Application)value;
             }
             set
             {
@@ -119,7 +119,7 @@ namespace OpusSharp
         /// <param name="SampleRate">Sampling rate of input signal (Hz) This must be one of 8000, 12000, 16000, 24000, or 48000.</param>
         /// <param name="Channels">Number of channels (1 or 2) in input signal.</param>
         /// <param name="Application">The coding mode that the encoder should set to.</param>
-        public OpusEncoder(int SampleRate, int Channels, Application Application)
+        public OpusEncoder(int SampleRate, int Channels, Enums.Application Application)
         {
             this.SampleRate = SampleRate;
             this.Channels = Channels;

@@ -1,0 +1,13 @@
+﻿﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>OpusSharp.Windows64</id>
+    <version>1.0.0</version>
+    <description>Contains 64-bit windows binaries for OpusSharp.</description>
+    <authors>The Opus Audio Codec Authors</authors>
+    <projectUrl>https://opus-codec.org/</projectUrl>
+  </metadata>
+  <files>
+    <file src="opus.dll" target="runtimes\win-x64\native" />
+  </files>
+</package>
