@@ -121,12 +121,12 @@ namespace OpusSharp
         /// <param name="Application">The coding mode that the encoder should set to.</param>
         public OpusEncoder(int SampleRate, int Channels, Enums.Application Application)
         {
+            Encoder = NativeOpus.opus_encoder_create(SampleRate, Channels, (int)Application, out var Error);
+            CheckError((int)Error);
+
             this.SampleRate = SampleRate;
             this.Channels = Channels;
             OpusApplication = Application;
-
-            Encoder = NativeOpus.opus_encoder_create(SampleRate, Channels, (int)Application, out var Error);
-            CheckError((int)Error);
         }
 
         /// <summary>

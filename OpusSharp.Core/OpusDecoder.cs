@@ -1,7 +1,6 @@
 ﻿using OpusSharp.Enums;
 using OpusSharp.SafeHandlers;
 using System;
-using System.Text;
 
 namespace OpusSharp
 {
@@ -68,11 +67,11 @@ namespace OpusSharp
         /// <param name="Channels">Number of channels (1 or 2) to decode.</param>
         public OpusDecoder(int SampleRate, int Channels)
         {
-            this.SampleRate = SampleRate;
-            this.Channels = Channels;
-
             Decoder = NativeOpus.opus_decoder_create(SampleRate, Channels, out var Error);
             CheckError((int)Error);
+
+            this.SampleRate = SampleRate;
+            this.Channels = Channels;
         }
 
         /// <summary>

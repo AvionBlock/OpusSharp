@@ -6,6 +6,9 @@
     <description>Contains android opus binaries for OpusSharp.</description>
     <authors>The Opus Audio Codec Authors</authors>
     <projectUrl>https://opus-codec.org/</projectUrl>
+    <dependencies>
+      <dependency id="OpusSharp.Core" version="1.0.0" />
+    </dependencies>
   </metadata>
 
   <files>
