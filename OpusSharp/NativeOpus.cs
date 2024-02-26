@@ -9,6 +9,8 @@ namespace OpusSharp
     {
 #if ANDROID
         private const string DllName = "libopus.so";
+#elif WINDOWS
+        private const string DllName = "opus";
 #else
         private const string DllName = "opus";
 #endif

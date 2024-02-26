@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>OpusSharp.Android</id>
+    <version>1.0.0</version>
+    <description>Contains android opus binaries for OpusSharp.</description>
+    <authors>The Opus Audio Codec Authors</authors>
+    <projectUrl>https://opus-codec.org/</projectUrl>
+
+    <dependencies>
+      <group targetFramework="MonoAndroid">
+			</group>
+    </dependencies>
+  </metadata>
+
+  <files>
+    <file src="bin/Release/net7.0-android/OpusSharp.dll" target="lib/monoandroid/OpusSharp.dll" />
+		<file src="bin/Release/net7.0-android/OpusSharp.pdb" target="lib/monoandroid/OpusSharp.pdb" />
+		<file src="bin/Release/net7.0-android/OpusSharp.aar" target="lib/monoandroid/OpusSharp.aar" />
+  </files>
+</package>

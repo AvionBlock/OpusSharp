@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <SupportedOSPlatformVersion>30.0</SupportedOSPlatformVersion>
+    <AssemblyName>OpusSharp</AssemblyName>
   </PropertyGroup>
   <Import Project="..\OpusSharp\OpusSharp.projitems" Label="Shared" />
 </Project>

@@ -13,8 +13,4 @@
 			<dependency id="OpusSharp.Windows" version="1.0.0" />
 		</dependencies>
 	</metadata>
-
-	<files>
-		<file src="OpusSharp.targets" target="build" />
-	</files>
 </package>

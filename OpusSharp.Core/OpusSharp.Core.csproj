@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyName>OpusSharp</AssemblyName>
   </PropertyGroup>
 
   <Import Project="..\OpusSharp\OpusSharp.projitems" Label="Shared" />

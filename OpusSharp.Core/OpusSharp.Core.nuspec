@@ -14,5 +14,7 @@
 	</metadata>
 
 	<files>
+	  <file src="bin/Release/netstandard2.0/OpusSharp.dll" target="lib/netstandard2.0/OpusSharp.dll" />
+	  <file src="bin/Release/netstandard2.0/OpusSharp.pdb" target="lib/netstandard2.0/OpusSharp.pdb" />
 	</files>
 </package>
