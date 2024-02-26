@@ -1,7 +1,6 @@
 ﻿using OpusSharp.Enums;
 using OpusSharp.SafeHandlers;
 using System;
-using System.Text;
 
 namespace OpusSharp
 {
