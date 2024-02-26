@@ -126,7 +126,6 @@ namespace OpusSharp
 
             this.SampleRate = SampleRate;
             this.Channels = Channels;
-            OpusApplication = Application;
         }
 
         /// <summary>
