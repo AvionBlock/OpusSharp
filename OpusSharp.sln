@@ -3,18 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "OpusSharp.Shared", "OpusSharp.Shared\OpusSharp.Shared.shproj", "{8C82C153-8E4A-48F4-8645-FA6C8E3D48E7}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{06668FA9-B8FC-4392-9F59-267F34E404E9}"
 	ProjectSection(SolutionItems) = preProject
 		OpusSharp.nuspec = OpusSharp.nuspec
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpusSharp.Android", "OpusSharp.Android\OpusSharp.Android.csproj", "{0FE03535-7720-4D52-A53D-9820070754AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusSharp.Android", "OpusSharp.Android\OpusSharp.Android.csproj", "{0FE03535-7720-4D52-A53D-9820070754AB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusSharp.Standard", "OpusSharp.Standard\OpusSharp.Standard.csproj", "{3B96E291-DA80-469B-863D-52652FE3AE64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusSharp.Windows", "OpusSharp.Windows\OpusSharp.Windows.csproj", "{7F610AB2-3235-4E08-B9CB-13246A9DAFCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpusSharp.Windows", "OpusSharp.Windows\OpusSharp.Windows.csproj", "{7F610AB2-3235-4E08-B9CB-13246A9DAFCF}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "OpusSharp", "OpusSharp\OpusSharp.shproj", "{3E0613CD-3DFF-4EA5-B1BE-B0F952E8AF48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpusSharp.Core", "OpusSharp.Core\OpusSharp.Core.csproj", "{F33D5B16-AB0A-4D11-BD56-9F29938D6DC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,14 +32,6 @@ Global
 		{0FE03535-7720-4D52-A53D-9820070754AB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0FE03535-7720-4D52-A53D-9820070754AB}.Release|x64.ActiveCfg = Release|Any CPU
 		{0FE03535-7720-4D52-A53D-9820070754AB}.Release|x64.Build.0 = Release|Any CPU
-		{3B96E291-DA80-469B-863D-52652FE3AE64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3B96E291-DA80-469B-863D-52652FE3AE64}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3B96E291-DA80-469B-863D-52652FE3AE64}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{3B96E291-DA80-469B-863D-52652FE3AE64}.Debug|x64.Build.0 = Debug|Any CPU
-		{3B96E291-DA80-469B-863D-52652FE3AE64}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3B96E291-DA80-469B-863D-52652FE3AE64}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3B96E291-DA80-469B-863D-52652FE3AE64}.Release|x64.ActiveCfg = Release|Any CPU
-		{3B96E291-DA80-469B-863D-52652FE3AE64}.Release|x64.Build.0 = Release|Any CPU
 		{7F610AB2-3235-4E08-B9CB-13246A9DAFCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7F610AB2-3235-4E08-B9CB-13246A9DAFCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F610AB2-3235-4E08-B9CB-13246A9DAFCF}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -48,6 +40,14 @@ Global
 		{7F610AB2-3235-4E08-B9CB-13246A9DAFCF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7F610AB2-3235-4E08-B9CB-13246A9DAFCF}.Release|x64.ActiveCfg = Release|Any CPU
 		{7F610AB2-3235-4E08-B9CB-13246A9DAFCF}.Release|x64.Build.0 = Release|Any CPU
+		{F33D5B16-AB0A-4D11-BD56-9F29938D6DC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F33D5B16-AB0A-4D11-BD56-9F29938D6DC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F33D5B16-AB0A-4D11-BD56-9F29938D6DC1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F33D5B16-AB0A-4D11-BD56-9F29938D6DC1}.Debug|x64.Build.0 = Debug|Any CPU
+		{F33D5B16-AB0A-4D11-BD56-9F29938D6DC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F33D5B16-AB0A-4D11-BD56-9F29938D6DC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F33D5B16-AB0A-4D11-BD56-9F29938D6DC1}.Release|x64.ActiveCfg = Release|Any CPU
+		{F33D5B16-AB0A-4D11-BD56-9F29938D6DC1}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,9 +56,9 @@ Global
 		SolutionGuid = {442131D7-4D4A-4408-86C4-35D0873B9DD2}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		OpusSharp.Shared\OpusSharp.Shared.projitems*{0fe03535-7720-4d52-a53d-9820070754ab}*SharedItemsImports = 5
-		OpusSharp.Shared\OpusSharp.Shared.projitems*{3b96e291-da80-469b-863d-52652fe3ae64}*SharedItemsImports = 5
-		OpusSharp.Shared\OpusSharp.Shared.projitems*{7f610ab2-3235-4e08-b9cb-13246a9dafcf}*SharedItemsImports = 5
-		OpusSharp.Shared\OpusSharp.Shared.projitems*{8c82c153-8e4a-48f4-8645-fa6c8e3d48e7}*SharedItemsImports = 13
+		OpusSharp\OpusSharp.projitems*{0fe03535-7720-4d52-a53d-9820070754ab}*SharedItemsImports = 5
+		OpusSharp\OpusSharp.projitems*{3e0613cd-3dff-4ea5-b1be-b0f952e8af48}*SharedItemsImports = 13
+		OpusSharp\OpusSharp.projitems*{7f610ab2-3235-4e08-b9cb-13246a9dafcf}*SharedItemsImports = 5
+		OpusSharp\OpusSharp.projitems*{f33d5b16-ab0a-4d11-bd56-9f29938d6dc1}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

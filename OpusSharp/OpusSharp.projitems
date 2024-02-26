@@ -3,18 +3,21 @@
   <PropertyGroup>
     <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <SharedGUID>8c82c153-8e4a-48f4-8645-fa6c8e3d48e7</SharedGUID>
+    <SharedGUID>3e0613cd-3dff-4ea5-b1be-b0f952e8af48</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
     <Import_RootNamespace>OpusSharp</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Enums\Application.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\DecoderCtl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\EncoderCtl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\OpusError.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\OpusSignal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NativeOpus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OpusDecoder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OpusEncoder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SafeHandlers\OpusDecoderSafeHandle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SafeHandlers\OpusEncoderSafeHandle.cs" />
   </ItemGroup>
 </Project>

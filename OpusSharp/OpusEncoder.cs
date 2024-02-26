@@ -1,4 +1,5 @@
 ﻿using OpusSharp.Enums;
+using OpusSharp.SafeHandlers;
 using System;
 
 namespace OpusSharp
@@ -8,39 +9,45 @@ namespace OpusSharp
     /// </summary>
     public class OpusEncoder : IDisposable
     {
-        protected IntPtr Encoder { get; }
+        private readonly OpusEncoderSafeHandle Encoder;
 
-        private int bitrate;
-        private int complexity;
-        private int packetLossPerc;
-        private OpusSignal signal;
-        private bool isDisposed;
-
-        /// <summary>
-        /// The coding mode that the encoder is set to.
-        /// </summary>
-        public Enums.Application OpusApplication { get; }
-
+        #region Variables
         /// <summary>
         /// Sampling rate of input signal (Hz) This must be one of 8000, 12000, 16000, 24000, or 48000.
         /// </summary>
         public int SampleRate { get; }
-
         /// <summary>
         /// Number of channels (1 or 2) in input signal.
         /// </summary>
         public int Channels { get; }
-
         /// <summary>
         /// Configures the bitrate in the encoder.
         /// </summary>
         public int Bitrate
-        { 
-            get => bitrate; 
+        {
+            get
+            {
+                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.GET_BITRATE, out int value));
+                return value;
+            }
             set
             {
-                NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.SET_BITRATE, value);
-                bitrate = value;
+                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.SET_BITRATE, value));
+            }
+        }
+        /// <summary>
+        /// The coding mode that the encoder is set to.
+        /// </summary>
+        public Application OpusApplication
+        {
+            get
+            {
+                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.GET_APPLICATION, out int value));
+                return (Application)value;
+            }
+            set
+            {
+                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.SET_APPLICATION, (int)value));
             }
         }
         /// <summary>
@@ -48,11 +55,14 @@ namespace OpusSharp
         /// </summary>
         public int Complexity
         {
-            get => complexity;
+            get
+            {
+                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.GET_COMPLEXITY, out int value));
+                return value;
+            }
             set
             {
                 CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.SET_COMPLEXITY, value));
-                complexity = value;
             }
         }
         /// <summary>
@@ -60,11 +70,14 @@ namespace OpusSharp
         /// </summary>
         public int PacketLossPerc
         {
-            get => packetLossPerc;
+            get
+            {
+                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.GET_PACKET_LOSS_PERC, out int value));
+                return value;
+            }
             set
             {
                 CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.SET_PACKET_LOSS_PERC, value));
-                packetLossPerc = value;
             }
         }
         /// <summary>
@@ -72,21 +85,41 @@ namespace OpusSharp
         /// </summary>
         public OpusSignal Signal
         {
-            get => signal;
+            get
+            {
+                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.GET_SIGNAL, out int value));
+                return (OpusSignal)value;
+            }
             set
             {
                 CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.SET_SIGNAL, (int)value));
-                signal = value;
             }
         }
+        /// <summary>
+        /// Enables or disables variable bitrate (VBR) in the encoder.
+        /// </summary>
+        public bool VBR
+        {
+            get
+            {
+                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.GET_VBR, out int value));
+                return value == 1;
+            }
+            set
+            {
+                CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)EncoderCtl.SET_VBR, value == true? 1 : 0));
+            }
+        }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// Creates and initializes an opus encoder.
         /// </summary>
         /// <param name="SampleRate">Sampling rate of input signal (Hz) This must be one of 8000, 12000, 16000, 24000, or 48000.</param>
         /// <param name="Channels">Number of channels (1 or 2) in input signal.</param>
         /// <param name="Application">The coding mode that the encoder should set to.</param>
-        public OpusEncoder(int SampleRate, int Channels, Enums.Application Application)
+        public OpusEncoder(int SampleRate, int Channels, Application Application)
         {
             this.SampleRate = SampleRate;
             this.Channels = Channels;
@@ -94,27 +127,23 @@ namespace OpusSharp
 
             Encoder = NativeOpus.opus_encoder_create(SampleRate, Channels, (int)Application, out var Error);
             CheckError((int)Error);
-            Bitrate = 32000;
-            Complexity = 0;
-            Signal = OpusSignal.Auto;
-            PacketLossPerc = 0;
         }
 
         /// <summary>
         /// Encodes an Opus frame.
         /// </summary>
-        /// <param name="input">Input signal (interleaved if 2 channels). length is frame_size*channels*sizeof(short)</param>
+        /// <param name="input">Input signal (interleaved if 2 channels). length is frame_size*channels</param>
         /// <param name="frame_size">Number of samples per channel in the input signal. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
         /// <param name="output">Output payload</param>
         /// <param name="inputOffset">Offset to start reading in the input.</param>
         /// <param name="outputOffset">Offset to start writing in the output.</param>
         /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see Error codes) on failure.</returns>
-        public unsafe int Encode(short[] input, int frame_size, byte[] output, int inputOffset = 0, int outputOffset = 0)
+        public unsafe int Encode(byte[] input, int frame_size, byte[] output, int inputOffset = 0, int outputOffset = 0)
         {
             int result = (int)OpusError.OK;
-            fixed (short* inPtr = input)
+            fixed (byte* inPtr = input)
             fixed (byte* outPtr = output)
-                result = NativeOpus.opus_encode(Encoder, inPtr + inputOffset, frame_size, outPtr + outputOffset, output.Length - outputOffset);
+                result = NativeOpus.opus_encode(Encoder, inPtr + inputOffset, frame_size / 2, outPtr + outputOffset, output.Length - outputOffset);
 
             CheckError(result);
             return result;
@@ -129,14 +158,18 @@ namespace OpusSharp
         /// <param name="inputOffset">Offset to start reading in the input.</param>
         /// <param name="outputOffset">Offset to start writing in the output.</param>
         /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see Error codes) on failure.</returns>
-        public unsafe int Encode(byte[] input, int frame_size, byte[] output, int inputOffset = 0, int outputOffset = 0)
+        public unsafe int Encode(short[] input, int frame_size, byte[] output, int inputOffset = 0, int outputOffset = 0)
         {
+            byte[] byteInput = new byte[input.Length * 2]; //Short to byte is 2 bytes.
+            Buffer.BlockCopy(input, 0, byteInput, 0, input.Length);
+
             int result = (int)OpusError.OK;
-            fixed (byte* inPtr = input)
+            fixed (byte* inPtr = byteInput)
             fixed (byte* outPtr = output)
-                result = NativeOpus.opus_encode(Encoder, inPtr + inputOffset, frame_size / 2, outPtr + outputOffset, output.Length - outputOffset);
+                result = NativeOpus.opus_encode(Encoder, inPtr + inputOffset, frame_size, outPtr + outputOffset, output.Length - outputOffset);
 
             CheckError(result);
+            Buffer.BlockCopy(byteInput, 0, output, 0, output.Length);
             return result;
         }
 
@@ -159,6 +192,7 @@ namespace OpusSharp
             CheckError(result);
             return result;
         }
+
         /// <summary>
         /// Gets the size of an OpusEncoder structure.
         /// </summary>
@@ -177,15 +211,10 @@ namespace OpusSharp
 
         protected void Dispose(bool disposing)
         {
-            if (!isDisposed)
-            {
-                if (Encoder != IntPtr.Zero)
-                    NativeOpus.opus_encoder_destroy(Encoder);
-
-                if (!isDisposed)
-                    isDisposed = true;
-            }
+            if (!Encoder.IsClosed)
+                Encoder.Dispose();
         }
+        #endregion
 
         ~OpusEncoder()
         {

@@ -9,6 +9,10 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
-  <Import Project="..\OpusSharp.Shared\OpusSharp.Shared.projitems" Label="Shared" />
+  <ItemGroup>
+    <ProjectReference Include="..\OpusSharp.Standard\OpusSharp.Standard.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\OpusSharp\OpusSharp.projitems" Label="Shared" />
 
 </Project>

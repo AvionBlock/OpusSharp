@@ -1,4 +1,5 @@
 ﻿using OpusSharp.Enums;
+using OpusSharp.SafeHandlers;
 using System;
 using System.Runtime.InteropServices;
 
@@ -16,25 +17,25 @@ namespace OpusSharp
         public static extern int opus_encoder_get_size(int channels);
 
         [DllImport(DllName, EntryPoint = "opus_encoder_create", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr opus_encoder_create(int Fs, int channels, int application, out OpusError error);
+        public static extern OpusEncoderSafeHandle opus_encoder_create(int Fs, int channels, int application, out OpusError error);
 
         [DllImport(DllName, EntryPoint = "opus_encoder_init", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_encoder_init(IntPtr st, int Fs, int channels, int application);
+        public static extern int opus_encoder_init(OpusEncoderSafeHandle st, int Fs, int channels, int application);
 
         [DllImport(DllName, EntryPoint = "opus_encode", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_encode(IntPtr st, short* pcm, int frame_size, byte* data, int max_data_bytes);
-
-        [DllImport(DllName, EntryPoint = "opus_encode", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_encode(IntPtr st, byte* pcm, int frame_size, byte* data, int max_data_bytes);
+        public static extern int opus_encode(OpusEncoderSafeHandle st, byte* pcm, int frame_size, byte* data, int max_data_bytes);
 
         [DllImport(DllName, EntryPoint = "opus_encode_float", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_encode_float(IntPtr st, float* pcm, int frame_size, byte* data, int max_data_bytes);
+        public static extern int opus_encode_float(OpusEncoderSafeHandle st, float* pcm, int frame_size, byte* data, int max_data_bytes);
 
         [DllImport(DllName, EntryPoint = "opus_encoder_destroy", CallingConvention = CallingConvention.Cdecl)]
         public static extern void opus_encoder_destroy(IntPtr st);
 
         [DllImport(DllName, EntryPoint = "opus_encoder_ctl", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_encoder_ctl(IntPtr st, int request, int value);
+        public static extern int opus_encoder_ctl(OpusEncoderSafeHandle st, int request, out int value);
+
+        [DllImport(DllName, EntryPoint = "opus_encoder_ctl", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int opus_encoder_ctl(OpusEncoderSafeHandle st, int request, int value);
         #endregion
 
         #region Decoder
@@ -42,22 +43,22 @@ namespace OpusSharp
         public static extern int opus_decoder_get_size(int channels);
 
         [DllImport(DllName, EntryPoint = "opus_decoder_create", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr opus_decoder_create(int Fs, int channels, out OpusError error);
+        public static extern OpusDecoderSafeHandle opus_decoder_create(int Fs, int channels, out OpusError error);
 
         [DllImport(DllName, EntryPoint = "opus_decoder_init", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_decoder_init(IntPtr st, int Fs, int channels);
+        public static extern int opus_decoder_init(OpusDecoderSafeHandle st, int Fs, int channels);
 
         [DllImport(DllName, EntryPoint = "opus_decode", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_decode(IntPtr st, byte* data, int len, short* pcm, int frame_size, int decode_fec);
-
-        [DllImport(DllName, EntryPoint = "opus_decode", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_decode(IntPtr st, byte* data, int len, byte* pcm, int frame_size, int decode_fec);
+        public static extern int opus_decode(OpusDecoderSafeHandle st, byte* data, int len, byte* pcm, int frame_size, int decode_fec);
 
         [DllImport(DllName, EntryPoint = "opus_decode_float", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_decode_float(IntPtr st, byte* data, int len, float* pcm, int frame_size, int decode_fec);
+        public static extern int opus_decode_float(OpusDecoderSafeHandle st, byte* data, int len, float* pcm, int frame_size, int decode_fec);
 
         [DllImport(DllName, EntryPoint = "opus_decoder_ctl", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_decoder_ctl(IntPtr st, int request, int value);
+        public static extern int opus_decoder_ctl(OpusDecoderSafeHandle st, int request, out int value);
+
+        [DllImport(DllName, EntryPoint = "opus_decoder_ctl", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int opus_decoder_ctl(OpusDecoderSafeHandle st, int request, int value);
 
         [DllImport(DllName, EntryPoint = "opus_decoder_destroy", CallingConvention = CallingConvention.Cdecl)]
         public static extern void opus_decoder_destroy(IntPtr st);
