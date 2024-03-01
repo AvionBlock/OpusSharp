@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using System;
+using System.Runtime.ConstrainedExecution;
 
 namespace OpusSharp.SafeHandlers
 {
@@ -11,6 +12,7 @@ namespace OpusSharp.SafeHandlers
 
         public override bool IsInvalid => handle == IntPtr.Zero;
 
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         protected override bool ReleaseHandle()
         {
             NativeOpus.opus_encoder_destroy(handle);

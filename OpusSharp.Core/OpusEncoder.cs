@@ -27,11 +27,13 @@ namespace OpusSharp
         {
             get
             {
+                if (Encoder.IsClosed) return 0;
                 EncoderCtl(Enums.EncoderCtl.GET_BITRATE, out int value);
                 return value;
             }
             set
             {
+                if (Encoder.IsClosed) return;
                 EncoderCtl(Enums.EncoderCtl.SET_BITRATE, value);
             }
         }
@@ -42,11 +44,13 @@ namespace OpusSharp
         {
             get
             {
+                if (Encoder.IsClosed) return 0;
                 EncoderCtl(Enums.EncoderCtl.GET_APPLICATION, out int value);
                 return (Enums.Application)value;
             }
             set
             {
+                if (Encoder.IsClosed) return;
                 EncoderCtl(Enums.EncoderCtl.SET_APPLICATION, (int)value);
             }
         }
@@ -57,11 +61,13 @@ namespace OpusSharp
         {
             get
             {
+                if (Encoder.IsClosed) return 0;
                 EncoderCtl(Enums.EncoderCtl.GET_COMPLEXITY, out int value);
                 return value;
             }
             set
             {
+                if (Encoder.IsClosed) return;
                 EncoderCtl(Enums.EncoderCtl.SET_COMPLEXITY, value);
             }
         }
@@ -72,11 +78,13 @@ namespace OpusSharp
         {
             get
             {
+                if (Encoder.IsClosed) return 0;
                 EncoderCtl(Enums.EncoderCtl.GET_PACKET_LOSS_PERC, out int value);
                 return value;
             }
             set
             {
+                if (Encoder.IsClosed) return;
                 EncoderCtl(Enums.EncoderCtl.SET_PACKET_LOSS_PERC, value);
             }
         }
@@ -87,11 +95,13 @@ namespace OpusSharp
         {
             get
             {
+                if (Encoder.IsClosed) return 0;
                 EncoderCtl(Enums.EncoderCtl.GET_SIGNAL, out int value);
                 return (OpusSignal)value;
             }
             set
             {
+                if (Encoder.IsClosed) return;
                 EncoderCtl(Enums.EncoderCtl.SET_SIGNAL, (int)value);
             }
         }
@@ -102,11 +112,13 @@ namespace OpusSharp
         {
             get
             {
+                if (Encoder.IsClosed) return false;
                 EncoderCtl(Enums.EncoderCtl.GET_VBR, out int value);
                 return value == 1;
             }
             set
             {
+                if (Encoder.IsClosed) return;
                 EncoderCtl(Enums.EncoderCtl.SET_VBR, value == true ? 1 : 0);
             }
         }
@@ -139,6 +151,8 @@ namespace OpusSharp
         /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see Error codes) on failure.</returns>
         public unsafe int Encode(byte[] input, int frame_size, byte[] output, int inputOffset = 0, int outputOffset = 0)
         {
+            ThrowIfDisposed();
+
             int result = (int)OpusError.OK;
             fixed (byte* inPtr = input)
             fixed (byte* outPtr = output)
@@ -159,6 +173,8 @@ namespace OpusSharp
         /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see Error codes) on failure.</returns>
         public unsafe int Encode(short[] input, int frame_size, byte[] output, int inputOffset = 0, int outputOffset = 0)
         {
+            ThrowIfDisposed();
+
             byte[] byteInput = new byte[input.Length * 2]; //Short to byte is 2 bytes.
             Buffer.BlockCopy(input, 0, byteInput, 0, input.Length);
 
@@ -183,6 +199,8 @@ namespace OpusSharp
         /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see Error codes) on failure.</returns>
         public unsafe int EncodeFloat(float[] input, int frame_size, byte[] output, int inputOffset = 0, int outputOffset = 0)
         {
+            ThrowIfDisposed();
+
             int result = (int)OpusError.OK;
             fixed (float* inPtr = input)
             fixed (byte* outPtr = output)
@@ -209,6 +227,8 @@ namespace OpusSharp
         /// <param name="value">The value to input.</param>
         public void EncoderCtl(Enums.EncoderCtl ctl, int value)
         {
+            ThrowIfDisposed();
+
             CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)ctl, value));
         }
 
@@ -219,6 +239,8 @@ namespace OpusSharp
         /// <param name="value">The value that is outputted from the CTL.</param>
         public void EncoderCtl(Enums.EncoderCtl ctl, out int value)
         {
+            ThrowIfDisposed();
+
             CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)ctl, out int val));
             value = val;
         }
@@ -233,6 +255,14 @@ namespace OpusSharp
         {
             if (!Encoder.IsClosed)
                 Encoder.Dispose();
+        }
+
+        private void ThrowIfDisposed()
+        {
+            if(Encoder.IsClosed)
+            {
+                throw new ObjectDisposedException(GetType().FullName);
+            }
         }
         #endregion
 

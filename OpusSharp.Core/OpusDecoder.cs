@@ -27,11 +27,13 @@ namespace OpusSharp
         {
             get
             {
+                if (Decoder.IsClosed) return 0;
                 DecoderCtl(Enums.DecoderCtl.GET_GAIN, out int value);
                 return value;
             }
             set
             {
+                if (Decoder.IsClosed) return;
                 DecoderCtl(Enums.DecoderCtl.SET_GAIN, value);
             }
         }
@@ -42,6 +44,7 @@ namespace OpusSharp
         {
             get
             {
+                if (Decoder.IsClosed) return 0;
                 DecoderCtl(Enums.DecoderCtl.GET_LAST_PACKET_DURATION, out int value);
                 return value;
             }
@@ -53,6 +56,7 @@ namespace OpusSharp
         {
             get
             {
+                if (Decoder.IsClosed) return 0;
                 DecoderCtl(Enums.DecoderCtl.GET_PITCH, out int value);
                 return value;
             }
@@ -87,6 +91,8 @@ namespace OpusSharp
         /// <returns>The length of the decoded packet on success or a negative error code (see Error codes) on failure.</returns>
         public unsafe int Decode(byte[] input, int inputLength, byte[] output, int frame_size, bool decodeFEC = false, int inputOffset = 0, int outputOffset = 0)
         {
+            ThrowIfDisposed();
+
             int result = 0;
             fixed (byte* inPtr = input)
             fixed (byte* outPtr = output)
@@ -108,6 +114,8 @@ namespace OpusSharp
         /// <returns>The length of the decoded packet on success or a negative error code (see Error codes) on failure.</returns>
         public unsafe int Decode(byte[] input, int inputLength, short[] output, int frame_size, bool decodeFEC = false, int inputOffset = 0, int outputOffset = 0)
         {
+            ThrowIfDisposed();
+
             byte[] byteOutput = new byte[output.Length * 2]; //Short to byte is 2 bytes.
             Buffer.BlockCopy(byteOutput, 0, byteOutput, 0, output.Length);
 
@@ -131,6 +139,8 @@ namespace OpusSharp
         /// <returns>The length of the decoded packet on success or a negative error code (see Error codes) on failure.</returns>
         public unsafe int DecodeFloat(byte[] input, int inputLength, float[] output, int frame_size, bool decodeFEC = false, int inputOffset = 0, int outputOffset = 0)
         {
+            ThrowIfDisposed();
+
             int result = 0;
             fixed (byte* inPtr = input)
             fixed (float* outPtr = output)
@@ -146,6 +156,8 @@ namespace OpusSharp
         /// <param name="value">The value to input.</param>
         public void DecoderCtl(Enums.DecoderCtl ctl, int value)
         {
+            ThrowIfDisposed();
+
             CheckError(NativeOpus.opus_decoder_ctl(Decoder, (int)ctl, value));
         }
 
@@ -156,6 +168,8 @@ namespace OpusSharp
         /// <param name="value">The value that is outputted from the CTL.</param>
         public void DecoderCtl(Enums.DecoderCtl ctl, out int value)
         {
+            ThrowIfDisposed();
+
             CheckError(NativeOpus.opus_decoder_ctl(Decoder, (int)ctl, out int val));
             value = val;
         }
@@ -170,6 +184,14 @@ namespace OpusSharp
         {
             if (!Decoder.IsClosed)
                 Decoder.Dispose();
+        }
+
+        private void ThrowIfDisposed()
+        {
+            if (Decoder.IsClosed)
+            {
+                throw new ObjectDisposedException(GetType().FullName);
+            }
         }
         #endregion
 

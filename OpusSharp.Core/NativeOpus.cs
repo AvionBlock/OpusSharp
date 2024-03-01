@@ -1,6 +1,7 @@
 ﻿using OpusSharp.Enums;
 using OpusSharp.SafeHandlers;
 using System;
+using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 
 namespace OpusSharp
@@ -33,6 +34,7 @@ namespace OpusSharp
         public static extern int opus_encode_float(OpusEncoderSafeHandle st, float* pcm, int frame_size, byte* data, int max_data_bytes);
 
         [DllImport(DllName, EntryPoint = "opus_encoder_destroy", CallingConvention = CallingConvention.Cdecl)]
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static extern void opus_encoder_destroy(IntPtr st);
 
         [DllImport(DllName, EntryPoint = "opus_encoder_ctl", CallingConvention = CallingConvention.Cdecl)]
@@ -65,6 +67,7 @@ namespace OpusSharp
         public static extern int opus_decoder_ctl(OpusDecoderSafeHandle st, int request, int value);
 
         [DllImport(DllName, EntryPoint = "opus_decoder_destroy", CallingConvention = CallingConvention.Cdecl)]
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static extern void opus_decoder_destroy(IntPtr st);
 
         [DllImport(DllName, EntryPoint = "opus_packet_parse", CallingConvention = CallingConvention.Cdecl)]
