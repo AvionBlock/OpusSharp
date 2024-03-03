@@ -6,8 +6,7 @@ To use this library, you will need to package it so it can dynamically be loaded
 
 First, Open the `.sln` file in an IDE of you're choice, then right click on the solution and build.
 
-To package, Make sure to have nuget already installed either by an EXE in the same directory as this repository or install via PATH, Then open a command prompt/terminal in the repository's directory and type the following command:
-`nuget pack OpusSharp.nusepc -Version 1.0.0 -OutputDirectory <YourLocalNugetFeedDirectory>`.
+To package, Make sure to have nuget already installed either by an EXE in the same directory as this repository or install via PATH, Then just run `PackAll.bat`.
 
 # Using the nuget package
 Just install it onto you're directory, If you cannot find you're package in the nuget package manager of you're project, you will need to add you're local nuget feed to you're IDE: https://learn.microsoft.com/en-us/nuget/consume-packages/install-use-packages-visual-studio#package-sources
