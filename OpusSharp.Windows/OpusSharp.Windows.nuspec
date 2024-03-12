@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>OpusSharp.Windows</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <description>Contains windows opus binaries for OpusSharp.</description>
     <authors>The Opus Audio Codec Authors</authors>
     <projectUrl>https://opus-codec.org/</projectUrl>
