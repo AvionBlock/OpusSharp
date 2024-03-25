@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package>
+	<metadata>
+		<id>OpusSharp.iOS</id>
+		<version>1.0.0</version>
+		<authors>SineVector241</authors>
+		<description>Standard library for OpusSharp.</description>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<copyright>Copyright MIT</copyright>
+
+		<dependencies>
+			<dependency id="OpusSharp.Core" version="1.0.3" />
+		</dependencies>
+	</metadata>
+</package>
