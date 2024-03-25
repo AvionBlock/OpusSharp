@@ -1,10 +1,19 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
 
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
-	  <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net6.0-windows10.0.19041.0</TargetFrameworks>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <AssemblyName>OpusSharp</AssemblyName>
-  </PropertyGroup>
+	<PropertyGroup>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<AssemblyName>OpusSharp</AssemblyName>
+		<TargetFrameworks>netstandard2.0;net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
+		<IsWindows Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))' == 'true'">true</IsWindows>
+		<IsLinux Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))' == 'true'">true</IsLinux>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(IsWindows)'=='true'">
+		<DefineConstants>WINDOWS</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(IsLinux)'=='true'">
+		<DefineConstants>LINUX</DefineConstants>
+	</PropertyGroup>
 
 </Project>

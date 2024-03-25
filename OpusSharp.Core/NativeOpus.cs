@@ -8,11 +8,9 @@ namespace OpusSharp
 {
     internal static unsafe class NativeOpus
     {
-#if __ANDROID__
+#if __ANDROID__ || LINUX
         private const string DllName = "libopus.so";
-#elif __IOS__
-        private const string DllName = "__Internal__";
-#elif __MACCATALYST__
+#elif __IOS__ || __MACCATALYST__
         private const string DllName = "__Internal__";
 #else
         private const string DllName = "opus";

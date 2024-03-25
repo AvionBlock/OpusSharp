@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>OpusSharp.Core</id>
-		<version>1.0.2</version>
+		<version>1.0.3</version>
 		<authors>SineVector241</authors>
 		<description>Standard library for OpusSharp.</description>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
