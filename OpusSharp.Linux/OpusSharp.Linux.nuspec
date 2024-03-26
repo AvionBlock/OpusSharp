@@ -3,7 +3,7 @@
   <metadata>
     <id>OpusSharp.Linux</id>
     <version>1.0.0</version>
-    <description>Contains windows opus binaries for OpusSharp.</description>
+    <description>Contains linux opus binaries for OpusSharp.</description>
     <authors>The Opus Audio Codec Authors</authors>
     <projectUrl>https://opus-codec.org/</projectUrl>
 
