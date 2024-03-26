@@ -12,4 +12,8 @@
 			<dependency id="OpusSharp.Core" version="1.0.3" />
 		</dependencies>
 	</metadata>
+
+	<files>
+		<file src="lib/libopus.a" target="runtime/ios/native" />
+	</files>
 </package>
