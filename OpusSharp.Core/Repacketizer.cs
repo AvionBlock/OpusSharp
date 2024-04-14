@@ -10,9 +10,6 @@ namespace OpusSharp.Core
     {
         private readonly OpusRepacketizerSafeHandle Repacker;
 
-        #region Variables
-        #endregion
-
         #region Methods
         /// <summary>
         /// Creates and initializes an opus repacketizer.
