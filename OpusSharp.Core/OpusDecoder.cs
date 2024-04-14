@@ -360,7 +360,7 @@ namespace OpusSharp.Core
             return result == 1;
         }
 
-        /* Unknown Implementation
+        /* Unknown Implementation, NEED HELP!
         public static unsafe void Parse(byte[] data, out byte out_toc, byte[] frames, short[] size, out int payloadOffset)
         {
             fixed (byte* dataPtr = data)

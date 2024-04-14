@@ -191,5 +191,13 @@ namespace OpusSharp.Core
         [DllImport(DllName, EntryPoint = "opus_multistream_decoder_ctl", CallingConvention = CallingConvention.Cdecl)]
         public static extern int opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle st, int request, out int value);
         #endregion
+
+        #region LibInfo
+        [DllImport(DllName, EntryPoint = "opus_get_version_string", CallingConvention = CallingConvention.Cdecl)]
+        public static extern string opus_get_version_string();
+
+        [DllImport(DllName, EntryPoint = "opus_strerror", CallingConvention = CallingConvention.Cdecl)]
+        public static extern string opus_strerror(int error);
+        #endregion
     }
 }
