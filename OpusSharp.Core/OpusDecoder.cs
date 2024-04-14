@@ -1,4 +1,5 @@
-﻿using OpusSharp.Enums;
+﻿using OpusSharp.Core;
+using OpusSharp.Enums;
 using OpusSharp.SafeHandlers;
 using System;
 
@@ -7,7 +8,7 @@ namespace OpusSharp
     /// <summary>
     /// Audio decoder with opus.
     /// </summary>
-    public class OpusDecoder : IDisposable
+    public class OpusDecoder : Disposable
     {
         private readonly OpusDecoderSafeHandle Decoder;
 
@@ -174,16 +175,13 @@ namespace OpusSharp
             value = val;
         }
 
-        public void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected void Dispose(bool disposing)
-        {
-            if (!Decoder.IsClosed)
-                Decoder.Dispose();
+            if (disposing)
+            {
+                if (!Decoder.IsClosed)
+                    Decoder.Dispose();
+            }
         }
 
         private void ThrowIfDisposed()
@@ -194,11 +192,6 @@ namespace OpusSharp
             }
         }
         #endregion
-
-        ~OpusDecoder()
-        {
-            Dispose(false);
-        }
 
         protected static void CheckError(int result)
         {
