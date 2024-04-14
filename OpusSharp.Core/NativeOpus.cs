@@ -1,11 +1,10 @@
 ﻿using OpusSharp.Core.Enums;
 using OpusSharp.Core.SafeHandlers;
-using OpusSharp.SafeHandlers;
 using System;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 
-namespace OpusSharp
+namespace OpusSharp.Core
 {
     internal static unsafe class NativeOpus
     {

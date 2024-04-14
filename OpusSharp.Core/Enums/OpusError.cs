@@ -6,7 +6,7 @@
     public enum OpusError : int
     {
         /// <summary>
-        /// No error.
+        /// No error. This does not throw the <seealso cref="OpusException"/>
         /// </summary>
         OK = 0,
         /// <summary>

@@ -1,8 +1,7 @@
-﻿using OpusSharp.Core;
-using OpusSharp.Core.SafeHandlers;
+﻿using OpusSharp.Core.SafeHandlers;
 using System;
 
-namespace OpusSharp
+namespace OpusSharp.Core
 {
     /// <summary>
     /// Audio encoder with opus.
@@ -20,7 +19,7 @@ namespace OpusSharp
             get
             {
                 if (Encoder.IsClosed) return 0;
-                EncoderCtl(Core.Enums.GenericCtl.OPUS_GET_SAMPLE_RATE_REQUEST, out int value);
+                EncoderCtl(Enums.GenericCtl.OPUS_GET_SAMPLE_RATE_REQUEST, out int value);
                 return value;
             }
         }
@@ -38,31 +37,31 @@ namespace OpusSharp
             get
             {
                 if (Encoder.IsClosed) return 0;
-                EncoderCtl(Core.Enums.EncoderCtl.OPUS_GET_BITRATE_REQUEST, out int value);
+                EncoderCtl(Enums.EncoderCtl.OPUS_GET_BITRATE_REQUEST, out int value);
                 return value;
             }
             set
             {
                 if (Encoder.IsClosed) return;
-                EncoderCtl(Core.Enums.EncoderCtl.OPUS_SET_BITRATE_REQUEST, value);
+                EncoderCtl(Enums.EncoderCtl.OPUS_SET_BITRATE_REQUEST, value);
             }
         }
 
         /// <summary>
         /// The coding mode that the encoder is set to.
         /// </summary>
-        public Core.Enums.PreDefCtl OpusApplication
+        public Enums.PreDefCtl OpusApplication
         {
             get
             {
                 if (Encoder.IsClosed) return 0;
-                EncoderCtl(Core.Enums.EncoderCtl.OPUS_GET_APPLICATION_REQUEST, out int value);
-                return (Core.Enums.PreDefCtl)value;
+                EncoderCtl(Enums.EncoderCtl.OPUS_GET_APPLICATION_REQUEST, out int value);
+                return (Enums.PreDefCtl)value;
             }
             set
             {
                 if (Encoder.IsClosed) return;
-                EncoderCtl(Core.Enums.EncoderCtl.OPUS_SET_APPLICATION_REQUEST, (int)value);
+                EncoderCtl(Enums.EncoderCtl.OPUS_SET_APPLICATION_REQUEST, (int)value);
             }
         }
 
@@ -74,13 +73,13 @@ namespace OpusSharp
             get
             {
                 if (Encoder.IsClosed) return 0;
-                EncoderCtl(Core.Enums.EncoderCtl.OPUS_GET_COMPLEXITY_REQUEST, out int value);
+                EncoderCtl(Enums.EncoderCtl.OPUS_GET_COMPLEXITY_REQUEST, out int value);
                 return value;
             }
             set
             {
                 if (Encoder.IsClosed) return;
-                EncoderCtl(Core.Enums.EncoderCtl.OPUS_SET_COMPLEXITY_REQUEST, value);
+                EncoderCtl(Enums.EncoderCtl.OPUS_SET_COMPLEXITY_REQUEST, value);
             }
         }
 
@@ -92,31 +91,31 @@ namespace OpusSharp
             get
             {
                 if (Encoder.IsClosed) return 0;
-                EncoderCtl(Core.Enums.EncoderCtl.OPUS_GET_PACKET_LOSS_PERC_REQUEST, out int value);
+                EncoderCtl(Enums.EncoderCtl.OPUS_GET_PACKET_LOSS_PERC_REQUEST, out int value);
                 return value;
             }
             set
             {
                 if (Encoder.IsClosed) return;
-                EncoderCtl(Core.Enums.EncoderCtl.OPUS_SET_PACKET_LOSS_PERC_REQUEST, value);
+                EncoderCtl(Enums.EncoderCtl.OPUS_SET_PACKET_LOSS_PERC_REQUEST, value);
             }
         }
 
         /// <summary>
         /// Configures the type of signal being encoded.
         /// </summary>
-        public Core.Enums.PreDefCtl Signal
+        public Enums.PreDefCtl Signal
         {
             get
             {
                 if (Encoder.IsClosed) return 0;
-                EncoderCtl(Core.Enums.EncoderCtl.OPUS_GET_SIGNAL_REQUEST, out int value);
-                return (Core.Enums.PreDefCtl)value;
+                EncoderCtl(Enums.EncoderCtl.OPUS_GET_SIGNAL_REQUEST, out int value);
+                return (Enums.PreDefCtl)value;
             }
             set
             {
                 if (Encoder.IsClosed) return;
-                EncoderCtl(Core.Enums.EncoderCtl.OPUS_SET_SIGNAL_REQUEST, (int)value);
+                EncoderCtl(Enums.EncoderCtl.OPUS_SET_SIGNAL_REQUEST, (int)value);
             }
         }
 
@@ -128,13 +127,13 @@ namespace OpusSharp
             get
             {
                 if (Encoder.IsClosed) return false;
-                EncoderCtl(Core.Enums.EncoderCtl.OPUS_GET_VBR_REQUEST, out int value);
+                EncoderCtl(Enums.EncoderCtl.OPUS_GET_VBR_REQUEST, out int value);
                 return value == 1;
             }
             set
             {
                 if (Encoder.IsClosed) return;
-                EncoderCtl(Core.Enums.EncoderCtl.OPUS_SET_VBR_REQUEST, value == true ? 1 : 0);
+                EncoderCtl(Enums.EncoderCtl.OPUS_SET_VBR_REQUEST, value == true ? 1 : 0);
             }
         }
 
@@ -146,13 +145,13 @@ namespace OpusSharp
             get
             {
                 if (Encoder.IsClosed) return false;
-                EncoderCtl(Core.Enums.EncoderCtl.OPUS_GET_VBR_CONSTRAINT_REQUEST, out int value);
+                EncoderCtl(Enums.EncoderCtl.OPUS_GET_VBR_CONSTRAINT_REQUEST, out int value);
                 return value == 1;
             }
             set
             {
                 if (Encoder.IsClosed) return;
-                EncoderCtl(Core.Enums.EncoderCtl.OPUS_SET_VBR_CONSTRAINT_REQUEST, value == true ? 1 : 0);
+                EncoderCtl(Enums.EncoderCtl.OPUS_SET_VBR_CONSTRAINT_REQUEST, value == true ? 1 : 0);
             }
         }
         #endregion
@@ -164,7 +163,8 @@ namespace OpusSharp
         /// <param name="SampleRate">Sampling rate of input signal (Hz) This must be one of 8000, 12000, 16000, 24000, or 48000.</param>
         /// <param name="Channels">Number of channels (1 or 2) in input signal.</param>
         /// <param name="Application">The coding mode that the encoder should set to.</param>
-        public OpusEncoder(int SampleRate, int Channels, Core.Enums.PreDefCtl Application)
+        /// <exception cref="OpusException"></exception>
+        public OpusEncoder(int SampleRate, int Channels, Enums.PreDefCtl Application)
         {
             Encoder = NativeOpus.opus_encoder_create(SampleRate, Channels, (int)Application, out var Error);
             CheckError((int)Error);
@@ -180,7 +180,9 @@ namespace OpusSharp
         /// <param name="output">Output payload</param>
         /// <param name="inputOffset">Offset to start reading in the input.</param>
         /// <param name="outputOffset">Offset to start writing in the output.</param>
-        /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see Error codes) on failure.</returns>
+        /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see <see cref="Enums.OpusError"/>) on failure. Note: OpusSharp throws an error if there is a negative error code.</returns>
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="OpusException"></exception>
         public unsafe int Encode(byte[] input, int frame_size, byte[] output, int inputOffset = 0, int outputOffset = 0)
         {
             ThrowIfDisposed();
@@ -202,7 +204,9 @@ namespace OpusSharp
         /// <param name="output">Output payload</param>
         /// <param name="inputOffset">Offset to start reading in the input.</param>
         /// <param name="outputOffset">Offset to start writing in the output.</param>
-        /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see Error codes) on failure.</returns>
+        /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see <see cref="Enums.OpusError"/>) on failure. Note: OpusSharp throws an error if there is a negative error code.</returns>
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="OpusException"></exception>
         public unsafe int Encode(short[] input, int frame_size, byte[] output, int inputOffset = 0, int outputOffset = 0)
         {
             ThrowIfDisposed();
@@ -228,7 +232,9 @@ namespace OpusSharp
         /// <param name="output">Output payload</param>
         /// <param name="inputOffset">Offset to start reading in the input.</param>
         /// <param name="outputOffset">Offset to start writing in the output.</param>
-        /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see Error codes) on failure.</returns>
+        /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see <see cref="Enums.OpusError"/>) on failure. Note: OpusSharp throws an error if there is a negative error code.</returns>
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="OpusException"></exception>
         public unsafe int EncodeFloat(float[] input, int frame_size, byte[] output, int inputOffset = 0, int outputOffset = 0)
         {
             ThrowIfDisposed();
@@ -243,21 +249,13 @@ namespace OpusSharp
         }
 
         /// <summary>
-        /// Gets the size of an OpusEncoder structure.
-        /// </summary>
-        /// <param name="channels">Number of channels. This must be 1 or 2.</param>
-        /// <returns>The size in bytes.</returns>
-        public int GetSize(int channels)
-        {
-            return NativeOpus.opus_encoder_get_size(channels);
-        }
-
-        /// <summary>
         /// Requests a CTL on the encoder.
         /// </summary>
         /// <param name="ctl">The encoder CTL to request.</param>
         /// <param name="value">The value to input.</param>
-        public void EncoderCtl(Core.Enums.EncoderCtl ctl, int value)
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="OpusException"></exception>
+        public void EncoderCtl(Enums.EncoderCtl ctl, int value)
         {
             ThrowIfDisposed();
 
@@ -269,7 +267,9 @@ namespace OpusSharp
         /// </summary>
         /// <param name="ctl">The encoder CTL to request.</param>
         /// <param name="value">The value that is outputted from the CTL.</param>
-        public void EncoderCtl(Core.Enums.EncoderCtl ctl, out int value)
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="OpusException"></exception>
+        public void EncoderCtl(Enums.EncoderCtl ctl, out int value)
         {
             ThrowIfDisposed();
 
@@ -282,7 +282,9 @@ namespace OpusSharp
         /// </summary>
         /// <param name="ctl">The encoder CTL to request.</param>
         /// <param name="value">The value to input.</param>
-        public void EncoderCtl(Core.Enums.GenericCtl ctl, int value)
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="OpusException"></exception>
+        public void EncoderCtl(Enums.GenericCtl ctl, int value)
         {
             ThrowIfDisposed();
 
@@ -294,7 +296,9 @@ namespace OpusSharp
         /// </summary>
         /// <param name="ctl">The encoder CTL to request.</param>
         /// <param name="value">The value that is outputted from the CTL.</param>
-        public void EncoderCtl(Core.Enums.GenericCtl ctl, out int value)
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="OpusException"></exception>
+        public void EncoderCtl(Enums.GenericCtl ctl, out int value)
         {
             ThrowIfDisposed();
 
@@ -311,6 +315,10 @@ namespace OpusSharp
             }
         }
 
+        /// <summary>
+        /// Checks if the object is disposed and throws.
+        /// </summary>
+        /// <exception cref="ObjectDisposedException"></exception>
         private void ThrowIfDisposed()
         {
             if(Encoder.IsClosed)
@@ -320,10 +328,15 @@ namespace OpusSharp
         }
         #endregion
 
+        /// <summary>
+        /// Check's for an opus error and throws if there is one.
+        /// </summary>
+        /// <param name="result"></param>
+        /// <exception cref="OpusException"></exception>
         protected static void CheckError(int result)
         {
             if (result < 0)
-                throw new Exception($"Opus Error: {(Core.Enums.OpusError)result}");
+                throw new OpusException(((Enums.OpusError)result).ToString());
         }
     }
 }

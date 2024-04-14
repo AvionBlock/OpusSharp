@@ -1,11 +1,10 @@
-﻿using OpusSharp.Core;
-using OpusSharp.Core.SafeHandlers;
+﻿using OpusSharp.Core.SafeHandlers;
 using System;
 
-namespace OpusSharp
+namespace OpusSharp.Core
 {
     /// <summary>
-    /// Audio decoder with opus.
+    /// Audio multistream decoder with opus.
     /// </summary>
     public class OpusMSDecoder : Disposable
     {
@@ -20,7 +19,7 @@ namespace OpusSharp
             get
             {
                 if (Decoder.IsClosed) return 0;
-                DecoderCtl(Core.Enums.GenericCtl.OPUS_GET_SAMPLE_RATE_REQUEST, out int value);
+                DecoderCtl(Enums.GenericCtl.OPUS_GET_SAMPLE_RATE_REQUEST, out int value);
                 return value;
             }
         }
@@ -38,13 +37,13 @@ namespace OpusSharp
             get
             {
                 if (Decoder.IsClosed) return 0;
-                DecoderCtl(Core.Enums.DecoderCtl.OPUS_GET_GAIN_REQUEST, out int value);
+                DecoderCtl(Enums.DecoderCtl.OPUS_GET_GAIN_REQUEST, out int value);
                 return value;
             }
             set
             {
                 if (Decoder.IsClosed) return;
-                DecoderCtl(Core.Enums.DecoderCtl.OPUS_SET_GAIN_REQUEST, value);
+                DecoderCtl(Enums.DecoderCtl.OPUS_SET_GAIN_REQUEST, value);
             }
         }
 
@@ -56,7 +55,7 @@ namespace OpusSharp
             get
             {
                 if (Decoder.IsClosed) return 0;
-                DecoderCtl(Core.Enums.DecoderCtl.OPUS_GET_LAST_PACKET_DURATION_REQUEST, out int value);
+                DecoderCtl(Enums.DecoderCtl.OPUS_GET_LAST_PACKET_DURATION_REQUEST, out int value);
                 return value;
             }
         }
@@ -69,7 +68,7 @@ namespace OpusSharp
             get
             {
                 if (Decoder.IsClosed) return 0;
-                DecoderCtl(Core.Enums.DecoderCtl.OPUS_GET_PITCH_REQUEST, out int value);
+                DecoderCtl(Enums.DecoderCtl.OPUS_GET_PITCH_REQUEST, out int value);
                 return value;
             }
         }
@@ -81,9 +80,10 @@ namespace OpusSharp
         /// </summary>
         /// <param name="SampleRate">Sample rate to decode at (Hz). This must be one of 8000, 12000, 16000, 24000, or 48000.</param>
         /// <param name="Channels">Number of channels to decode.</param>
+        /// <exception cref="OpusException"></exception>
         public unsafe OpusMSDecoder(int SampleRate, int Channels, int Streams, int CoupledStreams, byte[] mapping)
         {
-            Core.Enums.OpusError error;
+            Enums.OpusError error;
             fixed (byte* mapPtr = mapping)
                 Decoder = NativeOpus.opus_multistream_decoder_create(SampleRate, Channels, Streams, CoupledStreams, mapPtr, out error);
             CheckError((int)error);
@@ -101,7 +101,9 @@ namespace OpusSharp
         /// <param name="decodeFEC">Flag (false or true) to request that any in-band forward error correction data be decoded. If no such data is available, the frame is decoded as if it were lost.</param>
         /// <param name="inputOffset">Offset to start reading in the input.</param>
         /// <param name="outputOffset">Offset to start writing in the output.</param>
-        /// <returns>The length of the decoded packet on success or a negative error code (see Error codes) on failure.</returns>
+        /// <returns>The length of the decoded packet on success or a negative error code (see <see cref="Enums.OpusError"/>) on failure. Note: OpusSharp throws an error if there is a negative error code.</returns>
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="OpusException"></exception>
         public unsafe int Decode(byte[] input, int inputLength, byte[] output, int frame_size, bool decodeFEC = false, int inputOffset = 0, int outputOffset = 0)
         {
             ThrowIfDisposed();
@@ -124,7 +126,9 @@ namespace OpusSharp
         /// <param name="decodeFEC">Flag (false or true) to request that any in-band forward error correction data be decoded. If no such data is available, the frame is decoded as if it were lost.</param>
         /// <param name="inputOffset">Offset to start reading in the input.</param>
         /// <param name="outputOffset">Offset to start writing in the output.</param>
-        /// <returns>The length of the decoded packet on success or a negative error code (see Error codes) on failure.</returns>
+        /// <returns>The length of the decoded packet on success or a negative error code (see <see cref="Enums.OpusError"/>) on failure. Note: OpusSharp throws an error if there is a negative error code.</returns>
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="OpusException"></exception>
         public unsafe int Decode(byte[] input, int inputLength, short[] output, int frame_size, bool decodeFEC = false, int inputOffset = 0, int outputOffset = 0)
         {
             ThrowIfDisposed();
@@ -149,7 +153,9 @@ namespace OpusSharp
         /// <param name="output">Output signal, with interleaved samples. This must contain room for frame_size*channels samples.</param>
         /// <param name="inputOffset">Offset to start reading in the input.</param>
         /// <param name="outputOffset">Offset to start writing in the output.</param>
-        /// <returns>The length of the decoded packet on success or a negative error code (see Error codes) on failure.</returns>
+        /// <returns>The length of the decoded packet on success or a negative error code (see <see cref="Enums.OpusError"/>) on failure. Note: OpusSharp throws an error if there is a negative error code.</returns>
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="OpusException"></exception>
         public unsafe int DecodeFloat(byte[] input, int inputLength, float[] output, int frame_size, bool decodeFEC = false, int inputOffset = 0, int outputOffset = 0)
         {
             ThrowIfDisposed();
@@ -167,7 +173,9 @@ namespace OpusSharp
         /// </summary>
         /// <param name="ctl">The decoder CTL to request.</param>
         /// <param name="value">The value to input.</param>
-        public void DecoderCtl(Core.Enums.DecoderCtl ctl, int value)
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="OpusException"></exception>
+        public void DecoderCtl(Enums.DecoderCtl ctl, int value)
         {
             ThrowIfDisposed();
 
@@ -179,7 +187,9 @@ namespace OpusSharp
         /// </summary>
         /// <param name="ctl">The decoder CTL to request.</param>
         /// <param name="value">The value that is outputted from the CTL.</param>
-        public void DecoderCtl(Core.Enums.DecoderCtl ctl, out int value)
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="OpusException"></exception>
+        public void DecoderCtl(Enums.DecoderCtl ctl, out int value)
         {
             ThrowIfDisposed();
 
@@ -192,7 +202,9 @@ namespace OpusSharp
         /// </summary>
         /// <param name="ctl">The decoder CTL to request.</param>
         /// <param name="value">The value to input.</param>
-        public void DecoderCtl(Core.Enums.GenericCtl ctl, int value)
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="OpusException"></exception>
+        public void DecoderCtl(Enums.GenericCtl ctl, int value)
         {
             ThrowIfDisposed();
 
@@ -204,7 +216,9 @@ namespace OpusSharp
         /// </summary>
         /// <param name="ctl">The decoder CTL to request.</param>
         /// <param name="value">The value that is outputted from the CTL.</param>
-        public void DecoderCtl(Core.Enums.GenericCtl ctl, out int value)
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="OpusException"></exception>
+        public void DecoderCtl(Enums.GenericCtl ctl, out int value)
         {
             ThrowIfDisposed();
 
@@ -221,6 +235,10 @@ namespace OpusSharp
             }
         }
 
+        /// <summary>
+        /// Checks if the object is disposed and throws.
+        /// </summary>
+        /// <exception cref="ObjectDisposedException"></exception>
         private void ThrowIfDisposed()
         {
             if (Decoder.IsClosed)
@@ -230,10 +248,15 @@ namespace OpusSharp
         }
         #endregion
 
+        /// <summary>
+        /// Check's for an opus error and throws if there is one.
+        /// </summary>
+        /// <param name="result"></param>
+        /// <exception cref="OpusException"></exception>
         protected static void CheckError(int result)
         {
             if (result < 0)
-                throw new Exception($"Opus Error: {(Core.Enums.OpusError)result}");
+                throw new OpusException(((Enums.OpusError)result).ToString());
         }
     }
 }
