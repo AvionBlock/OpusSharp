@@ -229,6 +229,8 @@ namespace OpusSharp.Core
         /// </summary>
         /// <param name="data">Opus packet</param>
         /// <returns>Number of samples.</returns>
+        /// <exception cref="ObjectDisposedException"></exception>
+        /// <exception cref="OpusException"></exception>
         public unsafe int GetNumberOfSamples(byte[] data)
         {
             ThrowIfDisposed();
