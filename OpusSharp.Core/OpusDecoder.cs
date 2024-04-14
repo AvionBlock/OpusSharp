@@ -224,6 +224,23 @@ namespace OpusSharp.Core
             value = val;
         }
 
+        /// <summary>
+        /// Gets the number of samples of an Opus packet.
+        /// </summary>
+        /// <param name="data">Opus packet</param>
+        /// <returns>Number of samples.</returns>
+        public unsafe int GetNumberOfSamples(byte[] data)
+        {
+            ThrowIfDisposed();
+
+            int result = 0;
+            fixed (byte* dataPtr = data)
+                result = NativeOpus.opus_decoder_get_nb_samples(Decoder, dataPtr, data.Length);
+
+            CheckError(result);
+            return result;
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -245,6 +262,12 @@ namespace OpusSharp.Core
             }
         }
 
+        /// <summary>
+        /// Gets the bandwidth of an Opus packet.
+        /// </summary>
+        /// <param name="data">Opus packet</param>
+        /// <returns>The bandwidth.</returns>
+        /// <exception cref="OpusException"></exception>
         public static unsafe Enums.PreDefCtl GetBandwidth(byte[] data)
         {
             int result = 0;
@@ -255,7 +278,12 @@ namespace OpusSharp.Core
             return (Enums.PreDefCtl)result;
         }
 
-
+        /// <summary>
+        /// Gets the number of samples per frame from an Opus packet.
+        /// </summary>
+        /// <param name="data">Opus packet. This must contain at least one byte of data.</param>
+        /// <param name="Fs">Sampling rate in Hz. This must be a multiple of 400, or inaccurate results will be returned.</param>
+        /// <returns>Number of samples per frame.</returns>
         public static unsafe int GetSamplesPerFrame(byte[] data, int Fs)
         {
             int result = 0;
@@ -265,6 +293,12 @@ namespace OpusSharp.Core
             return result;
         }
 
+        /// <summary>
+        /// Gets the number of channels from an Opus packet.
+        /// </summary>
+        /// <param name="data">Opus packet</param>
+        /// <returns>Number of channels</returns>
+        /// <exception cref="OpusException"></exception>
         public static unsafe int GetNumberOfChannels(byte[] data)
         {
             int result = 0;
@@ -275,6 +309,12 @@ namespace OpusSharp.Core
             return result;
         }
 
+        /// <summary>
+        /// Gets the number of frames in an Opus packet.
+        /// </summary>
+        /// <param name="data">Opus packet.</param>
+        /// <returns>Number of frames.</returns>
+        /// <exception cref="OpusException"></exception>
         public static unsafe int GetNumberOfFrames(byte[] data)
         {
             int result = 0;
@@ -285,6 +325,13 @@ namespace OpusSharp.Core
             return result;
         }
 
+        /// <summary>
+        /// Gets the number of samples of an Opus packet.
+        /// </summary>
+        /// <param name="data">Opus packet</param>
+        /// <param name="Fs">Sampling rate in Hz. This must be a multiple of 400, or inaccurate results will be returned.</param>
+        /// <returns>Number of samples.</returns>
+        /// <exception cref="OpusException"></exception>
         public static unsafe int GetNumberOfSamples(byte[] data, int Fs)
         {
             int result = 0;
@@ -295,6 +342,12 @@ namespace OpusSharp.Core
             return result;
         }
 
+        /// <summary>
+        /// Checks whether an Opus packet has LBRR.
+        /// </summary>
+        /// <param name="data">Opus packet</param>
+        /// <returns>Wether the LBRR is present.</returns>
+        /// <exception cref="OpusException"></exception>
         public static unsafe bool HasLbrr(byte[] data)
         {
             int result = 0;
@@ -304,6 +357,14 @@ namespace OpusSharp.Core
             CheckError(result);
             return result == 1;
         }
+
+        /* Unknown Implementation
+        public static unsafe void Parse(byte[] data, out byte out_toc, byte[] frames, short[] size, out int payloadOffset)
+        {
+            fixed (byte* dataPtr = data)
+                NativeOpus.opus_packet_parse(dataPtr, data.Length / 2, );
+        }
+        */
         #endregion
 
         /// <summary>

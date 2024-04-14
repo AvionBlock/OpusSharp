@@ -64,6 +64,9 @@ namespace OpusSharp.Core
         [DllImport(DllName, EntryPoint = "opus_decoder_ctl", CallingConvention = CallingConvention.Cdecl)]
         public static extern int opus_decoder_ctl(OpusDecoderSafeHandle st, int request, int value);
 
+        [DllImport(DllName, EntryPoint = "opus_decoder_get_nb_samples", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int opus_decoder_get_nb_samples(OpusDecoderSafeHandle st, byte* packet, int len);
+
         [DllImport(DllName, EntryPoint = "opus_decoder_destroy", CallingConvention = CallingConvention.Cdecl)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static extern void opus_decoder_destroy(IntPtr st);
