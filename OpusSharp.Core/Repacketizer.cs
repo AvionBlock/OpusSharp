@@ -6,7 +6,7 @@ namespace OpusSharp.Core
     /// <summary>
     /// The repacketizer can be used to merge multiple Opus packets into a single packet or alternatively to split Opus packets that have previously been merged.
     /// </summary>
-    public class Repacketizer
+    public class Repacketizer : Disposable
     {
         private readonly OpusRepacketizerSafeHandle Repacker;
 
@@ -109,6 +109,15 @@ namespace OpusSharp.Core
             if (Repacker.IsClosed)
             {
                 throw new ObjectDisposedException(GetType().FullName);
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (!Repacker.IsClosed)
+                    Repacker.Dispose();
             }
         }
 
