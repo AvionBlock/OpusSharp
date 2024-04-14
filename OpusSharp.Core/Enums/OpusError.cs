@@ -1,4 +1,4 @@
-﻿namespace OpusSharp.Enums
+﻿namespace OpusSharp.Core.Enums
 {
     /// <summary>
     /// Specifies the type of opus error.

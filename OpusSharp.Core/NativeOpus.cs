@@ -1,5 +1,5 @@
-﻿using OpusSharp.Core.SafeHandlers;
-using OpusSharp.Enums;
+﻿using OpusSharp.Core.Enums;
+using OpusSharp.Core.SafeHandlers;
 using OpusSharp.SafeHandlers;
 using System;
 using System.Runtime.ConstrainedExecution;
@@ -109,7 +109,7 @@ namespace OpusSharp
 
         [DllImport(DllName, EntryPoint = "opus_repacketizer_destroy", CallingConvention = CallingConvention.Cdecl)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        public static extern void opus_repacketizer_destroy(OpusRepacketizerSafeHandle rp);
+        public static extern void opus_repacketizer_destroy(IntPtr rp);
 
         [DllImport(DllName, EntryPoint = "opus_repacketizer_cat", CallingConvention = CallingConvention.Cdecl)]
         public static extern int opus_repacketizer_cat(OpusRepacketizerSafeHandle rp, byte* data, int len);
@@ -154,7 +154,7 @@ namespace OpusSharp
 
         [DllImport(DllName, EntryPoint = "opus_multistream_encoder_destroy", CallingConvention = CallingConvention.Cdecl)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        public static extern void opus_multistream_encoder_destroy(OpusMSEncoderSafeHandle st);
+        public static extern void opus_multistream_encoder_destroy(IntPtr st);
 
         [DllImport(DllName, EntryPoint = "opus_multistream_encoder_ctl", CallingConvention = CallingConvention.Cdecl)]
         public static extern int opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle st, int request, int value);
@@ -181,7 +181,7 @@ namespace OpusSharp
 
         [DllImport(DllName, EntryPoint = "opus_multistream_decoder_destroy", CallingConvention = CallingConvention.Cdecl)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        public static extern void opus_multistream_decoder_destroy(OpusMSDecoderSafeHandle st);
+        public static extern void opus_multistream_decoder_destroy(IntPtr st);
 
         [DllImport(DllName, EntryPoint = "opus_multistream_decoder_ctl", CallingConvention = CallingConvention.Cdecl)]
         public static extern int opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle st, int request, int value);

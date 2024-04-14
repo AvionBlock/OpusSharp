@@ -1,5 +1,4 @@
 ﻿using OpusSharp.Core;
-using OpusSharp.Enums;
 using OpusSharp.SafeHandlers;
 using System;
 using System.Text;
@@ -17,11 +16,21 @@ namespace OpusSharp
         /// <summary>
         /// Sampling rate of input signal (Hz) This must be one of 8000, 12000, 16000, 24000, or 48000.
         /// </summary>
-        public int SampleRate { get; }
+        public int SampleRate
+        {
+            get
+            {
+                if (Encoder.IsClosed) return 0;
+                EncoderCtl(Core.Enums.GenericCtl.OPUS_GET_SAMPLE_RATE_REQUEST, out int value);
+                return value;
+            }
+        }
+
         /// <summary>
         /// Number of channels (1 or 2) in input signal.
         /// </summary>
         public int Channels { get; }
+
         /// <summary>
         /// Configures the bitrate in the encoder.
         /// </summary>
@@ -30,32 +39,34 @@ namespace OpusSharp
             get
             {
                 if (Encoder.IsClosed) return 0;
-                EncoderCtl(Enums.EncoderCtl.GET_BITRATE, out int value);
+                EncoderCtl(Core.Enums.EncoderCtl.OPUS_GET_BITRATE_REQUEST, out int value);
                 return value;
             }
             set
             {
                 if (Encoder.IsClosed) return;
-                EncoderCtl(Enums.EncoderCtl.SET_BITRATE, value);
+                EncoderCtl(Core.Enums.EncoderCtl.OPUS_SET_BITRATE_REQUEST, value);
             }
         }
+
         /// <summary>
         /// The coding mode that the encoder is set to.
         /// </summary>
-        public Enums.Application OpusApplication
+        public Core.Enums.PreDefCtl OpusApplication
         {
             get
             {
                 if (Encoder.IsClosed) return 0;
-                EncoderCtl(Enums.EncoderCtl.GET_APPLICATION, out int value);
-                return (Enums.Application)value;
+                EncoderCtl(Core.Enums.EncoderCtl.OPUS_GET_APPLICATION_REQUEST, out int value);
+                return (Core.Enums.PreDefCtl)value;
             }
             set
             {
                 if (Encoder.IsClosed) return;
-                EncoderCtl(Enums.EncoderCtl.SET_APPLICATION, (int)value);
+                EncoderCtl(Core.Enums.EncoderCtl.OPUS_SET_APPLICATION_REQUEST, (int)value);
             }
         }
+
         /// <summary>
         /// Configures the encoder's computational complexity. The supported range is 0-10 inclusive with 10 representing the highest complexity.
         /// </summary>
@@ -64,15 +75,16 @@ namespace OpusSharp
             get
             {
                 if (Encoder.IsClosed) return 0;
-                EncoderCtl(Enums.EncoderCtl.GET_COMPLEXITY, out int value);
+                EncoderCtl(Core.Enums.EncoderCtl.OPUS_GET_COMPLEXITY_REQUEST, out int value);
                 return value;
             }
             set
             {
                 if (Encoder.IsClosed) return;
-                EncoderCtl(Enums.EncoderCtl.SET_COMPLEXITY, value);
+                EncoderCtl(Core.Enums.EncoderCtl.OPUS_SET_COMPLEXITY_REQUEST, value);
             }
         }
+
         /// <summary>
         /// Configures the encoder's expected packet loss percentage. Loss percentage in the range 0-100, inclusive (default: 0).
         /// </summary>
@@ -81,32 +93,34 @@ namespace OpusSharp
             get
             {
                 if (Encoder.IsClosed) return 0;
-                EncoderCtl(Enums.EncoderCtl.GET_PACKET_LOSS_PERC, out int value);
+                EncoderCtl(Core.Enums.EncoderCtl.OPUS_GET_PACKET_LOSS_PERC_REQUEST, out int value);
                 return value;
             }
             set
             {
                 if (Encoder.IsClosed) return;
-                EncoderCtl(Enums.EncoderCtl.SET_PACKET_LOSS_PERC, value);
+                EncoderCtl(Core.Enums.EncoderCtl.OPUS_SET_PACKET_LOSS_PERC_REQUEST, value);
             }
         }
+
         /// <summary>
         /// Configures the type of signal being encoded.
         /// </summary>
-        public OpusSignal Signal
+        public Core.Enums.PreDefCtl Signal
         {
             get
             {
                 if (Encoder.IsClosed) return 0;
-                EncoderCtl(Enums.EncoderCtl.GET_SIGNAL, out int value);
-                return (OpusSignal)value;
+                EncoderCtl(Core.Enums.EncoderCtl.OPUS_GET_SIGNAL_REQUEST, out int value);
+                return (Core.Enums.PreDefCtl)value;
             }
             set
             {
                 if (Encoder.IsClosed) return;
-                EncoderCtl(Enums.EncoderCtl.SET_SIGNAL, (int)value);
+                EncoderCtl(Core.Enums.EncoderCtl.OPUS_SET_SIGNAL_REQUEST, (int)value);
             }
         }
+
         /// <summary>
         /// Enables or disables variable bitrate (VBR) in the encoder.
         /// </summary>
@@ -115,13 +129,31 @@ namespace OpusSharp
             get
             {
                 if (Encoder.IsClosed) return false;
-                EncoderCtl(Enums.EncoderCtl.GET_VBR, out int value);
+                EncoderCtl(Core.Enums.EncoderCtl.OPUS_GET_VBR_REQUEST, out int value);
                 return value == 1;
             }
             set
             {
                 if (Encoder.IsClosed) return;
-                EncoderCtl(Enums.EncoderCtl.SET_VBR, value == true ? 1 : 0);
+                EncoderCtl(Core.Enums.EncoderCtl.OPUS_SET_VBR_REQUEST, value == true ? 1 : 0);
+            }
+        }
+
+        /// <summary>
+        /// Enables or disables constraint variable bitrate (CVBR) in the encoder.
+        /// </summary>
+        public bool VBRConstraint
+        {
+            get
+            {
+                if (Encoder.IsClosed) return false;
+                EncoderCtl(Core.Enums.EncoderCtl.OPUS_GET_VBR_CONSTRAINT_REQUEST, out int value);
+                return value == 1;
+            }
+            set
+            {
+                if (Encoder.IsClosed) return;
+                EncoderCtl(Core.Enums.EncoderCtl.OPUS_SET_VBR_CONSTRAINT_REQUEST, value == true ? 1 : 0);
             }
         }
         #endregion
@@ -227,7 +259,7 @@ namespace OpusSharp
         /// </summary>
         /// <param name="ctl">The encoder CTL to request.</param>
         /// <param name="value">The value to input.</param>
-        public void EncoderCtl(Enums.EncoderCtl ctl, int value)
+        public void EncoderCtl(Core.Enums.EncoderCtl ctl, int value)
         {
             ThrowIfDisposed();
 
@@ -239,7 +271,32 @@ namespace OpusSharp
         /// </summary>
         /// <param name="ctl">The encoder CTL to request.</param>
         /// <param name="value">The value that is outputted from the CTL.</param>
-        public void EncoderCtl(Enums.EncoderCtl ctl, out int value)
+        public void EncoderCtl(Core.Enums.EncoderCtl ctl, out int value)
+        {
+            ThrowIfDisposed();
+
+            CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)ctl, out int val));
+            value = val;
+        }
+
+        /// <summary>
+        /// Requests a CTL on the encoder.
+        /// </summary>
+        /// <param name="ctl">The encoder CTL to request.</param>
+        /// <param name="value">The value to input.</param>
+        public void EncoderCtl(Core.Enums.GenericCtl ctl, int value)
+        {
+            ThrowIfDisposed();
+
+            CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)ctl, value));
+        }
+
+        /// <summary>
+        /// Requests a CTL on the encoder.
+        /// </summary>
+        /// <param name="ctl">The encoder CTL to request.</param>
+        /// <param name="value">The value that is outputted from the CTL.</param>
+        public void EncoderCtl(Core.Enums.GenericCtl ctl, out int value)
         {
             ThrowIfDisposed();
 
@@ -268,7 +325,7 @@ namespace OpusSharp
         protected static void CheckError(int result)
         {
             if (result < 0)
-                throw new Exception($"Opus Error: {(OpusError)result}");
+                throw new Exception($"Opus Error: {(Core.Enums.OpusError)result}");
         }
     }
 }

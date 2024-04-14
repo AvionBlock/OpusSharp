@@ -15,7 +15,7 @@ namespace OpusSharp.Core.SafeHandlers
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         protected override bool ReleaseHandle()
         {
-            NativeOpus.opus_encoder_destroy(handle);
+            NativeOpus.opus_multistream_encoder_destroy(handle);
             return true;
         }
     }

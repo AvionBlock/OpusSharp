@@ -1,5 +1,4 @@
 ﻿using OpusSharp.Core;
-using OpusSharp.Enums;
 using OpusSharp.SafeHandlers;
 using System;
 
@@ -16,11 +15,21 @@ namespace OpusSharp
         /// <summary>
         /// Sampling rate of input signal (Hz) This must be one of 8000, 12000, 16000, 24000, or 48000.
         /// </summary>
-        public int SampleRate { get; }
+        public int SampleRate 
+        { 
+            get 
+            {
+                if (Decoder.IsClosed) return 0;
+                DecoderCtl(Core.Enums.GenericCtl.OPUS_GET_SAMPLE_RATE_REQUEST, out int value);
+                return value;
+            }
+        }
+
         /// <summary>
         /// Number of channels (1 or 2) in input signal.
         /// </summary>
         public int Channels { get; }
+
         /// <summary>
         /// Configures decoder gain adjustment.
         /// </summary>
@@ -29,15 +38,16 @@ namespace OpusSharp
             get
             {
                 if (Decoder.IsClosed) return 0;
-                DecoderCtl(Enums.DecoderCtl.GET_GAIN, out int value);
+                DecoderCtl(Core.Enums.DecoderCtl.OPUS_GET_GAIN_REQUEST, out int value);
                 return value;
             }
             set
             {
                 if (Decoder.IsClosed) return;
-                DecoderCtl(Enums.DecoderCtl.SET_GAIN, value);
+                DecoderCtl(Core.Enums.DecoderCtl.OPUS_SET_GAIN_REQUEST, value);
             }
         }
+
         /// <summary>
         /// Gets the duration (in samples) of the last packet successfully decoded or concealed.
         /// </summary>
@@ -46,10 +56,11 @@ namespace OpusSharp
             get
             {
                 if (Decoder.IsClosed) return 0;
-                DecoderCtl(Enums.DecoderCtl.GET_LAST_PACKET_DURATION, out int value);
+                DecoderCtl(Core.Enums.DecoderCtl.OPUS_GET_LAST_PACKET_DURATION_REQUEST, out int value);
                 return value;
             }
         }
+
         /// <summary>
         /// Gets the pitch of the last decoded frame, if available.
         /// </summary>
@@ -58,7 +69,7 @@ namespace OpusSharp
             get
             {
                 if (Decoder.IsClosed) return 0;
-                DecoderCtl(Enums.DecoderCtl.GET_PITCH, out int value);
+                DecoderCtl(Core.Enums.DecoderCtl.OPUS_GET_PITCH_REQUEST, out int value);
                 return value;
             }
         }
@@ -75,7 +86,6 @@ namespace OpusSharp
             Decoder = NativeOpus.opus_decoder_create(SampleRate, Channels, out var Error);
             CheckError((int)Error);
 
-            this.SampleRate = SampleRate;
             this.Channels = Channels;
         }
 
@@ -155,7 +165,7 @@ namespace OpusSharp
         /// </summary>
         /// <param name="ctl">The decoder CTL to request.</param>
         /// <param name="value">The value to input.</param>
-        public void DecoderCtl(Enums.DecoderCtl ctl, int value)
+        public void DecoderCtl(Core.Enums.DecoderCtl ctl, int value)
         {
             ThrowIfDisposed();
 
@@ -167,7 +177,32 @@ namespace OpusSharp
         /// </summary>
         /// <param name="ctl">The decoder CTL to request.</param>
         /// <param name="value">The value that is outputted from the CTL.</param>
-        public void DecoderCtl(Enums.DecoderCtl ctl, out int value)
+        public void DecoderCtl(Core.Enums.DecoderCtl ctl, out int value)
+        {
+            ThrowIfDisposed();
+
+            CheckError(NativeOpus.opus_decoder_ctl(Decoder, (int)ctl, out int val));
+            value = val;
+        }
+
+        /// <summary>
+        /// Requests a CTL on the decoder.
+        /// </summary>
+        /// <param name="ctl">The decoder CTL to request.</param>
+        /// <param name="value">The value to input.</param>
+        public void DecoderCtl(Core.Enums.GenericCtl ctl, int value)
+        {
+            ThrowIfDisposed();
+
+            CheckError(NativeOpus.opus_decoder_ctl(Decoder, (int)ctl, value));
+        }
+
+        /// <summary>
+        /// Requests a CTL on the decoder.
+        /// </summary>
+        /// <param name="ctl">The decoder CTL to request.</param>
+        /// <param name="value">The value that is outputted from the CTL.</param>
+        public void DecoderCtl(Core.Enums.GenericCtl ctl, out int value)
         {
             ThrowIfDisposed();
 
@@ -196,7 +231,7 @@ namespace OpusSharp
         protected static void CheckError(int result)
         {
             if (result < 0)
-                throw new Exception($"Opus Error: {(OpusError)result}");
+                throw new Exception($"Opus Error: {(Core.Enums.OpusError)result}");
         }
     }
 }
