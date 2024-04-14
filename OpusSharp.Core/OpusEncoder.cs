@@ -1,7 +1,6 @@
 ﻿using OpusSharp.Core;
-using OpusSharp.SafeHandlers;
+using OpusSharp.Core.SafeHandlers;
 using System;
-using System.Text;
 
 namespace OpusSharp
 {
@@ -165,12 +164,11 @@ namespace OpusSharp
         /// <param name="SampleRate">Sampling rate of input signal (Hz) This must be one of 8000, 12000, 16000, 24000, or 48000.</param>
         /// <param name="Channels">Number of channels (1 or 2) in input signal.</param>
         /// <param name="Application">The coding mode that the encoder should set to.</param>
-        public OpusEncoder(int SampleRate, int Channels, Enums.Application Application)
+        public OpusEncoder(int SampleRate, int Channels, Core.Enums.PreDefCtl Application)
         {
             Encoder = NativeOpus.opus_encoder_create(SampleRate, Channels, (int)Application, out var Error);
             CheckError((int)Error);
 
-            this.SampleRate = SampleRate;
             this.Channels = Channels;
         }
 
@@ -187,7 +185,7 @@ namespace OpusSharp
         {
             ThrowIfDisposed();
 
-            int result = (int)OpusError.OK;
+            int result = 0;
             fixed (byte* inPtr = input)
             fixed (byte* outPtr = output)
                 result = NativeOpus.opus_encode(Encoder, inPtr + inputOffset, frame_size / 2, outPtr + outputOffset, output.Length - outputOffset);
@@ -212,7 +210,7 @@ namespace OpusSharp
             byte[] byteInput = new byte[input.Length * 2]; //Short to byte is 2 bytes.
             Buffer.BlockCopy(input, 0, byteInput, 0, input.Length);
 
-            int result = (int)OpusError.OK;
+            int result = 0;
             fixed (byte* inPtr = byteInput)
             fixed (byte* outPtr = output)
                 result = NativeOpus.opus_encode(Encoder, inPtr + inputOffset, frame_size, outPtr + outputOffset, output.Length - outputOffset);
@@ -235,7 +233,7 @@ namespace OpusSharp
         {
             ThrowIfDisposed();
 
-            int result = (int)OpusError.OK;
+            int result = 0;
             fixed (float* inPtr = input)
             fixed (byte* outPtr = output)
                 result = NativeOpus.opus_encode_float(Encoder, inPtr + inputOffset, frame_size, outPtr + outputOffset, output.Length - outputOffset);

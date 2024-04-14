@@ -141,7 +141,7 @@ namespace OpusSharp
         public static extern int opus_multistream_encoder_get_size(int streams, int coupled_streams);
 
         [DllImport(DllName, EntryPoint = "opus_multistream_encoder_create", CallingConvention = CallingConvention.Cdecl)]
-        public static extern OpusMSEncoderSafeHandle opus_multistream_encoder_create(int Fs, int channels, int streams, int coupled_streams, byte* mapping, int application, out int error);
+        public static extern OpusMSEncoderSafeHandle opus_multistream_encoder_create(int Fs, int channels, int streams, int coupled_streams, byte* mapping, int application, out OpusError error);
 
         [DllImport(DllName, EntryPoint = "opus_multistream_encoder_init", CallingConvention = CallingConvention.Cdecl)]
         public static extern int opus_multistream_encoder_init(OpusMSEncoderSafeHandle st, int Fs, int channels, int streams, int coupled_streams, byte* mapping, int application);
@@ -168,7 +168,7 @@ namespace OpusSharp
         public static extern int opus_multistream_decoder_get_size(int streams, int coupled_streams);
 
         [DllImport(DllName, EntryPoint = "opus_multistream_decoder_create", CallingConvention = CallingConvention.Cdecl)]
-        public static extern OpusMSDecoderSafeHandle opus_multistream_decoder_create(int Fs, int channels, int streams, int coupled_streams, byte* mapping, out int error);
+        public static extern OpusMSDecoderSafeHandle opus_multistream_decoder_create(int Fs, int channels, int streams, int coupled_streams, byte* mapping, out OpusError error);
 
         [DllImport(DllName, EntryPoint = "opus_multistream_decoder_init", CallingConvention = CallingConvention.Cdecl)]
         public static extern int opus_multistream_decoder_init(OpusMSDecoderSafeHandle st, int Fs, int channels, int streams, int coupled_streams, byte* mapping);

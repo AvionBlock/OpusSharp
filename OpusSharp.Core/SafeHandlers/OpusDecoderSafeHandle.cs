@@ -2,7 +2,7 @@
 using System;
 using System.Runtime.ConstrainedExecution;
 
-namespace OpusSharp.SafeHandlers
+namespace OpusSharp.Core.SafeHandlers
 {
     internal class OpusDecoderSafeHandle : SafeHandle
     {
