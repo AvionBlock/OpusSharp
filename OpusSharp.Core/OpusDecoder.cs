@@ -244,6 +244,66 @@ namespace OpusSharp.Core
                 throw new ObjectDisposedException(GetType().FullName);
             }
         }
+
+        public static unsafe Enums.PreDefCtl GetBandwidth(byte[] data)
+        {
+            int result = 0;
+            fixed (byte* dataPtr = data)
+                result = NativeOpus.opus_packet_get_bandwidth(dataPtr);
+
+            CheckError(result);
+            return (Enums.PreDefCtl)result;
+        }
+
+
+        public static unsafe int GetSamplesPerFrame(byte[] data, int Fs)
+        {
+            int result = 0;
+            fixed (byte* dataPtr = data)
+                result = NativeOpus.opus_packet_get_samples_per_frame(dataPtr, Fs);
+
+            return result;
+        }
+
+        public static unsafe int GetNumberOfChannels(byte[] data)
+        {
+            int result = 0;
+            fixed (byte* dataPtr = data)
+                result = NativeOpus.opus_packet_get_nb_channels(dataPtr);
+
+            CheckError(result);
+            return result;
+        }
+
+        public static unsafe int GetNumberOfFrames(byte[] data)
+        {
+            int result = 0;
+            fixed (byte* dataPtr = data)
+                result = NativeOpus.opus_packet_get_nb_frames(dataPtr, data.Length);
+
+            CheckError(result);
+            return result;
+        }
+
+        public static unsafe int GetNumberOfSamples(byte[] data, int Fs)
+        {
+            int result = 0;
+            fixed (byte* dataPtr = data)
+                result = NativeOpus.opus_packet_get_nb_samples(dataPtr, data.Length, Fs);
+
+            CheckError(result);
+            return result;
+        }
+
+        public static unsafe bool HasLbrr(byte[] data)
+        {
+            int result = 0;
+            fixed (byte* dataPtr = data)
+                result = NativeOpus.opus_packet_has_lbrr(dataPtr, data.Length);
+
+            CheckError(result);
+            return result == 1;
+        }
         #endregion
 
         /// <summary>

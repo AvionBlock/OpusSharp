@@ -78,7 +78,7 @@ namespace OpusSharp.Core
         public static extern int opus_packet_get_samples_per_frame(byte* data, int Fs);
 
         [DllImport(DllName, EntryPoint = "opus_packet_get_nb_channels", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_packet_nb_channels(byte* data);
+        public static extern int opus_packet_get_nb_channels(byte* data);
 
         [DllImport(DllName, EntryPoint = "opus_packet_get_nb_frames", CallingConvention = CallingConvention.Cdecl)]
         public static extern int opus_packet_get_nb_frames(byte* packet, int len);
