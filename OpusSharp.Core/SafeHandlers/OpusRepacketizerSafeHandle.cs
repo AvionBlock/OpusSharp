@@ -1,12 +1,12 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Runtime.ConstrainedExecution;
 using System;
-using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices;
 
 namespace OpusSharp.Core.SafeHandlers
 {
-    internal class OpusDecoderSafeHandle : SafeHandle
+    internal class OpusRepacketizerSafeHandle : SafeHandle
     {
-        public OpusDecoderSafeHandle() : base(IntPtr.Zero, true)
+        public OpusRepacketizerSafeHandle() : base(IntPtr.Zero, true)
         {
         }
 
@@ -15,7 +15,7 @@ namespace OpusSharp.Core.SafeHandlers
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         protected override bool ReleaseHandle()
         {
-            NativeOpus.opus_decoder_destroy(handle);
+            NativeOpus.opus_repacketizer_destroy(handle);
             return true;
         }
     }
