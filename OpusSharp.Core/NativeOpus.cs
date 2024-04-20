@@ -188,10 +188,10 @@ namespace OpusSharp.Core
 
         #region LibInfo
         [DllImport(DllName, EntryPoint = "opus_get_version_string", CallingConvention = CallingConvention.Cdecl)]
-        public static extern string opus_get_version_string();
+        public static extern char* opus_get_version_string();
 
         [DllImport(DllName, EntryPoint = "opus_strerror", CallingConvention = CallingConvention.Cdecl)]
-        public static extern string opus_strerror(int error);
+        public static extern char* opus_strerror(int error);
         #endregion
     }
 }

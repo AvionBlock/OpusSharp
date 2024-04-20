@@ -1,4 +1,6 @@
 ﻿using OpusSharp.Core.Enums;
+using System;
+using System.Runtime.InteropServices;
 
 namespace OpusSharp.Core
 {
@@ -8,9 +10,9 @@ namespace OpusSharp.Core
         /// Gets the libopus version string.
         /// </summary>
         /// <returns>The version.</returns>
-        public static string NativeVersion()
+        public static unsafe string NativeVersion()
         {
-            return NativeOpus.opus_get_version_string();
+            return Marshal.PtrToStringAnsi((IntPtr)NativeOpus.opus_get_version_string());
         }
 
         /// <summary>
@@ -18,9 +20,9 @@ namespace OpusSharp.Core
         /// </summary>
         /// <param name="error">The error number.</param>
         /// <returns>The error information.</returns>
-        public static string OpusStringError(OpusError error)
+        public static unsafe string OpusStringError(OpusError error)
         {
-            return NativeOpus.opus_strerror((int)error);
+            return Marshal.PtrToStringAnsi((IntPtr)NativeOpus.opus_strerror((int)error));
         }
     }
 }
