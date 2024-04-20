@@ -1,7 +1,6 @@
 ﻿using OpusSharp.Core.Enums;
 using OpusSharp.Core.SafeHandlers;
 using System;
-using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 
 namespace OpusSharp.Core
