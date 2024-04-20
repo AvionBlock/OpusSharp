@@ -231,13 +231,11 @@ namespace OpusSharp.Core
         /// <returns>Number of samples.</returns>
         /// <exception cref="ObjectDisposedException"></exception>
         /// <exception cref="OpusException"></exception>
-        public unsafe int GetNumberOfSamples(byte[] data)
+        public int GetNumberOfSamples(byte[] data)
         {
             ThrowIfDisposed();
 
-            int result = 0;
-            fixed (byte* dataPtr = data)
-                result = NativeOpus.opus_decoder_get_nb_samples(Decoder, dataPtr, data.Length);
+            var result = NativeOpus.opus_decoder_get_nb_samples(Decoder, data, data.Length);
 
             CheckError(result);
             return result;
@@ -317,11 +315,9 @@ namespace OpusSharp.Core
         /// <param name="data">Opus packet.</param>
         /// <returns>Number of frames.</returns>
         /// <exception cref="OpusException"></exception>
-        public static unsafe int GetNumberOfFrames(byte[] data)
+        public static int GetNumberOfFrames(byte[] data)
         {
-            int result = 0;
-            fixed (byte* dataPtr = data)
-                result = NativeOpus.opus_packet_get_nb_frames(dataPtr, data.Length);
+            var result = NativeOpus.opus_packet_get_nb_frames(data, data.Length);
 
             CheckError(result);
             return result;
@@ -334,11 +330,9 @@ namespace OpusSharp.Core
         /// <param name="Fs">Sampling rate in Hz. This must be a multiple of 400, or inaccurate results will be returned.</param>
         /// <returns>Number of samples.</returns>
         /// <exception cref="OpusException"></exception>
-        public static unsafe int GetNumberOfSamples(byte[] data, int Fs)
+        public static int GetNumberOfSamples(byte[] data, int Fs)
         {
-            int result = 0;
-            fixed (byte* dataPtr = data)
-                result = NativeOpus.opus_packet_get_nb_samples(dataPtr, data.Length, Fs);
+            var result = NativeOpus.opus_packet_get_nb_samples(data, data.Length, Fs);
 
             CheckError(result);
             return result;
@@ -352,21 +346,51 @@ namespace OpusSharp.Core
         /// <exception cref="OpusException"></exception>
         public static unsafe bool HasLbrr(byte[] data)
         {
-            int result = 0;
-            fixed (byte* dataPtr = data)
-                result = NativeOpus.opus_packet_has_lbrr(dataPtr, data.Length);
+            var result = NativeOpus.opus_packet_has_lbrr(data, data.Length);
 
             CheckError(result);
             return result == 1;
         }
 
-        /* Unknown Implementation, NEED HELP!
-        public static unsafe void Parse(byte[] data, out byte out_toc, byte[] frames, short[] size, out int payloadOffset)
+        /// <summary>
+        /// Parse an opus packet into one or more frames. THIS FUNCTION IS NOT WORKING, DO NOT USE THIS FUNCTION UNTIL IT IS FIXED/FIGURED OUT.
+        /// </summary>
+        /// <param name="data">Opus packet to be parsed</param>
+        /// <param name="out_toc">TOC pointer</param>
+        /// <param name="frames">encapsulated frames</param>
+        /// <param name="size">sizes of the encapsulated frames</param>
+        /// <param name="payloadOffset">returns the position of the payload within the packet (in bytes)</param>
+        /// <returns>number of frames.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static unsafe int Parse(byte[] data, out byte out_toc, out byte[] frames, out short[] size, out int payloadOffset)
         {
+            throw new NotImplementedException();
+
+            /*
+            frames = new byte[48];
+            size = new short[48];
+
+            var result = 0;
             fixed (byte* dataPtr = data)
-                NativeOpus.opus_packet_parse(dataPtr, data.Length / 2, );
+                result = NativeOpus.opus_packet_parse(dataPtr, data.Length, out out_toc, out frames, out size, out payloadOffset);
+
+            return result;
+            */
         }
-        */
+
+        /// <summary>
+        /// Applies soft-clipping to bring a float signal within the [-1,1] range.
+        /// </summary>
+        /// <param name="data">Input PCM and modified PCM</param>
+        /// <param name="channels">Number of channels</param>
+        /// <param name="softclipMem">State memory for the soft clipping process (one float per channel, initialized to zero)</param>
+        public static unsafe void PcmSoftClip(float[] data, int channels, out float[] softclipMem)
+        {
+            softclipMem = new float[channels];
+            fixed (float* dataPtr = data)
+            fixed (float* softclipMemPtr = softclipMem)
+                NativeOpus.opus_pcm_soft_clip(dataPtr, data.Length, channels, softclipMemPtr);
+        }
         #endregion
 
         /// <summary>
