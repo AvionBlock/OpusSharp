@@ -244,7 +244,7 @@ namespace OpusSharp.Core
             if (disposing)
             {
                 if (!Decoder.IsClosed)
-                    Decoder.Dispose();
+                    Decoder.Close();
             }
         }
 

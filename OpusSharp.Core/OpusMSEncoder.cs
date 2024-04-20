@@ -316,7 +316,7 @@ namespace OpusSharp.Core
             if (disposing)
             {
                 if (!Encoder.IsClosed)
-                    Encoder.Dispose();
+                    Encoder.Close();
             }
         }
 

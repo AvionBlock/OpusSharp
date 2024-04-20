@@ -114,7 +114,7 @@ namespace OpusSharp.Core
             if (disposing)
             {
                 if (!Repacker.IsClosed)
-                    Repacker.Dispose();
+                    Repacker.Close();
             }
         }
 
