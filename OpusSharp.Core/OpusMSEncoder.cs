@@ -19,8 +19,7 @@ namespace OpusSharp.Core
             get
             {
                 if (Encoder.IsClosed) return 0;
-                EncoderCtl(Enums.GenericCtl.OPUS_GET_SAMPLE_RATE_REQUEST, out int value);
-                return value;
+                return EncoderCtl(Enums.GenericCtl.OPUS_GET_SAMPLE_RATE_REQUEST);
             }
         }
 
@@ -217,7 +216,9 @@ namespace OpusSharp.Core
             ThrowIfDisposed();
 
             byte[] byteInput = new byte[input.Length * 2]; //Short to byte is 2 bytes.
+#pragma warning disable CA2018 // 'Buffer.BlockCopy' expects the number of bytes to be copied for the 'count' argument
             Buffer.BlockCopy(input, 0, byteInput, 0, input.Length);
+#pragma warning restore CA2018 // 'Buffer.BlockCopy' expects the number of bytes to be copied for the 'count' argument
 
             int result = 0;
             fixed (byte* inPtr = byteInput)
@@ -300,15 +301,14 @@ namespace OpusSharp.Core
         /// Requests a CTL on the encoder.
         /// </summary>
         /// <param name="ctl">The encoder CTL to request.</param>
-        /// <param name="value">The value that is outputted from the CTL.</param>
         /// <exception cref="ObjectDisposedException"></exception>
         /// <exception cref="OpusException"></exception>
-        public void EncoderCtl(Enums.GenericCtl ctl, out int value)
+        public int EncoderCtl(Enums.GenericCtl ctl)
         {
             ThrowIfDisposed();
 
             CheckError(NativeOpus.opus_multistream_encoder_ctl(Encoder, (int)ctl, out int val));
-            value = val;
+            return val;
         }
 
         protected override void Dispose(bool disposing)

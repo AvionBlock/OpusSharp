@@ -98,7 +98,7 @@ namespace OpusSharp.Core
         public static extern int opus_repacketizer_get_size();
 
         [DllImport(DllName, EntryPoint = "opus_repacketizer_init", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_repacketizer_init(OpusRepacketizerSafeHandle rp);
+        public static extern OpusRepacketizerSafeHandle opus_repacketizer_init(OpusRepacketizerSafeHandle rp);
 
         [DllImport(DllName, EntryPoint = "opus_repacketizer_create", CallingConvention = CallingConvention.Cdecl)]
         public static extern OpusRepacketizerSafeHandle opus_repacketizer_create();

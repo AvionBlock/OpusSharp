@@ -19,8 +19,7 @@ namespace OpusSharp.Core
             get
             {
                 if (Decoder.IsClosed) return 0;
-                DecoderCtl(Enums.GenericCtl.OPUS_GET_SAMPLE_RATE_REQUEST, out int value);
-                return value;
+                return DecoderCtl(Enums.GenericCtl.OPUS_GET_SAMPLE_RATE_REQUEST);
             }
         }
 
@@ -141,7 +140,9 @@ namespace OpusSharp.Core
             fixed (byte* outPtr = byteOutput)
                 result = NativeOpus.opus_multistream_decode(Decoder, inPtr + inputOffset, inputLength, outPtr + outputOffset, frame_size, decodeFEC ? 1 : 0);
             CheckError(result);
+#pragma warning disable CA2018 // 'Buffer.BlockCopy' expects the number of bytes to be copied for the 'count' argument
             Buffer.BlockCopy(byteOutput, 0, output, 0, output.Length);
+#pragma warning restore CA2018 // 'Buffer.BlockCopy' expects the number of bytes to be copied for the 'count' argument
             return result * Channels;
         }
 
@@ -215,15 +216,14 @@ namespace OpusSharp.Core
         /// Requests a CTL on the multistream decoder.
         /// </summary>
         /// <param name="ctl">The decoder CTL to request.</param>
-        /// <param name="value">The value that is outputted from the CTL.</param>
         /// <exception cref="ObjectDisposedException"></exception>
         /// <exception cref="OpusException"></exception>
-        public void DecoderCtl(Enums.GenericCtl ctl, out int value)
+        public int DecoderCtl(Enums.GenericCtl ctl)
         {
             ThrowIfDisposed();
 
             CheckError(NativeOpus.opus_multistream_decoder_ctl(Decoder, (int)ctl, out int val));
-            value = val;
+            return val;
         }
 
         protected override void Dispose(bool disposing)

@@ -12,7 +12,6 @@ namespace OpusSharp.Core.SafeHandlers
 
         public override bool IsInvalid => handle == IntPtr.Zero;
 
-        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         protected override bool ReleaseHandle()
         {
             NativeOpus.opus_repacketizer_destroy(handle);

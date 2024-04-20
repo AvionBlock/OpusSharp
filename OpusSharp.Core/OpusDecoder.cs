@@ -37,8 +37,7 @@ namespace OpusSharp.Core
             get
             {
                 if (Decoder.IsClosed) return 0;
-                DecoderCtl(Enums.DecoderCtl.OPUS_GET_GAIN_REQUEST, out int value);
-                return value;
+                return DecoderCtl(Enums.DecoderCtl.OPUS_GET_GAIN_REQUEST);
             }
             set
             {
@@ -55,8 +54,7 @@ namespace OpusSharp.Core
             get
             {
                 if (Decoder.IsClosed) return 0;
-                DecoderCtl(Enums.DecoderCtl.OPUS_GET_LAST_PACKET_DURATION_REQUEST, out int value);
-                return value;
+                return DecoderCtl(Enums.DecoderCtl.OPUS_GET_LAST_PACKET_DURATION_REQUEST);
             }
         }
 
@@ -68,8 +66,7 @@ namespace OpusSharp.Core
             get
             {
                 if (Decoder.IsClosed) return 0;
-                DecoderCtl(Enums.DecoderCtl.OPUS_GET_PITCH_REQUEST, out int value);
-                return value;
+                return DecoderCtl(Enums.DecoderCtl.OPUS_GET_PITCH_REQUEST);
             }
         }
         #endregion
@@ -139,7 +136,9 @@ namespace OpusSharp.Core
             fixed (byte* outPtr = byteOutput)
                 result = NativeOpus.opus_decode(Decoder, inPtr + inputOffset, inputLength, outPtr + outputOffset, frame_size, decodeFEC ? 1 : 0);
             CheckError(result);
+#pragma warning disable CA2018 // 'Buffer.BlockCopy' expects the number of bytes to be copied for the 'count' argument
             Buffer.BlockCopy(byteOutput, 0, output, 0, output.Length);
+#pragma warning restore CA2018 // 'Buffer.BlockCopy' expects the number of bytes to be copied for the 'count' argument
             return result * Channels;
         }
 
@@ -184,15 +183,14 @@ namespace OpusSharp.Core
         /// Requests a CTL on the decoder.
         /// </summary>
         /// <param name="ctl">The decoder CTL to request.</param>
-        /// <param name="value">The value that is outputted from the CTL.</param>
         /// <exception cref="ObjectDisposedException"></exception>
         /// <exception cref="OpusException"></exception>
-        public void DecoderCtl(Enums.DecoderCtl ctl, out int value)
+        public int DecoderCtl(Enums.DecoderCtl ctl)
         {
             ThrowIfDisposed();
 
             CheckError(NativeOpus.opus_decoder_ctl(Decoder, (int)ctl, out int val));
-            value = val;
+            return val;
         }
 
         /// <summary>
