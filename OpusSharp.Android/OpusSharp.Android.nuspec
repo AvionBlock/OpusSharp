@@ -7,7 +7,7 @@
     <authors>The Opus Audio Codec Authors</authors>
     <projectUrl>https://opus-codec.org/</projectUrl>
     <dependencies>
-      <dependency id="OpusSharp.Core" version="1.0.3" />
+      <dependency id="OpusSharp.Core" version="1.0.4" />
     </dependencies>
   </metadata>
 

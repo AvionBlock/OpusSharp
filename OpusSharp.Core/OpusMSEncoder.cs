@@ -4,11 +4,11 @@ using System;
 namespace OpusSharp.Core
 {
     /// <summary>
-    /// Audio encoder with opus.
+    /// Audio multistream encoder with opus.
     /// </summary>
-    public class OpusEncoder : Disposable
+    public class OpusMSEncoder : Disposable
     {
-        private readonly OpusEncoderSafeHandle Encoder;
+        private readonly OpusMSEncoderSafeHandle Encoder;
 
         #region Variables
         /// <summary>
@@ -24,12 +24,12 @@ namespace OpusSharp.Core
         }
 
         /// <summary>
-        /// Number of channels (1 or 2) in input signal.
+        /// Number of channels in the input signal. This must be at most 255. It may be greater than the number of coded channels (streams + coupled_streams).
         /// </summary>
         public int Channels { get; }
 
         /// <summary>
-        /// Configures the bitrate in the encoder.
+        /// Configures the bitrate in the multistream encoder.
         /// </summary>
         public int Bitrate
         {
@@ -46,7 +46,7 @@ namespace OpusSharp.Core
         }
 
         /// <summary>
-        /// The coding mode that the encoder is set to.
+        /// The coding mode that the multistream encoder is set to.
         /// </summary>
         public Enums.PreDefCtl OpusApplication
         {
@@ -63,7 +63,7 @@ namespace OpusSharp.Core
         }
 
         /// <summary>
-        /// Configures the encoder's computational complexity. The supported range is 0-10 inclusive with 10 representing the highest complexity.
+        /// Configures the multistream encoder's computational complexity. The supported range is 0-10 inclusive with 10 representing the highest complexity.
         /// </summary>
         public int Complexity
         {
@@ -80,7 +80,7 @@ namespace OpusSharp.Core
         }
 
         /// <summary>
-        /// Configures the encoder's expected packet loss percentage. Loss percentage in the range 0-100, inclusive (default: 0).
+        /// Configures the multistream encoder's expected packet loss percentage. Loss percentage in the range 0-100, inclusive (default: 0).
         /// </summary>
         public int PacketLossPerc
         {
@@ -114,7 +114,7 @@ namespace OpusSharp.Core
         }
 
         /// <summary>
-        /// Enables or disables variable bitrate (VBR) in the encoder.
+        /// Enables or disables variable bitrate (VBR) in the multistream encoder.
         /// </summary>
         public bool VBR
         {
@@ -131,7 +131,7 @@ namespace OpusSharp.Core
         }
 
         /// <summary>
-        /// Enables or disables constraint variable bitrate (CVBR) in the encoder.
+        /// Enables or disables constraint variable bitrate (CVBR) in the multistream encoder.
         /// </summary>
         public bool VBRConstraint
         {
@@ -150,52 +150,57 @@ namespace OpusSharp.Core
 
         #region Methods
         /// <summary>
-        /// Creates and initializes an opus encoder.
+        /// Creates and initializes an opus multistream encoder.
         /// </summary>
-        /// <param name="SampleRate">Sampling rate of input signal (Hz) This must be one of 8000, 12000, 16000, 24000, or 48000.</param>
-        /// <param name="Channels">Number of channels (1 or 2) in input signal.</param>
-        /// <param name="Application">The coding mode that the encoder should set to.</param>
+        /// <param name="SampleRate">Sampling rate of the input signal (in Hz). This must be one of 8000, 12000, 16000, 24000, or 48000.</param>
+        /// <param name="Channels">Number of channels in the input signal. This must be at most 255. It may be greater than the number of coded channels (streams + coupled_streams).</param>
+        /// <param name="Streams">The total number of streams to encode from the input. This must be no more than the number of channels.</param>
+        /// <param name="CoupledStreams">Number of coupled (2 channel) streams to encode. This must be no larger than the total number of streams. Additionally, The total number of encoded channels (streams + coupled_streams) must be no more than the number of input channels.</param>
+        /// <param name="mapping">Mapping from encoded channels to input channels, as described in Opus Multistream API. As an extra constraint, the multistream encoder does not allow encoding coupled streams for which one channel is unused since this is never a good idea.</param>
+        /// <param name="Application">The target encoder application.</param>
         /// <exception cref="OpusException"></exception>
-        public OpusEncoder(int SampleRate, int Channels, Enums.PreDefCtl Application)
+        public unsafe OpusMSEncoder(int SampleRate, int Channels, int Streams, int CoupledStreams, byte[] mapping, Enums.PreDefCtl Application)
         {
-            Encoder = NativeOpus.opus_encoder_create(SampleRate, Channels, (int)Application, out var Error);
-            CheckError((int)Error);
+            Enums.OpusError error;
+            fixed (byte* mapPtr = mapping)
+                Encoder = NativeOpus.opus_multistream_encoder_create(SampleRate, Channels, Streams, CoupledStreams, mapPtr, (int)Application, out error);
+            CheckError((int)error);
 
             this.Channels = Channels;
         }
 
         /// <summary>
-        /// Encodes an Opus frame.
+        /// Encodes a multistream Opus frame.
         /// </summary>
-        /// <param name="input">Input signal (interleaved if 2 channels). length is frame_size*channels</param>
+        /// <param name="input">The input signal as interleaved samples. This must contain frame_size*channels</param>
         /// <param name="frame_size">Number of samples per channel in the input signal. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
-        /// <param name="output">Output payload</param>
-        /// <param name="inputOffset">Offset to start reading in the input.</param>
-        /// <param name="outputOffset">Offset to start writing in the output.</param>
+        /// <param name="output">Output payload. This must contain storage for at least max_data_bytes. This variable is also used to determine the upper limit on the instant bitrate.</param>
+        /// <param name="outputOffset">Offset to start reading in the input.</param>
+        /// <param name="inputOffset">Offset to start writing in the output.</param>
         /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see <see cref="Enums.OpusError"/>) on failure. Note: OpusSharp throws an error if there is a negative error code.</returns>
         /// <exception cref="ObjectDisposedException"></exception>
         /// <exception cref="OpusException"></exception>
-        public unsafe int Encode(byte[] input, int frame_size, byte[] output, int inputOffset = 0, int outputOffset = 0)
+        public unsafe int Encode(byte[] input, int frame_size, byte[] output, int outputOffset = 0, int inputOffset = 0)
         {
             ThrowIfDisposed();
 
             int result = 0;
             fixed (byte* inPtr = input)
             fixed (byte* outPtr = output)
-                result = NativeOpus.opus_encode(Encoder, inPtr + inputOffset, frame_size / 2, outPtr + outputOffset, output.Length - outputOffset);
+                result = NativeOpus.opus_multistream_encode(Encoder, inPtr + inputOffset, frame_size / 2, outPtr + outputOffset, output.Length - outputOffset);
 
             CheckError(result);
             return result;
         }
 
         /// <summary>
-        /// Encodes an Opus frame.
+        /// Encodes a multistream Opus frame.
         /// </summary>
-        /// <param name="input">Input signal (interleaved if 2 channels). length is frame_size*channels*sizeof(short)</param>
+        /// <param name="input">The input signal as interleaved samples. This must contain frame_size*channels</param>
         /// <param name="frame_size">Number of samples per channel in the input signal. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
-        /// <param name="output">Output payload</param>
-        /// <param name="inputOffset">Offset to start reading in the input.</param>
-        /// <param name="outputOffset">Offset to start writing in the output.</param>
+        /// <param name="output">Output payload. This must contain storage for at least max_data_bytes. This variable is also used to determine the upper limit on the instant bitrate.</param>
+        /// <param name="outputOffset">Offset to start reading in the input.</param>
+        /// <param name="inputOffset">Offset to start writing in the output.</param>
         /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see <see cref="Enums.OpusError"/>) on failure. Note: OpusSharp throws an error if there is a negative error code.</returns>
         /// <exception cref="ObjectDisposedException"></exception>
         /// <exception cref="OpusException"></exception>
@@ -211,7 +216,7 @@ namespace OpusSharp.Core
             int result = 0;
             fixed (byte* inPtr = byteInput)
             fixed (byte* outPtr = output)
-                result = NativeOpus.opus_encode(Encoder, inPtr + inputOffset, frame_size, outPtr + outputOffset, output.Length - outputOffset);
+                result = NativeOpus.opus_multistream_encode(Encoder, inPtr + inputOffset, frame_size, outPtr + outputOffset, output.Length - outputOffset);
 
             CheckError(result);
             Buffer.BlockCopy(byteInput, 0, output, 0, output.Length);
@@ -219,11 +224,11 @@ namespace OpusSharp.Core
         }
 
         /// <summary>
-        /// Encodes an Opus frame.
+        /// Encodes a multistream Opus frame from floating point input.
         /// </summary>
-        /// <param name="input">Input in float format (interleaved if 2 channels), with a normal range of +/-1.0. Samples with a range beyond +/-1.0 are supported but will be clipped by decoders using the integer API and should only be used if it is known that the far end supports extended dynamic range. length is frame_size*channels*sizeof(float)</param>
+        /// <param name="input">The input signal as interleaved samples with a normal range of +/-1.0. Samples with a range beyond +/-1.0 are supported but will be clipped by decoders using the integer API and should only be used if it is known that the far end supports extended dynamic range. This must contain frame_size*channels samples.</param>
         /// <param name="frame_size">Number of samples per channel in the input signal. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
-        /// <param name="output">Output payload</param>
+        /// <param name="output">Output payload. This must contain storage for at least max_data_bytes. This variable is also used to determine the upper limit on the instant bitrate.</param>
         /// <param name="inputOffset">Offset to start reading in the input.</param>
         /// <param name="outputOffset">Offset to start writing in the output.</param>
         /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see <see cref="Enums.OpusError"/>) on failure. Note: OpusSharp throws an error if there is a negative error code.</returns>
@@ -236,7 +241,7 @@ namespace OpusSharp.Core
             int result = 0;
             fixed (float* inPtr = input)
             fixed (byte* outPtr = output)
-                result = NativeOpus.opus_encode_float(Encoder, inPtr + inputOffset, frame_size, outPtr + outputOffset, output.Length - outputOffset);
+                result = NativeOpus.opus_multistream_encode_float(Encoder, inPtr + inputOffset, frame_size, outPtr + outputOffset, output.Length - outputOffset);
 
             CheckError(result);
             return result;
@@ -253,7 +258,7 @@ namespace OpusSharp.Core
         {
             ThrowIfDisposed();
 
-            CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)ctl, value));
+            CheckError(NativeOpus.opus_multistream_encoder_ctl(Encoder, (int)ctl, value));
         }
 
         /// <summary>
@@ -267,7 +272,7 @@ namespace OpusSharp.Core
         {
             ThrowIfDisposed();
 
-            CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)ctl, out int val));
+            CheckError(NativeOpus.opus_multistream_encoder_ctl(Encoder, (int)ctl, out int val));
             return val;
         }
 
@@ -282,7 +287,7 @@ namespace OpusSharp.Core
         {
             ThrowIfDisposed();
 
-            CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)ctl, value));
+            CheckError(NativeOpus.opus_multistream_encoder_ctl(Encoder, (int)ctl, value));
         }
 
         /// <summary>
@@ -295,7 +300,7 @@ namespace OpusSharp.Core
         {
             ThrowIfDisposed();
 
-            CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)ctl, out int val));
+            CheckError(NativeOpus.opus_multistream_encoder_ctl(Encoder, (int)ctl, out int val));
             return val;
         }
 
@@ -314,7 +319,7 @@ namespace OpusSharp.Core
         /// <exception cref="ObjectDisposedException"></exception>
         private void ThrowIfDisposed()
         {
-            if(Encoder.IsClosed)
+            if (Encoder.IsClosed)
             {
                 throw new ObjectDisposedException(GetType().FullName);
             }
