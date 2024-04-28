@@ -74,12 +74,9 @@ for ARCH in $ARCHS; do
   cd ../../
 done
 
-# Use lipo to create a universal library
-echo "Creating universal library..."
-LIPO_LIBS=""
+echo "Copying binaries to output dir..."
 for ARCH in $ARCHS; do
-  LIPO_LIBS="$LIPO_LIBS $BUILD_DIR/$ARCH/installed/lib/libopus.a"
+  cp $BUILD_DIR/$ARCH/installed/lib/libopus.a $OUTPUT_DIR/libopus_$ARCH.a
 done
-lipo -create $LIPO_LIBS -output $OUTPUT_DIR/libopus.a
 
-echo "libopus.a has been created at $OUTPUT_DIR/libopus.a"
+echo "libopus.a has been created for each arch at $OUTPUT_DIR"
