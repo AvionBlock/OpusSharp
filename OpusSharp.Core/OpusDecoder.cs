@@ -19,8 +19,7 @@ namespace OpusSharp.Core
             get 
             {
                 if (Decoder.IsClosed) return 0;
-                DecoderCtl(Enums.GenericCtl.OPUS_GET_SAMPLE_RATE_REQUEST, out int value);
-                return value;
+                return DecoderCtl(Enums.GenericCtl.OPUS_GET_SAMPLE_RATE_REQUEST);
             }
         }
 
@@ -214,12 +213,12 @@ namespace OpusSharp.Core
         /// <param name="value">The value that is outputted from the CTL.</param>
         /// <exception cref="ObjectDisposedException"></exception>
         /// <exception cref="OpusException"></exception>
-        public void DecoderCtl(Enums.GenericCtl ctl, out int value)
+        public int DecoderCtl(Enums.GenericCtl ctl)
         {
             ThrowIfDisposed();
 
             CheckError(NativeOpus.opus_decoder_ctl(Decoder, (int)ctl, out int val));
-            value = val;
+            return val;
         }
 
         /// <summary>

@@ -36,8 +36,7 @@ namespace OpusSharp.Core
             get
             {
                 if (Decoder.IsClosed) return 0;
-                DecoderCtl(Enums.DecoderCtl.OPUS_GET_GAIN_REQUEST, out int value);
-                return value;
+                return DecoderCtl(Enums.DecoderCtl.OPUS_GET_GAIN_REQUEST);
             }
             set
             {
@@ -54,8 +53,7 @@ namespace OpusSharp.Core
             get
             {
                 if (Decoder.IsClosed) return 0;
-                DecoderCtl(Enums.DecoderCtl.OPUS_GET_LAST_PACKET_DURATION_REQUEST, out int value);
-                return value;
+                return DecoderCtl(Enums.DecoderCtl.OPUS_GET_LAST_PACKET_DURATION_REQUEST);
             }
         }
 
@@ -67,8 +65,7 @@ namespace OpusSharp.Core
             get
             {
                 if (Decoder.IsClosed) return 0;
-                DecoderCtl(Enums.DecoderCtl.OPUS_GET_PITCH_REQUEST, out int value);
-                return value;
+                return DecoderCtl(Enums.DecoderCtl.OPUS_GET_PITCH_REQUEST);
             }
         }
         #endregion
@@ -190,12 +187,12 @@ namespace OpusSharp.Core
         /// <param name="value">The value that is outputted from the CTL.</param>
         /// <exception cref="ObjectDisposedException"></exception>
         /// <exception cref="OpusException"></exception>
-        public void DecoderCtl(Enums.DecoderCtl ctl, out int value)
+        public int DecoderCtl(Enums.DecoderCtl ctl)
         {
             ThrowIfDisposed();
 
             CheckError(NativeOpus.opus_multistream_decoder_ctl(Decoder, (int)ctl, out int val));
-            value = val;
+            return val;
         }
 
         /// <summary>

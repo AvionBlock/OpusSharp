@@ -36,8 +36,7 @@ namespace OpusSharp.Core
             get
             {
                 if (Encoder.IsClosed) return 0;
-                EncoderCtl(Enums.EncoderCtl.OPUS_GET_BITRATE_REQUEST, out int value);
-                return value;
+                return EncoderCtl(Enums.EncoderCtl.OPUS_GET_BITRATE_REQUEST);
             }
             set
             {
@@ -54,8 +53,7 @@ namespace OpusSharp.Core
             get
             {
                 if (Encoder.IsClosed) return 0;
-                EncoderCtl(Enums.EncoderCtl.OPUS_GET_APPLICATION_REQUEST, out int value);
-                return (Enums.PreDefCtl)value;
+                return (Enums.PreDefCtl)EncoderCtl(Enums.EncoderCtl.OPUS_GET_APPLICATION_REQUEST);
             }
             set
             {
@@ -72,8 +70,7 @@ namespace OpusSharp.Core
             get
             {
                 if (Encoder.IsClosed) return 0;
-                EncoderCtl(Enums.EncoderCtl.OPUS_GET_COMPLEXITY_REQUEST, out int value);
-                return value;
+                return EncoderCtl(Enums.EncoderCtl.OPUS_GET_COMPLEXITY_REQUEST);
             }
             set
             {
@@ -90,8 +87,7 @@ namespace OpusSharp.Core
             get
             {
                 if (Encoder.IsClosed) return 0;
-                EncoderCtl(Enums.EncoderCtl.OPUS_GET_PACKET_LOSS_PERC_REQUEST, out int value);
-                return value;
+                return EncoderCtl(Enums.EncoderCtl.OPUS_GET_PACKET_LOSS_PERC_REQUEST);
             }
             set
             {
@@ -108,8 +104,7 @@ namespace OpusSharp.Core
             get
             {
                 if (Encoder.IsClosed) return 0;
-                EncoderCtl(Enums.EncoderCtl.OPUS_GET_SIGNAL_REQUEST, out int value);
-                return (Enums.PreDefCtl)value;
+                return (Enums.PreDefCtl)EncoderCtl(Enums.EncoderCtl.OPUS_GET_SIGNAL_REQUEST);
             }
             set
             {
@@ -126,8 +121,7 @@ namespace OpusSharp.Core
             get
             {
                 if (Encoder.IsClosed) return false;
-                EncoderCtl(Enums.EncoderCtl.OPUS_GET_VBR_REQUEST, out int value);
-                return value == 1;
+                return EncoderCtl(Enums.EncoderCtl.OPUS_GET_VBR_REQUEST) == 1;
             }
             set
             {
@@ -144,8 +138,7 @@ namespace OpusSharp.Core
             get
             {
                 if (Encoder.IsClosed) return false;
-                EncoderCtl(Enums.EncoderCtl.OPUS_GET_VBR_CONSTRAINT_REQUEST, out int value);
-                return value == 1;
+                return EncoderCtl(Enums.EncoderCtl.OPUS_GET_VBR_CONSTRAINT_REQUEST) == 1;
             }
             set
             {
@@ -270,12 +263,12 @@ namespace OpusSharp.Core
         /// <param name="value">The value that is outputted from the CTL.</param>
         /// <exception cref="ObjectDisposedException"></exception>
         /// <exception cref="OpusException"></exception>
-        public void EncoderCtl(Enums.EncoderCtl ctl, out int value)
+        public int EncoderCtl(Enums.EncoderCtl ctl)
         {
             ThrowIfDisposed();
 
             CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)ctl, out int val));
-            value = val;
+            return val;
         }
 
         /// <summary>
