@@ -112,7 +112,7 @@ namespace OpusSharp.Core
             fixed (byte* outPtr = output)
                 result = NativeOpus.opus_multistream_decode(Decoder, inPtr + inputOffset, inputLength, outPtr + outputOffset, frame_size / 2, decodeFEC ? 1 : 0);
             CheckError(result);
-            return result * sizeof(short) * Channels;
+            return result * sizeof(short);
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace OpusSharp.Core
 #pragma warning disable CA2018 // 'Buffer.BlockCopy' expects the number of bytes to be copied for the 'count' argument
             Buffer.BlockCopy(byteOutput, 0, output, 0, output.Length);
 #pragma warning restore CA2018 // 'Buffer.BlockCopy' expects the number of bytes to be copied for the 'count' argument
-            return result * Channels;
+            return result;
         }
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace OpusSharp.Core
             fixed (float* outPtr = output)
                 result = NativeOpus.opus_multistream_decode_float(Decoder, inPtr + inputOffset, inputLength, outPtr + outputOffset, frame_size, decodeFEC ? 1 : 0);
             CheckError(result);
-            return result * Channels;
+            return result;
         }
 
         /// <summary>
