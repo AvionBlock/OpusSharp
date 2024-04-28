@@ -54,6 +54,12 @@ public class ExampleDecoder
 }
 ```
 
+You are allowed to directly use the CTL.
+```cs
+var isUsingFec = Encoder.EncoderCtl(OpusSharp.Core.Enums.EncoderCtl.OPUS_GET_INBAND_FEC_REQUEST);
+Console.WriteLine(isUsingFec);
+```
+
 # Packaging as nuget
 To use this library, you will need to package it so it can dynamically be loaded onto you're project without having to declare or make you're own library specific to a platform as that is handled by the nuget file.
 
