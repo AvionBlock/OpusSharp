@@ -60,6 +60,8 @@ var isUsingFec = Encoder.EncoderCtl(OpusSharp.Core.Enums.EncoderCtl.OPUS_GET_INB
 Console.WriteLine(isUsingFec);
 ```
 
+Example Usage in MAUI application providing support for android and windows: https://github.com/SineVector241/VoiceCraft-MCBE_Proximity_Chat
+
 # Packaging as nuget
 To use this library, you will need to package it so it can dynamically be loaded onto your project without having to declare or make your own library specific to a platform as that is handled by the nuget file.
 
