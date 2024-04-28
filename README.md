@@ -78,11 +78,16 @@ Just install it onto your directory, If you cannot find your package in the nuge
 # Working And Tested
 - OpusEncoder - Every function is working
 - OpusDecoder - Every function is working except for Parse() function as that throws a System.EngineExecutionException, I don't know why...
+- Android - arm64-v8a, armeabi-v7a, x86, x86_64.
+- Windows - win-x64, win-x86
+- iOS/MAC - All Architectures.
 
 # Not Tested
 - OpusMSEncoder
 - OpusMSDecoder
 - Repacketizer
+- Windows - arm, arm64
+- Linux - linux-x64
 
 # Planned
 - OpusInfo
