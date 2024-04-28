@@ -72,3 +72,16 @@ Please check [OpusLibs](./OpusLibs) for more information.
 
 # Using the nuget package
 Just install it onto you're directory, If you cannot find you're package in the nuget package manager of you're project, you will need to add you're local nuget feed to you're IDE: https://learn.microsoft.com/en-us/nuget/consume-packages/install-use-packages-visual-studio#package-sources
+
+# Working And Tested
+- OpusEncoder - Every function is working
+- OpusDecoder - Every function is working except for Parse() function as that throws a System.EngineExecutionException, I don't know why...
+
+# Not Tested
+- OpusMSEncoder
+- OpusMSDecoder
+- Repacketizer
+
+# Planned
+- OpusInfo
+- DredDecoder
