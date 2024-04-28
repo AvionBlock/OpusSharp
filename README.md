@@ -61,7 +61,7 @@ Console.WriteLine(isUsingFec);
 ```
 
 # Packaging as nuget
-To use this library, you will need to package it so it can dynamically be loaded onto you're project without having to declare or make you're own library specific to a platform as that is handled by the nuget file.
+To use this library, you will need to package it so it can dynamically be loaded onto your project without having to declare or make your own library specific to a platform as that is handled by the nuget file.
 
 First, Open the `.sln` file in an IDE of you're choice, then right click on the solution and build.
 
@@ -71,7 +71,7 @@ To package, Make sure to have nuget already installed either by an EXE in the sa
 Please check [OpusLibs](./OpusLibs) for more information.
 
 # Using the nuget package
-Just install it onto you're directory, If you cannot find you're package in the nuget package manager of you're project, you will need to add you're local nuget feed to you're IDE: https://learn.microsoft.com/en-us/nuget/consume-packages/install-use-packages-visual-studio#package-sources
+Just install it onto your directory, If you cannot find your package in the nuget package manager of your project, you will need to add you're local nuget feed to you're IDE: https://learn.microsoft.com/en-us/nuget/consume-packages/install-use-packages-visual-studio#package-sources
 
 # Working And Tested
 - OpusEncoder - Every function is working
