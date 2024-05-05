@@ -260,7 +260,6 @@ namespace OpusSharp.Core
         /// Requests a CTL on the encoder.
         /// </summary>
         /// <param name="ctl">The encoder CTL to request.</param>
-        /// <param name="value">The value that is outputted from the CTL.</param>
         /// <exception cref="ObjectDisposedException"></exception>
         /// <exception cref="OpusException"></exception>
         public int EncoderCtl(Enums.EncoderCtl ctl)
@@ -299,6 +298,10 @@ namespace OpusSharp.Core
             return val;
         }
 
+        /// <summary>
+        /// Disposes the object.
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

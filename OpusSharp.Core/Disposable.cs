@@ -17,15 +17,24 @@ namespace OpusSharp.Core
     {
         private int isDisposed; // 0 for false, 1 for true
 
+        /// <summary>
+        /// Returns wether the object is disposed or not.
+        /// </summary>
         public bool IsDisposed
         {
             get => Volatile.Read(ref this.isDisposed) != 0;
         }
 
+        /// <summary>
+        /// Makes an object disposable.
+        /// </summary>
         protected Disposable()
         {
         }
 
+        /// <summary>
+        /// When the object is destructed and not disposed, it does not dispose.
+        /// </summary>
         ~Disposable()
         {
             int oldIsDisposed = Interlocked.Exchange(ref this.isDisposed, 1);
@@ -35,6 +44,9 @@ namespace OpusSharp.Core
             }
         }
 
+        /// <summary>
+        /// Disposes the object.
+        /// </summary>
         public void Dispose()
         {
             int oldIsDisposed = Interlocked.Exchange(ref this.isDisposed, 1);
@@ -51,6 +63,10 @@ namespace OpusSharp.Core
             }
         }
 
+        /// <summary>
+        /// Disposes the object.
+        /// </summary>
+        /// <param name="disposing"></param>
         protected virtual void Dispose(bool disposing)
         {
             throw new NotImplementedException();
