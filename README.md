@@ -1,5 +1,5 @@
 # OpusSharp
-OpusSharp aims to be a cross platform C# compatible version of the native opus codec/library. The code uses the native compiled DLL's with instructions on how to compile your own. Currently Windows and Android binaries are only available.
+OpusSharp aims to be a cross platform C# compatible version of the native opus codec/library. The code uses the native compiled DLL's with instructions on how to compile your own. Currently, Windows, Android, iOS and Linux binaries are available.
 
 # Examples
 Encoder:
@@ -65,12 +65,12 @@ Example Usage in MAUI application providing support for android and windows: htt
 # Packaging as nuget
 To use this library, you will need to package it so it can dynamically be loaded onto your project without having to declare or make your own library specific to a platform as that is handled by the nuget file.
 
-First, Open the `.sln` file in an IDE of you're choice, then right click on the solution and build.
+First, Open the `.sln` file in an IDE of your choice, then right click on the solution and build.
 
 To package, Make sure to have nuget already installed either by an EXE in the same directory as this repository or install via PATH, Then just run `PackAll.bat`.
 
 # Using the nuget package
-Just install it onto your directory, If you cannot find your package in the nuget package manager of your project, you will need to add you're local nuget feed to you're IDE: https://learn.microsoft.com/en-us/nuget/consume-packages/install-use-packages-visual-studio#package-sources
+Just install it onto your directory, If you cannot find your package in the nuget package manager of your project, you will need to add your local nuget feed to your IDE: https://learn.microsoft.com/en-us/nuget/consume-packages/install-use-packages-visual-studio#package-sources
 
 # Working And Tested
 - OpusEncoder - Every function is working
