@@ -11,4 +11,4 @@ jobs:
           dotnet-version: '8.x'
           
       - name: Build
-        run: dir
+        run: dotnet build ./OpusSharp.Core/OpusSharp.Core.csproj
