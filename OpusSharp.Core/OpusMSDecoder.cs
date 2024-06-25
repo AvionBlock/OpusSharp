@@ -76,6 +76,9 @@ namespace OpusSharp.Core
         /// </summary>
         /// <param name="SampleRate">Sample rate to decode at (Hz). This must be one of 8000, 12000, 16000, 24000, or 48000.</param>
         /// <param name="Channels">Number of channels to decode.</param>
+        /// <param name="Streams">The total number of streams coded in the input. This must be no more than 255.</param>
+        /// <param name="CoupledStreams">Number of streams to decode as coupled (2 channel) streams. This must be no larger than the total number of streams. Additionally, The total number of coded channels (streams + coupled_streams) must be no more than 255.</param>
+        /// <param name="mapping">Mapping from coded channels to output channels, as described in Opus Multistream API.</param>
         /// <exception cref="OpusException"></exception>
         public unsafe OpusMSDecoder(int SampleRate, int Channels, int Streams, int CoupledStreams, byte[] mapping)
         {
@@ -147,8 +150,10 @@ namespace OpusSharp.Core
         /// Decodes a multistream Opus frame.
         /// </summary>
         /// <param name="input">Input in float format (interleaved if 2 channels), with a normal range of +/-1.0. Samples with a range beyond +/-1.0 are supported but will be clipped by decoders using the integer API and should only be used if it is known that the far end supports extended dynamic range. length is frame_size*channels*sizeof(float)</param>
-        /// <param name="frame_size">The number of samples per channel of available space in pcm. If this is less than the maximum packet duration (120 ms; 5760 for 48kHz), this function will not be capable of decoding some packets. In the case of PLC (data==NULL) or FEC (decode_fec=1), then frame_size needs to be exactly the duration of audio that is missing, otherwise the decoder will not be in the optimal state to decode the next incoming packet. For the PLC and FEC cases, frame_size must be a multiple of 2.5 ms.</param>
+        /// <param name="inputLength">The number of samples per channel of available space in pcm. If this is less than the maximum packet duration (120 ms; 5760 for 48kHz), this function will not be capable of decoding some packets. In the case of PLC (data==NULL) or FEC (decode_fec=1), then frame_size needs to be exactly the duration of audio that is missing, otherwise the decoder will not be in the optimal state to decode the next incoming packet. For the PLC and FEC cases, frame_size must be a multiple of 2.5 ms.</param>
         /// <param name="output">Output signal, with interleaved samples. This must contain room for frame_size*channels samples.</param>
+        /// <param name="frame_size"></param>
+        /// <param name="decodeFEC">Flag (false or true) to request that any in-band forward error correction data be decoded. If no such data is available, the frame is decoded as if it were lost.</param>
         /// <param name="inputOffset">Offset to start reading in the input.</param>
         /// <param name="outputOffset">Offset to start writing in the output.</param>
         /// <returns>The length of the decoded packet on success or a negative error code (see <see cref="Enums.OpusError"/>) on failure. Note: OpusSharp throws an error if there is a negative error code.</returns>
@@ -184,7 +189,6 @@ namespace OpusSharp.Core
         /// Requests a CTL on the multistream decoder.
         /// </summary>
         /// <param name="ctl">The decoder CTL to request.</param>
-        /// <param name="value">The value that is outputted from the CTL.</param>
         /// <exception cref="ObjectDisposedException"></exception>
         /// <exception cref="OpusException"></exception>
         public int DecoderCtl(Enums.DecoderCtl ctl)
@@ -223,6 +227,10 @@ namespace OpusSharp.Core
             return val;
         }
 
+        /// <summary>
+        /// Disposes the object.
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

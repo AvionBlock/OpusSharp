@@ -1,5 +1,5 @@
 # OpusSharp
-OpusSharp aims to be a cross platform C# compatible version of the native opus codec/library. The code uses the native compiled DLL's with instructions on how to compile you're own. Currently Windows and Android binaries are only available.
+OpusSharp aims to be a cross platform C# compatible version of the native opus codec/library. The code uses the native compiled DLL's with instructions on how to compile your own. Currently, Windows, Android, iOS and Linux binaries are available.
 
 # Examples
 Encoder:
@@ -60,28 +60,35 @@ var isUsingFec = Encoder.EncoderCtl(OpusSharp.Core.Enums.EncoderCtl.OPUS_GET_INB
 Console.WriteLine(isUsingFec);
 ```
 
+Example Usage in MAUI application providing support for android and windows: https://github.com/SineVector241/VoiceCraft-MCBE_Proximity_Chat
+
 # Packaging as nuget
 To use this library, you will need to package it so it can dynamically be loaded onto your project without having to declare or make your own library specific to a platform as that is handled by the nuget file.
 
-First, Open the `.sln` file in an IDE of you're choice, then right click on the solution and build.
+First, Open the `.sln` file in an IDE of your choice, then right click on the solution and build.
 
 To package, Make sure to have nuget already installed either by an EXE in the same directory as this repository or install via PATH, Then just run `PackAll.bat`.
 
-# Compiling Native Builds
-Please check [OpusLibs](./OpusLibs) for more information.
-
 # Using the nuget package
-Just install it onto your directory, If you cannot find your package in the nuget package manager of your project, you will need to add you're local nuget feed to you're IDE: https://learn.microsoft.com/en-us/nuget/consume-packages/install-use-packages-visual-studio#package-sources
+Just install it onto your directory, If you cannot find your package in the nuget package manager of your project, you will need to add your local nuget feed to your IDE: https://learn.microsoft.com/en-us/nuget/consume-packages/install-use-packages-visual-studio#package-sources
 
 # Working And Tested
 - OpusEncoder - Every function is working
 - OpusDecoder - Every function is working except for Parse() function as that throws a System.EngineExecutionException, I don't know why...
+- Android - arm64-v8a, armeabi-v7a, x86, x86_64.
+- Windows - win-x64, win-x86
+- iOS/MAC - All Architectures.
 
 # Not Tested
 - OpusMSEncoder
 - OpusMSDecoder
 - Repacketizer
+- Windows - arm, arm64
+- Linux - linux-x64
 
 # Planned
 - OpusInfo
 - DredDecoder
+
+# Compiling Native Builds
+Please check [OpusLibs](./OpusLibs) for more information.
