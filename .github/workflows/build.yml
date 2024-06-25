@@ -14,4 +14,4 @@ jobs:
         run: dotnet workload restore ./OpusSharp.Core/OpusSharp.Core.csproj
 
       - name: Build
-        run: dotnet build ./OpusSharp.Core/OpusSharp.Core.csproj -f netstandard2.0 p:TargetFrameworks=net8.0
+        run: dotnet build ./OpusSharp.Core/OpusSharp.Core.csproj -f netstandard2.0 -p:TargetFrameworks=net8.0
