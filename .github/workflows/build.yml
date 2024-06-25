@@ -1,0 +1,8 @@
+name: BuildTest
+run-name: Testing OpusSharp.Core Build.
+on: [push, pull_request]
+jobs:
+  BuildProject:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "test"
