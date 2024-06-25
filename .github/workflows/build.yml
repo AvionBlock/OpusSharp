@@ -1,8 +1,11 @@
-name: BuildTest
-run-name: Testing OpusSharp.Core Build.
 on: [push, pull_request]
+name: BuildTest
 jobs:
-  BuildProject:
+   build:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "test"
+      - uses: actions/setup-dotnet@v3
+      - with:
+          dotnet-version: '8.x'
+      
+      - run: dotnet --version
