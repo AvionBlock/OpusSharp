@@ -7,8 +7,10 @@ namespace OpusSharp.Core
 {
     internal static unsafe class NativeOpus
     {
-#if __ANDROID__ || LINUX
+#if __ANDROID__
         private const string DllName = "libopus.so";
+#elif LINUX
+        private const string DllName = "libopus.so.0.10.1";
 #elif __IOS__ || __MACCATALYST__
         private const string DllName = "__Internal__";
 #else
