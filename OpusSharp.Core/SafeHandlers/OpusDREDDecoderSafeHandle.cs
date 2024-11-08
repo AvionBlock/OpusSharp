@@ -13,7 +13,7 @@ namespace OpusSharp.Core.SafeHandlers
 
         protected override bool ReleaseHandle()
         {
-            NativeHandler.opus_dred_decoder_destroy(handle);
+            NativeOpus.opus_dred_decoder_destroy(handle);
             return true;
         }
     }

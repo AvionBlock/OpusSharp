@@ -13,7 +13,7 @@ namespace OpusSharp.Core.SafeHandlers
 
         protected override bool ReleaseHandle()
         {
-            NativeHandler.opus_multistream_encoder_destroy(handle);
+            NativeOpus.opus_multistream_encoder_destroy(handle);
             return true;
         }
     }

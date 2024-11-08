@@ -14,7 +14,7 @@ namespace OpusSharp.Core
         /// <returns>Version string.</returns>
         public static unsafe string Version()
         {
-            byte* version = NativeHandler.opus_get_version_string();
+            byte* version = NativeOpus.opus_get_version_string();
             return Marshal.PtrToStringAnsi((IntPtr)version) ?? "";
         }
 
@@ -25,7 +25,7 @@ namespace OpusSharp.Core
         /// <returns>Error string.</returns>
         public static unsafe string StringError(int error)
         {
-            byte* stringError = NativeHandler.opus_strerror(error);
+            byte* stringError = NativeOpus.opus_strerror(error);
             return Marshal.PtrToStringAnsi((IntPtr)stringError) ?? "";
         }
     }

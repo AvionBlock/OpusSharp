@@ -13,7 +13,7 @@ namespace OpusSharp.Core.SafeHandlers
 
         protected override bool ReleaseHandle()
         {
-            NativeHandler.opus_repacketizer_destroy(handle);
+            NativeOpus.opus_repacketizer_destroy(handle);
             return true;
         }
     }

@@ -6,7 +6,7 @@ namespace OpusSharp.Core
     /// <summary>
     /// Native opus handler that directly calls the exported opus functions.
     /// </summary>
-    public static class NativeHandler
+    public static class NativeOpus
     {
 #if ANDROID
         private const string DllName = "libopus.so";
