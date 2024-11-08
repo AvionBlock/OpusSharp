@@ -3,9 +3,9 @@ using System.Runtime.InteropServices;
 
 namespace OpusSharp.Core.SafeHandlers
 {
-    public class OpusMSEncoderSafeHandle : SafeHandle
+    public class OpusDREDDecoderSafeHandle : SafeHandle
     {
-        public OpusMSEncoderSafeHandle() : base(IntPtr.Zero, true)
+        public OpusDREDDecoderSafeHandle() : base(IntPtr.Zero, true)
         {
         }
 
@@ -13,7 +13,7 @@ namespace OpusSharp.Core.SafeHandlers
 
         protected override bool ReleaseHandle()
         {
-            NativeHandler.opus_multistream_encoder_destroy(handle);
+            NativeHandler.opus_dred_decoder_destroy(handle);
             return true;
         }
     }

@@ -1,10 +1,9 @@
 ﻿using System.Runtime.InteropServices;
 using System;
-using System.Runtime.ConstrainedExecution;
 
 namespace OpusSharp.Core.SafeHandlers
 {
-    internal class OpusDecoderSafeHandle : SafeHandle
+    public class OpusDecoderSafeHandle : SafeHandle
     {
         public OpusDecoderSafeHandle() : base(IntPtr.Zero, true)
         {
@@ -14,7 +13,7 @@ namespace OpusSharp.Core.SafeHandlers
 
         protected override bool ReleaseHandle()
         {
-            NativeOpus.opus_decoder_destroy(handle);
+            NativeHandler.opus_decoder_destroy(handle);
             return true;
         }
     }

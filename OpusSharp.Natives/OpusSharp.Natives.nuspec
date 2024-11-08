@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>OpusSharp.Natives</id>
+    <version>1.5.2</version>
+    <description>Contains native binaries for OpusSharp.</description>
+    <authors>The Opus Authors</authors>
+    <projectUrl>https://opus-codec.org/</projectUrl>
+  </metadata>
+  <files>
+    <file src="runtimes\win-x64\native\opus.dll" target="runtimes\win-x64\native" />
+    <file src="runtimes\win-x86\native\opus.dll" target="runtimes\win-x86\native" />
+    <file src="runtimes\win-arm64\native\opus.dll" target="runtimes\win-arm64\native" />
+    <file src="runtimes\win-arm\native\opus.dll" target="runtimes\win-arm\native" />
+
+    <file src="runtimes\android-x64\native\libopus.so" target="runtimes\android-x64\native" />
+    <file src="runtimes\android-x86\native\libopus.so" target="runtimes\android-x86\native" />
+    <file src="runtimes\android-arm64\native\libopus.so" target="runtimes\android-arm64\native" />
+    <file src="runtimes\android-arm\native\libopus.so" target="runtimes\android-arm\native" />
+
+    <file src="runtimes\linux-x64\native\libopus.so.0.10.1" target="runtimes\linux-x64\native" />
+    <file src="runtimes\linux-x86\native\libopus.so.0.10.1" target="runtimes\linux-x86\native" />
+    <file src="runtimes\linux-arm64\native\libopus.so.0.10.1" target="runtimes\linux-arm64\native" />
+    <file src="runtimes\linux-arm\native\libopus.so.0.10.1" target="runtimes\linux-arm\native" />
+  </files>
+</package>

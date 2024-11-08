@@ -1,10 +1,9 @@
-﻿using System.Runtime.ConstrainedExecution;
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
 
 namespace OpusSharp.Core.SafeHandlers
 {
-    internal class OpusRepacketizerSafeHandle : SafeHandle
+    public class OpusRepacketizerSafeHandle : SafeHandle
     {
         public OpusRepacketizerSafeHandle() : base(IntPtr.Zero, true)
         {
@@ -14,7 +13,7 @@ namespace OpusSharp.Core.SafeHandlers
 
         protected override bool ReleaseHandle()
         {
-            NativeOpus.opus_repacketizer_destroy(handle);
+            NativeHandler.opus_repacketizer_destroy(handle);
             return true;
         }
     }
