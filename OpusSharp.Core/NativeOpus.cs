@@ -300,7 +300,7 @@ namespace OpusSharp.Core
         /// <param name="payload_offset">returns the position of the payload within the packet (in bytes).</param>
         /// <returns>number of frames.</returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static unsafe extern int opus_packet_parse(byte* data, int len, byte* out_toc, byte* frames, short* size, int* payload_offset);
+        public static unsafe extern int opus_packet_parse(byte* data, int len, byte* out_toc, byte*[] frames, short* size, int* payload_offset);
 
         /// <summary>
         /// Gets the bandwidth of an Opus packet.
