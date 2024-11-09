@@ -42,6 +42,9 @@ namespace OpusSharp.Core
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_encoder_ctl(OpusEncoderSafeHandle st, int request, void* data);
 
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static unsafe extern int opus_encoder_ctl(OpusEncoderSafeHandle st, int request, void* data, void* data2);
+
         //Decoder
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int opus_decoder_get_size(int channels);
@@ -198,6 +201,9 @@ namespace OpusSharp.Core
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle st, int request, void* data);
 
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static unsafe extern int opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle st, int request, void* data, void* data2);
+
         //Multistream Decoder
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int opus_multistream_decoder_get_size(int streams, int coupled_streams);
@@ -216,6 +222,9 @@ namespace OpusSharp.Core
 
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle st, int request, void* data);
+
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static unsafe extern int opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle st, int request, void* data, void* data2);
 
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void opus_multistream_decoder_destroy(IntPtr st);
