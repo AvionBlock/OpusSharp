@@ -8,13 +8,7 @@ namespace OpusSharp.Core
     /// </summary>
     public static class NativeOpus
     {
-#if ANDROID
-        private const string DllName = "libopus.so";
-#elif LINUX
-        private const string DllName = "libopus.so.0.10.1";
-#elif WINDOWS
-        private const string DllName = "opus.dll";
-#elif MACOS || IOS || MACCATALYST
+#if MACOS || IOS || MACCATALYST
         private const string DllName = "__Internal__";
 #else
         private const string DllName = "opus";
@@ -376,106 +370,348 @@ namespace OpusSharp.Core
         public static unsafe extern void opus_pcm_soft_clip(float* pcm, int frame_size, int channels, float* softclip_mem);
 
         //Repacketizer
+        /// <summary>
+        /// Gets the size of an <see cref="OpusRepacketizerSafeHandle"/> structure.
+        /// </summary>
+        /// <returns>The size in bytes.</returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int opus_repacketizer_get_size();
 
+        /// <summary>
+        /// (Re)initializes a previously allocated <see cref="OpusRepacketizerSafeHandle"/> state.
+        /// </summary>
+        /// <param name="rp">The <see cref="OpusRepacketizerSafeHandle"/> state to (re)initialize.</param>
+        /// <returns><see cref="OpusRepacketizerSafeHandle"/></returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern OpusRepacketizerSafeHandle opus_repacketizer_init(OpusRepacketizerSafeHandle rp);
 
+        /// <summary>
+        /// Allocates memory and initializes the new <see cref="OpusRepacketizerSafeHandle"/> with <see cref="opus_repacketizer_init(OpusRepacketizerSafeHandle)"/>.
+        /// </summary>
+        /// <returns><see cref="OpusRepacketizerSafeHandle"/></returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern OpusRepacketizerSafeHandle opus_repacketizer_create();
 
+        /// <summary>
+        /// Frees an <see cref="OpusRepacketizerSafeHandle"/> allocated by <see cref="opus_repacketizer_create"/>.
+        /// </summary>
+        /// <param name="rp">State to be freed.</param>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void opus_repacketizer_destroy(IntPtr rp);
 
+        /// <summary>
+        /// Add a packet to the current repacketizer state.
+        /// </summary>
+        /// <param name="rp">The repacketizer state to which to add the packet.</param>
+        /// <param name="data">The packet data. The application must ensure this pointer remains valid until the next call to <see cref="opus_repacketizer_init(OpusRepacketizerSafeHandle)"/> or <see cref="opus_repacketizer_destroy(IntPtr)"/>.</param>
+        /// <param name="len">The number of bytes in the packet data.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_repacketizer_cat(OpusRepacketizerSafeHandle rp, byte* data, int len);
 
+        /// <summary>
+        /// Construct a new packet from data previously submitted to the <see cref="OpusRepacketizerSafeHandle"/> state via <see cref="opus_repacketizer_cat(OpusRepacketizerSafeHandle, byte*, int)"/>.
+        /// </summary>
+        /// <param name="rp">The repacketizer state from which to construct the new packet.</param>
+        /// <param name="begin">The index of the first frame in the current repacketizer state to include in the output.</param>
+        /// <param name="end">One past the index of the last frame in the current repacketizer state to include in the output.</param>
+        /// <param name="data">The buffer in which to store the output packet.</param>
+        /// <param name="maxlen">The maximum number of bytes to store in the output buffer. In order to guarantee success, this should be at least 1276 for a single frame, or for multiple frames, 1277*(end-begin). However, 1*(end-begin) plus the size of all packet data submitted to the repacketizer since the last call to <see cref="opus_repacketizer_init(OpusRepacketizerSafeHandle)"/> or <see cref="opus_repacketizer_create"/> is also sufficient, and possibly much smaller.</param>
+        /// <returns>The total size of the output packet on success, or an <see cref="OpusErrorCodes"/> on failure.</returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_repacketizer_out_range(OpusRepacketizerSafeHandle rp, int begin, int end, byte* data, int maxlen);
 
+        /// <summary>
+        /// Return the total number of frames contained in packet data submitted to the <see cref="OpusRepacketizerSafeHandle"/> state so far via <see cref="opus_repacketizer_cat(OpusRepacketizerSafeHandle, byte*, int)"/> since the last call to <see cref="opus_repacketizer_init(OpusRepacketizerSafeHandle)"/> or <see cref="opus_repacketizer_create"/>.
+        /// </summary>
+        /// <param name="rp">The repacketizer state containing the frames.</param>
+        /// <returns>The total number of frames contained in the packet data submitted to the repacketizer state.</returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int opus_repacketizer_get_nb_frames(OpusRepacketizerSafeHandle rp);
 
+        /// <summary>
+        /// Construct a new packet from data previously submitted to the repacketizer state via <see cref="opus_repacketizer_cat(OpusRepacketizerSafeHandle, byte*, int)"/>.
+        /// </summary>
+        /// <param name="rp">The repacketizer state from which to construct the new packet.</param>
+        /// <param name="data">The buffer in which to store the output packet.</param>
+        /// <param name="maxlen">The maximum number of bytes to store in the output buffer. In order to guarantee success, this should be at least 1277*opus_repacketizer_get_nb_frames(rp). However, 1*opus_repacketizer_get_nb_frames(rp) plus the size of all packet data submitted to the repacketizer since the last call to opus_repacketizer_init() or opus_repacketizer_create() is also sufficient, and possibly much smaller.</param>
+        /// <returns>The total size of the output packet on success, or an <see cref="OpusErrorCodes"/> on failure.</returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_repacketizer_out(OpusRepacketizerSafeHandle rp, byte* data, int maxlen);
 
+        /// <summary>
+        /// Pads a given Opus packet to a larger size (possibly changing the TOC sequence).
+        /// </summary>
+        /// <param name="data">The buffer containing the packet to pad.</param>
+        /// <param name="len">The size of the packet. This must be at least 1.</param>
+        /// <param name="new_len">The desired size of the packet after padding. This must be at least as large as len.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_packet_pad(byte* data, int len, int new_len);
 
+        /// <summary>
+        /// Remove all padding from a given Opus packet and rewrite the TOC sequence to minimize space usage.
+        /// </summary>
+        /// <param name="data">The buffer containing the packet to strip.</param>
+        /// <param name="len">The size of the packet. This must be at least 1.</param>
+        /// <returns>The new size of the output packet on success, or an <see cref="OpusErrorCodes"/> on failure.</returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_packet_unpad(byte* data, int len);
 
+        /// <summary>
+        /// Pads a given Opus multi-stream packet to a larger size (possibly changing the TOC sequence).
+        /// </summary>
+        /// <param name="data">The buffer containing the packet to pad.</param>
+        /// <param name="len">The size of the packet. This must be at least 1.</param>
+        /// <param name="new_len">The desired size of the packet after padding. This must be at least 1.</param>
+        /// <param name="nb_streams">The number of streams (not channels) in the packet. This must be at least as large as len.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_multistream_packet_pad(byte* data, int len, int new_len, int nb_streams);
 
+        /// <summary>
+        /// Remove all padding from a given Opus multi-stream packet and rewrite the TOC sequence to minimize space usage.
+        /// </summary>
+        /// <param name="data">The buffer containing the packet to strip.</param>
+        /// <param name="len">The size of the packet. This must be at least 1.</param>
+        /// <param name="nb_streams">The number of streams (not channels) in the packet. This must be at least 1.</param>
+        /// <returns>The new size of the output packet on success, or an <see cref="OpusErrorCodes"/> on failure.</returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_multistream_packet_unpad(byte* data, int len, int nb_streams);
 
         //Multistream Encoder
+        /// <summary>
+        /// Gets the size of an <see cref="OpusMSEncoderSafeHandle"/> structure.
+        /// </summary>
+        /// <param name="streams">The total number of streams to encode from the input. This must be no more than 255.</param>
+        /// <param name="coupled_streams">Number of coupled (2 channel) streams to encode. This must be no larger than the total number of streams. Additionally, The total number of encoded channels (streams + coupled_streams) must be no more than 255.</param>
+        /// <returns>The size in bytes on success, or a negative error code (see <see cref="OpusErrorCodes"/>) on error.</returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int opus_multistream_encoder_get_size(int streams, int coupled_streams);
 
+        /// <summary>
+        /// N.A.
+        /// </summary>
+        /// <param name="channels"></param>
+        /// <param name="mapping_family"></param>
+        /// <returns></returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int opus_multistream_surround_encoder_get_size(int channels, int mapping_family);
 
+        /// <summary>
+        /// Allocates and initializes a <see cref="OpusMSEncoderSafeHandle"/> state.
+        /// </summary>
+        /// <param name="Fs">Sampling rate of the input signal (in Hz). This must be one of 8000, 12000, 16000, 24000, or 48000.</param>
+        /// <param name="channels">Number of channels in the input signal. This must be at most 255. It may be greater than the number of coded channels (streams + coupled_streams).</param>
+        /// <param name="streams">The total number of streams to encode from the input. This must be no more than the number of channels.</param>
+        /// <param name="coupled_streams">Number of coupled (2 channel) streams to encode. This must be no larger than the total number of streams. Additionally, The total number of encoded channels (streams + coupled_streams) must be no more than the number of input channels.</param>
+        /// <param name="mapping">Mapping from encoded channels to input channels, as described in Opus Multistream API. As an extra constraint, the multistream encoder does not allow encoding coupled streams for which one channel is unused since this is never a good idea.</param>
+        /// <param name="application">The target encoder application. This must be one of the following: <see cref="OpusPredefinedValues.OPUS_APPLICATION_VOIP"/>, <see cref="OpusPredefinedValues.OPUS_APPLICATION_AUDIO"/> or <see cref="OpusPredefinedValues.OPUS_APPLICATION_RESTRICTED_LOWDELAY"/>.</param>
+        /// <param name="error">Returns <see cref="OpusErrorCodes.OPUS_OK"/> on success, or an error code (see <see cref="OpusErrorCodes"/>) on failure.</param>
+        /// <returns><see cref="OpusMSEncoderSafeHandle"/></returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern OpusMSEncoderSafeHandle opus_multistream_encoder_create(int Fs, int channels, int streams, int coupled_streams, byte* mapping, int application, int* error);
 
+        /// <summary>
+        /// N.A.
+        /// </summary>
+        /// <param name="Fs"></param>
+        /// <param name="channels"></param>
+        /// <param name="mapping_family"></param>
+        /// <param name="streams"></param>
+        /// <param name="coupled_streams"></param>
+        /// <param name="mapping"></param>
+        /// <param name="application"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern OpusMSEncoderSafeHandle opus_multistream_surround_encoder_create(int Fs, int channels, int mapping_family, int* streams, int* coupled_streams, byte* mapping, int application, int* error);
 
+        /// <summary>
+        /// Initialize a previously allocated <see cref="OpusMSEncoderSafeHandle"/> state.
+        /// </summary>
+        /// <param name="st">Multistream encoder state to initialize.</param>
+        /// <param name="Fs">Sampling rate of the input signal (in Hz). This must be one of 8000, 12000, 16000, 24000, or 48000.</param>
+        /// <param name="channels">Number of channels in the input signal. This must be at most 255. It may be greater than the number of coded channels (streams + coupled_streams).</param>
+        /// <param name="streams">The total number of streams to encode from the input. This must be no more than the number of channels.</param>
+        /// <param name="coupled_streams">Number of coupled (2 channel) streams to encode. This must be no larger than the total number of streams. Additionally, The total number of encoded channels (streams + coupled_streams) must be no more than the number of input channels.</param>
+        /// <param name="mapping">Mapping from encoded channels to input channels, as described in Opus Multistream API. As an extra constraint, the multistream encoder does not allow encoding coupled streams for which one channel is unused since this is never a good idea.</param>
+        /// <param name="application">The target encoder application. This must be one of the following: <see cref="OpusPredefinedValues.OPUS_APPLICATION_VOIP"/>, <see cref="OpusPredefinedValues.OPUS_APPLICATION_AUDIO"/> or <see cref="OpusPredefinedValues.OPUS_APPLICATION_RESTRICTED_LOWDELAY"/>.</param>
+        /// <returns><see cref="OpusErrorCodes.OPUS_OK"/> on success, or an error code (see <see cref="OpusErrorCodes"/>) on failure.</returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_multistream_encoder_init(OpusMSEncoderSafeHandle st, int Fs, int channels, int streams, int coupled_streams, byte* mapping, int application);
 
+        /// <summary>
+        /// N.A.
+        /// </summary>
+        /// <param name="st"></param>
+        /// <param name="Fs"></param>
+        /// <param name="channels"></param>
+        /// <param name="mapping_family"></param>
+        /// <param name="streams"></param>
+        /// <param name="coupled_streams"></param>
+        /// <param name="mapping"></param>
+        /// <param name="application"></param>
+        /// <returns></returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_multistream_surround_encoder_init(OpusMSEncoderSafeHandle st, int Fs, int channels, int mapping_family, int* streams, int* coupled_streams, byte* mapping, int application);
 
+        /// <summary>
+        /// Encodes a multistream Opus frame.
+        /// </summary>
+        /// <param name="st">Multistream encoder state.</param>
+        /// <param name="pcm">The input signal as interleaved samples. This must contain frame_size*channels samples.</param>
+        /// <param name="frame_size">Number of samples per channel in the input signal. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
+        /// <param name="data">Output payload. This must contain storage for at least max_data_bytes.</param>
+        /// <param name="max_data_bytes">Size of the allocated memory for the output payload. This may be used to impose an upper limit on the instant bitrate, but should not be used as the only bitrate control. Use <see cref="EncoderCTL.OPUS_SET_BITRATE"/> to control the bitrate.</param>
+        /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see <see cref="OpusErrorCodes"/>) on failure.</returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_multistream_encode(OpusMSEncoderSafeHandle st, byte* pcm, int frame_size, byte* data, int max_data_bytes);
 
+        /// <summary>
+        /// Encodes a multistream Opus frame from floating point input.
+        /// </summary>
+        /// <param name="st">Multistream encoder state.</param>
+        /// <param name="pcm">The input signal as interleaved samples with a normal range of +/-1.0. Samples with a range beyond +/-1.0 are supported but will be clipped by decoders using the integer API and should only be used if it is known that the far end supports extended dynamic range. This must contain frame_size*channels samples.</param>
+        /// <param name="frame_size">Number of samples per channel in the input signal. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
+        /// <param name="data">Output payload. This must contain storage for at least max_data_bytes.</param>
+        /// <param name="max_data_bytes">Size of the allocated memory for the output payload. This may be used to impose an upper limit on the instant bitrate, but should not be used as the only bitrate control. Use <see cref="EncoderCTL.OPUS_SET_BITRATE"/> to control the bitrate.</param>
+        /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see <see cref="OpusErrorCodes"/>) on failure.</returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_multistream_encode_float(OpusMSEncoderSafeHandle st, float* pcm, int frame_size, byte* data, int max_data_bytes);
 
+        /// <summary>
+        /// Frees an <see cref="OpusMSEncoderSafeHandle"/> allocated by <see cref="opus_multistream_encoder_create(int, int, int, int, byte*, int, int*)"/>.
+        /// </summary>
+        /// <param name="st">Multistream encoder state to be freed.</param>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void opus_multistream_encoder_destroy(IntPtr st);
 
+        /// <summary>
+        /// Perform a CTL function on a multistream Opus encoder.
+        /// </summary>
+        /// <param name="st">Multistream encoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="EncoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
+        /// <param name="data">The input/output data.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle st, int request, void* data);
 
+        /// <summary>
+        /// Perform a CTL function on a multistream Opus encoder.
+        /// </summary>
+        /// <param name="st">Multistream encoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="EncoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
+        /// <param name="data">The input/output data.</param>
+        /// <param name="data2">The input/output data.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle st, int request, void* data, void* data2);
 
         //Multistream Decoder
+        /// <summary>
+        /// Gets the size of an <see cref="OpusMSDecoderSafeHandle"/> structure.
+        /// </summary>
+        /// <param name="streams">The total number of streams coded in the input. This must be no more than 255.</param>
+        /// <param name="coupled_streams">Number streams to decode as coupled (2 channel) streams. This must be no larger than the total number of streams. Additionally, The total number of coded channels (streams + coupled_streams) must be no more than 255.</param>
+        /// <returns>The size in bytes on success, or a negative error code (see <see cref="OpusErrorCodes"/>) on error.</returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int opus_multistream_decoder_get_size(int streams, int coupled_streams);
 
+        /// <summary>
+        /// Allocates and initializes a multistream decoder state.
+        /// </summary>
+        /// <param name="Fs">Sampling rate to decode at (in Hz). This must be one of 8000, 12000, 16000, 24000, or 48000.</param>
+        /// <param name="channels">Number of channels to output. This must be at most 255. It may be different from the number of coded channels (streams + coupled_streams).</param>
+        /// <param name="streams">The total number of streams coded in the input. This must be no more than 255.</param>
+        /// <param name="coupled_streams">Number of streams to decode as coupled (2 channel) streams. This must be no larger than the total number of streams. Additionally, The total number of coded channels (streams + coupled_streams) must be no more than 255.</param>
+        /// <param name="mapping">Mapping from coded channels to output channels, as described in Opus Multistream API.</param>
+        /// <param name="error">Returns <see cref="OpusErrorCodes.OPUS_OK"/> on success, or an error code (see <see cref="OpusErrorCodes"/>) on failure.</param>
+        /// <returns><see cref="OpusMSDecoderSafeHandle"/></returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern OpusMSDecoderSafeHandle opus_multistream_decoder_create(int Fs, int channels, int streams, int coupled_streams, byte* mapping, int* error);
 
+        /// <summary>
+        /// Intialize a previously allocated decoder state object.
+        /// </summary>
+        /// <param name="st">Multistream encoder state to initialize.</param>
+        /// <param name="Fs">Sampling rate to decode at (in Hz). This must be one of 8000, 12000, 16000, 24000, or 48000.</param>
+        /// <param name="channels">Number of channels to output. This must be at most 255. It may be different from the number of coded channels (streams + coupled_streams).</param>
+        /// <param name="streams">The total number of streams coded in the input. This must be no more than 255.</param>
+        /// <param name="coupled_streams">Number of streams to decode as coupled (2 channel) streams. This must be no larger than the total number of streams. Additionally, The total number of coded channels (streams + coupled_streams) must be no more than 255.</param>
+        /// <param name="mapping">Mapping from coded channels to output channels, as described in Opus Multistream API.</param>
+        /// <returns><see cref="OpusErrorCodes.OPUS_OK"/> on success, or an error code (see <see cref="OpusErrorCodes"/>) on failure.</returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_multistream_decoder_init(OpusMSDecoderSafeHandle st, int Fs, int channels, int streams, int coupled_streams, byte* mapping);
 
+        /// <summary>
+        /// Decode a multistream Opus packet.
+        /// </summary>
+        /// <param name="st">Multistream decoder state.</param>
+        /// <param name="data">Input payload. Use a NULL pointer to indicate packet loss.</param>
+        /// <param name="len">Number of bytes in payload.</param>
+        /// <param name="pcm">Output signal, with interleaved samples. This must contain room for frame_size*channels samples.</param>
+        /// <param name="frame_size">The number of samples per channel of available space in pcm. If this is less than the maximum packet duration (120 ms; 5760 for 48kHz), this function will not be capable of decoding some packets. In the case of PLC (data==NULL) or FEC (decode_fec=1), then frame_size needs to be exactly the duration of audio that is missing, otherwise the decoder will not be in the optimal state to decode the next incoming packet. For the PLC and FEC cases, frame_size must be a multiple of 2.5 ms.</param>
+        /// <param name="decode_fec">Flag (0 or 1) to request that any in-band forward error correction data be decoded. If no such data is available, the frame is decoded as if it were lost.</param>
+        /// <returns>Number of samples decoded on success or a negative error code (see <see cref="OpusErrorCodes"/>) on failure.</returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_multistream_decode(OpusMSDecoderSafeHandle st, byte* data, int len, short* pcm, int frame_size, int decode_fec);
 
+        /// <summary>
+        /// Decode a multistream Opus packet with floating point output.
+        /// </summary>
+        /// <param name="st">Multistream decoder state.</param>
+        /// <param name="data">Input payload. Use a NULL pointer to indicate packet loss.</param>
+        /// <param name="len">Number of bytes in payload.</param>
+        /// <param name="pcm">Output signal, with interleaved samples. This must contain room for frame_size*channels samples.</param>
+        /// <param name="frame_size">The number of samples per channel of available space in pcm. If this is less than the maximum packet duration (120 ms; 5760 for 48kHz), this function will not be capable of decoding some packets. In the case of PLC (data==NULL) or FEC (decode_fec=1), then frame_size needs to be exactly the duration of audio that is missing, otherwise the decoder will not be in the optimal state to decode the next incoming packet. For the PLC and FEC cases, frame_size must be a multiple of 2.5 ms.</param>
+        /// <param name="decode_fec">Flag (0 or 1) to request that any in-band forward error correction data be decoded. If no such data is available, the frame is decoded as if it were lost.</param>
+        /// <returns>Number of samples decoded on success or a negative error code (see <see cref="OpusErrorCodes"/>) on failure.</returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_multistream_decode_float(OpusMSDecoderSafeHandle st, byte* data, int len, float* pcm, int frame_size, int decode_fec);
 
+        /// <summary>
+        /// Perform a CTL function on a multistream Opus decoder.
+        /// </summary>
+        /// <param name="st">Multistream decoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="DecoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
+        /// <param name="data">The input/output data.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle st, int request, void* data);
 
+        /// <summary>
+        /// Perform a CTL function on a multistream Opus decoder.
+        /// </summary>
+        /// <param name="st">Multistream decoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="DecoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
+        /// <param name="data">The input/output data.</param>
+        /// <param name="data2">The input/output data.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle st, int request, void* data, void* data2);
 
+        /// <summary>
+        /// Frees an <see cref="OpusMSDecoderSafeHandle"/> allocated by <see cref="opus_multistream_decoder_create(int, int, int, int, byte*, int*)"/>.
+        /// </summary>
+        /// <param name="st">Multistream decoder state to be freed.</param>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void opus_multistream_decoder_destroy(IntPtr st);
 
         //Library Information
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static unsafe extern byte* opus_strerror(int error);
-
+        /// <summary>
+        /// Gets the libopus version string.
+        /// </summary>
+        /// <returns>Version string</returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern byte* opus_get_version_string();
+
+        /// <summary>
+        /// Converts an opus error code into a human readable string.
+        /// </summary>
+        /// <param name="error">Error number.</param>
+        /// <returns>Error string.</returns>
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static unsafe extern byte* opus_strerror(int error);
     }
 }
