@@ -35,9 +35,9 @@ namespace OpusSharp.Core
         public static unsafe extern OpusEncoderSafeHandle opus_encoder_create(int Fs, int channels, int application, int* error);
 
         /// <summary>
-        /// Initializes a previously allocated encoder state. The memory pointed to by st must be at least the size returned by opus_encoder_get_size().
+        /// Initializes a previously allocated <see cref="OpusEncoderSafeHandle"/> state. The memory pointed to by st must be at least the size returned by <see cref="opus_encoder_get_size(int)"/>.
         /// </summary>
-        /// <param name="st">Encoder state</param>
+        /// <param name="st">Encoder state.</param>
         /// <param name="Fs">Sampling rate of input signal (Hz) This must be one of 8000, 12000, 16000, 24000, or 48000.</param>
         /// <param name="channels">Number of channels (1 or 2) in input signal.</param>
         /// <param name="application">>Coding mode (one of <see cref="OpusPredefinedValues.OPUS_APPLICATION_VOIP"/>, <see cref="OpusPredefinedValues.OPUS_APPLICATION_AUDIO"/> or <see cref="OpusPredefinedValues.OPUS_APPLICATION_RESTRICTED_LOWDELAY"/>)</param>
@@ -48,7 +48,7 @@ namespace OpusSharp.Core
         /// <summary>
         /// Encodes an Opus frame.
         /// </summary>
-        /// <param name="st">Encoder state</param>
+        /// <param name="st">Encoder state.</param>
         /// <param name="pcm">Input signal (interleaved if 2 channels). length is frame_size*channels*sizeof(short)</param>
         /// <param name="frame_size">Number of samples per channel in the input signal. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
         /// <param name="data">Output payload. This must contain storage for at least max_data_bytes.</param>
@@ -60,7 +60,7 @@ namespace OpusSharp.Core
         /// <summary>
         /// Encodes an Opus frame from floating point input.
         /// </summary>
-        /// <param name="st">Encoder state</param>
+        /// <param name="st">Encoder state.</param>
         /// <param name="pcm">Input in float format (interleaved if 2 channels), with a normal range of +/-1.0. Samples with a range beyond +/-1.0 are supported but will be clipped by decoders using the integer API and should only be used if it is known that the far end supports extended dynamic range. length is frame_size*channels*sizeof(float)</param>
         /// <param name="frame_size">Number of samples per channel in the input signal. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
         /// <param name="data">Output payload. This must contain storage for at least max_data_bytes.</param>
@@ -70,18 +70,18 @@ namespace OpusSharp.Core
         public static unsafe extern int opus_encode_float(OpusEncoderSafeHandle st, float* pcm, int frame_size, byte* data, int max_data_bytes);
 
         /// <summary>
-        /// Frees an OpusEncoder allocated by <see cref="opus_encoder_create(int, int, int, int*)"/>.
+        /// Frees an <see cref="OpusEncoderSafeHandle"/> allocated by <see cref="opus_encoder_create(int, int, int, int*)"/>.
         /// </summary>
         /// <param name="st">State to be freed.</param>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void opus_encoder_destroy(IntPtr st);
 
         /// <summary>
-        /// Perform a CTL function on an Opus encoder.
+        /// Perform a CTL function on an <see cref="OpusEncoderSafeHandle"/>.
         /// </summary>
         /// <param name="st">Encoder state.</param>
         /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="EncoderCTL"/>.</param>
-        /// <param name="data">The data to input or output. MUST BE FIXED!</param>
+        /// <param name="data">The data to input/output.</param>
         /// <returns><see cref="OpusErrorCodes"/></returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_encoder_ctl(OpusEncoderSafeHandle st, int request, void* data);
@@ -91,8 +91,8 @@ namespace OpusSharp.Core
         /// </summary>
         /// <param name="st">Encoder state.</param>
         /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="EncoderCTL"/>.</param>
-        /// <param name="data">The data to input or output. MUST BE FIXED!</param>
-        /// <param name="data2">The second data to input or output. MUST BE FIXED!</param>
+        /// <param name="data">The data to input/output.</param>
+        /// <param name="data2">The second data to input/output.</param>
         /// <returns><see cref="OpusErrorCodes"/></returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_encoder_ctl(OpusEncoderSafeHandle st, int request, void* data, void* data2);
@@ -107,7 +107,7 @@ namespace OpusSharp.Core
         public static extern int opus_decoder_get_size(int channels);
 
         /// <summary>
-        /// Allocates and initializes a decoder state.
+        /// Allocates and initializes a <see cref="OpusDecoderSafeHandle"/> state.
         /// </summary>
         /// <param name="Fs">Sample rate to decode at (Hz). This must be one of 8000, 12000, 16000, 24000, or 48000.</param>
         /// <param name="channels">Number of channels (1 or 2) to decode.</param>
@@ -117,7 +117,7 @@ namespace OpusSharp.Core
         public static unsafe extern OpusDecoderSafeHandle opus_decoder_create(int Fs, int channels, int* error);
 
         /// <summary>
-        /// Initializes a previously allocated decoder state.
+        /// Initializes a previously allocated <see cref="OpusDecoderSafeHandle"/> state.
         /// </summary>
         /// <param name="st">Decoder state.</param>
         /// <param name="Fs">Sampling rate to decode to (Hz). This must be one of 8000, 12000, 16000, 24000, or 48000.</param>
@@ -135,7 +135,7 @@ namespace OpusSharp.Core
         /// <param name="pcm">Output signal (interleaved if 2 channels). length is frame_size*channels*sizeof(short).</param>
         /// <param name="frame_size">Number of samples per channel of available space in pcm. If this is less than the maximum packet duration (120ms; 5760 for 48kHz), this function will not be capable of decoding some packets. In the case of PLC (data==NULL) or FEC (decode_fec=1), then frame_size needs to be exactly the duration of audio that is missing, otherwise the decoder will not be in the optimal state to decode the next incoming packet. For the PLC and FEC cases, frame_size must be a multiple of 2.5 ms.</param>
         /// <param name="decode_fec">Flag (0 or 1) to request that any in-band forward error correction data be decoded. If no such data is available, the frame is decoded as if it were lost.</param>
-        /// <returns>Number of decoded samples or <see cref="OpusErrorCodes"/></returns>
+        /// <returns>Number of decoded samples or <see cref="OpusErrorCodes"/>.</returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_decode(OpusDecoderSafeHandle st, byte* data, int len, short* pcm, int frame_size, int decode_fec);
 
@@ -153,17 +153,17 @@ namespace OpusSharp.Core
         public static unsafe extern int opus_decode_float(OpusDecoderSafeHandle st, byte* data, int len, float* pcm, int frame_size, int decode_fec);
 
         /// <summary>
-        /// Perform a CTL function on an Opus decoder.
+        /// Perform a CTL function on an <see cref="OpusDecoderSafeHandle"/>.
         /// </summary>
         /// <param name="st">Decoder state.</param>
         /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="DecoderCTL"/>.</param>
-        /// <param name="data">The data to input or output. MUST BE FIXED!</param>
+        /// <param name="data">The data to input or output.</param>
         /// <returns><see cref="OpusErrorCodes"/></returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_decoder_ctl(OpusDecoderSafeHandle st, int request, void* data);
 
         /// <summary>
-        /// Frees an OpusDecoder allocated by <see cref="opus_decoder_create(int, int, int*)"/>.
+        /// Frees an <see cref="OpusDecoderSafeHandle"/> allocated by <see cref="opus_decoder_create(int, int, int*)"/>.
         /// </summary>
         /// <param name="st">State to be freed.</param>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
@@ -194,25 +194,25 @@ namespace OpusSharp.Core
         public static extern int opus_dred_decoder_init(OpusDREDDecoderSafeHandle dec);
 
         /// <summary>
-        /// Frees an OpusDREDDecoder allocated by <see cref="opus_dred_decoder_create(int*)"/>.
+        /// Frees an <see cref="OpusDREDDecoderSafeHandle"/> allocated by <see cref="opus_dred_decoder_create(int*)"/>.
         /// </summary>
         /// <param name="dec">State to be freed.</param>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void opus_dred_decoder_destroy(IntPtr dec);
 
         /// <summary>
-        /// Perform a CTL function on an Opus DRED decoder.
+        /// Perform a CTL function on an <see cref="OpusDREDDecoderSafeHandle"/>.
         /// </summary>
         /// <param name="dred_dec">DRED Decoder state.</param>
         /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="DecoderCTL"/>.</param>
-        /// <param name="data">The data to input or output. MUST BE FIXED!</param>
+        /// <param name="data">The data to input or output.</param>
         /// <returns><see cref="OpusErrorCodes"/></returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static unsafe extern int opus_dred_decoder_ctl(OpusDREDDecoderSafeHandle dred_dec, int request, void* data);
 
         //Dred Packet?
         /// <summary>
-        /// Gets the size of an OpusDRED structure.
+        /// Gets the size of an <see cref="OpusDREDSafeHandle"/> structure.
         /// </summary>
         /// <returns>The size in bytes.</returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
@@ -227,7 +227,7 @@ namespace OpusSharp.Core
         public static unsafe extern OpusDREDSafeHandle opus_dred_alloc(int* error);
 
         /// <summary>
-        /// Frees an OpusDRED allocated by <see cref="opus_dred_alloc(int*)"/>.
+        /// Frees an <see cref="OpusDREDSafeHandle"/> allocated by <see cref="opus_dred_alloc(int*)"/>.
         /// </summary>
         /// <param name="dec">State to be freed.</param>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
@@ -249,7 +249,7 @@ namespace OpusSharp.Core
         public static unsafe extern int opus_dred_parse(OpusDREDDecoderSafeHandle dred_dec, OpusDREDSafeHandle dred, byte* data, int len, int max_dred_samples, int sampling_rate, int* dred_end, int defer_processing);
 
         /// <summary>
-        /// Finish decoding an Opus DRED packet.
+        /// Finish decoding an <see cref="OpusDREDSafeHandle"/> packet.
         /// </summary>
         /// <param name="dred_dec">DRED Decoder state.</param>
         /// <param name="src">Source DRED state to start the processing from.</param>
@@ -259,7 +259,7 @@ namespace OpusSharp.Core
         public static extern int opus_dred_process(OpusDREDDecoderSafeHandle dred_dec, OpusDREDSafeHandle src, OpusDREDSafeHandle dst);
 
         /// <summary>
-        /// Decode audio from an Opus DRED packet with floating point output.
+        /// Decode audio from an <see cref="OpusDREDSafeHandle"/> packet with floating point output.
         /// </summary>
         /// <param name="st">Decoder state.</param>
         /// <param name="dred">DRED state.</param>
@@ -268,10 +268,10 @@ namespace OpusSharp.Core
         /// <param name="frame_size">Number of samples per channel to decode in pcm. frame_size must be a multiple of 2.5 ms.</param>
         /// <returns>Number of decoded samples or <see cref="OpusErrorCodes"/>.</returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static unsafe extern int opus_decoder_dred_decode(OpusDecoderSafeHandle st, OpusDREDSafeHandle dred, int dred_offset, int* pcm, int frame_size);
+        public static unsafe extern int opus_decoder_dred_decode(OpusDecoderSafeHandle st, OpusDREDSafeHandle dred, int dred_offset, short* pcm, int frame_size);
 
         /// <summary>
-        /// Decode audio from an Opus DRED packet with floating point output.
+        /// Decode audio from an <see cref="OpusDREDSafeHandle"/> packet with floating point output.
         /// </summary>
         /// <param name="st">Decoder state.</param>
         /// <param name="dred">DRED state.</param>
@@ -294,7 +294,7 @@ namespace OpusSharp.Core
         /// <param name="payload_offset">returns the position of the payload within the packet (in bytes).</param>
         /// <returns>number of frames.</returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static unsafe extern int opus_packet_parse(byte* data, int len, byte* out_toc, byte*[] frames, short* size, int* payload_offset);
+        public static unsafe extern int opus_packet_parse(byte* data, int len, byte* out_toc, byte*[] frames, short[] size, int* payload_offset);
 
         /// <summary>
         /// Gets the bandwidth of an Opus packet.
@@ -400,7 +400,7 @@ namespace OpusSharp.Core
         public static extern void opus_repacketizer_destroy(IntPtr rp);
 
         /// <summary>
-        /// Add a packet to the current repacketizer state.
+        /// Add a packet to the current <see cref="OpusRepacketizerSafeHandle"/> state.
         /// </summary>
         /// <param name="rp">The repacketizer state to which to add the packet.</param>
         /// <param name="data">The packet data. The application must ensure this pointer remains valid until the next call to <see cref="opus_repacketizer_init(OpusRepacketizerSafeHandle)"/> or <see cref="opus_repacketizer_destroy(IntPtr)"/>.</param>
@@ -430,7 +430,7 @@ namespace OpusSharp.Core
         public static extern int opus_repacketizer_get_nb_frames(OpusRepacketizerSafeHandle rp);
 
         /// <summary>
-        /// Construct a new packet from data previously submitted to the repacketizer state via <see cref="opus_repacketizer_cat(OpusRepacketizerSafeHandle, byte*, int)"/>.
+        /// Construct a new packet from data previously submitted to the <see cref="OpusRepacketizerSafeHandle"/> state via <see cref="opus_repacketizer_cat(OpusRepacketizerSafeHandle, byte*, int)"/>.
         /// </summary>
         /// <param name="rp">The repacketizer state from which to construct the new packet.</param>
         /// <param name="data">The buffer in which to store the output packet.</param>
@@ -566,7 +566,7 @@ namespace OpusSharp.Core
         /// <param name="max_data_bytes">Size of the allocated memory for the output payload. This may be used to impose an upper limit on the instant bitrate, but should not be used as the only bitrate control. Use <see cref="EncoderCTL.OPUS_SET_BITRATE"/> to control the bitrate.</param>
         /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see <see cref="OpusErrorCodes"/>) on failure.</returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static unsafe extern int opus_multistream_encode(OpusMSEncoderSafeHandle st, byte* pcm, int frame_size, byte* data, int max_data_bytes);
+        public static unsafe extern int opus_multistream_encode(OpusMSEncoderSafeHandle st, short* pcm, int frame_size, byte* data, int max_data_bytes);
 
         /// <summary>
         /// Encodes a multistream Opus frame from floating point input.
@@ -588,7 +588,7 @@ namespace OpusSharp.Core
         public static extern void opus_multistream_encoder_destroy(IntPtr st);
 
         /// <summary>
-        /// Perform a CTL function on a multistream Opus encoder.
+        /// Perform a CTL function on a <see cref="OpusMSEncoderSafeHandle"/>.
         /// </summary>
         /// <param name="st">Multistream encoder state.</param>
         /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="EncoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
@@ -598,7 +598,7 @@ namespace OpusSharp.Core
         public static unsafe extern int opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle st, int request, void* data);
 
         /// <summary>
-        /// Perform a CTL function on a multistream Opus encoder.
+        /// Perform a CTL function on a <see cref="OpusMSEncoderSafeHandle"/>.
         /// </summary>
         /// <param name="st">Multistream encoder state.</param>
         /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="EncoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
@@ -619,7 +619,7 @@ namespace OpusSharp.Core
         public static extern int opus_multistream_decoder_get_size(int streams, int coupled_streams);
 
         /// <summary>
-        /// Allocates and initializes a multistream decoder state.
+        /// Allocates and initializes a <see cref="OpusMSDecoderSafeHandle"/> state.
         /// </summary>
         /// <param name="Fs">Sampling rate to decode at (in Hz). This must be one of 8000, 12000, 16000, 24000, or 48000.</param>
         /// <param name="channels">Number of channels to output. This must be at most 255. It may be different from the number of coded channels (streams + coupled_streams).</param>
@@ -632,7 +632,7 @@ namespace OpusSharp.Core
         public static unsafe extern OpusMSDecoderSafeHandle opus_multistream_decoder_create(int Fs, int channels, int streams, int coupled_streams, byte* mapping, int* error);
 
         /// <summary>
-        /// Intialize a previously allocated decoder state object.
+        /// Intialize a previously allocated <see cref="OpusMSDecoderSafeHandle"/> state object.
         /// </summary>
         /// <param name="st">Multistream encoder state to initialize.</param>
         /// <param name="Fs">Sampling rate to decode at (in Hz). This must be one of 8000, 12000, 16000, 24000, or 48000.</param>
@@ -671,7 +671,7 @@ namespace OpusSharp.Core
         public static unsafe extern int opus_multistream_decode_float(OpusMSDecoderSafeHandle st, byte* data, int len, float* pcm, int frame_size, int decode_fec);
 
         /// <summary>
-        /// Perform a CTL function on a multistream Opus decoder.
+        /// Perform a CTL function on a <see cref="OpusMSEncoderSafeHandle"/>.
         /// </summary>
         /// <param name="st">Multistream decoder state.</param>
         /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="DecoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
@@ -681,7 +681,7 @@ namespace OpusSharp.Core
         public static unsafe extern int opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle st, int request, void* data);
 
         /// <summary>
-        /// Perform a CTL function on a multistream Opus decoder.
+        /// Perform a CTL function on a <see cref="OpusMSEncoderSafeHandle"/>.
         /// </summary>
         /// <param name="st">Multistream decoder state.</param>
         /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="DecoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
