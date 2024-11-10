@@ -1,3 +1,9 @@
-﻿using OpusSharp.Core;
+﻿byte[]? test = null;
 
-Console.WriteLine(OpusInfo.Version());
+unsafe
+{
+    fixed (byte* ptr = test.AsSpan())
+    {
+        Console.WriteLine(new IntPtr(ptr));
+    }
+}
