@@ -15,6 +15,6 @@ jobs:
 
     - name: Deploy
       working-directory: ./Docs
-      run: dotnet run -- deploy
+      run: dotnet run -- deploy -l Debug
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
