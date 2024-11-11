@@ -1,8 +1,4 @@
-﻿using System.Threading.Tasks;
-using Statiq.App;
-using Statiq.Docs;
-
-namespace MySite
+﻿namespace OpusSharp.Docs
 {
     public class Program
     {
@@ -12,6 +8,11 @@ namespace MySite
             .CreateDocs(args)
             .AddSourceFiles("../OpusSharp.Core/**/{!.git,!bin,!obj,!packages,!*.Tests,}/**/*.cs")
             .AddSourceFiles("../../OpusSharp.Core/**/{!.git,!bin,!obj,!packages,!*.Tests,}/**/*.cs")
+            .DeployToGitHubPages(
+              "opussharp",
+              "opussharp.github.io",
+              Config.FromSetting<string>("GITHUB_TOKEN")
+            )
             .RunAsync();
     }
 }

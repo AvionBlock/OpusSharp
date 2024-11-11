@@ -32,7 +32,7 @@ namespace OpusSharp.Core
         /// </summary>
         /// <param name="input">Input payload. Use null to indicate packet loss</param>
         /// <param name="length">Number of bytes in payload.</param>
-        /// <param name="output">Output signal (interleaved if 2 channels). length is frame_size*channels.</param>
+        /// <param name="output">Output signal (interleaved if 2 channels). length is frame_size*channels*sizeof(short).</param>
         /// <param name="frame_size">Number of samples per channel of available space in pcm. If this is less than the maximum packet duration (120ms; 5760 for 48kHz), this function will not be capable of decoding some packets. In the case of PLC (data==NULL) or FEC (decode_fec=true), then frame_size needs to be exactly the duration of audio that is missing, otherwise the decoder will not be in the optimal state to decode the next incoming packet. For the PLC and FEC cases, frame_size must be a multiple of 2.5 ms.</param>
         /// <param name="decode_fec">Request that any in-band forward error correction data be decoded. If no such data is available, the frame is decoded as if it were lost.</param>
         /// <returns>Number of decoded samples or <see cref="OpusErrorCodes"/>.</returns>
@@ -54,7 +54,7 @@ namespace OpusSharp.Core
         /// </summary>
         /// <param name="input">Input payload. Use null to indicate packet loss</param>
         /// <param name="length">Number of bytes in payload.</param>
-        /// <param name="output">Output signal (interleaved if 2 channels). length is frame_size*channels*sizeof(short)</param>
+        /// <param name="output">Output signal (interleaved if 2 channels). length is frame_size*channels.</param>
         /// <param name="frame_size">Number of samples per channel of available space in pcm. If this is less than the maximum packet duration (120ms; 5760 for 48kHz), this function will not be capable of decoding some packets. In the case of PLC (data==NULL) or FEC (decode_fec=true), then frame_size needs to be exactly the duration of audio that is missing, otherwise the decoder will not be in the optimal state to decode the next incoming packet. For the PLC and FEC cases, frame_size must be a multiple of 2.5 ms.</param>
         /// <param name="decode_fec">Request that any in-band forward error correction data be decoded. If no such data is available, the frame is decoded as if it were lost.</param>
         /// <returns>Number of decoded samples or <see cref="OpusErrorCodes"/>.</returns>
@@ -76,7 +76,7 @@ namespace OpusSharp.Core
         /// </summary>
         /// <param name="input">Input payload. Use null to indicate packet loss</param>
         /// <param name="length">Number of bytes in payload.</param>
-        /// <param name="output">Output signal (interleaved if 2 channels). length is frame_size*channels*sizeof(float)</param>
+        /// <param name="output">Output signal (interleaved if 2 channels). length is (frame_size*channels)/2. Note: I don't know if this is correct.</param>
         /// <param name="frame_size">Number of samples per channel of available space in pcm. If this is less than the maximum packet duration (120ms; 5760 for 48kHz), this function will not be capable of decoding some packets. In the case of PLC (data==NULL) or FEC (decode_fec=true), then frame_size needs to be exactly the duration of audio that is missing, otherwise the decoder will not be in the optimal state to decode the next incoming packet. For the PLC and FEC cases, frame_size must be a multiple of 2.5 ms.</param>
         /// <param name="decode_fec">Request that any in-band forward error correction data be decoded. If no such data is available, the frame is decoded as if it were lost.</param>
         /// <returns>Number of decoded samples or <see cref="OpusErrorCodes"/>.</returns>

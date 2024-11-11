@@ -9,7 +9,7 @@ namespace OpusSharp.Core.SafeHandlers
     public class OpusDecoderSafeHandle : SafeHandle
     {
         /// <summary>
-        /// Create a new <see cref="OpusDecoderSafeHandle"/>.
+        /// Creates a new <see cref="OpusDecoderSafeHandle"/>.
         /// </summary>
         public OpusDecoderSafeHandle() : base(IntPtr.Zero, true)
         {
