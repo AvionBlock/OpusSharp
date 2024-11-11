@@ -9,7 +9,7 @@
             .AddSourceFiles("../OpusSharp.Core/**/{!.git,!bin,!obj,!packages,!*.Tests,}/**/*.cs")
             .AddSourceFiles("../../OpusSharp.Core/**/{!.git,!bin,!obj,!packages,!*.Tests,}/**/*.cs")
             .DeployToGitHubPages(
-              "opussharp",
+              "avionblock",
               "avionblock.github.io",
               Config.FromSetting<string>("GITHUB_TOKEN")
             )
