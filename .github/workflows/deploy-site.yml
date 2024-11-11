@@ -38,6 +38,6 @@ jobs:
           dotnet-version: |
             3.1.x
             6.0.x
-      - run: dotnet run -- deploy
+      - run: dotnet run -- deploy ./Docs.csproj
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
