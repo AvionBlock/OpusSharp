@@ -1,7 +1,6 @@
 name: Deploy Site
 on: 
   workflow_dispatch:
-
 jobs:
   build:
     runs-on: windows-latest
@@ -12,7 +11,6 @@ jobs:
     - uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.x' # SDK Version to use.
-
     - name: Deploy
       working-directory: ./Docs
       run: dotnet run -- deploy
