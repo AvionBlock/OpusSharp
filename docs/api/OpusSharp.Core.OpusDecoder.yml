@@ -1,0 +1,1378 @@
+### YamlMime:ManagedReference
+items:
+- uid: OpusSharp.Core.OpusDecoder
+  commentId: T:OpusSharp.Core.OpusDecoder
+  id: OpusDecoder
+  parent: OpusSharp.Core
+  children:
+  - OpusSharp.Core.OpusDecoder.#ctor(System.Int32,System.Int32)
+  - OpusSharp.Core.OpusDecoder.CheckError(System.Int32)
+  - OpusSharp.Core.OpusDecoder.Ctl(OpusSharp.Core.GenericCTL)
+  - OpusSharp.Core.OpusDecoder.Ctl``1(OpusSharp.Core.DecoderCTL,``0@)
+  - OpusSharp.Core.OpusDecoder.Ctl``1(OpusSharp.Core.GenericCTL,``0@)
+  - OpusSharp.Core.OpusDecoder.Decode(System.Byte[],System.Int32,System.Byte[],System.Int32,System.Boolean)
+  - OpusSharp.Core.OpusDecoder.Decode(System.Byte[],System.Int32,System.Int16[],System.Int32,System.Boolean)
+  - OpusSharp.Core.OpusDecoder.Decode(System.Byte[],System.Int32,System.Single[],System.Int32,System.Boolean)
+  - OpusSharp.Core.OpusDecoder.Decode(System.Span{System.Byte},System.Int32,System.Span{System.Byte},System.Int32,System.Boolean)
+  - OpusSharp.Core.OpusDecoder.Decode(System.Span{System.Byte},System.Int32,System.Span{System.Int16},System.Int32,System.Boolean)
+  - OpusSharp.Core.OpusDecoder.Decode(System.Span{System.Byte},System.Int32,System.Span{System.Single},System.Int32,System.Boolean)
+  - OpusSharp.Core.OpusDecoder.Dispose
+  - OpusSharp.Core.OpusDecoder.Dispose(System.Boolean)
+  - OpusSharp.Core.OpusDecoder.ThrowIfDisposed
+  - OpusSharp.Core.OpusDecoder._handler
+  langs:
+  - csharp
+  - vb
+  name: OpusDecoder
+  nameWithType: OpusDecoder
+  fullName: OpusSharp.Core.OpusDecoder
+  type: Class
+  source:
+    remote:
+      path: OpusSharp.Core/OpusDecoder.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OpusDecoder
+    path: ../OpusSharp.Core/OpusDecoder.cs
+    startLine: 8
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: An opus decoder.
+  example: []
+  syntax:
+    content: 'public class OpusDecoder : IDisposable'
+    content.vb: Public Class OpusDecoder Implements IDisposable
+  inheritance:
+  - System.Object
+  implements:
+  - System.IDisposable
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: OpusSharp.Core.OpusDecoder._handler
+  commentId: F:OpusSharp.Core.OpusDecoder._handler
+  id: _handler
+  parent: OpusSharp.Core.OpusDecoder
+  langs:
+  - csharp
+  - vb
+  name: _handler
+  nameWithType: OpusDecoder._handler
+  fullName: OpusSharp.Core.OpusDecoder._handler
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/OpusDecoder.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: _handler
+    path: ../OpusSharp.Core/OpusDecoder.cs
+    startLine: 13
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Direct safe handle for the <xref href="OpusSharp.Core.OpusDecoder" data-throw-if-not-resolved="false"></xref>. IT IS NOT RECOMMENDED TO CLOSE THE HANDLE DIRECTLY! Instead use <xref href="OpusSharp.Core.OpusDecoder.Dispose(System.Boolean)" data-throw-if-not-resolved="false"></xref> to dispose the handle and object safely.
+  example: []
+  syntax:
+    content: protected OpusDecoderSafeHandle _handler
+    return:
+      type: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle
+    content.vb: Protected _handler As OpusDecoderSafeHandle
+- uid: OpusSharp.Core.OpusDecoder.#ctor(System.Int32,System.Int32)
+  commentId: M:OpusSharp.Core.OpusDecoder.#ctor(System.Int32,System.Int32)
+  id: '#ctor(System.Int32,System.Int32)'
+  parent: OpusSharp.Core.OpusDecoder
+  langs:
+  - csharp
+  - vb
+  name: OpusDecoder(int, int)
+  nameWithType: OpusDecoder.OpusDecoder(int, int)
+  fullName: OpusSharp.Core.OpusDecoder.OpusDecoder(int, int)
+  type: Constructor
+  source:
+    remote:
+      path: OpusSharp.Core/OpusDecoder.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: .ctor
+    path: ../OpusSharp.Core/OpusDecoder.cs
+    startLine: 22
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Creates a new opus decoder.
+  example: []
+  syntax:
+    content: public OpusDecoder(int sample_rate, int channels)
+    parameters:
+    - id: sample_rate
+      type: System.Int32
+      description: The sample rate, this must be one of 8000, 12000, 16000, 24000, or 48000.
+    - id: channels
+      type: System.Int32
+      description: Number of channels, this must be 1 or 2.
+    content.vb: Public Sub New(sample_rate As Integer, channels As Integer)
+  overload: OpusSharp.Core.OpusDecoder.#ctor*
+  exceptions:
+  - type: OpusSharp.Core.OpusException
+    commentId: T:OpusSharp.Core.OpusException
+    description: ''
+  nameWithType.vb: OpusDecoder.New(Integer, Integer)
+  fullName.vb: OpusSharp.Core.OpusDecoder.New(Integer, Integer)
+  name.vb: New(Integer, Integer)
+- uid: OpusSharp.Core.OpusDecoder.Decode(System.Span{System.Byte},System.Int32,System.Span{System.Byte},System.Int32,System.Boolean)
+  commentId: M:OpusSharp.Core.OpusDecoder.Decode(System.Span{System.Byte},System.Int32,System.Span{System.Byte},System.Int32,System.Boolean)
+  id: Decode(System.Span{System.Byte},System.Int32,System.Span{System.Byte},System.Int32,System.Boolean)
+  parent: OpusSharp.Core.OpusDecoder
+  langs:
+  - csharp
+  - vb
+  name: Decode(Span<byte>, int, Span<byte>, int, bool)
+  nameWithType: OpusDecoder.Decode(Span<byte>, int, Span<byte>, int, bool)
+  fullName: OpusSharp.Core.OpusDecoder.Decode(System.Span<byte>, int, System.Span<byte>, int, bool)
+  type: Method
+  source:
+    remote:
+      path: OpusSharp.Core/OpusDecoder.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: Decode
+    path: ../OpusSharp.Core/OpusDecoder.cs
+    startLine: 38
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Decodes an opus encoded frame.
+  example: []
+  syntax:
+    content: public int Decode(Span<byte> input, int length, Span<byte> output, int frame_size, bool decode_fec)
+    parameters:
+    - id: input
+      type: System.Span{System.Byte}
+      description: Input payload. Use null to indicate packet loss
+    - id: length
+      type: System.Int32
+      description: Number of bytes in payload.
+    - id: output
+      type: System.Span{System.Byte}
+      description: Output signal (interleaved if 2 channels). length is frame_size*channels*sizeof(short).
+    - id: frame_size
+      type: System.Int32
+      description: Number of samples per channel of available space in pcm. If this is less than the maximum packet duration (120ms; 5760 for 48kHz), this function will not be capable of decoding some packets. In the case of PLC (data==NULL) or FEC (decode_fec=true), then frame_size needs to be exactly the duration of audio that is missing, otherwise the decoder will not be in the optimal state to decode the next incoming packet. For the PLC and FEC cases, frame_size must be a multiple of 2.5 ms.
+    - id: decode_fec
+      type: System.Boolean
+      description: Request that any in-band forward error correction data be decoded. If no such data is available, the frame is decoded as if it were lost.
+    return:
+      type: System.Int32
+      description: Number of decoded samples or <xref href="OpusSharp.Core.OpusErrorCodes" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Function Decode(input As Span(Of Byte), length As Integer, output As Span(Of Byte), frame_size As Integer, decode_fec As Boolean) As Integer
+  overload: OpusSharp.Core.OpusDecoder.Decode*
+  nameWithType.vb: OpusDecoder.Decode(Span(Of Byte), Integer, Span(Of Byte), Integer, Boolean)
+  fullName.vb: OpusSharp.Core.OpusDecoder.Decode(System.Span(Of Byte), Integer, System.Span(Of Byte), Integer, Boolean)
+  name.vb: Decode(Span(Of Byte), Integer, Span(Of Byte), Integer, Boolean)
+- uid: OpusSharp.Core.OpusDecoder.Decode(System.Span{System.Byte},System.Int32,System.Span{System.Int16},System.Int32,System.Boolean)
+  commentId: M:OpusSharp.Core.OpusDecoder.Decode(System.Span{System.Byte},System.Int32,System.Span{System.Int16},System.Int32,System.Boolean)
+  id: Decode(System.Span{System.Byte},System.Int32,System.Span{System.Int16},System.Int32,System.Boolean)
+  parent: OpusSharp.Core.OpusDecoder
+  langs:
+  - csharp
+  - vb
+  name: Decode(Span<byte>, int, Span<short>, int, bool)
+  nameWithType: OpusDecoder.Decode(Span<byte>, int, Span<short>, int, bool)
+  fullName: OpusSharp.Core.OpusDecoder.Decode(System.Span<byte>, int, System.Span<short>, int, bool)
+  type: Method
+  source:
+    remote:
+      path: OpusSharp.Core/OpusDecoder.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: Decode
+    path: ../OpusSharp.Core/OpusDecoder.cs
+    startLine: 60
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Decodes an opus encoded frame.
+  example: []
+  syntax:
+    content: public int Decode(Span<byte> input, int length, Span<short> output, int frame_size, bool decode_fec)
+    parameters:
+    - id: input
+      type: System.Span{System.Byte}
+      description: Input payload. Use null to indicate packet loss
+    - id: length
+      type: System.Int32
+      description: Number of bytes in payload.
+    - id: output
+      type: System.Span{System.Int16}
+      description: Output signal (interleaved if 2 channels). length is frame_size*channels.
+    - id: frame_size
+      type: System.Int32
+      description: Number of samples per channel of available space in pcm. If this is less than the maximum packet duration (120ms; 5760 for 48kHz), this function will not be capable of decoding some packets. In the case of PLC (data==NULL) or FEC (decode_fec=true), then frame_size needs to be exactly the duration of audio that is missing, otherwise the decoder will not be in the optimal state to decode the next incoming packet. For the PLC and FEC cases, frame_size must be a multiple of 2.5 ms.
+    - id: decode_fec
+      type: System.Boolean
+      description: Request that any in-band forward error correction data be decoded. If no such data is available, the frame is decoded as if it were lost.
+    return:
+      type: System.Int32
+      description: Number of decoded samples or <xref href="OpusSharp.Core.OpusErrorCodes" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Function Decode(input As Span(Of Byte), length As Integer, output As Span(Of Short), frame_size As Integer, decode_fec As Boolean) As Integer
+  overload: OpusSharp.Core.OpusDecoder.Decode*
+  nameWithType.vb: OpusDecoder.Decode(Span(Of Byte), Integer, Span(Of Short), Integer, Boolean)
+  fullName.vb: OpusSharp.Core.OpusDecoder.Decode(System.Span(Of Byte), Integer, System.Span(Of Short), Integer, Boolean)
+  name.vb: Decode(Span(Of Byte), Integer, Span(Of Short), Integer, Boolean)
+- uid: OpusSharp.Core.OpusDecoder.Decode(System.Span{System.Byte},System.Int32,System.Span{System.Single},System.Int32,System.Boolean)
+  commentId: M:OpusSharp.Core.OpusDecoder.Decode(System.Span{System.Byte},System.Int32,System.Span{System.Single},System.Int32,System.Boolean)
+  id: Decode(System.Span{System.Byte},System.Int32,System.Span{System.Single},System.Int32,System.Boolean)
+  parent: OpusSharp.Core.OpusDecoder
+  langs:
+  - csharp
+  - vb
+  name: Decode(Span<byte>, int, Span<float>, int, bool)
+  nameWithType: OpusDecoder.Decode(Span<byte>, int, Span<float>, int, bool)
+  fullName: OpusSharp.Core.OpusDecoder.Decode(System.Span<byte>, int, System.Span<float>, int, bool)
+  type: Method
+  source:
+    remote:
+      path: OpusSharp.Core/OpusDecoder.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: Decode
+    path: ../OpusSharp.Core/OpusDecoder.cs
+    startLine: 82
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Decodes an opus encoded frame.
+  example: []
+  syntax:
+    content: public int Decode(Span<byte> input, int length, Span<float> output, int frame_size, bool decode_fec)
+    parameters:
+    - id: input
+      type: System.Span{System.Byte}
+      description: Input payload. Use null to indicate packet loss
+    - id: length
+      type: System.Int32
+      description: Number of bytes in payload.
+    - id: output
+      type: System.Span{System.Single}
+      description: "Output signal (interleaved if 2 channels). length is (frame_size*channels)/2. Note: I don't know if this is correct."
+    - id: frame_size
+      type: System.Int32
+      description: Number of samples per channel of available space in pcm. If this is less than the maximum packet duration (120ms; 5760 for 48kHz), this function will not be capable of decoding some packets. In the case of PLC (data==NULL) or FEC (decode_fec=true), then frame_size needs to be exactly the duration of audio that is missing, otherwise the decoder will not be in the optimal state to decode the next incoming packet. For the PLC and FEC cases, frame_size must be a multiple of 2.5 ms.
+    - id: decode_fec
+      type: System.Boolean
+      description: Request that any in-band forward error correction data be decoded. If no such data is available, the frame is decoded as if it were lost.
+    return:
+      type: System.Int32
+      description: Number of decoded samples or <xref href="OpusSharp.Core.OpusErrorCodes" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Function Decode(input As Span(Of Byte), length As Integer, output As Span(Of Single), frame_size As Integer, decode_fec As Boolean) As Integer
+  overload: OpusSharp.Core.OpusDecoder.Decode*
+  nameWithType.vb: OpusDecoder.Decode(Span(Of Byte), Integer, Span(Of Single), Integer, Boolean)
+  fullName.vb: OpusSharp.Core.OpusDecoder.Decode(System.Span(Of Byte), Integer, System.Span(Of Single), Integer, Boolean)
+  name.vb: Decode(Span(Of Byte), Integer, Span(Of Single), Integer, Boolean)
+- uid: OpusSharp.Core.OpusDecoder.Decode(System.Byte[],System.Int32,System.Byte[],System.Int32,System.Boolean)
+  commentId: M:OpusSharp.Core.OpusDecoder.Decode(System.Byte[],System.Int32,System.Byte[],System.Int32,System.Boolean)
+  id: Decode(System.Byte[],System.Int32,System.Byte[],System.Int32,System.Boolean)
+  parent: OpusSharp.Core.OpusDecoder
+  langs:
+  - csharp
+  - vb
+  name: Decode(byte[]?, int, byte[], int, bool)
+  nameWithType: OpusDecoder.Decode(byte[]?, int, byte[], int, bool)
+  fullName: OpusSharp.Core.OpusDecoder.Decode(byte[]?, int, byte[], int, bool)
+  type: Method
+  source:
+    remote:
+      path: OpusSharp.Core/OpusDecoder.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: Decode
+    path: ../OpusSharp.Core/OpusDecoder.cs
+    startLine: 104
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Decodes an opus encoded frame.
+  example: []
+  syntax:
+    content: public int Decode(byte[]? input, int length, byte[] output, int frame_size, bool decode_fec)
+    parameters:
+    - id: input
+      type: System.Byte[]
+      description: Input payload. Use null to indicate packet loss
+    - id: length
+      type: System.Int32
+      description: Number of bytes in payload.
+    - id: output
+      type: System.Byte[]
+      description: Output signal (interleaved if 2 channels). length is frame_size*channels
+    - id: frame_size
+      type: System.Int32
+      description: Number of samples per channel of available space in pcm. If this is less than the maximum packet duration (120ms; 5760 for 48kHz), this function will not be capable of decoding some packets. In the case of PLC (data==NULL) or FEC (decode_fec=true), then frame_size needs to be exactly the duration of audio that is missing, otherwise the decoder will not be in the optimal state to decode the next incoming packet. For the PLC and FEC cases, frame_size must be a multiple of 2.5 ms.
+    - id: decode_fec
+      type: System.Boolean
+      description: Request that any in-band forward error correction data be decoded. If no such data is available, the frame is decoded as if it were lost.
+    return:
+      type: System.Int32
+      description: Number of decoded samples or <xref href="OpusSharp.Core.OpusErrorCodes" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Function Decode(input As Byte(), length As Integer, output As Byte(), frame_size As Integer, decode_fec As Boolean) As Integer
+  overload: OpusSharp.Core.OpusDecoder.Decode*
+  nameWithType.vb: OpusDecoder.Decode(Byte(), Integer, Byte(), Integer, Boolean)
+  fullName.vb: OpusSharp.Core.OpusDecoder.Decode(Byte(), Integer, Byte(), Integer, Boolean)
+  name.vb: Decode(Byte(), Integer, Byte(), Integer, Boolean)
+- uid: OpusSharp.Core.OpusDecoder.Decode(System.Byte[],System.Int32,System.Int16[],System.Int32,System.Boolean)
+  commentId: M:OpusSharp.Core.OpusDecoder.Decode(System.Byte[],System.Int32,System.Int16[],System.Int32,System.Boolean)
+  id: Decode(System.Byte[],System.Int32,System.Int16[],System.Int32,System.Boolean)
+  parent: OpusSharp.Core.OpusDecoder
+  langs:
+  - csharp
+  - vb
+  name: Decode(byte[]?, int, short[], int, bool)
+  nameWithType: OpusDecoder.Decode(byte[]?, int, short[], int, bool)
+  fullName: OpusSharp.Core.OpusDecoder.Decode(byte[]?, int, short[], int, bool)
+  type: Method
+  source:
+    remote:
+      path: OpusSharp.Core/OpusDecoder.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: Decode
+    path: ../OpusSharp.Core/OpusDecoder.cs
+    startLine: 115
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Decodes an opus encoded frame.
+  example: []
+  syntax:
+    content: public int Decode(byte[]? input, int length, short[] output, int frame_size, bool decode_fec)
+    parameters:
+    - id: input
+      type: System.Byte[]
+      description: Input payload. Use null to indicate packet loss
+    - id: length
+      type: System.Int32
+      description: Number of bytes in payload.
+    - id: output
+      type: System.Int16[]
+      description: Output signal (interleaved if 2 channels). length is frame_size*channels*sizeof(short)
+    - id: frame_size
+      type: System.Int32
+      description: Number of samples per channel of available space in pcm. If this is less than the maximum packet duration (120ms; 5760 for 48kHz), this function will not be capable of decoding some packets. In the case of PLC (data==NULL) or FEC (decode_fec=true), then frame_size needs to be exactly the duration of audio that is missing, otherwise the decoder will not be in the optimal state to decode the next incoming packet. For the PLC and FEC cases, frame_size must be a multiple of 2.5 ms.
+    - id: decode_fec
+      type: System.Boolean
+      description: Request that any in-band forward error correction data be decoded. If no such data is available, the frame is decoded as if it were lost.
+    return:
+      type: System.Int32
+      description: Number of decoded samples or <xref href="OpusSharp.Core.OpusErrorCodes" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Function Decode(input As Byte(), length As Integer, output As Short(), frame_size As Integer, decode_fec As Boolean) As Integer
+  overload: OpusSharp.Core.OpusDecoder.Decode*
+  nameWithType.vb: OpusDecoder.Decode(Byte(), Integer, Short(), Integer, Boolean)
+  fullName.vb: OpusSharp.Core.OpusDecoder.Decode(Byte(), Integer, Short(), Integer, Boolean)
+  name.vb: Decode(Byte(), Integer, Short(), Integer, Boolean)
+- uid: OpusSharp.Core.OpusDecoder.Decode(System.Byte[],System.Int32,System.Single[],System.Int32,System.Boolean)
+  commentId: M:OpusSharp.Core.OpusDecoder.Decode(System.Byte[],System.Int32,System.Single[],System.Int32,System.Boolean)
+  id: Decode(System.Byte[],System.Int32,System.Single[],System.Int32,System.Boolean)
+  parent: OpusSharp.Core.OpusDecoder
+  langs:
+  - csharp
+  - vb
+  name: Decode(byte[]?, int, float[], int, bool)
+  nameWithType: OpusDecoder.Decode(byte[]?, int, float[], int, bool)
+  fullName: OpusSharp.Core.OpusDecoder.Decode(byte[]?, int, float[], int, bool)
+  type: Method
+  source:
+    remote:
+      path: OpusSharp.Core/OpusDecoder.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: Decode
+    path: ../OpusSharp.Core/OpusDecoder.cs
+    startLine: 126
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Decodes an opus encoded frame.
+  example: []
+  syntax:
+    content: public int Decode(byte[]? input, int length, float[] output, int frame_size, bool decode_fec)
+    parameters:
+    - id: input
+      type: System.Byte[]
+      description: Input payload. Use null to indicate packet loss
+    - id: length
+      type: System.Int32
+      description: Number of bytes in payload.
+    - id: output
+      type: System.Single[]
+      description: Output signal (interleaved if 2 channels). length is frame_size*channels*sizeof(float)
+    - id: frame_size
+      type: System.Int32
+      description: Number of samples per channel of available space in pcm. If this is less than the maximum packet duration (120ms; 5760 for 48kHz), this function will not be capable of decoding some packets. In the case of PLC (data==NULL) or FEC (decode_fec=true), then frame_size needs to be exactly the duration of audio that is missing, otherwise the decoder will not be in the optimal state to decode the next incoming packet. For the PLC and FEC cases, frame_size must be a multiple of 2.5 ms.
+    - id: decode_fec
+      type: System.Boolean
+      description: Request that any in-band forward error correction data be decoded. If no such data is available, the frame is decoded as if it were lost.
+    return:
+      type: System.Int32
+      description: Number of decoded samples or <xref href="OpusSharp.Core.OpusErrorCodes" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Function Decode(input As Byte(), length As Integer, output As Single(), frame_size As Integer, decode_fec As Boolean) As Integer
+  overload: OpusSharp.Core.OpusDecoder.Decode*
+  nameWithType.vb: OpusDecoder.Decode(Byte(), Integer, Single(), Integer, Boolean)
+  fullName.vb: OpusSharp.Core.OpusDecoder.Decode(Byte(), Integer, Single(), Integer, Boolean)
+  name.vb: Decode(Byte(), Integer, Single(), Integer, Boolean)
+- uid: OpusSharp.Core.OpusDecoder.Ctl``1(OpusSharp.Core.DecoderCTL,``0@)
+  commentId: M:OpusSharp.Core.OpusDecoder.Ctl``1(OpusSharp.Core.DecoderCTL,``0@)
+  id: Ctl``1(OpusSharp.Core.DecoderCTL,``0@)
+  parent: OpusSharp.Core.OpusDecoder
+  langs:
+  - csharp
+  - vb
+  name: Ctl<T>(DecoderCTL, ref T)
+  nameWithType: OpusDecoder.Ctl<T>(DecoderCTL, ref T)
+  fullName: OpusSharp.Core.OpusDecoder.Ctl<T>(OpusSharp.Core.DecoderCTL, ref T)
+  type: Method
+  source:
+    remote:
+      path: OpusSharp.Core/OpusDecoder.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: Ctl
+    path: ../OpusSharp.Core/OpusDecoder.cs
+    startLine: 137
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Performs a ctl request.
+  example: []
+  syntax:
+    content: 'public int Ctl<T>(DecoderCTL request, ref T value) where T : unmanaged'
+    parameters:
+    - id: request
+      type: OpusSharp.Core.DecoderCTL
+      description: The request you want to specify.
+    - id: value
+      type: '{T}'
+      description: The input/output value.
+    typeParameters:
+    - id: T
+      description: The type you want to input/output.
+    return:
+      type: System.Int32
+      description: The result code of the request. See <xref href="OpusSharp.Core.OpusErrorCodes" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Function Ctl(Of T As Structure)(request As DecoderCTL, value As T) As Integer
+  overload: OpusSharp.Core.OpusDecoder.Ctl*
+  exceptions:
+  - type: OpusSharp.Core.OpusException
+    commentId: T:OpusSharp.Core.OpusException
+    description: ''
+  - type: System.ObjectDisposedException
+    commentId: T:System.ObjectDisposedException
+    description: ''
+  nameWithType.vb: OpusDecoder.Ctl(Of T)(DecoderCTL, T)
+  fullName.vb: OpusSharp.Core.OpusDecoder.Ctl(Of T)(OpusSharp.Core.DecoderCTL, T)
+  name.vb: Ctl(Of T)(DecoderCTL, T)
+- uid: OpusSharp.Core.OpusDecoder.Ctl(OpusSharp.Core.GenericCTL)
+  commentId: M:OpusSharp.Core.OpusDecoder.Ctl(OpusSharp.Core.GenericCTL)
+  id: Ctl(OpusSharp.Core.GenericCTL)
+  parent: OpusSharp.Core.OpusDecoder
+  langs:
+  - csharp
+  - vb
+  name: Ctl(GenericCTL)
+  nameWithType: OpusDecoder.Ctl(GenericCTL)
+  fullName: OpusSharp.Core.OpusDecoder.Ctl(OpusSharp.Core.GenericCTL)
+  type: Method
+  source:
+    remote:
+      path: OpusSharp.Core/OpusDecoder.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: Ctl
+    path: ../OpusSharp.Core/OpusDecoder.cs
+    startLine: 155
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Performs a ctl request.
+  example: []
+  syntax:
+    content: public int Ctl(GenericCTL request)
+    parameters:
+    - id: request
+      type: OpusSharp.Core.GenericCTL
+      description: The request you want to specify.
+    return:
+      type: System.Int32
+      description: The result code of the request. See <xref href="OpusSharp.Core.OpusErrorCodes" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Function Ctl(request As GenericCTL) As Integer
+  overload: OpusSharp.Core.OpusDecoder.Ctl*
+  exceptions:
+  - type: OpusSharp.Core.OpusException
+    commentId: T:OpusSharp.Core.OpusException
+    description: ''
+  - type: System.ObjectDisposedException
+    commentId: T:System.ObjectDisposedException
+    description: ''
+- uid: OpusSharp.Core.OpusDecoder.Ctl``1(OpusSharp.Core.GenericCTL,``0@)
+  commentId: M:OpusSharp.Core.OpusDecoder.Ctl``1(OpusSharp.Core.GenericCTL,``0@)
+  id: Ctl``1(OpusSharp.Core.GenericCTL,``0@)
+  parent: OpusSharp.Core.OpusDecoder
+  langs:
+  - csharp
+  - vb
+  name: Ctl<T>(GenericCTL, ref T)
+  nameWithType: OpusDecoder.Ctl<T>(GenericCTL, ref T)
+  fullName: OpusSharp.Core.OpusDecoder.Ctl<T>(OpusSharp.Core.GenericCTL, ref T)
+  type: Method
+  source:
+    remote:
+      path: OpusSharp.Core/OpusDecoder.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: Ctl
+    path: ../OpusSharp.Core/OpusDecoder.cs
+    startLine: 172
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Performs a ctl request.
+  example: []
+  syntax:
+    content: 'public int Ctl<T>(GenericCTL request, ref T value) where T : unmanaged'
+    parameters:
+    - id: request
+      type: OpusSharp.Core.GenericCTL
+      description: The request you want to specify.
+    - id: value
+      type: '{T}'
+      description: The input/output value.
+    typeParameters:
+    - id: T
+      description: The type you want to input/output.
+    return:
+      type: System.Int32
+      description: The result code of the request. See <xref href="OpusSharp.Core.OpusErrorCodes" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Function Ctl(Of T As Structure)(request As GenericCTL, value As T) As Integer
+  overload: OpusSharp.Core.OpusDecoder.Ctl*
+  exceptions:
+  - type: OpusSharp.Core.OpusException
+    commentId: T:OpusSharp.Core.OpusException
+    description: ''
+  - type: System.ObjectDisposedException
+    commentId: T:System.ObjectDisposedException
+    description: ''
+  nameWithType.vb: OpusDecoder.Ctl(Of T)(GenericCTL, T)
+  fullName.vb: OpusSharp.Core.OpusDecoder.Ctl(Of T)(OpusSharp.Core.GenericCTL, T)
+  name.vb: Ctl(Of T)(GenericCTL, T)
+- uid: OpusSharp.Core.OpusDecoder.Dispose
+  commentId: M:OpusSharp.Core.OpusDecoder.Dispose
+  id: Dispose
+  parent: OpusSharp.Core.OpusDecoder
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: OpusDecoder.Dispose()
+  fullName: OpusSharp.Core.OpusDecoder.Dispose()
+  type: Method
+  source:
+    remote:
+      path: OpusSharp.Core/OpusDecoder.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: Dispose
+    path: ../OpusSharp.Core/OpusDecoder.cs
+    startLine: 184
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+  example: []
+  syntax:
+    content: public void Dispose()
+    content.vb: Public Sub Dispose()
+  overload: OpusSharp.Core.OpusDecoder.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+- uid: OpusSharp.Core.OpusDecoder.Dispose(System.Boolean)
+  commentId: M:OpusSharp.Core.OpusDecoder.Dispose(System.Boolean)
+  id: Dispose(System.Boolean)
+  parent: OpusSharp.Core.OpusDecoder
+  langs:
+  - csharp
+  - vb
+  name: Dispose(bool)
+  nameWithType: OpusDecoder.Dispose(bool)
+  fullName: OpusSharp.Core.OpusDecoder.Dispose(bool)
+  type: Method
+  source:
+    remote:
+      path: OpusSharp.Core/OpusDecoder.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: Dispose
+    path: ../OpusSharp.Core/OpusDecoder.cs
+    startLine: 194
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Dispose logic.
+  example: []
+  syntax:
+    content: protected virtual void Dispose(bool disposing)
+    parameters:
+    - id: disposing
+      type: System.Boolean
+      description: Set to true if fully disposing.
+    content.vb: Protected Overridable Sub Dispose(disposing As Boolean)
+  overload: OpusSharp.Core.OpusDecoder.Dispose*
+  nameWithType.vb: OpusDecoder.Dispose(Boolean)
+  fullName.vb: OpusSharp.Core.OpusDecoder.Dispose(Boolean)
+  name.vb: Dispose(Boolean)
+- uid: OpusSharp.Core.OpusDecoder.ThrowIfDisposed
+  commentId: M:OpusSharp.Core.OpusDecoder.ThrowIfDisposed
+  id: ThrowIfDisposed
+  parent: OpusSharp.Core.OpusDecoder
+  langs:
+  - csharp
+  - vb
+  name: ThrowIfDisposed()
+  nameWithType: OpusDecoder.ThrowIfDisposed()
+  fullName: OpusSharp.Core.OpusDecoder.ThrowIfDisposed()
+  type: Method
+  source:
+    remote:
+      path: OpusSharp.Core/OpusDecoder.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: ThrowIfDisposed
+    path: ../OpusSharp.Core/OpusDecoder.cs
+    startLine: 211
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Throws an exception if this object is disposed or the handler is closed.
+  example: []
+  syntax:
+    content: protected virtual void ThrowIfDisposed()
+    content.vb: Protected Overridable Sub ThrowIfDisposed()
+  overload: OpusSharp.Core.OpusDecoder.ThrowIfDisposed*
+  exceptions:
+  - type: System.ObjectDisposedException
+    commentId: T:System.ObjectDisposedException
+    description: ''
+- uid: OpusSharp.Core.OpusDecoder.CheckError(System.Int32)
+  commentId: M:OpusSharp.Core.OpusDecoder.CheckError(System.Int32)
+  id: CheckError(System.Int32)
+  parent: OpusSharp.Core.OpusDecoder
+  langs:
+  - csharp
+  - vb
+  name: CheckError(int)
+  nameWithType: OpusDecoder.CheckError(int)
+  fullName: OpusSharp.Core.OpusDecoder.CheckError(int)
+  type: Method
+  source:
+    remote:
+      path: OpusSharp.Core/OpusDecoder.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: CheckError
+    path: ../OpusSharp.Core/OpusDecoder.cs
+    startLine: 222
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Checks if there is an opus error and throws if the error is a negative value.
+  example: []
+  syntax:
+    content: protected void CheckError(int error)
+    parameters:
+    - id: error
+      type: System.Int32
+      description: The error code to input.
+    content.vb: Protected Sub CheckError([error] As Integer)
+  overload: OpusSharp.Core.OpusDecoder.CheckError*
+  exceptions:
+  - type: OpusSharp.Core.OpusException
+    commentId: T:OpusSharp.Core.OpusException
+    description: ''
+  nameWithType.vb: OpusDecoder.CheckError(Integer)
+  fullName.vb: OpusSharp.Core.OpusDecoder.CheckError(Integer)
+  name.vb: CheckError(Integer)
+references:
+- uid: OpusSharp.Core
+  commentId: N:OpusSharp.Core
+  href: OpusSharp.html
+  name: OpusSharp.Core
+  nameWithType: OpusSharp.Core
+  fullName: OpusSharp.Core
+  spec.csharp:
+  - uid: OpusSharp
+    name: OpusSharp
+    href: OpusSharp.html
+  - name: .
+  - uid: OpusSharp.Core
+    name: Core
+    href: OpusSharp.Core.html
+  spec.vb:
+  - uid: OpusSharp
+    name: OpusSharp
+    href: OpusSharp.html
+  - name: .
+  - uid: OpusSharp.Core
+    name: Core
+    href: OpusSharp.Core.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: OpusSharp.Core.OpusDecoder
+  commentId: T:OpusSharp.Core.OpusDecoder
+  href: OpusSharp.Core.OpusDecoder.html
+  name: OpusDecoder
+  nameWithType: OpusDecoder
+  fullName: OpusSharp.Core.OpusDecoder
+- uid: OpusSharp.Core.OpusDecoder.Dispose(System.Boolean)
+  commentId: M:OpusSharp.Core.OpusDecoder.Dispose(System.Boolean)
+  isExternal: true
+  href: OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_Dispose_System_Boolean_
+  name: Dispose(bool)
+  nameWithType: OpusDecoder.Dispose(bool)
+  fullName: OpusSharp.Core.OpusDecoder.Dispose(bool)
+  nameWithType.vb: OpusDecoder.Dispose(Boolean)
+  fullName.vb: OpusSharp.Core.OpusDecoder.Dispose(Boolean)
+  name.vb: Dispose(Boolean)
+  spec.csharp:
+  - uid: OpusSharp.Core.OpusDecoder.Dispose(System.Boolean)
+    name: Dispose
+    href: OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_Dispose_System_Boolean_
+  - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: OpusSharp.Core.OpusDecoder.Dispose(System.Boolean)
+    name: Dispose
+    href: OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_Dispose_System_Boolean_
+  - name: (
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle
+  commentId: T:OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle
+  parent: OpusSharp.Core.SafeHandlers
+  href: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.html
+  name: OpusDecoderSafeHandle
+  nameWithType: OpusDecoderSafeHandle
+  fullName: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle
+- uid: OpusSharp.Core.SafeHandlers
+  commentId: N:OpusSharp.Core.SafeHandlers
+  href: OpusSharp.html
+  name: OpusSharp.Core.SafeHandlers
+  nameWithType: OpusSharp.Core.SafeHandlers
+  fullName: OpusSharp.Core.SafeHandlers
+  spec.csharp:
+  - uid: OpusSharp
+    name: OpusSharp
+    href: OpusSharp.html
+  - name: .
+  - uid: OpusSharp.Core
+    name: Core
+    href: OpusSharp.Core.html
+  - name: .
+  - uid: OpusSharp.Core.SafeHandlers
+    name: SafeHandlers
+    href: OpusSharp.Core.SafeHandlers.html
+  spec.vb:
+  - uid: OpusSharp
+    name: OpusSharp
+    href: OpusSharp.html
+  - name: .
+  - uid: OpusSharp.Core
+    name: Core
+    href: OpusSharp.Core.html
+  - name: .
+  - uid: OpusSharp.Core.SafeHandlers
+    name: SafeHandlers
+    href: OpusSharp.Core.SafeHandlers.html
+- uid: OpusSharp.Core.OpusException
+  commentId: T:OpusSharp.Core.OpusException
+  href: OpusSharp.Core.OpusException.html
+  name: OpusException
+  nameWithType: OpusException
+  fullName: OpusSharp.Core.OpusException
+- uid: OpusSharp.Core.OpusDecoder.#ctor*
+  commentId: Overload:OpusSharp.Core.OpusDecoder.#ctor
+  href: OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder__ctor_System_Int32_System_Int32_
+  name: OpusDecoder
+  nameWithType: OpusDecoder.OpusDecoder
+  fullName: OpusSharp.Core.OpusDecoder.OpusDecoder
+  nameWithType.vb: OpusDecoder.New
+  fullName.vb: OpusSharp.Core.OpusDecoder.New
+  name.vb: New
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: OpusSharp.Core.OpusErrorCodes
+  commentId: T:OpusSharp.Core.OpusErrorCodes
+  parent: OpusSharp.Core
+  href: OpusSharp.Core.OpusErrorCodes.html
+  name: OpusErrorCodes
+  nameWithType: OpusErrorCodes
+  fullName: OpusSharp.Core.OpusErrorCodes
+- uid: OpusSharp.Core.OpusDecoder.Decode*
+  commentId: Overload:OpusSharp.Core.OpusDecoder.Decode
+  href: OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_Decode_System_Span_System_Byte__System_Int32_System_Span_System_Byte__System_Int32_System_Boolean_
+  name: Decode
+  nameWithType: OpusDecoder.Decode
+  fullName: OpusSharp.Core.OpusDecoder.Decode
+- uid: System.Span{System.Byte}
+  commentId: T:System.Span{System.Byte}
+  parent: System
+  definition: System.Span`1
+  href: https://learn.microsoft.com/dotnet/api/system.span-1
+  name: Span<byte>
+  nameWithType: Span<byte>
+  fullName: System.Span<byte>
+  nameWithType.vb: Span(Of Byte)
+  fullName.vb: System.Span(Of Byte)
+  name.vb: Span(Of Byte)
+  spec.csharp:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  spec.vb:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.Span`1
+  commentId: T:System.Span`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.span-1
+  name: Span<T>
+  nameWithType: Span<T>
+  fullName: System.Span<T>
+  nameWithType.vb: Span(Of T)
+  fullName.vb: System.Span(Of T)
+  name.vb: Span(Of T)
+  spec.csharp:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Span{System.Int16}
+  commentId: T:System.Span{System.Int16}
+  parent: System
+  definition: System.Span`1
+  href: https://learn.microsoft.com/dotnet/api/system.span-1
+  name: Span<short>
+  nameWithType: Span<short>
+  fullName: System.Span<short>
+  nameWithType.vb: Span(Of Short)
+  fullName.vb: System.Span(Of Short)
+  name.vb: Span(Of Short)
+  spec.csharp:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: <
+  - uid: System.Int16
+    name: short
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int16
+  - name: '>'
+  spec.vb:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Int16
+    name: Short
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int16
+  - name: )
+- uid: System.Span{System.Single}
+  commentId: T:System.Span{System.Single}
+  parent: System
+  definition: System.Span`1
+  href: https://learn.microsoft.com/dotnet/api/system.span-1
+  name: Span<float>
+  nameWithType: Span<float>
+  fullName: System.Span<float>
+  nameWithType.vb: Span(Of Single)
+  fullName.vb: System.Span(Of Single)
+  name.vb: Span(Of Single)
+  spec.csharp:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: <
+  - uid: System.Single
+    name: float
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: '>'
+  spec.vb:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Single
+    name: Single
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: )
+- uid: System.Byte[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte[]
+  nameWithType: byte[]
+  fullName: byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+- uid: System.Int16[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int16
+  name: short[]
+  nameWithType: short[]
+  fullName: short[]
+  nameWithType.vb: Short()
+  fullName.vb: Short()
+  name.vb: Short()
+  spec.csharp:
+  - uid: System.Int16
+    name: short
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int16
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Int16
+    name: Short
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int16
+  - name: (
+  - name: )
+- uid: System.Single[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float[]
+  nameWithType: float[]
+  fullName: float[]
+  nameWithType.vb: Single()
+  fullName.vb: Single()
+  name.vb: Single()
+  spec.csharp:
+  - uid: System.Single
+    name: float
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Single
+    name: Single
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: (
+  - name: )
+- uid: System.ObjectDisposedException
+  commentId: T:System.ObjectDisposedException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.objectdisposedexception
+  name: ObjectDisposedException
+  nameWithType: ObjectDisposedException
+  fullName: System.ObjectDisposedException
+- uid: OpusSharp.Core.OpusDecoder.Ctl*
+  commentId: Overload:OpusSharp.Core.OpusDecoder.Ctl
+  href: OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_Ctl__1_OpusSharp_Core_DecoderCTL___0__
+  name: Ctl
+  nameWithType: OpusDecoder.Ctl
+  fullName: OpusSharp.Core.OpusDecoder.Ctl
+- uid: OpusSharp.Core.DecoderCTL
+  commentId: T:OpusSharp.Core.DecoderCTL
+  parent: OpusSharp.Core
+  href: OpusSharp.Core.DecoderCTL.html
+  name: DecoderCTL
+  nameWithType: DecoderCTL
+  fullName: OpusSharp.Core.DecoderCTL
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: OpusSharp.Core.GenericCTL
+  commentId: T:OpusSharp.Core.GenericCTL
+  parent: OpusSharp.Core
+  href: OpusSharp.Core.GenericCTL.html
+  name: GenericCTL
+  nameWithType: GenericCTL
+  fullName: OpusSharp.Core.GenericCTL
+- uid: OpusSharp.Core.OpusDecoder.Dispose*
+  commentId: Overload:OpusSharp.Core.OpusDecoder.Dispose
+  href: OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_Dispose
+  name: Dispose
+  nameWithType: OpusDecoder.Dispose
+  fullName: OpusSharp.Core.OpusDecoder.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: OpusSharp.Core.OpusDecoder.ThrowIfDisposed*
+  commentId: Overload:OpusSharp.Core.OpusDecoder.ThrowIfDisposed
+  href: OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_ThrowIfDisposed
+  name: ThrowIfDisposed
+  nameWithType: OpusDecoder.ThrowIfDisposed
+  fullName: OpusSharp.Core.OpusDecoder.ThrowIfDisposed
+- uid: OpusSharp.Core.OpusDecoder.CheckError*
+  commentId: Overload:OpusSharp.Core.OpusDecoder.CheckError
+  href: OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_CheckError_System_Int32_
+  name: CheckError
+  nameWithType: OpusDecoder.CheckError
+  fullName: OpusSharp.Core.OpusDecoder.CheckError

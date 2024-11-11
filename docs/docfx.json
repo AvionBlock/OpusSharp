@@ -1,0 +1,42 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "../OpusSharp.Core",
+          "files": [
+            "**/*.csproj"
+          ]
+        }
+      ],
+      "dest": "api"
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [
+          "**/*.{md,yml}"
+        ],
+        "exclude": [
+          "_site/**"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [
+          "images/**"
+        ]
+      }
+    ],
+    "output": "_site",
+    "template":["default","templates/singulinkfx"],
+    "globalMetadata": {
+      "_appName": "OpusSharp",
+      "_appTitle": "OpusSharp",
+      "_enableSearch": true,
+      "pdf": false
+    }
+  }
+}

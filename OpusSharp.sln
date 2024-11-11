@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusSharp.Core", "OpusSharp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tester", "Tester\Tester.csproj", "{66918CCD-0778-4064-A28B-DC219A7D04F5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Docs", "Docs\Docs.csproj", "{D59C6F8F-428B-4853-8AD7-5C434078FA3C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,14 +31,6 @@ Global
 		{66918CCD-0778-4064-A28B-DC219A7D04F5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{66918CCD-0778-4064-A28B-DC219A7D04F5}.Release|x64.ActiveCfg = Release|Any CPU
 		{66918CCD-0778-4064-A28B-DC219A7D04F5}.Release|x64.Build.0 = Release|Any CPU
-		{D59C6F8F-428B-4853-8AD7-5C434078FA3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D59C6F8F-428B-4853-8AD7-5C434078FA3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D59C6F8F-428B-4853-8AD7-5C434078FA3C}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{D59C6F8F-428B-4853-8AD7-5C434078FA3C}.Debug|x64.Build.0 = Debug|Any CPU
-		{D59C6F8F-428B-4853-8AD7-5C434078FA3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D59C6F8F-428B-4853-8AD7-5C434078FA3C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D59C6F8F-428B-4853-8AD7-5C434078FA3C}.Release|x64.ActiveCfg = Release|Any CPU
-		{D59C6F8F-428B-4853-8AD7-5C434078FA3C}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

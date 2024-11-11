@@ -1,0 +1,102 @@
+### YamlMime:ManagedReference
+items:
+- uid: OpusSharp.Core.SafeHandlers
+  commentId: N:OpusSharp.Core.SafeHandlers
+  id: OpusSharp.Core.SafeHandlers
+  children:
+  - OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle
+  - OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle
+  - OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle
+  - OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle
+  - OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle
+  - OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle
+  - OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle
+  langs:
+  - csharp
+  - vb
+  name: OpusSharp.Core.SafeHandlers
+  nameWithType: OpusSharp.Core.SafeHandlers
+  fullName: OpusSharp.Core.SafeHandlers
+  type: Namespace
+  assemblies:
+  - OpusSharp
+references:
+- uid: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle
+  commentId: T:OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle
+  parent: OpusSharp.Core.SafeHandlers
+  href: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.html
+  name: OpusDecoderSafeHandle
+  nameWithType: OpusDecoderSafeHandle
+  fullName: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle
+- uid: OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle
+  commentId: T:OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle
+  parent: OpusSharp.Core.SafeHandlers
+  href: OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.html
+  name: OpusDREDDecoderSafeHandle
+  nameWithType: OpusDREDDecoderSafeHandle
+  fullName: OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle
+- uid: OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle
+  commentId: T:OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle
+  parent: OpusSharp.Core.SafeHandlers
+  href: OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.html
+  name: OpusDREDSafeHandle
+  nameWithType: OpusDREDSafeHandle
+  fullName: OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle
+- uid: OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle
+  commentId: T:OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle
+  parent: OpusSharp.Core.SafeHandlers
+  href: OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.html
+  name: OpusEncoderSafeHandle
+  nameWithType: OpusEncoderSafeHandle
+  fullName: OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle
+- uid: OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle
+  commentId: T:OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle
+  parent: OpusSharp.Core.SafeHandlers
+  href: OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.html
+  name: OpusMSDecoderSafeHandle
+  nameWithType: OpusMSDecoderSafeHandle
+  fullName: OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle
+- uid: OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle
+  commentId: T:OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle
+  parent: OpusSharp.Core.SafeHandlers
+  href: OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.html
+  name: OpusMSEncoderSafeHandle
+  nameWithType: OpusMSEncoderSafeHandle
+  fullName: OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle
+- uid: OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle
+  commentId: T:OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle
+  parent: OpusSharp.Core.SafeHandlers
+  href: OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.html
+  name: OpusRepacketizerSafeHandle
+  nameWithType: OpusRepacketizerSafeHandle
+  fullName: OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle
+- uid: OpusSharp.Core.SafeHandlers
+  commentId: N:OpusSharp.Core.SafeHandlers
+  href: OpusSharp.html
+  name: OpusSharp.Core.SafeHandlers
+  nameWithType: OpusSharp.Core.SafeHandlers
+  fullName: OpusSharp.Core.SafeHandlers
+  spec.csharp:
+  - uid: OpusSharp
+    name: OpusSharp
+    href: OpusSharp.html
+  - name: .
+  - uid: OpusSharp.Core
+    name: Core
+    href: OpusSharp.Core.html
+  - name: .
+  - uid: OpusSharp.Core.SafeHandlers
+    name: SafeHandlers
+    href: OpusSharp.Core.SafeHandlers.html
+  spec.vb:
+  - uid: OpusSharp
+    name: OpusSharp
+    href: OpusSharp.html
+  - name: .
+  - uid: OpusSharp.Core
+    name: Core
+    href: OpusSharp.Core.html
+  - name: .
+  - uid: OpusSharp.Core.SafeHandlers
+    name: SafeHandlers
+    href: OpusSharp.Core.SafeHandlers.html

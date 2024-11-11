@@ -1,0 +1,45 @@
+### YamlMime:TableOfContent
+items:
+- uid: OpusSharp.Core
+  name: OpusSharp.Core
+  items:
+  - uid: OpusSharp.Core.DecoderCTL
+    name: DecoderCTL
+  - uid: OpusSharp.Core.EncoderCTL
+    name: EncoderCTL
+  - uid: OpusSharp.Core.GenericCTL
+    name: GenericCTL
+  - uid: OpusSharp.Core.MultistreamCTL
+    name: MultistreamCTL
+  - uid: OpusSharp.Core.NativeOpus
+    name: NativeOpus
+  - uid: OpusSharp.Core.OpusDecoder
+    name: OpusDecoder
+  - uid: OpusSharp.Core.OpusEncoder
+    name: OpusEncoder
+  - uid: OpusSharp.Core.OpusErrorCodes
+    name: OpusErrorCodes
+  - uid: OpusSharp.Core.OpusException
+    name: OpusException
+  - uid: OpusSharp.Core.OpusInfo
+    name: OpusInfo
+  - uid: OpusSharp.Core.OpusPredefinedValues
+    name: OpusPredefinedValues
+- uid: OpusSharp.Core.SafeHandlers
+  name: OpusSharp.Core.SafeHandlers
+  items:
+  - uid: OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle
+    name: OpusDREDDecoderSafeHandle
+  - uid: OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle
+    name: OpusDREDSafeHandle
+  - uid: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle
+    name: OpusDecoderSafeHandle
+  - uid: OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle
+    name: OpusEncoderSafeHandle
+  - uid: OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle
+    name: OpusMSDecoderSafeHandle
+  - uid: OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle
+    name: OpusMSEncoderSafeHandle
+  - uid: OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle
+    name: OpusRepacketizerSafeHandle
+memberLayout: SamePage

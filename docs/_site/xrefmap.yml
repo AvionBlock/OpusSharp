@@ -1,0 +1,2319 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: OpusSharp.Core
+  name: OpusSharp.Core
+  href: api/OpusSharp.Core.html
+  commentId: N:OpusSharp.Core
+  fullName: OpusSharp.Core
+  nameWithType: OpusSharp.Core
+- uid: OpusSharp.Core.DecoderCTL
+  name: DecoderCTL
+  href: api/OpusSharp.Core.DecoderCTL.html
+  commentId: T:OpusSharp.Core.DecoderCTL
+  fullName: OpusSharp.Core.DecoderCTL
+  nameWithType: DecoderCTL
+- uid: OpusSharp.Core.DecoderCTL.OPUS_GET_GAIN
+  name: OPUS_GET_GAIN
+  href: api/OpusSharp.Core.DecoderCTL.html#OpusSharp_Core_DecoderCTL_OPUS_GET_GAIN
+  commentId: F:OpusSharp.Core.DecoderCTL.OPUS_GET_GAIN
+  fullName: OpusSharp.Core.DecoderCTL.OPUS_GET_GAIN
+  nameWithType: DecoderCTL.OPUS_GET_GAIN
+- uid: OpusSharp.Core.DecoderCTL.OPUS_GET_LAST_PACKET_DURATION
+  name: OPUS_GET_LAST_PACKET_DURATION
+  href: api/OpusSharp.Core.DecoderCTL.html#OpusSharp_Core_DecoderCTL_OPUS_GET_LAST_PACKET_DURATION
+  commentId: F:OpusSharp.Core.DecoderCTL.OPUS_GET_LAST_PACKET_DURATION
+  fullName: OpusSharp.Core.DecoderCTL.OPUS_GET_LAST_PACKET_DURATION
+  nameWithType: DecoderCTL.OPUS_GET_LAST_PACKET_DURATION
+- uid: OpusSharp.Core.DecoderCTL.OPUS_GET_PITCH
+  name: OPUS_GET_PITCH
+  href: api/OpusSharp.Core.DecoderCTL.html#OpusSharp_Core_DecoderCTL_OPUS_GET_PITCH
+  commentId: F:OpusSharp.Core.DecoderCTL.OPUS_GET_PITCH
+  fullName: OpusSharp.Core.DecoderCTL.OPUS_GET_PITCH
+  nameWithType: DecoderCTL.OPUS_GET_PITCH
+- uid: OpusSharp.Core.DecoderCTL.OPUS_SET_GAIN
+  name: OPUS_SET_GAIN
+  href: api/OpusSharp.Core.DecoderCTL.html#OpusSharp_Core_DecoderCTL_OPUS_SET_GAIN
+  commentId: F:OpusSharp.Core.DecoderCTL.OPUS_SET_GAIN
+  fullName: OpusSharp.Core.DecoderCTL.OPUS_SET_GAIN
+  nameWithType: DecoderCTL.OPUS_SET_GAIN
+- uid: OpusSharp.Core.EncoderCTL
+  name: EncoderCTL
+  href: api/OpusSharp.Core.EncoderCTL.html
+  commentId: T:OpusSharp.Core.EncoderCTL
+  fullName: OpusSharp.Core.EncoderCTL
+  nameWithType: EncoderCTL
+- uid: OpusSharp.Core.EncoderCTL.OPUS_GET_APPLICATION
+  name: OPUS_GET_APPLICATION
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_GET_APPLICATION
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_GET_APPLICATION
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_GET_APPLICATION
+  nameWithType: EncoderCTL.OPUS_GET_APPLICATION
+- uid: OpusSharp.Core.EncoderCTL.OPUS_GET_BITRATE
+  name: OPUS_GET_BITRATE
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_GET_BITRATE
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_GET_BITRATE
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_GET_BITRATE
+  nameWithType: EncoderCTL.OPUS_GET_BITRATE
+- uid: OpusSharp.Core.EncoderCTL.OPUS_GET_COMPLEXITY
+  name: OPUS_GET_COMPLEXITY
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_GET_COMPLEXITY
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_GET_COMPLEXITY
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_GET_COMPLEXITY
+  nameWithType: EncoderCTL.OPUS_GET_COMPLEXITY
+- uid: OpusSharp.Core.EncoderCTL.OPUS_GET_DRED_DURATION
+  name: OPUS_GET_DRED_DURATION
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_GET_DRED_DURATION
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_GET_DRED_DURATION
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_GET_DRED_DURATION
+  nameWithType: EncoderCTL.OPUS_GET_DRED_DURATION
+- uid: OpusSharp.Core.EncoderCTL.OPUS_GET_DTX
+  name: OPUS_GET_DTX
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_GET_DTX
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_GET_DTX
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_GET_DTX
+  nameWithType: EncoderCTL.OPUS_GET_DTX
+- uid: OpusSharp.Core.EncoderCTL.OPUS_GET_EXPERT_FRAME_DURATION
+  name: OPUS_GET_EXPERT_FRAME_DURATION
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_GET_EXPERT_FRAME_DURATION
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_GET_EXPERT_FRAME_DURATION
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_GET_EXPERT_FRAME_DURATION
+  nameWithType: EncoderCTL.OPUS_GET_EXPERT_FRAME_DURATION
+- uid: OpusSharp.Core.EncoderCTL.OPUS_GET_FORCE_CHANNELS
+  name: OPUS_GET_FORCE_CHANNELS
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_GET_FORCE_CHANNELS
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_GET_FORCE_CHANNELS
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_GET_FORCE_CHANNELS
+  nameWithType: EncoderCTL.OPUS_GET_FORCE_CHANNELS
+- uid: OpusSharp.Core.EncoderCTL.OPUS_GET_INBAND_FEC
+  name: OPUS_GET_INBAND_FEC
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_GET_INBAND_FEC
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_GET_INBAND_FEC
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_GET_INBAND_FEC
+  nameWithType: EncoderCTL.OPUS_GET_INBAND_FEC
+- uid: OpusSharp.Core.EncoderCTL.OPUS_GET_IN_DTX
+  name: OPUS_GET_IN_DTX
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_GET_IN_DTX
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_GET_IN_DTX
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_GET_IN_DTX
+  nameWithType: EncoderCTL.OPUS_GET_IN_DTX
+- uid: OpusSharp.Core.EncoderCTL.OPUS_GET_LOOKAHEAD
+  name: OPUS_GET_LOOKAHEAD
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_GET_LOOKAHEAD
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_GET_LOOKAHEAD
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_GET_LOOKAHEAD
+  nameWithType: EncoderCTL.OPUS_GET_LOOKAHEAD
+- uid: OpusSharp.Core.EncoderCTL.OPUS_GET_LSB_DEPTH
+  name: OPUS_GET_LSB_DEPTH
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_GET_LSB_DEPTH
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_GET_LSB_DEPTH
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_GET_LSB_DEPTH
+  nameWithType: EncoderCTL.OPUS_GET_LSB_DEPTH
+- uid: OpusSharp.Core.EncoderCTL.OPUS_GET_MAX_BANDWIDTH
+  name: OPUS_GET_MAX_BANDWIDTH
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_GET_MAX_BANDWIDTH
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_GET_MAX_BANDWIDTH
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_GET_MAX_BANDWIDTH
+  nameWithType: EncoderCTL.OPUS_GET_MAX_BANDWIDTH
+- uid: OpusSharp.Core.EncoderCTL.OPUS_GET_PACKET_LOSS_PERC
+  name: OPUS_GET_PACKET_LOSS_PERC
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_GET_PACKET_LOSS_PERC
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_GET_PACKET_LOSS_PERC
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_GET_PACKET_LOSS_PERC
+  nameWithType: EncoderCTL.OPUS_GET_PACKET_LOSS_PERC
+- uid: OpusSharp.Core.EncoderCTL.OPUS_GET_PREDICTION_DISABLED
+  name: OPUS_GET_PREDICTION_DISABLED
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_GET_PREDICTION_DISABLED
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_GET_PREDICTION_DISABLED
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_GET_PREDICTION_DISABLED
+  nameWithType: EncoderCTL.OPUS_GET_PREDICTION_DISABLED
+- uid: OpusSharp.Core.EncoderCTL.OPUS_GET_SIGNAL
+  name: OPUS_GET_SIGNAL
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_GET_SIGNAL
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_GET_SIGNAL
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_GET_SIGNAL
+  nameWithType: EncoderCTL.OPUS_GET_SIGNAL
+- uid: OpusSharp.Core.EncoderCTL.OPUS_GET_VBR
+  name: OPUS_GET_VBR
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_GET_VBR
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_GET_VBR
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_GET_VBR
+  nameWithType: EncoderCTL.OPUS_GET_VBR
+- uid: OpusSharp.Core.EncoderCTL.OPUS_GET_VBR_CONSTRAINT
+  name: OPUS_GET_VBR_CONSTRAINT
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_GET_VBR_CONSTRAINT
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_GET_VBR_CONSTRAINT
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_GET_VBR_CONSTRAINT
+  nameWithType: EncoderCTL.OPUS_GET_VBR_CONSTRAINT
+- uid: OpusSharp.Core.EncoderCTL.OPUS_SET_APPLICATION
+  name: OPUS_SET_APPLICATION
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_SET_APPLICATION
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_SET_APPLICATION
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_SET_APPLICATION
+  nameWithType: EncoderCTL.OPUS_SET_APPLICATION
+- uid: OpusSharp.Core.EncoderCTL.OPUS_SET_BANDWIDTH
+  name: OPUS_SET_BANDWIDTH
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_SET_BANDWIDTH
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_SET_BANDWIDTH
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_SET_BANDWIDTH
+  nameWithType: EncoderCTL.OPUS_SET_BANDWIDTH
+- uid: OpusSharp.Core.EncoderCTL.OPUS_SET_BITRATE
+  name: OPUS_SET_BITRATE
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_SET_BITRATE
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_SET_BITRATE
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_SET_BITRATE
+  nameWithType: EncoderCTL.OPUS_SET_BITRATE
+- uid: OpusSharp.Core.EncoderCTL.OPUS_SET_COMPLEXITY
+  name: OPUS_SET_COMPLEXITY
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_SET_COMPLEXITY
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_SET_COMPLEXITY
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_SET_COMPLEXITY
+  nameWithType: EncoderCTL.OPUS_SET_COMPLEXITY
+- uid: OpusSharp.Core.EncoderCTL.OPUS_SET_DNN_BLOB
+  name: OPUS_SET_DNN_BLOB
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_SET_DNN_BLOB
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_SET_DNN_BLOB
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_SET_DNN_BLOB
+  nameWithType: EncoderCTL.OPUS_SET_DNN_BLOB
+- uid: OpusSharp.Core.EncoderCTL.OPUS_SET_DRED_DURATION
+  name: OPUS_SET_DRED_DURATION
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_SET_DRED_DURATION
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_SET_DRED_DURATION
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_SET_DRED_DURATION
+  nameWithType: EncoderCTL.OPUS_SET_DRED_DURATION
+- uid: OpusSharp.Core.EncoderCTL.OPUS_SET_DTX
+  name: OPUS_SET_DTX
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_SET_DTX
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_SET_DTX
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_SET_DTX
+  nameWithType: EncoderCTL.OPUS_SET_DTX
+- uid: OpusSharp.Core.EncoderCTL.OPUS_SET_EXPERT_FRAME_DURATION
+  name: OPUS_SET_EXPERT_FRAME_DURATION
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_SET_EXPERT_FRAME_DURATION
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_SET_EXPERT_FRAME_DURATION
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_SET_EXPERT_FRAME_DURATION
+  nameWithType: EncoderCTL.OPUS_SET_EXPERT_FRAME_DURATION
+- uid: OpusSharp.Core.EncoderCTL.OPUS_SET_FORCE_CHANNELS
+  name: OPUS_SET_FORCE_CHANNELS
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_SET_FORCE_CHANNELS
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_SET_FORCE_CHANNELS
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_SET_FORCE_CHANNELS
+  nameWithType: EncoderCTL.OPUS_SET_FORCE_CHANNELS
+- uid: OpusSharp.Core.EncoderCTL.OPUS_SET_INBAND_FEC
+  name: OPUS_SET_INBAND_FEC
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_SET_INBAND_FEC
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_SET_INBAND_FEC
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_SET_INBAND_FEC
+  nameWithType: EncoderCTL.OPUS_SET_INBAND_FEC
+- uid: OpusSharp.Core.EncoderCTL.OPUS_SET_LSB_DEPTH
+  name: OPUS_SET_LSB_DEPTH
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_SET_LSB_DEPTH
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_SET_LSB_DEPTH
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_SET_LSB_DEPTH
+  nameWithType: EncoderCTL.OPUS_SET_LSB_DEPTH
+- uid: OpusSharp.Core.EncoderCTL.OPUS_SET_MAX_BANDWIDTH
+  name: OPUS_SET_MAX_BANDWIDTH
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_SET_MAX_BANDWIDTH
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_SET_MAX_BANDWIDTH
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_SET_MAX_BANDWIDTH
+  nameWithType: EncoderCTL.OPUS_SET_MAX_BANDWIDTH
+- uid: OpusSharp.Core.EncoderCTL.OPUS_SET_PACKET_LOSS_PERC
+  name: OPUS_SET_PACKET_LOSS_PERC
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_SET_PACKET_LOSS_PERC
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_SET_PACKET_LOSS_PERC
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_SET_PACKET_LOSS_PERC
+  nameWithType: EncoderCTL.OPUS_SET_PACKET_LOSS_PERC
+- uid: OpusSharp.Core.EncoderCTL.OPUS_SET_PREDICTION_DISABLED
+  name: OPUS_SET_PREDICTION_DISABLED
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_SET_PREDICTION_DISABLED
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_SET_PREDICTION_DISABLED
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_SET_PREDICTION_DISABLED
+  nameWithType: EncoderCTL.OPUS_SET_PREDICTION_DISABLED
+- uid: OpusSharp.Core.EncoderCTL.OPUS_SET_SIGNAL
+  name: OPUS_SET_SIGNAL
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_SET_SIGNAL
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_SET_SIGNAL
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_SET_SIGNAL
+  nameWithType: EncoderCTL.OPUS_SET_SIGNAL
+- uid: OpusSharp.Core.EncoderCTL.OPUS_SET_VBR
+  name: OPUS_SET_VBR
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_SET_VBR
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_SET_VBR
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_SET_VBR
+  nameWithType: EncoderCTL.OPUS_SET_VBR
+- uid: OpusSharp.Core.EncoderCTL.OPUS_SET_VBR_CONSTRAINT
+  name: OPUS_SET_VBR_CONSTRAINT
+  href: api/OpusSharp.Core.EncoderCTL.html#OpusSharp_Core_EncoderCTL_OPUS_SET_VBR_CONSTRAINT
+  commentId: F:OpusSharp.Core.EncoderCTL.OPUS_SET_VBR_CONSTRAINT
+  fullName: OpusSharp.Core.EncoderCTL.OPUS_SET_VBR_CONSTRAINT
+  nameWithType: EncoderCTL.OPUS_SET_VBR_CONSTRAINT
+- uid: OpusSharp.Core.GenericCTL
+  name: GenericCTL
+  href: api/OpusSharp.Core.GenericCTL.html
+  commentId: T:OpusSharp.Core.GenericCTL
+  fullName: OpusSharp.Core.GenericCTL
+  nameWithType: GenericCTL
+- uid: OpusSharp.Core.GenericCTL.OPUS_GET_BANDWIDTH
+  name: OPUS_GET_BANDWIDTH
+  href: api/OpusSharp.Core.GenericCTL.html#OpusSharp_Core_GenericCTL_OPUS_GET_BANDWIDTH
+  commentId: F:OpusSharp.Core.GenericCTL.OPUS_GET_BANDWIDTH
+  fullName: OpusSharp.Core.GenericCTL.OPUS_GET_BANDWIDTH
+  nameWithType: GenericCTL.OPUS_GET_BANDWIDTH
+- uid: OpusSharp.Core.GenericCTL.OPUS_GET_FINAL_RANGE
+  name: OPUS_GET_FINAL_RANGE
+  href: api/OpusSharp.Core.GenericCTL.html#OpusSharp_Core_GenericCTL_OPUS_GET_FINAL_RANGE
+  commentId: F:OpusSharp.Core.GenericCTL.OPUS_GET_FINAL_RANGE
+  fullName: OpusSharp.Core.GenericCTL.OPUS_GET_FINAL_RANGE
+  nameWithType: GenericCTL.OPUS_GET_FINAL_RANGE
+- uid: OpusSharp.Core.GenericCTL.OPUS_GET_PHASE_INVERSION_DISABLED
+  name: OPUS_GET_PHASE_INVERSION_DISABLED
+  href: api/OpusSharp.Core.GenericCTL.html#OpusSharp_Core_GenericCTL_OPUS_GET_PHASE_INVERSION_DISABLED
+  commentId: F:OpusSharp.Core.GenericCTL.OPUS_GET_PHASE_INVERSION_DISABLED
+  fullName: OpusSharp.Core.GenericCTL.OPUS_GET_PHASE_INVERSION_DISABLED
+  nameWithType: GenericCTL.OPUS_GET_PHASE_INVERSION_DISABLED
+- uid: OpusSharp.Core.GenericCTL.OPUS_GET_SAMPLE_RATE
+  name: OPUS_GET_SAMPLE_RATE
+  href: api/OpusSharp.Core.GenericCTL.html#OpusSharp_Core_GenericCTL_OPUS_GET_SAMPLE_RATE
+  commentId: F:OpusSharp.Core.GenericCTL.OPUS_GET_SAMPLE_RATE
+  fullName: OpusSharp.Core.GenericCTL.OPUS_GET_SAMPLE_RATE
+  nameWithType: GenericCTL.OPUS_GET_SAMPLE_RATE
+- uid: OpusSharp.Core.GenericCTL.OPUS_RESET_STATE
+  name: OPUS_RESET_STATE
+  href: api/OpusSharp.Core.GenericCTL.html#OpusSharp_Core_GenericCTL_OPUS_RESET_STATE
+  commentId: F:OpusSharp.Core.GenericCTL.OPUS_RESET_STATE
+  fullName: OpusSharp.Core.GenericCTL.OPUS_RESET_STATE
+  nameWithType: GenericCTL.OPUS_RESET_STATE
+- uid: OpusSharp.Core.GenericCTL.OPUS_SET_PHASE_INVERSION_DISABLED
+  name: OPUS_SET_PHASE_INVERSION_DISABLED
+  href: api/OpusSharp.Core.GenericCTL.html#OpusSharp_Core_GenericCTL_OPUS_SET_PHASE_INVERSION_DISABLED
+  commentId: F:OpusSharp.Core.GenericCTL.OPUS_SET_PHASE_INVERSION_DISABLED
+  fullName: OpusSharp.Core.GenericCTL.OPUS_SET_PHASE_INVERSION_DISABLED
+  nameWithType: GenericCTL.OPUS_SET_PHASE_INVERSION_DISABLED
+- uid: OpusSharp.Core.MultistreamCTL
+  name: MultistreamCTL
+  href: api/OpusSharp.Core.MultistreamCTL.html
+  commentId: T:OpusSharp.Core.MultistreamCTL
+  fullName: OpusSharp.Core.MultistreamCTL
+  nameWithType: MultistreamCTL
+- uid: OpusSharp.Core.MultistreamCTL.OPUS_MULTISTREAM_GET_DECODER_STATE
+  name: OPUS_MULTISTREAM_GET_DECODER_STATE
+  href: api/OpusSharp.Core.MultistreamCTL.html#OpusSharp_Core_MultistreamCTL_OPUS_MULTISTREAM_GET_DECODER_STATE
+  commentId: F:OpusSharp.Core.MultistreamCTL.OPUS_MULTISTREAM_GET_DECODER_STATE
+  fullName: OpusSharp.Core.MultistreamCTL.OPUS_MULTISTREAM_GET_DECODER_STATE
+  nameWithType: MultistreamCTL.OPUS_MULTISTREAM_GET_DECODER_STATE
+- uid: OpusSharp.Core.MultistreamCTL.OPUS_MULTISTREAM_GET_ENCODER_STATE
+  name: OPUS_MULTISTREAM_GET_ENCODER_STATE
+  href: api/OpusSharp.Core.MultistreamCTL.html#OpusSharp_Core_MultistreamCTL_OPUS_MULTISTREAM_GET_ENCODER_STATE
+  commentId: F:OpusSharp.Core.MultistreamCTL.OPUS_MULTISTREAM_GET_ENCODER_STATE
+  fullName: OpusSharp.Core.MultistreamCTL.OPUS_MULTISTREAM_GET_ENCODER_STATE
+  nameWithType: MultistreamCTL.OPUS_MULTISTREAM_GET_ENCODER_STATE
+- uid: OpusSharp.Core.NativeOpus
+  name: NativeOpus
+  href: api/OpusSharp.Core.NativeOpus.html
+  commentId: T:OpusSharp.Core.NativeOpus
+  fullName: OpusSharp.Core.NativeOpus
+  nameWithType: NativeOpus
+- uid: OpusSharp.Core.NativeOpus.opus_decode(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle,System.Byte*,System.Int32,System.Int16*,System.Int32,System.Int32)
+  name: opus_decode(OpusDecoderSafeHandle, byte*, int, short*, int, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_decode_OpusSharp_Core_SafeHandlers_OpusDecoderSafeHandle_System_Byte__System_Int32_System_Int16__System_Int32_System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_decode(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle,System.Byte*,System.Int32,System.Int16*,System.Int32,System.Int32)
+  name.vb: opus_decode(OpusDecoderSafeHandle, Byte*, Integer, Short*, Integer, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_decode(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle, byte*, int, short*, int, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_decode(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle, Byte*, Integer, Short*, Integer, Integer)
+  nameWithType: NativeOpus.opus_decode(OpusDecoderSafeHandle, byte*, int, short*, int, int)
+  nameWithType.vb: NativeOpus.opus_decode(OpusDecoderSafeHandle, Byte*, Integer, Short*, Integer, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_decode*
+  name: opus_decode
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_decode_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_decode
+  fullName: OpusSharp.Core.NativeOpus.opus_decode
+  nameWithType: NativeOpus.opus_decode
+- uid: OpusSharp.Core.NativeOpus.opus_decode_float(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle,System.Byte*,System.Int32,System.Single*,System.Int32,System.Int32)
+  name: opus_decode_float(OpusDecoderSafeHandle, byte*, int, float*, int, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_decode_float_OpusSharp_Core_SafeHandlers_OpusDecoderSafeHandle_System_Byte__System_Int32_System_Single__System_Int32_System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_decode_float(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle,System.Byte*,System.Int32,System.Single*,System.Int32,System.Int32)
+  name.vb: opus_decode_float(OpusDecoderSafeHandle, Byte*, Integer, Single*, Integer, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_decode_float(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle, byte*, int, float*, int, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_decode_float(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle, Byte*, Integer, Single*, Integer, Integer)
+  nameWithType: NativeOpus.opus_decode_float(OpusDecoderSafeHandle, byte*, int, float*, int, int)
+  nameWithType.vb: NativeOpus.opus_decode_float(OpusDecoderSafeHandle, Byte*, Integer, Single*, Integer, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_decode_float*
+  name: opus_decode_float
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_decode_float_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_decode_float
+  fullName: OpusSharp.Core.NativeOpus.opus_decode_float
+  nameWithType: NativeOpus.opus_decode_float
+- uid: OpusSharp.Core.NativeOpus.opus_decoder_create(System.Int32,System.Int32,System.Int32*)
+  name: opus_decoder_create(int, int, int*)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_decoder_create_System_Int32_System_Int32_System_Int32__
+  commentId: M:OpusSharp.Core.NativeOpus.opus_decoder_create(System.Int32,System.Int32,System.Int32*)
+  name.vb: opus_decoder_create(Integer, Integer, Integer*)
+  fullName: OpusSharp.Core.NativeOpus.opus_decoder_create(int, int, int*)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_decoder_create(Integer, Integer, Integer*)
+  nameWithType: NativeOpus.opus_decoder_create(int, int, int*)
+  nameWithType.vb: NativeOpus.opus_decoder_create(Integer, Integer, Integer*)
+- uid: OpusSharp.Core.NativeOpus.opus_decoder_create*
+  name: opus_decoder_create
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_decoder_create_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_decoder_create
+  fullName: OpusSharp.Core.NativeOpus.opus_decoder_create
+  nameWithType: NativeOpus.opus_decoder_create
+- uid: OpusSharp.Core.NativeOpus.opus_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle,System.Int32)
+  name: opus_decoder_ctl(OpusDecoderSafeHandle, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_decoder_ctl_OpusSharp_Core_SafeHandlers_OpusDecoderSafeHandle_System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle,System.Int32)
+  name.vb: opus_decoder_ctl(OpusDecoderSafeHandle, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle, Integer)
+  nameWithType: NativeOpus.opus_decoder_ctl(OpusDecoderSafeHandle, int)
+  nameWithType.vb: NativeOpus.opus_decoder_ctl(OpusDecoderSafeHandle, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle,System.Int32,System.Void*)
+  name: opus_decoder_ctl(OpusDecoderSafeHandle, int, void*)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_decoder_ctl_OpusSharp_Core_SafeHandlers_OpusDecoderSafeHandle_System_Int32_System_Void__
+  commentId: M:OpusSharp.Core.NativeOpus.opus_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle,System.Int32,System.Void*)
+  name.vb: opus_decoder_ctl(OpusDecoderSafeHandle, Integer, Void*)
+  fullName: OpusSharp.Core.NativeOpus.opus_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle, int, void*)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle, Integer, Void*)
+  nameWithType: NativeOpus.opus_decoder_ctl(OpusDecoderSafeHandle, int, void*)
+  nameWithType.vb: NativeOpus.opus_decoder_ctl(OpusDecoderSafeHandle, Integer, Void*)
+- uid: OpusSharp.Core.NativeOpus.opus_decoder_ctl*
+  name: opus_decoder_ctl
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_decoder_ctl_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_decoder_ctl
+  fullName: OpusSharp.Core.NativeOpus.opus_decoder_ctl
+  nameWithType: NativeOpus.opus_decoder_ctl
+- uid: OpusSharp.Core.NativeOpus.opus_decoder_destroy(System.IntPtr)
+  name: opus_decoder_destroy(IntPtr)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_decoder_destroy_System_IntPtr_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_decoder_destroy(System.IntPtr)
+  fullName: OpusSharp.Core.NativeOpus.opus_decoder_destroy(System.IntPtr)
+  nameWithType: NativeOpus.opus_decoder_destroy(IntPtr)
+- uid: OpusSharp.Core.NativeOpus.opus_decoder_destroy*
+  name: opus_decoder_destroy
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_decoder_destroy_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_decoder_destroy
+  fullName: OpusSharp.Core.NativeOpus.opus_decoder_destroy
+  nameWithType: NativeOpus.opus_decoder_destroy
+- uid: OpusSharp.Core.NativeOpus.opus_decoder_dred_decode(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle,OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle,System.Int32,System.Int16*,System.Int32)
+  name: opus_decoder_dred_decode(OpusDecoderSafeHandle, OpusDREDSafeHandle, int, short*, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_decoder_dred_decode_OpusSharp_Core_SafeHandlers_OpusDecoderSafeHandle_OpusSharp_Core_SafeHandlers_OpusDREDSafeHandle_System_Int32_System_Int16__System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_decoder_dred_decode(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle,OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle,System.Int32,System.Int16*,System.Int32)
+  name.vb: opus_decoder_dred_decode(OpusDecoderSafeHandle, OpusDREDSafeHandle, Integer, Short*, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_decoder_dred_decode(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle, OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle, int, short*, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_decoder_dred_decode(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle, OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle, Integer, Short*, Integer)
+  nameWithType: NativeOpus.opus_decoder_dred_decode(OpusDecoderSafeHandle, OpusDREDSafeHandle, int, short*, int)
+  nameWithType.vb: NativeOpus.opus_decoder_dred_decode(OpusDecoderSafeHandle, OpusDREDSafeHandle, Integer, Short*, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_decoder_dred_decode*
+  name: opus_decoder_dred_decode
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_decoder_dred_decode_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_decoder_dred_decode
+  fullName: OpusSharp.Core.NativeOpus.opus_decoder_dred_decode
+  nameWithType: NativeOpus.opus_decoder_dred_decode
+- uid: OpusSharp.Core.NativeOpus.opus_decoder_dred_decode_float(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle,OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle,System.Int32,System.Single*,System.Int32)
+  name: opus_decoder_dred_decode_float(OpusDecoderSafeHandle, OpusDREDSafeHandle, int, float*, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_decoder_dred_decode_float_OpusSharp_Core_SafeHandlers_OpusDecoderSafeHandle_OpusSharp_Core_SafeHandlers_OpusDREDSafeHandle_System_Int32_System_Single__System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_decoder_dred_decode_float(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle,OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle,System.Int32,System.Single*,System.Int32)
+  name.vb: opus_decoder_dred_decode_float(OpusDecoderSafeHandle, OpusDREDSafeHandle, Integer, Single*, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_decoder_dred_decode_float(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle, OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle, int, float*, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_decoder_dred_decode_float(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle, OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle, Integer, Single*, Integer)
+  nameWithType: NativeOpus.opus_decoder_dred_decode_float(OpusDecoderSafeHandle, OpusDREDSafeHandle, int, float*, int)
+  nameWithType.vb: NativeOpus.opus_decoder_dred_decode_float(OpusDecoderSafeHandle, OpusDREDSafeHandle, Integer, Single*, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_decoder_dred_decode_float*
+  name: opus_decoder_dred_decode_float
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_decoder_dred_decode_float_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_decoder_dred_decode_float
+  fullName: OpusSharp.Core.NativeOpus.opus_decoder_dred_decode_float
+  nameWithType: NativeOpus.opus_decoder_dred_decode_float
+- uid: OpusSharp.Core.NativeOpus.opus_decoder_get_nb_samples(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle,System.Byte*,System.Int32)
+  name: opus_decoder_get_nb_samples(OpusDecoderSafeHandle, byte*, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_decoder_get_nb_samples_OpusSharp_Core_SafeHandlers_OpusDecoderSafeHandle_System_Byte__System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_decoder_get_nb_samples(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle,System.Byte*,System.Int32)
+  name.vb: opus_decoder_get_nb_samples(OpusDecoderSafeHandle, Byte*, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_decoder_get_nb_samples(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle, byte*, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_decoder_get_nb_samples(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle, Byte*, Integer)
+  nameWithType: NativeOpus.opus_decoder_get_nb_samples(OpusDecoderSafeHandle, byte*, int)
+  nameWithType.vb: NativeOpus.opus_decoder_get_nb_samples(OpusDecoderSafeHandle, Byte*, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_decoder_get_nb_samples*
+  name: opus_decoder_get_nb_samples
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_decoder_get_nb_samples_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_decoder_get_nb_samples
+  fullName: OpusSharp.Core.NativeOpus.opus_decoder_get_nb_samples
+  nameWithType: NativeOpus.opus_decoder_get_nb_samples
+- uid: OpusSharp.Core.NativeOpus.opus_decoder_get_size(System.Int32)
+  name: opus_decoder_get_size(int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_decoder_get_size_System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_decoder_get_size(System.Int32)
+  name.vb: opus_decoder_get_size(Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_decoder_get_size(int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_decoder_get_size(Integer)
+  nameWithType: NativeOpus.opus_decoder_get_size(int)
+  nameWithType.vb: NativeOpus.opus_decoder_get_size(Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_decoder_get_size*
+  name: opus_decoder_get_size
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_decoder_get_size_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_decoder_get_size
+  fullName: OpusSharp.Core.NativeOpus.opus_decoder_get_size
+  nameWithType: NativeOpus.opus_decoder_get_size
+- uid: OpusSharp.Core.NativeOpus.opus_decoder_init(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle,System.Int32,System.Int32)
+  name: opus_decoder_init(OpusDecoderSafeHandle, int, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_decoder_init_OpusSharp_Core_SafeHandlers_OpusDecoderSafeHandle_System_Int32_System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_decoder_init(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle,System.Int32,System.Int32)
+  name.vb: opus_decoder_init(OpusDecoderSafeHandle, Integer, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_decoder_init(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle, int, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_decoder_init(OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle, Integer, Integer)
+  nameWithType: NativeOpus.opus_decoder_init(OpusDecoderSafeHandle, int, int)
+  nameWithType.vb: NativeOpus.opus_decoder_init(OpusDecoderSafeHandle, Integer, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_decoder_init*
+  name: opus_decoder_init
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_decoder_init_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_decoder_init
+  fullName: OpusSharp.Core.NativeOpus.opus_decoder_init
+  nameWithType: NativeOpus.opus_decoder_init
+- uid: OpusSharp.Core.NativeOpus.opus_dred_alloc(System.Int32*)
+  name: opus_dred_alloc(int*)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_dred_alloc_System_Int32__
+  commentId: M:OpusSharp.Core.NativeOpus.opus_dred_alloc(System.Int32*)
+  name.vb: opus_dred_alloc(Integer*)
+  fullName: OpusSharp.Core.NativeOpus.opus_dred_alloc(int*)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_dred_alloc(Integer*)
+  nameWithType: NativeOpus.opus_dred_alloc(int*)
+  nameWithType.vb: NativeOpus.opus_dred_alloc(Integer*)
+- uid: OpusSharp.Core.NativeOpus.opus_dred_alloc*
+  name: opus_dred_alloc
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_dred_alloc_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_dred_alloc
+  fullName: OpusSharp.Core.NativeOpus.opus_dred_alloc
+  nameWithType: NativeOpus.opus_dred_alloc
+- uid: OpusSharp.Core.NativeOpus.opus_dred_decoder_create(System.Int32*)
+  name: opus_dred_decoder_create(int*)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_dred_decoder_create_System_Int32__
+  commentId: M:OpusSharp.Core.NativeOpus.opus_dred_decoder_create(System.Int32*)
+  name.vb: opus_dred_decoder_create(Integer*)
+  fullName: OpusSharp.Core.NativeOpus.opus_dred_decoder_create(int*)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_dred_decoder_create(Integer*)
+  nameWithType: NativeOpus.opus_dred_decoder_create(int*)
+  nameWithType.vb: NativeOpus.opus_dred_decoder_create(Integer*)
+- uid: OpusSharp.Core.NativeOpus.opus_dred_decoder_create*
+  name: opus_dred_decoder_create
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_dred_decoder_create_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_dred_decoder_create
+  fullName: OpusSharp.Core.NativeOpus.opus_dred_decoder_create
+  nameWithType: NativeOpus.opus_dred_decoder_create
+- uid: OpusSharp.Core.NativeOpus.opus_dred_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle,System.Int32)
+  name: opus_dred_decoder_ctl(OpusDREDDecoderSafeHandle, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_dred_decoder_ctl_OpusSharp_Core_SafeHandlers_OpusDREDDecoderSafeHandle_System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_dred_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle,System.Int32)
+  name.vb: opus_dred_decoder_ctl(OpusDREDDecoderSafeHandle, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_dred_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_dred_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle, Integer)
+  nameWithType: NativeOpus.opus_dred_decoder_ctl(OpusDREDDecoderSafeHandle, int)
+  nameWithType.vb: NativeOpus.opus_dred_decoder_ctl(OpusDREDDecoderSafeHandle, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_dred_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle,System.Int32,System.Void*)
+  name: opus_dred_decoder_ctl(OpusDREDDecoderSafeHandle, int, void*)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_dred_decoder_ctl_OpusSharp_Core_SafeHandlers_OpusDREDDecoderSafeHandle_System_Int32_System_Void__
+  commentId: M:OpusSharp.Core.NativeOpus.opus_dred_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle,System.Int32,System.Void*)
+  name.vb: opus_dred_decoder_ctl(OpusDREDDecoderSafeHandle, Integer, Void*)
+  fullName: OpusSharp.Core.NativeOpus.opus_dred_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle, int, void*)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_dred_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle, Integer, Void*)
+  nameWithType: NativeOpus.opus_dred_decoder_ctl(OpusDREDDecoderSafeHandle, int, void*)
+  nameWithType.vb: NativeOpus.opus_dred_decoder_ctl(OpusDREDDecoderSafeHandle, Integer, Void*)
+- uid: OpusSharp.Core.NativeOpus.opus_dred_decoder_ctl*
+  name: opus_dred_decoder_ctl
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_dred_decoder_ctl_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_dred_decoder_ctl
+  fullName: OpusSharp.Core.NativeOpus.opus_dred_decoder_ctl
+  nameWithType: NativeOpus.opus_dred_decoder_ctl
+- uid: OpusSharp.Core.NativeOpus.opus_dred_decoder_destroy(System.IntPtr)
+  name: opus_dred_decoder_destroy(IntPtr)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_dred_decoder_destroy_System_IntPtr_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_dred_decoder_destroy(System.IntPtr)
+  fullName: OpusSharp.Core.NativeOpus.opus_dred_decoder_destroy(System.IntPtr)
+  nameWithType: NativeOpus.opus_dred_decoder_destroy(IntPtr)
+- uid: OpusSharp.Core.NativeOpus.opus_dred_decoder_destroy*
+  name: opus_dred_decoder_destroy
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_dred_decoder_destroy_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_dred_decoder_destroy
+  fullName: OpusSharp.Core.NativeOpus.opus_dred_decoder_destroy
+  nameWithType: NativeOpus.opus_dred_decoder_destroy
+- uid: OpusSharp.Core.NativeOpus.opus_dred_decoder_get_size
+  name: opus_dred_decoder_get_size()
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_dred_decoder_get_size
+  commentId: M:OpusSharp.Core.NativeOpus.opus_dred_decoder_get_size
+  fullName: OpusSharp.Core.NativeOpus.opus_dred_decoder_get_size()
+  nameWithType: NativeOpus.opus_dred_decoder_get_size()
+- uid: OpusSharp.Core.NativeOpus.opus_dred_decoder_get_size*
+  name: opus_dred_decoder_get_size
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_dred_decoder_get_size_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_dred_decoder_get_size
+  fullName: OpusSharp.Core.NativeOpus.opus_dred_decoder_get_size
+  nameWithType: NativeOpus.opus_dred_decoder_get_size
+- uid: OpusSharp.Core.NativeOpus.opus_dred_decoder_init(OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle)
+  name: opus_dred_decoder_init(OpusDREDDecoderSafeHandle)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_dred_decoder_init_OpusSharp_Core_SafeHandlers_OpusDREDDecoderSafeHandle_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_dred_decoder_init(OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle)
+  fullName: OpusSharp.Core.NativeOpus.opus_dred_decoder_init(OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle)
+  nameWithType: NativeOpus.opus_dred_decoder_init(OpusDREDDecoderSafeHandle)
+- uid: OpusSharp.Core.NativeOpus.opus_dred_decoder_init*
+  name: opus_dred_decoder_init
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_dred_decoder_init_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_dred_decoder_init
+  fullName: OpusSharp.Core.NativeOpus.opus_dred_decoder_init
+  nameWithType: NativeOpus.opus_dred_decoder_init
+- uid: OpusSharp.Core.NativeOpus.opus_dred_free(System.IntPtr)
+  name: opus_dred_free(IntPtr)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_dred_free_System_IntPtr_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_dred_free(System.IntPtr)
+  fullName: OpusSharp.Core.NativeOpus.opus_dred_free(System.IntPtr)
+  nameWithType: NativeOpus.opus_dred_free(IntPtr)
+- uid: OpusSharp.Core.NativeOpus.opus_dred_free*
+  name: opus_dred_free
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_dred_free_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_dred_free
+  fullName: OpusSharp.Core.NativeOpus.opus_dred_free
+  nameWithType: NativeOpus.opus_dred_free
+- uid: OpusSharp.Core.NativeOpus.opus_dred_get_size
+  name: opus_dred_get_size()
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_dred_get_size
+  commentId: M:OpusSharp.Core.NativeOpus.opus_dred_get_size
+  fullName: OpusSharp.Core.NativeOpus.opus_dred_get_size()
+  nameWithType: NativeOpus.opus_dred_get_size()
+- uid: OpusSharp.Core.NativeOpus.opus_dred_get_size*
+  name: opus_dred_get_size
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_dred_get_size_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_dred_get_size
+  fullName: OpusSharp.Core.NativeOpus.opus_dred_get_size
+  nameWithType: NativeOpus.opus_dred_get_size
+- uid: OpusSharp.Core.NativeOpus.opus_dred_parse(OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle,OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle,System.Byte*,System.Int32,System.Int32,System.Int32,System.Int32*,System.Int32)
+  name: opus_dred_parse(OpusDREDDecoderSafeHandle, OpusDREDSafeHandle, byte*, int, int, int, int*, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_dred_parse_OpusSharp_Core_SafeHandlers_OpusDREDDecoderSafeHandle_OpusSharp_Core_SafeHandlers_OpusDREDSafeHandle_System_Byte__System_Int32_System_Int32_System_Int32_System_Int32__System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_dred_parse(OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle,OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle,System.Byte*,System.Int32,System.Int32,System.Int32,System.Int32*,System.Int32)
+  name.vb: opus_dred_parse(OpusDREDDecoderSafeHandle, OpusDREDSafeHandle, Byte*, Integer, Integer, Integer, Integer*, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_dred_parse(OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle, OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle, byte*, int, int, int, int*, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_dred_parse(OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle, OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle, Byte*, Integer, Integer, Integer, Integer*, Integer)
+  nameWithType: NativeOpus.opus_dred_parse(OpusDREDDecoderSafeHandle, OpusDREDSafeHandle, byte*, int, int, int, int*, int)
+  nameWithType.vb: NativeOpus.opus_dred_parse(OpusDREDDecoderSafeHandle, OpusDREDSafeHandle, Byte*, Integer, Integer, Integer, Integer*, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_dred_parse*
+  name: opus_dred_parse
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_dred_parse_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_dred_parse
+  fullName: OpusSharp.Core.NativeOpus.opus_dred_parse
+  nameWithType: NativeOpus.opus_dred_parse
+- uid: OpusSharp.Core.NativeOpus.opus_dred_process(OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle,OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle,OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle)
+  name: opus_dred_process(OpusDREDDecoderSafeHandle, OpusDREDSafeHandle, OpusDREDSafeHandle)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_dred_process_OpusSharp_Core_SafeHandlers_OpusDREDDecoderSafeHandle_OpusSharp_Core_SafeHandlers_OpusDREDSafeHandle_OpusSharp_Core_SafeHandlers_OpusDREDSafeHandle_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_dred_process(OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle,OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle,OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle)
+  fullName: OpusSharp.Core.NativeOpus.opus_dred_process(OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle, OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle, OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle)
+  nameWithType: NativeOpus.opus_dred_process(OpusDREDDecoderSafeHandle, OpusDREDSafeHandle, OpusDREDSafeHandle)
+- uid: OpusSharp.Core.NativeOpus.opus_dred_process*
+  name: opus_dred_process
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_dred_process_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_dred_process
+  fullName: OpusSharp.Core.NativeOpus.opus_dred_process
+  nameWithType: NativeOpus.opus_dred_process
+- uid: OpusSharp.Core.NativeOpus.opus_encode(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle,System.Int16*,System.Int32,System.Byte*,System.Int32)
+  name: opus_encode(OpusEncoderSafeHandle, short*, int, byte*, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_encode_OpusSharp_Core_SafeHandlers_OpusEncoderSafeHandle_System_Int16__System_Int32_System_Byte__System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_encode(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle,System.Int16*,System.Int32,System.Byte*,System.Int32)
+  name.vb: opus_encode(OpusEncoderSafeHandle, Short*, Integer, Byte*, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_encode(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle, short*, int, byte*, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_encode(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle, Short*, Integer, Byte*, Integer)
+  nameWithType: NativeOpus.opus_encode(OpusEncoderSafeHandle, short*, int, byte*, int)
+  nameWithType.vb: NativeOpus.opus_encode(OpusEncoderSafeHandle, Short*, Integer, Byte*, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_encode*
+  name: opus_encode
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_encode_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_encode
+  fullName: OpusSharp.Core.NativeOpus.opus_encode
+  nameWithType: NativeOpus.opus_encode
+- uid: OpusSharp.Core.NativeOpus.opus_encode_float(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle,System.Single*,System.Int32,System.Byte*,System.Int32)
+  name: opus_encode_float(OpusEncoderSafeHandle, float*, int, byte*, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_encode_float_OpusSharp_Core_SafeHandlers_OpusEncoderSafeHandle_System_Single__System_Int32_System_Byte__System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_encode_float(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle,System.Single*,System.Int32,System.Byte*,System.Int32)
+  name.vb: opus_encode_float(OpusEncoderSafeHandle, Single*, Integer, Byte*, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_encode_float(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle, float*, int, byte*, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_encode_float(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle, Single*, Integer, Byte*, Integer)
+  nameWithType: NativeOpus.opus_encode_float(OpusEncoderSafeHandle, float*, int, byte*, int)
+  nameWithType.vb: NativeOpus.opus_encode_float(OpusEncoderSafeHandle, Single*, Integer, Byte*, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_encode_float*
+  name: opus_encode_float
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_encode_float_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_encode_float
+  fullName: OpusSharp.Core.NativeOpus.opus_encode_float
+  nameWithType: NativeOpus.opus_encode_float
+- uid: OpusSharp.Core.NativeOpus.opus_encoder_create(System.Int32,System.Int32,System.Int32,System.Int32*)
+  name: opus_encoder_create(int, int, int, int*)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_encoder_create_System_Int32_System_Int32_System_Int32_System_Int32__
+  commentId: M:OpusSharp.Core.NativeOpus.opus_encoder_create(System.Int32,System.Int32,System.Int32,System.Int32*)
+  name.vb: opus_encoder_create(Integer, Integer, Integer, Integer*)
+  fullName: OpusSharp.Core.NativeOpus.opus_encoder_create(int, int, int, int*)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_encoder_create(Integer, Integer, Integer, Integer*)
+  nameWithType: NativeOpus.opus_encoder_create(int, int, int, int*)
+  nameWithType.vb: NativeOpus.opus_encoder_create(Integer, Integer, Integer, Integer*)
+- uid: OpusSharp.Core.NativeOpus.opus_encoder_create*
+  name: opus_encoder_create
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_encoder_create_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_encoder_create
+  fullName: OpusSharp.Core.NativeOpus.opus_encoder_create
+  nameWithType: NativeOpus.opus_encoder_create
+- uid: OpusSharp.Core.NativeOpus.opus_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle,System.Int32)
+  name: opus_encoder_ctl(OpusEncoderSafeHandle, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_encoder_ctl_OpusSharp_Core_SafeHandlers_OpusEncoderSafeHandle_System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle,System.Int32)
+  name.vb: opus_encoder_ctl(OpusEncoderSafeHandle, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle, Integer)
+  nameWithType: NativeOpus.opus_encoder_ctl(OpusEncoderSafeHandle, int)
+  nameWithType.vb: NativeOpus.opus_encoder_ctl(OpusEncoderSafeHandle, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle,System.Int32,System.Void*)
+  name: opus_encoder_ctl(OpusEncoderSafeHandle, int, void*)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_encoder_ctl_OpusSharp_Core_SafeHandlers_OpusEncoderSafeHandle_System_Int32_System_Void__
+  commentId: M:OpusSharp.Core.NativeOpus.opus_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle,System.Int32,System.Void*)
+  name.vb: opus_encoder_ctl(OpusEncoderSafeHandle, Integer, Void*)
+  fullName: OpusSharp.Core.NativeOpus.opus_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle, int, void*)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle, Integer, Void*)
+  nameWithType: NativeOpus.opus_encoder_ctl(OpusEncoderSafeHandle, int, void*)
+  nameWithType.vb: NativeOpus.opus_encoder_ctl(OpusEncoderSafeHandle, Integer, Void*)
+- uid: OpusSharp.Core.NativeOpus.opus_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle,System.Int32,System.Void*,System.Void*)
+  name: opus_encoder_ctl(OpusEncoderSafeHandle, int, void*, void*)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_encoder_ctl_OpusSharp_Core_SafeHandlers_OpusEncoderSafeHandle_System_Int32_System_Void__System_Void__
+  commentId: M:OpusSharp.Core.NativeOpus.opus_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle,System.Int32,System.Void*,System.Void*)
+  name.vb: opus_encoder_ctl(OpusEncoderSafeHandle, Integer, Void*, Void*)
+  fullName: OpusSharp.Core.NativeOpus.opus_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle, int, void*, void*)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle, Integer, Void*, Void*)
+  nameWithType: NativeOpus.opus_encoder_ctl(OpusEncoderSafeHandle, int, void*, void*)
+  nameWithType.vb: NativeOpus.opus_encoder_ctl(OpusEncoderSafeHandle, Integer, Void*, Void*)
+- uid: OpusSharp.Core.NativeOpus.opus_encoder_ctl*
+  name: opus_encoder_ctl
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_encoder_ctl_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_encoder_ctl
+  fullName: OpusSharp.Core.NativeOpus.opus_encoder_ctl
+  nameWithType: NativeOpus.opus_encoder_ctl
+- uid: OpusSharp.Core.NativeOpus.opus_encoder_destroy(System.IntPtr)
+  name: opus_encoder_destroy(IntPtr)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_encoder_destroy_System_IntPtr_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_encoder_destroy(System.IntPtr)
+  fullName: OpusSharp.Core.NativeOpus.opus_encoder_destroy(System.IntPtr)
+  nameWithType: NativeOpus.opus_encoder_destroy(IntPtr)
+- uid: OpusSharp.Core.NativeOpus.opus_encoder_destroy*
+  name: opus_encoder_destroy
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_encoder_destroy_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_encoder_destroy
+  fullName: OpusSharp.Core.NativeOpus.opus_encoder_destroy
+  nameWithType: NativeOpus.opus_encoder_destroy
+- uid: OpusSharp.Core.NativeOpus.opus_encoder_get_size(System.Int32)
+  name: opus_encoder_get_size(int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_encoder_get_size_System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_encoder_get_size(System.Int32)
+  name.vb: opus_encoder_get_size(Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_encoder_get_size(int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_encoder_get_size(Integer)
+  nameWithType: NativeOpus.opus_encoder_get_size(int)
+  nameWithType.vb: NativeOpus.opus_encoder_get_size(Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_encoder_get_size*
+  name: opus_encoder_get_size
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_encoder_get_size_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_encoder_get_size
+  fullName: OpusSharp.Core.NativeOpus.opus_encoder_get_size
+  nameWithType: NativeOpus.opus_encoder_get_size
+- uid: OpusSharp.Core.NativeOpus.opus_encoder_init(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle,System.Int32,System.Int32,System.Int32)
+  name: opus_encoder_init(OpusEncoderSafeHandle, int, int, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_encoder_init_OpusSharp_Core_SafeHandlers_OpusEncoderSafeHandle_System_Int32_System_Int32_System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_encoder_init(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle,System.Int32,System.Int32,System.Int32)
+  name.vb: opus_encoder_init(OpusEncoderSafeHandle, Integer, Integer, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_encoder_init(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle, int, int, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_encoder_init(OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle, Integer, Integer, Integer)
+  nameWithType: NativeOpus.opus_encoder_init(OpusEncoderSafeHandle, int, int, int)
+  nameWithType.vb: NativeOpus.opus_encoder_init(OpusEncoderSafeHandle, Integer, Integer, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_encoder_init*
+  name: opus_encoder_init
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_encoder_init_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_encoder_init
+  fullName: OpusSharp.Core.NativeOpus.opus_encoder_init
+  nameWithType: NativeOpus.opus_encoder_init
+- uid: OpusSharp.Core.NativeOpus.opus_get_version_string
+  name: opus_get_version_string()
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_get_version_string
+  commentId: M:OpusSharp.Core.NativeOpus.opus_get_version_string
+  fullName: OpusSharp.Core.NativeOpus.opus_get_version_string()
+  nameWithType: NativeOpus.opus_get_version_string()
+- uid: OpusSharp.Core.NativeOpus.opus_get_version_string*
+  name: opus_get_version_string
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_get_version_string_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_get_version_string
+  fullName: OpusSharp.Core.NativeOpus.opus_get_version_string
+  nameWithType: NativeOpus.opus_get_version_string
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_decode(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle,System.Byte*,System.Int32,System.Int16*,System.Int32,System.Int32)
+  name: opus_multistream_decode(OpusMSDecoderSafeHandle, byte*, int, short*, int, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_decode_OpusSharp_Core_SafeHandlers_OpusMSDecoderSafeHandle_System_Byte__System_Int32_System_Int16__System_Int32_System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_decode(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle,System.Byte*,System.Int32,System.Int16*,System.Int32,System.Int32)
+  name.vb: opus_multistream_decode(OpusMSDecoderSafeHandle, Byte*, Integer, Short*, Integer, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_decode(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle, byte*, int, short*, int, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_multistream_decode(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle, Byte*, Integer, Short*, Integer, Integer)
+  nameWithType: NativeOpus.opus_multistream_decode(OpusMSDecoderSafeHandle, byte*, int, short*, int, int)
+  nameWithType.vb: NativeOpus.opus_multistream_decode(OpusMSDecoderSafeHandle, Byte*, Integer, Short*, Integer, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_decode*
+  name: opus_multistream_decode
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_decode_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_multistream_decode
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_decode
+  nameWithType: NativeOpus.opus_multistream_decode
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_decode_float(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle,System.Byte*,System.Int32,System.Single*,System.Int32,System.Int32)
+  name: opus_multistream_decode_float(OpusMSDecoderSafeHandle, byte*, int, float*, int, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_decode_float_OpusSharp_Core_SafeHandlers_OpusMSDecoderSafeHandle_System_Byte__System_Int32_System_Single__System_Int32_System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_decode_float(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle,System.Byte*,System.Int32,System.Single*,System.Int32,System.Int32)
+  name.vb: opus_multistream_decode_float(OpusMSDecoderSafeHandle, Byte*, Integer, Single*, Integer, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_decode_float(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle, byte*, int, float*, int, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_multistream_decode_float(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle, Byte*, Integer, Single*, Integer, Integer)
+  nameWithType: NativeOpus.opus_multistream_decode_float(OpusMSDecoderSafeHandle, byte*, int, float*, int, int)
+  nameWithType.vb: NativeOpus.opus_multistream_decode_float(OpusMSDecoderSafeHandle, Byte*, Integer, Single*, Integer, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_decode_float*
+  name: opus_multistream_decode_float
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_decode_float_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_multistream_decode_float
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_decode_float
+  nameWithType: NativeOpus.opus_multistream_decode_float
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_decoder_create(System.Int32,System.Int32,System.Int32,System.Int32,System.Byte*,System.Int32*)
+  name: opus_multistream_decoder_create(int, int, int, int, byte*, int*)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_decoder_create_System_Int32_System_Int32_System_Int32_System_Int32_System_Byte__System_Int32__
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_decoder_create(System.Int32,System.Int32,System.Int32,System.Int32,System.Byte*,System.Int32*)
+  name.vb: opus_multistream_decoder_create(Integer, Integer, Integer, Integer, Byte*, Integer*)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_decoder_create(int, int, int, int, byte*, int*)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_multistream_decoder_create(Integer, Integer, Integer, Integer, Byte*, Integer*)
+  nameWithType: NativeOpus.opus_multistream_decoder_create(int, int, int, int, byte*, int*)
+  nameWithType.vb: NativeOpus.opus_multistream_decoder_create(Integer, Integer, Integer, Integer, Byte*, Integer*)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_decoder_create*
+  name: opus_multistream_decoder_create
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_decoder_create_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_multistream_decoder_create
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_decoder_create
+  nameWithType: NativeOpus.opus_multistream_decoder_create
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle,System.Int32)
+  name: opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_decoder_ctl_OpusSharp_Core_SafeHandlers_OpusMSDecoderSafeHandle_System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle,System.Int32)
+  name.vb: opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_multistream_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle, Integer)
+  nameWithType: NativeOpus.opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle, int)
+  nameWithType.vb: NativeOpus.opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle,System.Int32,System.Void*)
+  name: opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle, int, void*)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_decoder_ctl_OpusSharp_Core_SafeHandlers_OpusMSDecoderSafeHandle_System_Int32_System_Void__
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle,System.Int32,System.Void*)
+  name.vb: opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle, Integer, Void*)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle, int, void*)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_multistream_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle, Integer, Void*)
+  nameWithType: NativeOpus.opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle, int, void*)
+  nameWithType.vb: NativeOpus.opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle, Integer, Void*)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle,System.Int32,System.Void*,System.Void*)
+  name: opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle, int, void*, void*)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_decoder_ctl_OpusSharp_Core_SafeHandlers_OpusMSDecoderSafeHandle_System_Int32_System_Void__System_Void__
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle,System.Int32,System.Void*,System.Void*)
+  name.vb: opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle, Integer, Void*, Void*)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle, int, void*, void*)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_multistream_decoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle, Integer, Void*, Void*)
+  nameWithType: NativeOpus.opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle, int, void*, void*)
+  nameWithType.vb: NativeOpus.opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle, Integer, Void*, Void*)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_decoder_ctl*
+  name: opus_multistream_decoder_ctl
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_decoder_ctl_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_multistream_decoder_ctl
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_decoder_ctl
+  nameWithType: NativeOpus.opus_multistream_decoder_ctl
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_decoder_destroy(System.IntPtr)
+  name: opus_multistream_decoder_destroy(IntPtr)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_decoder_destroy_System_IntPtr_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_decoder_destroy(System.IntPtr)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_decoder_destroy(System.IntPtr)
+  nameWithType: NativeOpus.opus_multistream_decoder_destroy(IntPtr)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_decoder_destroy*
+  name: opus_multistream_decoder_destroy
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_decoder_destroy_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_multistream_decoder_destroy
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_decoder_destroy
+  nameWithType: NativeOpus.opus_multistream_decoder_destroy
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_decoder_get_size(System.Int32,System.Int32)
+  name: opus_multistream_decoder_get_size(int, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_decoder_get_size_System_Int32_System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_decoder_get_size(System.Int32,System.Int32)
+  name.vb: opus_multistream_decoder_get_size(Integer, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_decoder_get_size(int, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_multistream_decoder_get_size(Integer, Integer)
+  nameWithType: NativeOpus.opus_multistream_decoder_get_size(int, int)
+  nameWithType.vb: NativeOpus.opus_multistream_decoder_get_size(Integer, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_decoder_get_size*
+  name: opus_multistream_decoder_get_size
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_decoder_get_size_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_multistream_decoder_get_size
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_decoder_get_size
+  nameWithType: NativeOpus.opus_multistream_decoder_get_size
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_decoder_init(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle,System.Int32,System.Int32,System.Int32,System.Int32,System.Byte*)
+  name: opus_multistream_decoder_init(OpusMSDecoderSafeHandle, int, int, int, int, byte*)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_decoder_init_OpusSharp_Core_SafeHandlers_OpusMSDecoderSafeHandle_System_Int32_System_Int32_System_Int32_System_Int32_System_Byte__
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_decoder_init(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle,System.Int32,System.Int32,System.Int32,System.Int32,System.Byte*)
+  name.vb: opus_multistream_decoder_init(OpusMSDecoderSafeHandle, Integer, Integer, Integer, Integer, Byte*)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_decoder_init(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle, int, int, int, int, byte*)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_multistream_decoder_init(OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle, Integer, Integer, Integer, Integer, Byte*)
+  nameWithType: NativeOpus.opus_multistream_decoder_init(OpusMSDecoderSafeHandle, int, int, int, int, byte*)
+  nameWithType.vb: NativeOpus.opus_multistream_decoder_init(OpusMSDecoderSafeHandle, Integer, Integer, Integer, Integer, Byte*)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_decoder_init*
+  name: opus_multistream_decoder_init
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_decoder_init_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_multistream_decoder_init
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_decoder_init
+  nameWithType: NativeOpus.opus_multistream_decoder_init
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_encode(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle,System.Int16*,System.Int32,System.Byte*,System.Int32)
+  name: opus_multistream_encode(OpusMSEncoderSafeHandle, short*, int, byte*, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_encode_OpusSharp_Core_SafeHandlers_OpusMSEncoderSafeHandle_System_Int16__System_Int32_System_Byte__System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_encode(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle,System.Int16*,System.Int32,System.Byte*,System.Int32)
+  name.vb: opus_multistream_encode(OpusMSEncoderSafeHandle, Short*, Integer, Byte*, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_encode(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle, short*, int, byte*, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_multistream_encode(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle, Short*, Integer, Byte*, Integer)
+  nameWithType: NativeOpus.opus_multistream_encode(OpusMSEncoderSafeHandle, short*, int, byte*, int)
+  nameWithType.vb: NativeOpus.opus_multistream_encode(OpusMSEncoderSafeHandle, Short*, Integer, Byte*, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_encode*
+  name: opus_multistream_encode
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_encode_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_multistream_encode
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_encode
+  nameWithType: NativeOpus.opus_multistream_encode
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_encode_float(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle,System.Single*,System.Int32,System.Byte*,System.Int32)
+  name: opus_multistream_encode_float(OpusMSEncoderSafeHandle, float*, int, byte*, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_encode_float_OpusSharp_Core_SafeHandlers_OpusMSEncoderSafeHandle_System_Single__System_Int32_System_Byte__System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_encode_float(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle,System.Single*,System.Int32,System.Byte*,System.Int32)
+  name.vb: opus_multistream_encode_float(OpusMSEncoderSafeHandle, Single*, Integer, Byte*, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_encode_float(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle, float*, int, byte*, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_multistream_encode_float(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle, Single*, Integer, Byte*, Integer)
+  nameWithType: NativeOpus.opus_multistream_encode_float(OpusMSEncoderSafeHandle, float*, int, byte*, int)
+  nameWithType.vb: NativeOpus.opus_multistream_encode_float(OpusMSEncoderSafeHandle, Single*, Integer, Byte*, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_encode_float*
+  name: opus_multistream_encode_float
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_encode_float_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_multistream_encode_float
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_encode_float
+  nameWithType: NativeOpus.opus_multistream_encode_float
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_encoder_create(System.Int32,System.Int32,System.Int32,System.Int32,System.Byte*,System.Int32,System.Int32*)
+  name: opus_multistream_encoder_create(int, int, int, int, byte*, int, int*)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_encoder_create_System_Int32_System_Int32_System_Int32_System_Int32_System_Byte__System_Int32_System_Int32__
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_encoder_create(System.Int32,System.Int32,System.Int32,System.Int32,System.Byte*,System.Int32,System.Int32*)
+  name.vb: opus_multistream_encoder_create(Integer, Integer, Integer, Integer, Byte*, Integer, Integer*)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_encoder_create(int, int, int, int, byte*, int, int*)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_multistream_encoder_create(Integer, Integer, Integer, Integer, Byte*, Integer, Integer*)
+  nameWithType: NativeOpus.opus_multistream_encoder_create(int, int, int, int, byte*, int, int*)
+  nameWithType.vb: NativeOpus.opus_multistream_encoder_create(Integer, Integer, Integer, Integer, Byte*, Integer, Integer*)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_encoder_create*
+  name: opus_multistream_encoder_create
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_encoder_create_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_multistream_encoder_create
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_encoder_create
+  nameWithType: NativeOpus.opus_multistream_encoder_create
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle,System.Int32)
+  name: opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_encoder_ctl_OpusSharp_Core_SafeHandlers_OpusMSEncoderSafeHandle_System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle,System.Int32)
+  name.vb: opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_multistream_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle, Integer)
+  nameWithType: NativeOpus.opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle, int)
+  nameWithType.vb: NativeOpus.opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle,System.Int32,System.Void*)
+  name: opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle, int, void*)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_encoder_ctl_OpusSharp_Core_SafeHandlers_OpusMSEncoderSafeHandle_System_Int32_System_Void__
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle,System.Int32,System.Void*)
+  name.vb: opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle, Integer, Void*)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle, int, void*)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_multistream_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle, Integer, Void*)
+  nameWithType: NativeOpus.opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle, int, void*)
+  nameWithType.vb: NativeOpus.opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle, Integer, Void*)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle,System.Int32,System.Void*,System.Void*)
+  name: opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle, int, void*, void*)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_encoder_ctl_OpusSharp_Core_SafeHandlers_OpusMSEncoderSafeHandle_System_Int32_System_Void__System_Void__
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle,System.Int32,System.Void*,System.Void*)
+  name.vb: opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle, Integer, Void*, Void*)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle, int, void*, void*)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_multistream_encoder_ctl(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle, Integer, Void*, Void*)
+  nameWithType: NativeOpus.opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle, int, void*, void*)
+  nameWithType.vb: NativeOpus.opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle, Integer, Void*, Void*)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_encoder_ctl*
+  name: opus_multistream_encoder_ctl
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_encoder_ctl_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_multistream_encoder_ctl
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_encoder_ctl
+  nameWithType: NativeOpus.opus_multistream_encoder_ctl
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_encoder_destroy(System.IntPtr)
+  name: opus_multistream_encoder_destroy(IntPtr)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_encoder_destroy_System_IntPtr_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_encoder_destroy(System.IntPtr)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_encoder_destroy(System.IntPtr)
+  nameWithType: NativeOpus.opus_multistream_encoder_destroy(IntPtr)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_encoder_destroy*
+  name: opus_multistream_encoder_destroy
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_encoder_destroy_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_multistream_encoder_destroy
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_encoder_destroy
+  nameWithType: NativeOpus.opus_multistream_encoder_destroy
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_encoder_get_size(System.Int32,System.Int32)
+  name: opus_multistream_encoder_get_size(int, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_encoder_get_size_System_Int32_System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_encoder_get_size(System.Int32,System.Int32)
+  name.vb: opus_multistream_encoder_get_size(Integer, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_encoder_get_size(int, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_multistream_encoder_get_size(Integer, Integer)
+  nameWithType: NativeOpus.opus_multistream_encoder_get_size(int, int)
+  nameWithType.vb: NativeOpus.opus_multistream_encoder_get_size(Integer, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_encoder_get_size*
+  name: opus_multistream_encoder_get_size
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_encoder_get_size_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_multistream_encoder_get_size
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_encoder_get_size
+  nameWithType: NativeOpus.opus_multistream_encoder_get_size
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_encoder_init(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle,System.Int32,System.Int32,System.Int32,System.Int32,System.Byte*,System.Int32)
+  name: opus_multistream_encoder_init(OpusMSEncoderSafeHandle, int, int, int, int, byte*, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_encoder_init_OpusSharp_Core_SafeHandlers_OpusMSEncoderSafeHandle_System_Int32_System_Int32_System_Int32_System_Int32_System_Byte__System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_encoder_init(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle,System.Int32,System.Int32,System.Int32,System.Int32,System.Byte*,System.Int32)
+  name.vb: opus_multistream_encoder_init(OpusMSEncoderSafeHandle, Integer, Integer, Integer, Integer, Byte*, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_encoder_init(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle, int, int, int, int, byte*, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_multistream_encoder_init(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle, Integer, Integer, Integer, Integer, Byte*, Integer)
+  nameWithType: NativeOpus.opus_multistream_encoder_init(OpusMSEncoderSafeHandle, int, int, int, int, byte*, int)
+  nameWithType.vb: NativeOpus.opus_multistream_encoder_init(OpusMSEncoderSafeHandle, Integer, Integer, Integer, Integer, Byte*, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_encoder_init*
+  name: opus_multistream_encoder_init
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_encoder_init_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_multistream_encoder_init
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_encoder_init
+  nameWithType: NativeOpus.opus_multistream_encoder_init
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_packet_pad(System.Byte*,System.Int32,System.Int32,System.Int32)
+  name: opus_multistream_packet_pad(byte*, int, int, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_packet_pad_System_Byte__System_Int32_System_Int32_System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_packet_pad(System.Byte*,System.Int32,System.Int32,System.Int32)
+  name.vb: opus_multistream_packet_pad(Byte*, Integer, Integer, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_packet_pad(byte*, int, int, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_multistream_packet_pad(Byte*, Integer, Integer, Integer)
+  nameWithType: NativeOpus.opus_multistream_packet_pad(byte*, int, int, int)
+  nameWithType.vb: NativeOpus.opus_multistream_packet_pad(Byte*, Integer, Integer, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_packet_pad*
+  name: opus_multistream_packet_pad
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_packet_pad_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_multistream_packet_pad
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_packet_pad
+  nameWithType: NativeOpus.opus_multistream_packet_pad
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_packet_unpad(System.Byte*,System.Int32,System.Int32)
+  name: opus_multistream_packet_unpad(byte*, int, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_packet_unpad_System_Byte__System_Int32_System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_packet_unpad(System.Byte*,System.Int32,System.Int32)
+  name.vb: opus_multistream_packet_unpad(Byte*, Integer, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_packet_unpad(byte*, int, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_multistream_packet_unpad(Byte*, Integer, Integer)
+  nameWithType: NativeOpus.opus_multistream_packet_unpad(byte*, int, int)
+  nameWithType.vb: NativeOpus.opus_multistream_packet_unpad(Byte*, Integer, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_packet_unpad*
+  name: opus_multistream_packet_unpad
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_packet_unpad_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_multistream_packet_unpad
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_packet_unpad
+  nameWithType: NativeOpus.opus_multistream_packet_unpad
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_surround_encoder_create(System.Int32,System.Int32,System.Int32,System.Int32*,System.Int32*,System.Byte*,System.Int32,System.Int32*)
+  name: opus_multistream_surround_encoder_create(int, int, int, int*, int*, byte*, int, int*)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_surround_encoder_create_System_Int32_System_Int32_System_Int32_System_Int32__System_Int32__System_Byte__System_Int32_System_Int32__
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_surround_encoder_create(System.Int32,System.Int32,System.Int32,System.Int32*,System.Int32*,System.Byte*,System.Int32,System.Int32*)
+  name.vb: opus_multistream_surround_encoder_create(Integer, Integer, Integer, Integer*, Integer*, Byte*, Integer, Integer*)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_surround_encoder_create(int, int, int, int*, int*, byte*, int, int*)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_multistream_surround_encoder_create(Integer, Integer, Integer, Integer*, Integer*, Byte*, Integer, Integer*)
+  nameWithType: NativeOpus.opus_multistream_surround_encoder_create(int, int, int, int*, int*, byte*, int, int*)
+  nameWithType.vb: NativeOpus.opus_multistream_surround_encoder_create(Integer, Integer, Integer, Integer*, Integer*, Byte*, Integer, Integer*)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_surround_encoder_create*
+  name: opus_multistream_surround_encoder_create
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_surround_encoder_create_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_multistream_surround_encoder_create
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_surround_encoder_create
+  nameWithType: NativeOpus.opus_multistream_surround_encoder_create
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_surround_encoder_get_size(System.Int32,System.Int32)
+  name: opus_multistream_surround_encoder_get_size(int, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_surround_encoder_get_size_System_Int32_System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_surround_encoder_get_size(System.Int32,System.Int32)
+  name.vb: opus_multistream_surround_encoder_get_size(Integer, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_surround_encoder_get_size(int, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_multistream_surround_encoder_get_size(Integer, Integer)
+  nameWithType: NativeOpus.opus_multistream_surround_encoder_get_size(int, int)
+  nameWithType.vb: NativeOpus.opus_multistream_surround_encoder_get_size(Integer, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_surround_encoder_get_size*
+  name: opus_multistream_surround_encoder_get_size
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_surround_encoder_get_size_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_multistream_surround_encoder_get_size
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_surround_encoder_get_size
+  nameWithType: NativeOpus.opus_multistream_surround_encoder_get_size
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_surround_encoder_init(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle,System.Int32,System.Int32,System.Int32,System.Int32*,System.Int32*,System.Byte*,System.Int32)
+  name: opus_multistream_surround_encoder_init(OpusMSEncoderSafeHandle, int, int, int, int*, int*, byte*, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_surround_encoder_init_OpusSharp_Core_SafeHandlers_OpusMSEncoderSafeHandle_System_Int32_System_Int32_System_Int32_System_Int32__System_Int32__System_Byte__System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_multistream_surround_encoder_init(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle,System.Int32,System.Int32,System.Int32,System.Int32*,System.Int32*,System.Byte*,System.Int32)
+  name.vb: opus_multistream_surround_encoder_init(OpusMSEncoderSafeHandle, Integer, Integer, Integer, Integer*, Integer*, Byte*, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_surround_encoder_init(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle, int, int, int, int*, int*, byte*, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_multistream_surround_encoder_init(OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle, Integer, Integer, Integer, Integer*, Integer*, Byte*, Integer)
+  nameWithType: NativeOpus.opus_multistream_surround_encoder_init(OpusMSEncoderSafeHandle, int, int, int, int*, int*, byte*, int)
+  nameWithType.vb: NativeOpus.opus_multistream_surround_encoder_init(OpusMSEncoderSafeHandle, Integer, Integer, Integer, Integer*, Integer*, Byte*, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_multistream_surround_encoder_init*
+  name: opus_multistream_surround_encoder_init
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_multistream_surround_encoder_init_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_multistream_surround_encoder_init
+  fullName: OpusSharp.Core.NativeOpus.opus_multistream_surround_encoder_init
+  nameWithType: NativeOpus.opus_multistream_surround_encoder_init
+- uid: OpusSharp.Core.NativeOpus.opus_packet_get_bandwidth(System.Byte*)
+  name: opus_packet_get_bandwidth(byte*)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_packet_get_bandwidth_System_Byte__
+  commentId: M:OpusSharp.Core.NativeOpus.opus_packet_get_bandwidth(System.Byte*)
+  name.vb: opus_packet_get_bandwidth(Byte*)
+  fullName: OpusSharp.Core.NativeOpus.opus_packet_get_bandwidth(byte*)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_packet_get_bandwidth(Byte*)
+  nameWithType: NativeOpus.opus_packet_get_bandwidth(byte*)
+  nameWithType.vb: NativeOpus.opus_packet_get_bandwidth(Byte*)
+- uid: OpusSharp.Core.NativeOpus.opus_packet_get_bandwidth*
+  name: opus_packet_get_bandwidth
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_packet_get_bandwidth_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_packet_get_bandwidth
+  fullName: OpusSharp.Core.NativeOpus.opus_packet_get_bandwidth
+  nameWithType: NativeOpus.opus_packet_get_bandwidth
+- uid: OpusSharp.Core.NativeOpus.opus_packet_get_nb_channels(System.Byte*)
+  name: opus_packet_get_nb_channels(byte*)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_packet_get_nb_channels_System_Byte__
+  commentId: M:OpusSharp.Core.NativeOpus.opus_packet_get_nb_channels(System.Byte*)
+  name.vb: opus_packet_get_nb_channels(Byte*)
+  fullName: OpusSharp.Core.NativeOpus.opus_packet_get_nb_channels(byte*)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_packet_get_nb_channels(Byte*)
+  nameWithType: NativeOpus.opus_packet_get_nb_channels(byte*)
+  nameWithType.vb: NativeOpus.opus_packet_get_nb_channels(Byte*)
+- uid: OpusSharp.Core.NativeOpus.opus_packet_get_nb_channels*
+  name: opus_packet_get_nb_channels
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_packet_get_nb_channels_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_packet_get_nb_channels
+  fullName: OpusSharp.Core.NativeOpus.opus_packet_get_nb_channels
+  nameWithType: NativeOpus.opus_packet_get_nb_channels
+- uid: OpusSharp.Core.NativeOpus.opus_packet_get_nb_frames(System.Byte*,System.Int32)
+  name: opus_packet_get_nb_frames(byte*, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_packet_get_nb_frames_System_Byte__System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_packet_get_nb_frames(System.Byte*,System.Int32)
+  name.vb: opus_packet_get_nb_frames(Byte*, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_packet_get_nb_frames(byte*, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_packet_get_nb_frames(Byte*, Integer)
+  nameWithType: NativeOpus.opus_packet_get_nb_frames(byte*, int)
+  nameWithType.vb: NativeOpus.opus_packet_get_nb_frames(Byte*, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_packet_get_nb_frames*
+  name: opus_packet_get_nb_frames
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_packet_get_nb_frames_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_packet_get_nb_frames
+  fullName: OpusSharp.Core.NativeOpus.opus_packet_get_nb_frames
+  nameWithType: NativeOpus.opus_packet_get_nb_frames
+- uid: OpusSharp.Core.NativeOpus.opus_packet_get_nb_samples(System.Byte*,System.Int32,System.Int32)
+  name: opus_packet_get_nb_samples(byte*, int, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_packet_get_nb_samples_System_Byte__System_Int32_System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_packet_get_nb_samples(System.Byte*,System.Int32,System.Int32)
+  name.vb: opus_packet_get_nb_samples(Byte*, Integer, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_packet_get_nb_samples(byte*, int, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_packet_get_nb_samples(Byte*, Integer, Integer)
+  nameWithType: NativeOpus.opus_packet_get_nb_samples(byte*, int, int)
+  nameWithType.vb: NativeOpus.opus_packet_get_nb_samples(Byte*, Integer, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_packet_get_nb_samples*
+  name: opus_packet_get_nb_samples
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_packet_get_nb_samples_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_packet_get_nb_samples
+  fullName: OpusSharp.Core.NativeOpus.opus_packet_get_nb_samples
+  nameWithType: NativeOpus.opus_packet_get_nb_samples
+- uid: OpusSharp.Core.NativeOpus.opus_packet_get_samples_per_frame(System.Byte*,System.Int32)
+  name: opus_packet_get_samples_per_frame(byte*, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_packet_get_samples_per_frame_System_Byte__System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_packet_get_samples_per_frame(System.Byte*,System.Int32)
+  name.vb: opus_packet_get_samples_per_frame(Byte*, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_packet_get_samples_per_frame(byte*, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_packet_get_samples_per_frame(Byte*, Integer)
+  nameWithType: NativeOpus.opus_packet_get_samples_per_frame(byte*, int)
+  nameWithType.vb: NativeOpus.opus_packet_get_samples_per_frame(Byte*, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_packet_get_samples_per_frame*
+  name: opus_packet_get_samples_per_frame
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_packet_get_samples_per_frame_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_packet_get_samples_per_frame
+  fullName: OpusSharp.Core.NativeOpus.opus_packet_get_samples_per_frame
+  nameWithType: NativeOpus.opus_packet_get_samples_per_frame
+- uid: OpusSharp.Core.NativeOpus.opus_packet_has_lbrr(System.Byte*,System.Int32)
+  name: opus_packet_has_lbrr(byte*, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_packet_has_lbrr_System_Byte__System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_packet_has_lbrr(System.Byte*,System.Int32)
+  name.vb: opus_packet_has_lbrr(Byte*, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_packet_has_lbrr(byte*, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_packet_has_lbrr(Byte*, Integer)
+  nameWithType: NativeOpus.opus_packet_has_lbrr(byte*, int)
+  nameWithType.vb: NativeOpus.opus_packet_has_lbrr(Byte*, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_packet_has_lbrr*
+  name: opus_packet_has_lbrr
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_packet_has_lbrr_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_packet_has_lbrr
+  fullName: OpusSharp.Core.NativeOpus.opus_packet_has_lbrr
+  nameWithType: NativeOpus.opus_packet_has_lbrr
+- uid: OpusSharp.Core.NativeOpus.opus_packet_pad(System.Byte*,System.Int32,System.Int32)
+  name: opus_packet_pad(byte*, int, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_packet_pad_System_Byte__System_Int32_System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_packet_pad(System.Byte*,System.Int32,System.Int32)
+  name.vb: opus_packet_pad(Byte*, Integer, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_packet_pad(byte*, int, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_packet_pad(Byte*, Integer, Integer)
+  nameWithType: NativeOpus.opus_packet_pad(byte*, int, int)
+  nameWithType.vb: NativeOpus.opus_packet_pad(Byte*, Integer, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_packet_pad*
+  name: opus_packet_pad
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_packet_pad_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_packet_pad
+  fullName: OpusSharp.Core.NativeOpus.opus_packet_pad
+  nameWithType: NativeOpus.opus_packet_pad
+- uid: OpusSharp.Core.NativeOpus.opus_packet_parse(System.Byte*,System.Int32,System.Byte*,System.Byte*[],System.Int16[],System.Int32*)
+  name: opus_packet_parse(byte*, int, byte*, byte*[], short[], int*)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_packet_parse_System_Byte__System_Int32_System_Byte__System_Byte____System_Int16___System_Int32__
+  commentId: M:OpusSharp.Core.NativeOpus.opus_packet_parse(System.Byte*,System.Int32,System.Byte*,System.Byte*[],System.Int16[],System.Int32*)
+  name.vb: opus_packet_parse(Byte*, Integer, Byte*, Byte*(), Short(), Integer*)
+  fullName: OpusSharp.Core.NativeOpus.opus_packet_parse(byte*, int, byte*, byte*[], short[], int*)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_packet_parse(Byte*, Integer, Byte*, Byte*(), Short(), Integer*)
+  nameWithType: NativeOpus.opus_packet_parse(byte*, int, byte*, byte*[], short[], int*)
+  nameWithType.vb: NativeOpus.opus_packet_parse(Byte*, Integer, Byte*, Byte*(), Short(), Integer*)
+- uid: OpusSharp.Core.NativeOpus.opus_packet_parse*
+  name: opus_packet_parse
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_packet_parse_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_packet_parse
+  fullName: OpusSharp.Core.NativeOpus.opus_packet_parse
+  nameWithType: NativeOpus.opus_packet_parse
+- uid: OpusSharp.Core.NativeOpus.opus_packet_unpad(System.Byte*,System.Int32)
+  name: opus_packet_unpad(byte*, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_packet_unpad_System_Byte__System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_packet_unpad(System.Byte*,System.Int32)
+  name.vb: opus_packet_unpad(Byte*, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_packet_unpad(byte*, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_packet_unpad(Byte*, Integer)
+  nameWithType: NativeOpus.opus_packet_unpad(byte*, int)
+  nameWithType.vb: NativeOpus.opus_packet_unpad(Byte*, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_packet_unpad*
+  name: opus_packet_unpad
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_packet_unpad_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_packet_unpad
+  fullName: OpusSharp.Core.NativeOpus.opus_packet_unpad
+  nameWithType: NativeOpus.opus_packet_unpad
+- uid: OpusSharp.Core.NativeOpus.opus_pcm_soft_clip(System.Single*,System.Int32,System.Int32,System.Single*)
+  name: opus_pcm_soft_clip(float*, int, int, float*)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_pcm_soft_clip_System_Single__System_Int32_System_Int32_System_Single__
+  commentId: M:OpusSharp.Core.NativeOpus.opus_pcm_soft_clip(System.Single*,System.Int32,System.Int32,System.Single*)
+  name.vb: opus_pcm_soft_clip(Single*, Integer, Integer, Single*)
+  fullName: OpusSharp.Core.NativeOpus.opus_pcm_soft_clip(float*, int, int, float*)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_pcm_soft_clip(Single*, Integer, Integer, Single*)
+  nameWithType: NativeOpus.opus_pcm_soft_clip(float*, int, int, float*)
+  nameWithType.vb: NativeOpus.opus_pcm_soft_clip(Single*, Integer, Integer, Single*)
+- uid: OpusSharp.Core.NativeOpus.opus_pcm_soft_clip*
+  name: opus_pcm_soft_clip
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_pcm_soft_clip_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_pcm_soft_clip
+  fullName: OpusSharp.Core.NativeOpus.opus_pcm_soft_clip
+  nameWithType: NativeOpus.opus_pcm_soft_clip
+- uid: OpusSharp.Core.NativeOpus.opus_repacketizer_cat(OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle,System.Byte*,System.Int32)
+  name: opus_repacketizer_cat(OpusRepacketizerSafeHandle, byte*, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_repacketizer_cat_OpusSharp_Core_SafeHandlers_OpusRepacketizerSafeHandle_System_Byte__System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_repacketizer_cat(OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle,System.Byte*,System.Int32)
+  name.vb: opus_repacketizer_cat(OpusRepacketizerSafeHandle, Byte*, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_repacketizer_cat(OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle, byte*, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_repacketizer_cat(OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle, Byte*, Integer)
+  nameWithType: NativeOpus.opus_repacketizer_cat(OpusRepacketizerSafeHandle, byte*, int)
+  nameWithType.vb: NativeOpus.opus_repacketizer_cat(OpusRepacketizerSafeHandle, Byte*, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_repacketizer_cat*
+  name: opus_repacketizer_cat
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_repacketizer_cat_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_repacketizer_cat
+  fullName: OpusSharp.Core.NativeOpus.opus_repacketizer_cat
+  nameWithType: NativeOpus.opus_repacketizer_cat
+- uid: OpusSharp.Core.NativeOpus.opus_repacketizer_create
+  name: opus_repacketizer_create()
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_repacketizer_create
+  commentId: M:OpusSharp.Core.NativeOpus.opus_repacketizer_create
+  fullName: OpusSharp.Core.NativeOpus.opus_repacketizer_create()
+  nameWithType: NativeOpus.opus_repacketizer_create()
+- uid: OpusSharp.Core.NativeOpus.opus_repacketizer_create*
+  name: opus_repacketizer_create
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_repacketizer_create_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_repacketizer_create
+  fullName: OpusSharp.Core.NativeOpus.opus_repacketizer_create
+  nameWithType: NativeOpus.opus_repacketizer_create
+- uid: OpusSharp.Core.NativeOpus.opus_repacketizer_destroy(System.IntPtr)
+  name: opus_repacketizer_destroy(IntPtr)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_repacketizer_destroy_System_IntPtr_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_repacketizer_destroy(System.IntPtr)
+  fullName: OpusSharp.Core.NativeOpus.opus_repacketizer_destroy(System.IntPtr)
+  nameWithType: NativeOpus.opus_repacketizer_destroy(IntPtr)
+- uid: OpusSharp.Core.NativeOpus.opus_repacketizer_destroy*
+  name: opus_repacketizer_destroy
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_repacketizer_destroy_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_repacketizer_destroy
+  fullName: OpusSharp.Core.NativeOpus.opus_repacketizer_destroy
+  nameWithType: NativeOpus.opus_repacketizer_destroy
+- uid: OpusSharp.Core.NativeOpus.opus_repacketizer_get_nb_frames(OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle)
+  name: opus_repacketizer_get_nb_frames(OpusRepacketizerSafeHandle)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_repacketizer_get_nb_frames_OpusSharp_Core_SafeHandlers_OpusRepacketizerSafeHandle_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_repacketizer_get_nb_frames(OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle)
+  fullName: OpusSharp.Core.NativeOpus.opus_repacketizer_get_nb_frames(OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle)
+  nameWithType: NativeOpus.opus_repacketizer_get_nb_frames(OpusRepacketizerSafeHandle)
+- uid: OpusSharp.Core.NativeOpus.opus_repacketizer_get_nb_frames*
+  name: opus_repacketizer_get_nb_frames
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_repacketizer_get_nb_frames_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_repacketizer_get_nb_frames
+  fullName: OpusSharp.Core.NativeOpus.opus_repacketizer_get_nb_frames
+  nameWithType: NativeOpus.opus_repacketizer_get_nb_frames
+- uid: OpusSharp.Core.NativeOpus.opus_repacketizer_get_size
+  name: opus_repacketizer_get_size()
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_repacketizer_get_size
+  commentId: M:OpusSharp.Core.NativeOpus.opus_repacketizer_get_size
+  fullName: OpusSharp.Core.NativeOpus.opus_repacketizer_get_size()
+  nameWithType: NativeOpus.opus_repacketizer_get_size()
+- uid: OpusSharp.Core.NativeOpus.opus_repacketizer_get_size*
+  name: opus_repacketizer_get_size
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_repacketizer_get_size_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_repacketizer_get_size
+  fullName: OpusSharp.Core.NativeOpus.opus_repacketizer_get_size
+  nameWithType: NativeOpus.opus_repacketizer_get_size
+- uid: OpusSharp.Core.NativeOpus.opus_repacketizer_init(OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle)
+  name: opus_repacketizer_init(OpusRepacketizerSafeHandle)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_repacketizer_init_OpusSharp_Core_SafeHandlers_OpusRepacketizerSafeHandle_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_repacketizer_init(OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle)
+  fullName: OpusSharp.Core.NativeOpus.opus_repacketizer_init(OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle)
+  nameWithType: NativeOpus.opus_repacketizer_init(OpusRepacketizerSafeHandle)
+- uid: OpusSharp.Core.NativeOpus.opus_repacketizer_init*
+  name: opus_repacketizer_init
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_repacketizer_init_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_repacketizer_init
+  fullName: OpusSharp.Core.NativeOpus.opus_repacketizer_init
+  nameWithType: NativeOpus.opus_repacketizer_init
+- uid: OpusSharp.Core.NativeOpus.opus_repacketizer_out(OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle,System.Byte*,System.Int32)
+  name: opus_repacketizer_out(OpusRepacketizerSafeHandle, byte*, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_repacketizer_out_OpusSharp_Core_SafeHandlers_OpusRepacketizerSafeHandle_System_Byte__System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_repacketizer_out(OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle,System.Byte*,System.Int32)
+  name.vb: opus_repacketizer_out(OpusRepacketizerSafeHandle, Byte*, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_repacketizer_out(OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle, byte*, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_repacketizer_out(OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle, Byte*, Integer)
+  nameWithType: NativeOpus.opus_repacketizer_out(OpusRepacketizerSafeHandle, byte*, int)
+  nameWithType.vb: NativeOpus.opus_repacketizer_out(OpusRepacketizerSafeHandle, Byte*, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_repacketizer_out*
+  name: opus_repacketizer_out
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_repacketizer_out_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_repacketizer_out
+  fullName: OpusSharp.Core.NativeOpus.opus_repacketizer_out
+  nameWithType: NativeOpus.opus_repacketizer_out
+- uid: OpusSharp.Core.NativeOpus.opus_repacketizer_out_range(OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle,System.Int32,System.Int32,System.Byte*,System.Int32)
+  name: opus_repacketizer_out_range(OpusRepacketizerSafeHandle, int, int, byte*, int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_repacketizer_out_range_OpusSharp_Core_SafeHandlers_OpusRepacketizerSafeHandle_System_Int32_System_Int32_System_Byte__System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_repacketizer_out_range(OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle,System.Int32,System.Int32,System.Byte*,System.Int32)
+  name.vb: opus_repacketizer_out_range(OpusRepacketizerSafeHandle, Integer, Integer, Byte*, Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_repacketizer_out_range(OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle, int, int, byte*, int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_repacketizer_out_range(OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle, Integer, Integer, Byte*, Integer)
+  nameWithType: NativeOpus.opus_repacketizer_out_range(OpusRepacketizerSafeHandle, int, int, byte*, int)
+  nameWithType.vb: NativeOpus.opus_repacketizer_out_range(OpusRepacketizerSafeHandle, Integer, Integer, Byte*, Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_repacketizer_out_range*
+  name: opus_repacketizer_out_range
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_repacketizer_out_range_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_repacketizer_out_range
+  fullName: OpusSharp.Core.NativeOpus.opus_repacketizer_out_range
+  nameWithType: NativeOpus.opus_repacketizer_out_range
+- uid: OpusSharp.Core.NativeOpus.opus_strerror(System.Int32)
+  name: opus_strerror(int)
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_strerror_System_Int32_
+  commentId: M:OpusSharp.Core.NativeOpus.opus_strerror(System.Int32)
+  name.vb: opus_strerror(Integer)
+  fullName: OpusSharp.Core.NativeOpus.opus_strerror(int)
+  fullName.vb: OpusSharp.Core.NativeOpus.opus_strerror(Integer)
+  nameWithType: NativeOpus.opus_strerror(int)
+  nameWithType.vb: NativeOpus.opus_strerror(Integer)
+- uid: OpusSharp.Core.NativeOpus.opus_strerror*
+  name: opus_strerror
+  href: api/OpusSharp.Core.NativeOpus.html#OpusSharp_Core_NativeOpus_opus_strerror_
+  commentId: Overload:OpusSharp.Core.NativeOpus.opus_strerror
+  fullName: OpusSharp.Core.NativeOpus.opus_strerror
+  nameWithType: NativeOpus.opus_strerror
+- uid: OpusSharp.Core.OpusDecoder
+  name: OpusDecoder
+  href: api/OpusSharp.Core.OpusDecoder.html
+  commentId: T:OpusSharp.Core.OpusDecoder
+  fullName: OpusSharp.Core.OpusDecoder
+  nameWithType: OpusDecoder
+- uid: OpusSharp.Core.OpusDecoder.#ctor(System.Int32,System.Int32)
+  name: OpusDecoder(int, int)
+  href: api/OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder__ctor_System_Int32_System_Int32_
+  commentId: M:OpusSharp.Core.OpusDecoder.#ctor(System.Int32,System.Int32)
+  name.vb: New(Integer, Integer)
+  fullName: OpusSharp.Core.OpusDecoder.OpusDecoder(int, int)
+  fullName.vb: OpusSharp.Core.OpusDecoder.New(Integer, Integer)
+  nameWithType: OpusDecoder.OpusDecoder(int, int)
+  nameWithType.vb: OpusDecoder.New(Integer, Integer)
+- uid: OpusSharp.Core.OpusDecoder.#ctor*
+  name: OpusDecoder
+  href: api/OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder__ctor_
+  commentId: Overload:OpusSharp.Core.OpusDecoder.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: OpusSharp.Core.OpusDecoder.OpusDecoder
+  fullName.vb: OpusSharp.Core.OpusDecoder.New
+  nameWithType: OpusDecoder.OpusDecoder
+  nameWithType.vb: OpusDecoder.New
+- uid: OpusSharp.Core.OpusDecoder.CheckError(System.Int32)
+  name: CheckError(int)
+  href: api/OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_CheckError_System_Int32_
+  commentId: M:OpusSharp.Core.OpusDecoder.CheckError(System.Int32)
+  name.vb: CheckError(Integer)
+  fullName: OpusSharp.Core.OpusDecoder.CheckError(int)
+  fullName.vb: OpusSharp.Core.OpusDecoder.CheckError(Integer)
+  nameWithType: OpusDecoder.CheckError(int)
+  nameWithType.vb: OpusDecoder.CheckError(Integer)
+- uid: OpusSharp.Core.OpusDecoder.CheckError*
+  name: CheckError
+  href: api/OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_CheckError_
+  commentId: Overload:OpusSharp.Core.OpusDecoder.CheckError
+  isSpec: "True"
+  fullName: OpusSharp.Core.OpusDecoder.CheckError
+  nameWithType: OpusDecoder.CheckError
+- uid: OpusSharp.Core.OpusDecoder.Ctl(OpusSharp.Core.GenericCTL)
+  name: Ctl(GenericCTL)
+  href: api/OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_Ctl_OpusSharp_Core_GenericCTL_
+  commentId: M:OpusSharp.Core.OpusDecoder.Ctl(OpusSharp.Core.GenericCTL)
+  fullName: OpusSharp.Core.OpusDecoder.Ctl(OpusSharp.Core.GenericCTL)
+  nameWithType: OpusDecoder.Ctl(GenericCTL)
+- uid: OpusSharp.Core.OpusDecoder.Ctl*
+  name: Ctl
+  href: api/OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_Ctl_
+  commentId: Overload:OpusSharp.Core.OpusDecoder.Ctl
+  isSpec: "True"
+  fullName: OpusSharp.Core.OpusDecoder.Ctl
+  nameWithType: OpusDecoder.Ctl
+- uid: OpusSharp.Core.OpusDecoder.Ctl``1(OpusSharp.Core.DecoderCTL,``0@)
+  name: Ctl<T>(DecoderCTL, ref T)
+  href: api/OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_Ctl__1_OpusSharp_Core_DecoderCTL___0__
+  commentId: M:OpusSharp.Core.OpusDecoder.Ctl``1(OpusSharp.Core.DecoderCTL,``0@)
+  name.vb: Ctl(Of T)(DecoderCTL, T)
+  fullName: OpusSharp.Core.OpusDecoder.Ctl<T>(OpusSharp.Core.DecoderCTL, ref T)
+  fullName.vb: OpusSharp.Core.OpusDecoder.Ctl(Of T)(OpusSharp.Core.DecoderCTL, T)
+  nameWithType: OpusDecoder.Ctl<T>(DecoderCTL, ref T)
+  nameWithType.vb: OpusDecoder.Ctl(Of T)(DecoderCTL, T)
+- uid: OpusSharp.Core.OpusDecoder.Ctl``1(OpusSharp.Core.GenericCTL,``0@)
+  name: Ctl<T>(GenericCTL, ref T)
+  href: api/OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_Ctl__1_OpusSharp_Core_GenericCTL___0__
+  commentId: M:OpusSharp.Core.OpusDecoder.Ctl``1(OpusSharp.Core.GenericCTL,``0@)
+  name.vb: Ctl(Of T)(GenericCTL, T)
+  fullName: OpusSharp.Core.OpusDecoder.Ctl<T>(OpusSharp.Core.GenericCTL, ref T)
+  fullName.vb: OpusSharp.Core.OpusDecoder.Ctl(Of T)(OpusSharp.Core.GenericCTL, T)
+  nameWithType: OpusDecoder.Ctl<T>(GenericCTL, ref T)
+  nameWithType.vb: OpusDecoder.Ctl(Of T)(GenericCTL, T)
+- uid: OpusSharp.Core.OpusDecoder.Decode(System.Byte[],System.Int32,System.Byte[],System.Int32,System.Boolean)
+  name: Decode(byte[]?, int, byte[], int, bool)
+  href: api/OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_Decode_System_Byte___System_Int32_System_Byte___System_Int32_System_Boolean_
+  commentId: M:OpusSharp.Core.OpusDecoder.Decode(System.Byte[],System.Int32,System.Byte[],System.Int32,System.Boolean)
+  name.vb: Decode(Byte(), Integer, Byte(), Integer, Boolean)
+  fullName: OpusSharp.Core.OpusDecoder.Decode(byte[]?, int, byte[], int, bool)
+  fullName.vb: OpusSharp.Core.OpusDecoder.Decode(Byte(), Integer, Byte(), Integer, Boolean)
+  nameWithType: OpusDecoder.Decode(byte[]?, int, byte[], int, bool)
+  nameWithType.vb: OpusDecoder.Decode(Byte(), Integer, Byte(), Integer, Boolean)
+- uid: OpusSharp.Core.OpusDecoder.Decode(System.Byte[],System.Int32,System.Int16[],System.Int32,System.Boolean)
+  name: Decode(byte[]?, int, short[], int, bool)
+  href: api/OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_Decode_System_Byte___System_Int32_System_Int16___System_Int32_System_Boolean_
+  commentId: M:OpusSharp.Core.OpusDecoder.Decode(System.Byte[],System.Int32,System.Int16[],System.Int32,System.Boolean)
+  name.vb: Decode(Byte(), Integer, Short(), Integer, Boolean)
+  fullName: OpusSharp.Core.OpusDecoder.Decode(byte[]?, int, short[], int, bool)
+  fullName.vb: OpusSharp.Core.OpusDecoder.Decode(Byte(), Integer, Short(), Integer, Boolean)
+  nameWithType: OpusDecoder.Decode(byte[]?, int, short[], int, bool)
+  nameWithType.vb: OpusDecoder.Decode(Byte(), Integer, Short(), Integer, Boolean)
+- uid: OpusSharp.Core.OpusDecoder.Decode(System.Byte[],System.Int32,System.Single[],System.Int32,System.Boolean)
+  name: Decode(byte[]?, int, float[], int, bool)
+  href: api/OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_Decode_System_Byte___System_Int32_System_Single___System_Int32_System_Boolean_
+  commentId: M:OpusSharp.Core.OpusDecoder.Decode(System.Byte[],System.Int32,System.Single[],System.Int32,System.Boolean)
+  name.vb: Decode(Byte(), Integer, Single(), Integer, Boolean)
+  fullName: OpusSharp.Core.OpusDecoder.Decode(byte[]?, int, float[], int, bool)
+  fullName.vb: OpusSharp.Core.OpusDecoder.Decode(Byte(), Integer, Single(), Integer, Boolean)
+  nameWithType: OpusDecoder.Decode(byte[]?, int, float[], int, bool)
+  nameWithType.vb: OpusDecoder.Decode(Byte(), Integer, Single(), Integer, Boolean)
+- uid: OpusSharp.Core.OpusDecoder.Decode(System.Span{System.Byte},System.Int32,System.Span{System.Byte},System.Int32,System.Boolean)
+  name: Decode(Span<byte>, int, Span<byte>, int, bool)
+  href: api/OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_Decode_System_Span_System_Byte__System_Int32_System_Span_System_Byte__System_Int32_System_Boolean_
+  commentId: M:OpusSharp.Core.OpusDecoder.Decode(System.Span{System.Byte},System.Int32,System.Span{System.Byte},System.Int32,System.Boolean)
+  name.vb: Decode(Span(Of Byte), Integer, Span(Of Byte), Integer, Boolean)
+  fullName: OpusSharp.Core.OpusDecoder.Decode(System.Span<byte>, int, System.Span<byte>, int, bool)
+  fullName.vb: OpusSharp.Core.OpusDecoder.Decode(System.Span(Of Byte), Integer, System.Span(Of Byte), Integer, Boolean)
+  nameWithType: OpusDecoder.Decode(Span<byte>, int, Span<byte>, int, bool)
+  nameWithType.vb: OpusDecoder.Decode(Span(Of Byte), Integer, Span(Of Byte), Integer, Boolean)
+- uid: OpusSharp.Core.OpusDecoder.Decode(System.Span{System.Byte},System.Int32,System.Span{System.Int16},System.Int32,System.Boolean)
+  name: Decode(Span<byte>, int, Span<short>, int, bool)
+  href: api/OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_Decode_System_Span_System_Byte__System_Int32_System_Span_System_Int16__System_Int32_System_Boolean_
+  commentId: M:OpusSharp.Core.OpusDecoder.Decode(System.Span{System.Byte},System.Int32,System.Span{System.Int16},System.Int32,System.Boolean)
+  name.vb: Decode(Span(Of Byte), Integer, Span(Of Short), Integer, Boolean)
+  fullName: OpusSharp.Core.OpusDecoder.Decode(System.Span<byte>, int, System.Span<short>, int, bool)
+  fullName.vb: OpusSharp.Core.OpusDecoder.Decode(System.Span(Of Byte), Integer, System.Span(Of Short), Integer, Boolean)
+  nameWithType: OpusDecoder.Decode(Span<byte>, int, Span<short>, int, bool)
+  nameWithType.vb: OpusDecoder.Decode(Span(Of Byte), Integer, Span(Of Short), Integer, Boolean)
+- uid: OpusSharp.Core.OpusDecoder.Decode(System.Span{System.Byte},System.Int32,System.Span{System.Single},System.Int32,System.Boolean)
+  name: Decode(Span<byte>, int, Span<float>, int, bool)
+  href: api/OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_Decode_System_Span_System_Byte__System_Int32_System_Span_System_Single__System_Int32_System_Boolean_
+  commentId: M:OpusSharp.Core.OpusDecoder.Decode(System.Span{System.Byte},System.Int32,System.Span{System.Single},System.Int32,System.Boolean)
+  name.vb: Decode(Span(Of Byte), Integer, Span(Of Single), Integer, Boolean)
+  fullName: OpusSharp.Core.OpusDecoder.Decode(System.Span<byte>, int, System.Span<float>, int, bool)
+  fullName.vb: OpusSharp.Core.OpusDecoder.Decode(System.Span(Of Byte), Integer, System.Span(Of Single), Integer, Boolean)
+  nameWithType: OpusDecoder.Decode(Span<byte>, int, Span<float>, int, bool)
+  nameWithType.vb: OpusDecoder.Decode(Span(Of Byte), Integer, Span(Of Single), Integer, Boolean)
+- uid: OpusSharp.Core.OpusDecoder.Decode*
+  name: Decode
+  href: api/OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_Decode_
+  commentId: Overload:OpusSharp.Core.OpusDecoder.Decode
+  isSpec: "True"
+  fullName: OpusSharp.Core.OpusDecoder.Decode
+  nameWithType: OpusDecoder.Decode
+- uid: OpusSharp.Core.OpusDecoder.Dispose
+  name: Dispose()
+  href: api/OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_Dispose
+  commentId: M:OpusSharp.Core.OpusDecoder.Dispose
+  fullName: OpusSharp.Core.OpusDecoder.Dispose()
+  nameWithType: OpusDecoder.Dispose()
+- uid: OpusSharp.Core.OpusDecoder.Dispose(System.Boolean)
+  name: Dispose(bool)
+  href: api/OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_Dispose_System_Boolean_
+  commentId: M:OpusSharp.Core.OpusDecoder.Dispose(System.Boolean)
+  name.vb: Dispose(Boolean)
+  fullName: OpusSharp.Core.OpusDecoder.Dispose(bool)
+  fullName.vb: OpusSharp.Core.OpusDecoder.Dispose(Boolean)
+  nameWithType: OpusDecoder.Dispose(bool)
+  nameWithType.vb: OpusDecoder.Dispose(Boolean)
+- uid: OpusSharp.Core.OpusDecoder.Dispose*
+  name: Dispose
+  href: api/OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_Dispose_
+  commentId: Overload:OpusSharp.Core.OpusDecoder.Dispose
+  isSpec: "True"
+  fullName: OpusSharp.Core.OpusDecoder.Dispose
+  nameWithType: OpusDecoder.Dispose
+- uid: OpusSharp.Core.OpusDecoder.ThrowIfDisposed
+  name: ThrowIfDisposed()
+  href: api/OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_ThrowIfDisposed
+  commentId: M:OpusSharp.Core.OpusDecoder.ThrowIfDisposed
+  fullName: OpusSharp.Core.OpusDecoder.ThrowIfDisposed()
+  nameWithType: OpusDecoder.ThrowIfDisposed()
+- uid: OpusSharp.Core.OpusDecoder.ThrowIfDisposed*
+  name: ThrowIfDisposed
+  href: api/OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder_ThrowIfDisposed_
+  commentId: Overload:OpusSharp.Core.OpusDecoder.ThrowIfDisposed
+  isSpec: "True"
+  fullName: OpusSharp.Core.OpusDecoder.ThrowIfDisposed
+  nameWithType: OpusDecoder.ThrowIfDisposed
+- uid: OpusSharp.Core.OpusDecoder._handler
+  name: _handler
+  href: api/OpusSharp.Core.OpusDecoder.html#OpusSharp_Core_OpusDecoder__handler
+  commentId: F:OpusSharp.Core.OpusDecoder._handler
+  fullName: OpusSharp.Core.OpusDecoder._handler
+  nameWithType: OpusDecoder._handler
+- uid: OpusSharp.Core.OpusEncoder
+  name: OpusEncoder
+  href: api/OpusSharp.Core.OpusEncoder.html
+  commentId: T:OpusSharp.Core.OpusEncoder
+  fullName: OpusSharp.Core.OpusEncoder
+  nameWithType: OpusEncoder
+- uid: OpusSharp.Core.OpusEncoder.#ctor(System.Int32,System.Int32,OpusSharp.Core.OpusPredefinedValues)
+  name: OpusEncoder(int, int, OpusPredefinedValues)
+  href: api/OpusSharp.Core.OpusEncoder.html#OpusSharp_Core_OpusEncoder__ctor_System_Int32_System_Int32_OpusSharp_Core_OpusPredefinedValues_
+  commentId: M:OpusSharp.Core.OpusEncoder.#ctor(System.Int32,System.Int32,OpusSharp.Core.OpusPredefinedValues)
+  name.vb: New(Integer, Integer, OpusPredefinedValues)
+  fullName: OpusSharp.Core.OpusEncoder.OpusEncoder(int, int, OpusSharp.Core.OpusPredefinedValues)
+  fullName.vb: OpusSharp.Core.OpusEncoder.New(Integer, Integer, OpusSharp.Core.OpusPredefinedValues)
+  nameWithType: OpusEncoder.OpusEncoder(int, int, OpusPredefinedValues)
+  nameWithType.vb: OpusEncoder.New(Integer, Integer, OpusPredefinedValues)
+- uid: OpusSharp.Core.OpusEncoder.#ctor*
+  name: OpusEncoder
+  href: api/OpusSharp.Core.OpusEncoder.html#OpusSharp_Core_OpusEncoder__ctor_
+  commentId: Overload:OpusSharp.Core.OpusEncoder.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: OpusSharp.Core.OpusEncoder.OpusEncoder
+  fullName.vb: OpusSharp.Core.OpusEncoder.New
+  nameWithType: OpusEncoder.OpusEncoder
+  nameWithType.vb: OpusEncoder.New
+- uid: OpusSharp.Core.OpusEncoder.CheckError(System.Int32)
+  name: CheckError(int)
+  href: api/OpusSharp.Core.OpusEncoder.html#OpusSharp_Core_OpusEncoder_CheckError_System_Int32_
+  commentId: M:OpusSharp.Core.OpusEncoder.CheckError(System.Int32)
+  name.vb: CheckError(Integer)
+  fullName: OpusSharp.Core.OpusEncoder.CheckError(int)
+  fullName.vb: OpusSharp.Core.OpusEncoder.CheckError(Integer)
+  nameWithType: OpusEncoder.CheckError(int)
+  nameWithType.vb: OpusEncoder.CheckError(Integer)
+- uid: OpusSharp.Core.OpusEncoder.CheckError*
+  name: CheckError
+  href: api/OpusSharp.Core.OpusEncoder.html#OpusSharp_Core_OpusEncoder_CheckError_
+  commentId: Overload:OpusSharp.Core.OpusEncoder.CheckError
+  isSpec: "True"
+  fullName: OpusSharp.Core.OpusEncoder.CheckError
+  nameWithType: OpusEncoder.CheckError
+- uid: OpusSharp.Core.OpusEncoder.Ctl(OpusSharp.Core.GenericCTL)
+  name: Ctl(GenericCTL)
+  href: api/OpusSharp.Core.OpusEncoder.html#OpusSharp_Core_OpusEncoder_Ctl_OpusSharp_Core_GenericCTL_
+  commentId: M:OpusSharp.Core.OpusEncoder.Ctl(OpusSharp.Core.GenericCTL)
+  fullName: OpusSharp.Core.OpusEncoder.Ctl(OpusSharp.Core.GenericCTL)
+  nameWithType: OpusEncoder.Ctl(GenericCTL)
+- uid: OpusSharp.Core.OpusEncoder.Ctl*
+  name: Ctl
+  href: api/OpusSharp.Core.OpusEncoder.html#OpusSharp_Core_OpusEncoder_Ctl_
+  commentId: Overload:OpusSharp.Core.OpusEncoder.Ctl
+  isSpec: "True"
+  fullName: OpusSharp.Core.OpusEncoder.Ctl
+  nameWithType: OpusEncoder.Ctl
+- uid: OpusSharp.Core.OpusEncoder.Ctl``1(OpusSharp.Core.EncoderCTL,``0@)
+  name: Ctl<T>(EncoderCTL, ref T)
+  href: api/OpusSharp.Core.OpusEncoder.html#OpusSharp_Core_OpusEncoder_Ctl__1_OpusSharp_Core_EncoderCTL___0__
+  commentId: M:OpusSharp.Core.OpusEncoder.Ctl``1(OpusSharp.Core.EncoderCTL,``0@)
+  name.vb: Ctl(Of T)(EncoderCTL, T)
+  fullName: OpusSharp.Core.OpusEncoder.Ctl<T>(OpusSharp.Core.EncoderCTL, ref T)
+  fullName.vb: OpusSharp.Core.OpusEncoder.Ctl(Of T)(OpusSharp.Core.EncoderCTL, T)
+  nameWithType: OpusEncoder.Ctl<T>(EncoderCTL, ref T)
+  nameWithType.vb: OpusEncoder.Ctl(Of T)(EncoderCTL, T)
+- uid: OpusSharp.Core.OpusEncoder.Ctl``1(OpusSharp.Core.GenericCTL,``0@)
+  name: Ctl<T>(GenericCTL, ref T)
+  href: api/OpusSharp.Core.OpusEncoder.html#OpusSharp_Core_OpusEncoder_Ctl__1_OpusSharp_Core_GenericCTL___0__
+  commentId: M:OpusSharp.Core.OpusEncoder.Ctl``1(OpusSharp.Core.GenericCTL,``0@)
+  name.vb: Ctl(Of T)(GenericCTL, T)
+  fullName: OpusSharp.Core.OpusEncoder.Ctl<T>(OpusSharp.Core.GenericCTL, ref T)
+  fullName.vb: OpusSharp.Core.OpusEncoder.Ctl(Of T)(OpusSharp.Core.GenericCTL, T)
+  nameWithType: OpusEncoder.Ctl<T>(GenericCTL, ref T)
+  nameWithType.vb: OpusEncoder.Ctl(Of T)(GenericCTL, T)
+- uid: OpusSharp.Core.OpusEncoder.Ctl``2(OpusSharp.Core.EncoderCTL,``0@,``1@)
+  name: Ctl<T, T2>(EncoderCTL, ref T, ref T2)
+  href: api/OpusSharp.Core.OpusEncoder.html#OpusSharp_Core_OpusEncoder_Ctl__2_OpusSharp_Core_EncoderCTL___0____1__
+  commentId: M:OpusSharp.Core.OpusEncoder.Ctl``2(OpusSharp.Core.EncoderCTL,``0@,``1@)
+  name.vb: Ctl(Of T, T2)(EncoderCTL, T, T2)
+  fullName: OpusSharp.Core.OpusEncoder.Ctl<T, T2>(OpusSharp.Core.EncoderCTL, ref T, ref T2)
+  fullName.vb: OpusSharp.Core.OpusEncoder.Ctl(Of T, T2)(OpusSharp.Core.EncoderCTL, T, T2)
+  nameWithType: OpusEncoder.Ctl<T, T2>(EncoderCTL, ref T, ref T2)
+  nameWithType.vb: OpusEncoder.Ctl(Of T, T2)(EncoderCTL, T, T2)
+- uid: OpusSharp.Core.OpusEncoder.Dispose
+  name: Dispose()
+  href: api/OpusSharp.Core.OpusEncoder.html#OpusSharp_Core_OpusEncoder_Dispose
+  commentId: M:OpusSharp.Core.OpusEncoder.Dispose
+  fullName: OpusSharp.Core.OpusEncoder.Dispose()
+  nameWithType: OpusEncoder.Dispose()
+- uid: OpusSharp.Core.OpusEncoder.Dispose(System.Boolean)
+  name: Dispose(bool)
+  href: api/OpusSharp.Core.OpusEncoder.html#OpusSharp_Core_OpusEncoder_Dispose_System_Boolean_
+  commentId: M:OpusSharp.Core.OpusEncoder.Dispose(System.Boolean)
+  name.vb: Dispose(Boolean)
+  fullName: OpusSharp.Core.OpusEncoder.Dispose(bool)
+  fullName.vb: OpusSharp.Core.OpusEncoder.Dispose(Boolean)
+  nameWithType: OpusEncoder.Dispose(bool)
+  nameWithType.vb: OpusEncoder.Dispose(Boolean)
+- uid: OpusSharp.Core.OpusEncoder.Dispose*
+  name: Dispose
+  href: api/OpusSharp.Core.OpusEncoder.html#OpusSharp_Core_OpusEncoder_Dispose_
+  commentId: Overload:OpusSharp.Core.OpusEncoder.Dispose
+  isSpec: "True"
+  fullName: OpusSharp.Core.OpusEncoder.Dispose
+  nameWithType: OpusEncoder.Dispose
+- uid: OpusSharp.Core.OpusEncoder.Encode(System.Byte[],System.Int32,System.Byte[],System.Int32)
+  name: Encode(byte[], int, byte[], int)
+  href: api/OpusSharp.Core.OpusEncoder.html#OpusSharp_Core_OpusEncoder_Encode_System_Byte___System_Int32_System_Byte___System_Int32_
+  commentId: M:OpusSharp.Core.OpusEncoder.Encode(System.Byte[],System.Int32,System.Byte[],System.Int32)
+  name.vb: Encode(Byte(), Integer, Byte(), Integer)
+  fullName: OpusSharp.Core.OpusEncoder.Encode(byte[], int, byte[], int)
+  fullName.vb: OpusSharp.Core.OpusEncoder.Encode(Byte(), Integer, Byte(), Integer)
+  nameWithType: OpusEncoder.Encode(byte[], int, byte[], int)
+  nameWithType.vb: OpusEncoder.Encode(Byte(), Integer, Byte(), Integer)
+- uid: OpusSharp.Core.OpusEncoder.Encode(System.Int16[],System.Int32,System.Byte[],System.Int32)
+  name: Encode(short[], int, byte[], int)
+  href: api/OpusSharp.Core.OpusEncoder.html#OpusSharp_Core_OpusEncoder_Encode_System_Int16___System_Int32_System_Byte___System_Int32_
+  commentId: M:OpusSharp.Core.OpusEncoder.Encode(System.Int16[],System.Int32,System.Byte[],System.Int32)
+  name.vb: Encode(Short(), Integer, Byte(), Integer)
+  fullName: OpusSharp.Core.OpusEncoder.Encode(short[], int, byte[], int)
+  fullName.vb: OpusSharp.Core.OpusEncoder.Encode(Short(), Integer, Byte(), Integer)
+  nameWithType: OpusEncoder.Encode(short[], int, byte[], int)
+  nameWithType.vb: OpusEncoder.Encode(Short(), Integer, Byte(), Integer)
+- uid: OpusSharp.Core.OpusEncoder.Encode(System.Single[],System.Int32,System.Byte[],System.Int32)
+  name: Encode(float[], int, byte[], int)
+  href: api/OpusSharp.Core.OpusEncoder.html#OpusSharp_Core_OpusEncoder_Encode_System_Single___System_Int32_System_Byte___System_Int32_
+  commentId: M:OpusSharp.Core.OpusEncoder.Encode(System.Single[],System.Int32,System.Byte[],System.Int32)
+  name.vb: Encode(Single(), Integer, Byte(), Integer)
+  fullName: OpusSharp.Core.OpusEncoder.Encode(float[], int, byte[], int)
+  fullName.vb: OpusSharp.Core.OpusEncoder.Encode(Single(), Integer, Byte(), Integer)
+  nameWithType: OpusEncoder.Encode(float[], int, byte[], int)
+  nameWithType.vb: OpusEncoder.Encode(Single(), Integer, Byte(), Integer)
+- uid: OpusSharp.Core.OpusEncoder.Encode(System.Span{System.Byte},System.Int32,System.Span{System.Byte},System.Int32)
+  name: Encode(Span<byte>, int, Span<byte>, int)
+  href: api/OpusSharp.Core.OpusEncoder.html#OpusSharp_Core_OpusEncoder_Encode_System_Span_System_Byte__System_Int32_System_Span_System_Byte__System_Int32_
+  commentId: M:OpusSharp.Core.OpusEncoder.Encode(System.Span{System.Byte},System.Int32,System.Span{System.Byte},System.Int32)
+  name.vb: Encode(Span(Of Byte), Integer, Span(Of Byte), Integer)
+  fullName: OpusSharp.Core.OpusEncoder.Encode(System.Span<byte>, int, System.Span<byte>, int)
+  fullName.vb: OpusSharp.Core.OpusEncoder.Encode(System.Span(Of Byte), Integer, System.Span(Of Byte), Integer)
+  nameWithType: OpusEncoder.Encode(Span<byte>, int, Span<byte>, int)
+  nameWithType.vb: OpusEncoder.Encode(Span(Of Byte), Integer, Span(Of Byte), Integer)
+- uid: OpusSharp.Core.OpusEncoder.Encode(System.Span{System.Int16},System.Int32,System.Span{System.Byte},System.Int32)
+  name: Encode(Span<short>, int, Span<byte>, int)
+  href: api/OpusSharp.Core.OpusEncoder.html#OpusSharp_Core_OpusEncoder_Encode_System_Span_System_Int16__System_Int32_System_Span_System_Byte__System_Int32_
+  commentId: M:OpusSharp.Core.OpusEncoder.Encode(System.Span{System.Int16},System.Int32,System.Span{System.Byte},System.Int32)
+  name.vb: Encode(Span(Of Short), Integer, Span(Of Byte), Integer)
+  fullName: OpusSharp.Core.OpusEncoder.Encode(System.Span<short>, int, System.Span<byte>, int)
+  fullName.vb: OpusSharp.Core.OpusEncoder.Encode(System.Span(Of Short), Integer, System.Span(Of Byte), Integer)
+  nameWithType: OpusEncoder.Encode(Span<short>, int, Span<byte>, int)
+  nameWithType.vb: OpusEncoder.Encode(Span(Of Short), Integer, Span(Of Byte), Integer)
+- uid: OpusSharp.Core.OpusEncoder.Encode(System.Span{System.Single},System.Int32,System.Span{System.Byte},System.Int32)
+  name: Encode(Span<float>, int, Span<byte>, int)
+  href: api/OpusSharp.Core.OpusEncoder.html#OpusSharp_Core_OpusEncoder_Encode_System_Span_System_Single__System_Int32_System_Span_System_Byte__System_Int32_
+  commentId: M:OpusSharp.Core.OpusEncoder.Encode(System.Span{System.Single},System.Int32,System.Span{System.Byte},System.Int32)
+  name.vb: Encode(Span(Of Single), Integer, Span(Of Byte), Integer)
+  fullName: OpusSharp.Core.OpusEncoder.Encode(System.Span<float>, int, System.Span<byte>, int)
+  fullName.vb: OpusSharp.Core.OpusEncoder.Encode(System.Span(Of Single), Integer, System.Span(Of Byte), Integer)
+  nameWithType: OpusEncoder.Encode(Span<float>, int, Span<byte>, int)
+  nameWithType.vb: OpusEncoder.Encode(Span(Of Single), Integer, Span(Of Byte), Integer)
+- uid: OpusSharp.Core.OpusEncoder.Encode*
+  name: Encode
+  href: api/OpusSharp.Core.OpusEncoder.html#OpusSharp_Core_OpusEncoder_Encode_
+  commentId: Overload:OpusSharp.Core.OpusEncoder.Encode
+  isSpec: "True"
+  fullName: OpusSharp.Core.OpusEncoder.Encode
+  nameWithType: OpusEncoder.Encode
+- uid: OpusSharp.Core.OpusEncoder.ThrowIfDisposed
+  name: ThrowIfDisposed()
+  href: api/OpusSharp.Core.OpusEncoder.html#OpusSharp_Core_OpusEncoder_ThrowIfDisposed
+  commentId: M:OpusSharp.Core.OpusEncoder.ThrowIfDisposed
+  fullName: OpusSharp.Core.OpusEncoder.ThrowIfDisposed()
+  nameWithType: OpusEncoder.ThrowIfDisposed()
+- uid: OpusSharp.Core.OpusEncoder.ThrowIfDisposed*
+  name: ThrowIfDisposed
+  href: api/OpusSharp.Core.OpusEncoder.html#OpusSharp_Core_OpusEncoder_ThrowIfDisposed_
+  commentId: Overload:OpusSharp.Core.OpusEncoder.ThrowIfDisposed
+  isSpec: "True"
+  fullName: OpusSharp.Core.OpusEncoder.ThrowIfDisposed
+  nameWithType: OpusEncoder.ThrowIfDisposed
+- uid: OpusSharp.Core.OpusEncoder._handler
+  name: _handler
+  href: api/OpusSharp.Core.OpusEncoder.html#OpusSharp_Core_OpusEncoder__handler
+  commentId: F:OpusSharp.Core.OpusEncoder._handler
+  fullName: OpusSharp.Core.OpusEncoder._handler
+  nameWithType: OpusEncoder._handler
+- uid: OpusSharp.Core.OpusErrorCodes
+  name: OpusErrorCodes
+  href: api/OpusSharp.Core.OpusErrorCodes.html
+  commentId: T:OpusSharp.Core.OpusErrorCodes
+  fullName: OpusSharp.Core.OpusErrorCodes
+  nameWithType: OpusErrorCodes
+- uid: OpusSharp.Core.OpusErrorCodes.OPUS_ALLOC_FAIL
+  name: OPUS_ALLOC_FAIL
+  href: api/OpusSharp.Core.OpusErrorCodes.html#OpusSharp_Core_OpusErrorCodes_OPUS_ALLOC_FAIL
+  commentId: F:OpusSharp.Core.OpusErrorCodes.OPUS_ALLOC_FAIL
+  fullName: OpusSharp.Core.OpusErrorCodes.OPUS_ALLOC_FAIL
+  nameWithType: OpusErrorCodes.OPUS_ALLOC_FAIL
+- uid: OpusSharp.Core.OpusErrorCodes.OPUS_BAD_ARG
+  name: OPUS_BAD_ARG
+  href: api/OpusSharp.Core.OpusErrorCodes.html#OpusSharp_Core_OpusErrorCodes_OPUS_BAD_ARG
+  commentId: F:OpusSharp.Core.OpusErrorCodes.OPUS_BAD_ARG
+  fullName: OpusSharp.Core.OpusErrorCodes.OPUS_BAD_ARG
+  nameWithType: OpusErrorCodes.OPUS_BAD_ARG
+- uid: OpusSharp.Core.OpusErrorCodes.OPUS_BUFFER_TOO_SMALL
+  name: OPUS_BUFFER_TOO_SMALL
+  href: api/OpusSharp.Core.OpusErrorCodes.html#OpusSharp_Core_OpusErrorCodes_OPUS_BUFFER_TOO_SMALL
+  commentId: F:OpusSharp.Core.OpusErrorCodes.OPUS_BUFFER_TOO_SMALL
+  fullName: OpusSharp.Core.OpusErrorCodes.OPUS_BUFFER_TOO_SMALL
+  nameWithType: OpusErrorCodes.OPUS_BUFFER_TOO_SMALL
+- uid: OpusSharp.Core.OpusErrorCodes.OPUS_INTERNAL_ERROR
+  name: OPUS_INTERNAL_ERROR
+  href: api/OpusSharp.Core.OpusErrorCodes.html#OpusSharp_Core_OpusErrorCodes_OPUS_INTERNAL_ERROR
+  commentId: F:OpusSharp.Core.OpusErrorCodes.OPUS_INTERNAL_ERROR
+  fullName: OpusSharp.Core.OpusErrorCodes.OPUS_INTERNAL_ERROR
+  nameWithType: OpusErrorCodes.OPUS_INTERNAL_ERROR
+- uid: OpusSharp.Core.OpusErrorCodes.OPUS_INVALID_PACKET
+  name: OPUS_INVALID_PACKET
+  href: api/OpusSharp.Core.OpusErrorCodes.html#OpusSharp_Core_OpusErrorCodes_OPUS_INVALID_PACKET
+  commentId: F:OpusSharp.Core.OpusErrorCodes.OPUS_INVALID_PACKET
+  fullName: OpusSharp.Core.OpusErrorCodes.OPUS_INVALID_PACKET
+  nameWithType: OpusErrorCodes.OPUS_INVALID_PACKET
+- uid: OpusSharp.Core.OpusErrorCodes.OPUS_INVALID_STATE
+  name: OPUS_INVALID_STATE
+  href: api/OpusSharp.Core.OpusErrorCodes.html#OpusSharp_Core_OpusErrorCodes_OPUS_INVALID_STATE
+  commentId: F:OpusSharp.Core.OpusErrorCodes.OPUS_INVALID_STATE
+  fullName: OpusSharp.Core.OpusErrorCodes.OPUS_INVALID_STATE
+  nameWithType: OpusErrorCodes.OPUS_INVALID_STATE
+- uid: OpusSharp.Core.OpusErrorCodes.OPUS_OK
+  name: OPUS_OK
+  href: api/OpusSharp.Core.OpusErrorCodes.html#OpusSharp_Core_OpusErrorCodes_OPUS_OK
+  commentId: F:OpusSharp.Core.OpusErrorCodes.OPUS_OK
+  fullName: OpusSharp.Core.OpusErrorCodes.OPUS_OK
+  nameWithType: OpusErrorCodes.OPUS_OK
+- uid: OpusSharp.Core.OpusErrorCodes.OPUS_UNIMPLEMENTED
+  name: OPUS_UNIMPLEMENTED
+  href: api/OpusSharp.Core.OpusErrorCodes.html#OpusSharp_Core_OpusErrorCodes_OPUS_UNIMPLEMENTED
+  commentId: F:OpusSharp.Core.OpusErrorCodes.OPUS_UNIMPLEMENTED
+  fullName: OpusSharp.Core.OpusErrorCodes.OPUS_UNIMPLEMENTED
+  nameWithType: OpusErrorCodes.OPUS_UNIMPLEMENTED
+- uid: OpusSharp.Core.OpusException
+  name: OpusException
+  href: api/OpusSharp.Core.OpusException.html
+  commentId: T:OpusSharp.Core.OpusException
+  fullName: OpusSharp.Core.OpusException
+  nameWithType: OpusException
+- uid: OpusSharp.Core.OpusException.#ctor
+  name: OpusException()
+  href: api/OpusSharp.Core.OpusException.html#OpusSharp_Core_OpusException__ctor
+  commentId: M:OpusSharp.Core.OpusException.#ctor
+  name.vb: New()
+  fullName: OpusSharp.Core.OpusException.OpusException()
+  fullName.vb: OpusSharp.Core.OpusException.New()
+  nameWithType: OpusException.OpusException()
+  nameWithType.vb: OpusException.New()
+- uid: OpusSharp.Core.OpusException.#ctor(System.String)
+  name: OpusException(string)
+  href: api/OpusSharp.Core.OpusException.html#OpusSharp_Core_OpusException__ctor_System_String_
+  commentId: M:OpusSharp.Core.OpusException.#ctor(System.String)
+  name.vb: New(String)
+  fullName: OpusSharp.Core.OpusException.OpusException(string)
+  fullName.vb: OpusSharp.Core.OpusException.New(String)
+  nameWithType: OpusException.OpusException(string)
+  nameWithType.vb: OpusException.New(String)
+- uid: OpusSharp.Core.OpusException.#ctor(System.String,System.Exception)
+  name: OpusException(string, Exception)
+  href: api/OpusSharp.Core.OpusException.html#OpusSharp_Core_OpusException__ctor_System_String_System_Exception_
+  commentId: M:OpusSharp.Core.OpusException.#ctor(System.String,System.Exception)
+  name.vb: New(String, Exception)
+  fullName: OpusSharp.Core.OpusException.OpusException(string, System.Exception)
+  fullName.vb: OpusSharp.Core.OpusException.New(String, System.Exception)
+  nameWithType: OpusException.OpusException(string, Exception)
+  nameWithType.vb: OpusException.New(String, Exception)
+- uid: OpusSharp.Core.OpusException.#ctor*
+  name: OpusException
+  href: api/OpusSharp.Core.OpusException.html#OpusSharp_Core_OpusException__ctor_
+  commentId: Overload:OpusSharp.Core.OpusException.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: OpusSharp.Core.OpusException.OpusException
+  fullName.vb: OpusSharp.Core.OpusException.New
+  nameWithType: OpusException.OpusException
+  nameWithType.vb: OpusException.New
+- uid: OpusSharp.Core.OpusInfo
+  name: OpusInfo
+  href: api/OpusSharp.Core.OpusInfo.html
+  commentId: T:OpusSharp.Core.OpusInfo
+  fullName: OpusSharp.Core.OpusInfo
+  nameWithType: OpusInfo
+- uid: OpusSharp.Core.OpusInfo.StringError(System.Int32)
+  name: StringError(int)
+  href: api/OpusSharp.Core.OpusInfo.html#OpusSharp_Core_OpusInfo_StringError_System_Int32_
+  commentId: M:OpusSharp.Core.OpusInfo.StringError(System.Int32)
+  name.vb: StringError(Integer)
+  fullName: OpusSharp.Core.OpusInfo.StringError(int)
+  fullName.vb: OpusSharp.Core.OpusInfo.StringError(Integer)
+  nameWithType: OpusInfo.StringError(int)
+  nameWithType.vb: OpusInfo.StringError(Integer)
+- uid: OpusSharp.Core.OpusInfo.StringError*
+  name: StringError
+  href: api/OpusSharp.Core.OpusInfo.html#OpusSharp_Core_OpusInfo_StringError_
+  commentId: Overload:OpusSharp.Core.OpusInfo.StringError
+  isSpec: "True"
+  fullName: OpusSharp.Core.OpusInfo.StringError
+  nameWithType: OpusInfo.StringError
+- uid: OpusSharp.Core.OpusInfo.Version
+  name: Version()
+  href: api/OpusSharp.Core.OpusInfo.html#OpusSharp_Core_OpusInfo_Version
+  commentId: M:OpusSharp.Core.OpusInfo.Version
+  fullName: OpusSharp.Core.OpusInfo.Version()
+  nameWithType: OpusInfo.Version()
+- uid: OpusSharp.Core.OpusInfo.Version*
+  name: Version
+  href: api/OpusSharp.Core.OpusInfo.html#OpusSharp_Core_OpusInfo_Version_
+  commentId: Overload:OpusSharp.Core.OpusInfo.Version
+  isSpec: "True"
+  fullName: OpusSharp.Core.OpusInfo.Version
+  nameWithType: OpusInfo.Version
+- uid: OpusSharp.Core.OpusPredefinedValues
+  name: OpusPredefinedValues
+  href: api/OpusSharp.Core.OpusPredefinedValues.html
+  commentId: T:OpusSharp.Core.OpusPredefinedValues
+  fullName: OpusSharp.Core.OpusPredefinedValues
+  nameWithType: OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_APPLICATION_AUDIO
+  name: OPUS_APPLICATION_AUDIO
+  href: api/OpusSharp.Core.OpusPredefinedValues.html#OpusSharp_Core_OpusPredefinedValues_OPUS_APPLICATION_AUDIO
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_APPLICATION_AUDIO
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_APPLICATION_AUDIO
+  nameWithType: OpusPredefinedValues.OPUS_APPLICATION_AUDIO
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_APPLICATION_RESTRICTED_LOWDELAY
+  name: OPUS_APPLICATION_RESTRICTED_LOWDELAY
+  href: api/OpusSharp.Core.OpusPredefinedValues.html#OpusSharp_Core_OpusPredefinedValues_OPUS_APPLICATION_RESTRICTED_LOWDELAY
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_APPLICATION_RESTRICTED_LOWDELAY
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_APPLICATION_RESTRICTED_LOWDELAY
+  nameWithType: OpusPredefinedValues.OPUS_APPLICATION_RESTRICTED_LOWDELAY
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_APPLICATION_VOIP
+  name: OPUS_APPLICATION_VOIP
+  href: api/OpusSharp.Core.OpusPredefinedValues.html#OpusSharp_Core_OpusPredefinedValues_OPUS_APPLICATION_VOIP
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_APPLICATION_VOIP
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_APPLICATION_VOIP
+  nameWithType: OpusPredefinedValues.OPUS_APPLICATION_VOIP
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_AUTO
+  name: OPUS_AUTO
+  href: api/OpusSharp.Core.OpusPredefinedValues.html#OpusSharp_Core_OpusPredefinedValues_OPUS_AUTO
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_AUTO
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_AUTO
+  nameWithType: OpusPredefinedValues.OPUS_AUTO
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_FULLBAND
+  name: OPUS_BANDWIDTH_FULLBAND
+  href: api/OpusSharp.Core.OpusPredefinedValues.html#OpusSharp_Core_OpusPredefinedValues_OPUS_BANDWIDTH_FULLBAND
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_FULLBAND
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_FULLBAND
+  nameWithType: OpusPredefinedValues.OPUS_BANDWIDTH_FULLBAND
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_MEDIUMBAND
+  name: OPUS_BANDWIDTH_MEDIUMBAND
+  href: api/OpusSharp.Core.OpusPredefinedValues.html#OpusSharp_Core_OpusPredefinedValues_OPUS_BANDWIDTH_MEDIUMBAND
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_MEDIUMBAND
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_MEDIUMBAND
+  nameWithType: OpusPredefinedValues.OPUS_BANDWIDTH_MEDIUMBAND
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_NARROWBAND
+  name: OPUS_BANDWIDTH_NARROWBAND
+  href: api/OpusSharp.Core.OpusPredefinedValues.html#OpusSharp_Core_OpusPredefinedValues_OPUS_BANDWIDTH_NARROWBAND
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_NARROWBAND
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_NARROWBAND
+  nameWithType: OpusPredefinedValues.OPUS_BANDWIDTH_NARROWBAND
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_SUPERWIDEBAND
+  name: OPUS_BANDWIDTH_SUPERWIDEBAND
+  href: api/OpusSharp.Core.OpusPredefinedValues.html#OpusSharp_Core_OpusPredefinedValues_OPUS_BANDWIDTH_SUPERWIDEBAND
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_SUPERWIDEBAND
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_SUPERWIDEBAND
+  nameWithType: OpusPredefinedValues.OPUS_BANDWIDTH_SUPERWIDEBAND
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_WIDEBAND
+  name: OPUS_BANDWIDTH_WIDEBAND
+  href: api/OpusSharp.Core.OpusPredefinedValues.html#OpusSharp_Core_OpusPredefinedValues_OPUS_BANDWIDTH_WIDEBAND
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_WIDEBAND
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_WIDEBAND
+  nameWithType: OpusPredefinedValues.OPUS_BANDWIDTH_WIDEBAND
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_BITRATE_MAX
+  name: OPUS_BITRATE_MAX
+  href: api/OpusSharp.Core.OpusPredefinedValues.html#OpusSharp_Core_OpusPredefinedValues_OPUS_BITRATE_MAX
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_BITRATE_MAX
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_BITRATE_MAX
+  nameWithType: OpusPredefinedValues.OPUS_BITRATE_MAX
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_100_MS
+  name: OPUS_FRAMESIZE_100_MS
+  href: api/OpusSharp.Core.OpusPredefinedValues.html#OpusSharp_Core_OpusPredefinedValues_OPUS_FRAMESIZE_100_MS
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_100_MS
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_100_MS
+  nameWithType: OpusPredefinedValues.OPUS_FRAMESIZE_100_MS
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_10_MS
+  name: OPUS_FRAMESIZE_10_MS
+  href: api/OpusSharp.Core.OpusPredefinedValues.html#OpusSharp_Core_OpusPredefinedValues_OPUS_FRAMESIZE_10_MS
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_10_MS
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_10_MS
+  nameWithType: OpusPredefinedValues.OPUS_FRAMESIZE_10_MS
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_120_MS
+  name: OPUS_FRAMESIZE_120_MS
+  href: api/OpusSharp.Core.OpusPredefinedValues.html#OpusSharp_Core_OpusPredefinedValues_OPUS_FRAMESIZE_120_MS
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_120_MS
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_120_MS
+  nameWithType: OpusPredefinedValues.OPUS_FRAMESIZE_120_MS
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_20_MS
+  name: OPUS_FRAMESIZE_20_MS
+  href: api/OpusSharp.Core.OpusPredefinedValues.html#OpusSharp_Core_OpusPredefinedValues_OPUS_FRAMESIZE_20_MS
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_20_MS
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_20_MS
+  nameWithType: OpusPredefinedValues.OPUS_FRAMESIZE_20_MS
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_2_5_MS
+  name: OPUS_FRAMESIZE_2_5_MS
+  href: api/OpusSharp.Core.OpusPredefinedValues.html#OpusSharp_Core_OpusPredefinedValues_OPUS_FRAMESIZE_2_5_MS
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_2_5_MS
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_2_5_MS
+  nameWithType: OpusPredefinedValues.OPUS_FRAMESIZE_2_5_MS
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_40_MS
+  name: OPUS_FRAMESIZE_40_MS
+  href: api/OpusSharp.Core.OpusPredefinedValues.html#OpusSharp_Core_OpusPredefinedValues_OPUS_FRAMESIZE_40_MS
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_40_MS
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_40_MS
+  nameWithType: OpusPredefinedValues.OPUS_FRAMESIZE_40_MS
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_5_MS
+  name: OPUS_FRAMESIZE_5_MS
+  href: api/OpusSharp.Core.OpusPredefinedValues.html#OpusSharp_Core_OpusPredefinedValues_OPUS_FRAMESIZE_5_MS
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_5_MS
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_5_MS
+  nameWithType: OpusPredefinedValues.OPUS_FRAMESIZE_5_MS
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_60_MS
+  name: OPUS_FRAMESIZE_60_MS
+  href: api/OpusSharp.Core.OpusPredefinedValues.html#OpusSharp_Core_OpusPredefinedValues_OPUS_FRAMESIZE_60_MS
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_60_MS
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_60_MS
+  nameWithType: OpusPredefinedValues.OPUS_FRAMESIZE_60_MS
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_80_MS
+  name: OPUS_FRAMESIZE_80_MS
+  href: api/OpusSharp.Core.OpusPredefinedValues.html#OpusSharp_Core_OpusPredefinedValues_OPUS_FRAMESIZE_80_MS
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_80_MS
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_80_MS
+  nameWithType: OpusPredefinedValues.OPUS_FRAMESIZE_80_MS
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_ARG
+  name: OPUS_FRAMESIZE_ARG
+  href: api/OpusSharp.Core.OpusPredefinedValues.html#OpusSharp_Core_OpusPredefinedValues_OPUS_FRAMESIZE_ARG
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_ARG
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_ARG
+  nameWithType: OpusPredefinedValues.OPUS_FRAMESIZE_ARG
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_SIGNAL_MUSIC
+  name: OPUS_SIGNAL_MUSIC
+  href: api/OpusSharp.Core.OpusPredefinedValues.html#OpusSharp_Core_OpusPredefinedValues_OPUS_SIGNAL_MUSIC
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_SIGNAL_MUSIC
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_SIGNAL_MUSIC
+  nameWithType: OpusPredefinedValues.OPUS_SIGNAL_MUSIC
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_SIGNAL_VOICE
+  name: OPUS_SIGNAL_VOICE
+  href: api/OpusSharp.Core.OpusPredefinedValues.html#OpusSharp_Core_OpusPredefinedValues_OPUS_SIGNAL_VOICE
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_SIGNAL_VOICE
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_SIGNAL_VOICE
+  nameWithType: OpusPredefinedValues.OPUS_SIGNAL_VOICE
+- uid: OpusSharp.Core.SafeHandlers
+  name: OpusSharp.Core.SafeHandlers
+  href: api/OpusSharp.Core.SafeHandlers.html
+  commentId: N:OpusSharp.Core.SafeHandlers
+  fullName: OpusSharp.Core.SafeHandlers
+  nameWithType: OpusSharp.Core.SafeHandlers
+- uid: OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle
+  name: OpusDREDDecoderSafeHandle
+  href: api/OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.html
+  commentId: T:OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle
+  fullName: OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle
+  nameWithType: OpusDREDDecoderSafeHandle
+- uid: OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.#ctor
+  name: OpusDREDDecoderSafeHandle()
+  href: api/OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusDREDDecoderSafeHandle__ctor
+  commentId: M:OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.#ctor
+  name.vb: New()
+  fullName: OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.OpusDREDDecoderSafeHandle()
+  fullName.vb: OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.New()
+  nameWithType: OpusDREDDecoderSafeHandle.OpusDREDDecoderSafeHandle()
+  nameWithType.vb: OpusDREDDecoderSafeHandle.New()
+- uid: OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.#ctor*
+  name: OpusDREDDecoderSafeHandle
+  href: api/OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusDREDDecoderSafeHandle__ctor_
+  commentId: Overload:OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.OpusDREDDecoderSafeHandle
+  fullName.vb: OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.New
+  nameWithType: OpusDREDDecoderSafeHandle.OpusDREDDecoderSafeHandle
+  nameWithType.vb: OpusDREDDecoderSafeHandle.New
+- uid: OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.IsInvalid
+  name: IsInvalid
+  href: api/OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusDREDDecoderSafeHandle_IsInvalid
+  commentId: P:OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.IsInvalid
+  fullName: OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.IsInvalid
+  nameWithType: OpusDREDDecoderSafeHandle.IsInvalid
+- uid: OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.IsInvalid*
+  name: IsInvalid
+  href: api/OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusDREDDecoderSafeHandle_IsInvalid_
+  commentId: Overload:OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.IsInvalid
+  isSpec: "True"
+  fullName: OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.IsInvalid
+  nameWithType: OpusDREDDecoderSafeHandle.IsInvalid
+- uid: OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.ReleaseHandle
+  name: ReleaseHandle()
+  href: api/OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusDREDDecoderSafeHandle_ReleaseHandle
+  commentId: M:OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.ReleaseHandle
+  fullName: OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.ReleaseHandle()
+  nameWithType: OpusDREDDecoderSafeHandle.ReleaseHandle()
+- uid: OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.ReleaseHandle*
+  name: ReleaseHandle
+  href: api/OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusDREDDecoderSafeHandle_ReleaseHandle_
+  commentId: Overload:OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.ReleaseHandle
+  isSpec: "True"
+  fullName: OpusSharp.Core.SafeHandlers.OpusDREDDecoderSafeHandle.ReleaseHandle
+  nameWithType: OpusDREDDecoderSafeHandle.ReleaseHandle
+- uid: OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle
+  name: OpusDREDSafeHandle
+  href: api/OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.html
+  commentId: T:OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle
+  fullName: OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle
+  nameWithType: OpusDREDSafeHandle
+- uid: OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.#ctor
+  name: OpusDREDSafeHandle()
+  href: api/OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusDREDSafeHandle__ctor
+  commentId: M:OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.#ctor
+  name.vb: New()
+  fullName: OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.OpusDREDSafeHandle()
+  fullName.vb: OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.New()
+  nameWithType: OpusDREDSafeHandle.OpusDREDSafeHandle()
+  nameWithType.vb: OpusDREDSafeHandle.New()
+- uid: OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.#ctor*
+  name: OpusDREDSafeHandle
+  href: api/OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusDREDSafeHandle__ctor_
+  commentId: Overload:OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.OpusDREDSafeHandle
+  fullName.vb: OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.New
+  nameWithType: OpusDREDSafeHandle.OpusDREDSafeHandle
+  nameWithType.vb: OpusDREDSafeHandle.New
+- uid: OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.IsInvalid
+  name: IsInvalid
+  href: api/OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusDREDSafeHandle_IsInvalid
+  commentId: P:OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.IsInvalid
+  fullName: OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.IsInvalid
+  nameWithType: OpusDREDSafeHandle.IsInvalid
+- uid: OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.IsInvalid*
+  name: IsInvalid
+  href: api/OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusDREDSafeHandle_IsInvalid_
+  commentId: Overload:OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.IsInvalid
+  isSpec: "True"
+  fullName: OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.IsInvalid
+  nameWithType: OpusDREDSafeHandle.IsInvalid
+- uid: OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.ReleaseHandle
+  name: ReleaseHandle()
+  href: api/OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusDREDSafeHandle_ReleaseHandle
+  commentId: M:OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.ReleaseHandle
+  fullName: OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.ReleaseHandle()
+  nameWithType: OpusDREDSafeHandle.ReleaseHandle()
+- uid: OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.ReleaseHandle*
+  name: ReleaseHandle
+  href: api/OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusDREDSafeHandle_ReleaseHandle_
+  commentId: Overload:OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.ReleaseHandle
+  isSpec: "True"
+  fullName: OpusSharp.Core.SafeHandlers.OpusDREDSafeHandle.ReleaseHandle
+  nameWithType: OpusDREDSafeHandle.ReleaseHandle
+- uid: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle
+  name: OpusDecoderSafeHandle
+  href: api/OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.html
+  commentId: T:OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle
+  fullName: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle
+  nameWithType: OpusDecoderSafeHandle
+- uid: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.#ctor
+  name: OpusDecoderSafeHandle()
+  href: api/OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusDecoderSafeHandle__ctor
+  commentId: M:OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.#ctor
+  name.vb: New()
+  fullName: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.OpusDecoderSafeHandle()
+  fullName.vb: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.New()
+  nameWithType: OpusDecoderSafeHandle.OpusDecoderSafeHandle()
+  nameWithType.vb: OpusDecoderSafeHandle.New()
+- uid: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.#ctor*
+  name: OpusDecoderSafeHandle
+  href: api/OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusDecoderSafeHandle__ctor_
+  commentId: Overload:OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.OpusDecoderSafeHandle
+  fullName.vb: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.New
+  nameWithType: OpusDecoderSafeHandle.OpusDecoderSafeHandle
+  nameWithType.vb: OpusDecoderSafeHandle.New
+- uid: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.IsInvalid
+  name: IsInvalid
+  href: api/OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusDecoderSafeHandle_IsInvalid
+  commentId: P:OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.IsInvalid
+  fullName: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.IsInvalid
+  nameWithType: OpusDecoderSafeHandle.IsInvalid
+- uid: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.IsInvalid*
+  name: IsInvalid
+  href: api/OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusDecoderSafeHandle_IsInvalid_
+  commentId: Overload:OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.IsInvalid
+  isSpec: "True"
+  fullName: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.IsInvalid
+  nameWithType: OpusDecoderSafeHandle.IsInvalid
+- uid: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.ReleaseHandle
+  name: ReleaseHandle()
+  href: api/OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusDecoderSafeHandle_ReleaseHandle
+  commentId: M:OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.ReleaseHandle
+  fullName: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.ReleaseHandle()
+  nameWithType: OpusDecoderSafeHandle.ReleaseHandle()
+- uid: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.ReleaseHandle*
+  name: ReleaseHandle
+  href: api/OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusDecoderSafeHandle_ReleaseHandle_
+  commentId: Overload:OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.ReleaseHandle
+  isSpec: "True"
+  fullName: OpusSharp.Core.SafeHandlers.OpusDecoderSafeHandle.ReleaseHandle
+  nameWithType: OpusDecoderSafeHandle.ReleaseHandle
+- uid: OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle
+  name: OpusEncoderSafeHandle
+  href: api/OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.html
+  commentId: T:OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle
+  fullName: OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle
+  nameWithType: OpusEncoderSafeHandle
+- uid: OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.#ctor
+  name: OpusEncoderSafeHandle()
+  href: api/OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusEncoderSafeHandle__ctor
+  commentId: M:OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.#ctor
+  name.vb: New()
+  fullName: OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.OpusEncoderSafeHandle()
+  fullName.vb: OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.New()
+  nameWithType: OpusEncoderSafeHandle.OpusEncoderSafeHandle()
+  nameWithType.vb: OpusEncoderSafeHandle.New()
+- uid: OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.#ctor*
+  name: OpusEncoderSafeHandle
+  href: api/OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusEncoderSafeHandle__ctor_
+  commentId: Overload:OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.OpusEncoderSafeHandle
+  fullName.vb: OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.New
+  nameWithType: OpusEncoderSafeHandle.OpusEncoderSafeHandle
+  nameWithType.vb: OpusEncoderSafeHandle.New
+- uid: OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.IsInvalid
+  name: IsInvalid
+  href: api/OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusEncoderSafeHandle_IsInvalid
+  commentId: P:OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.IsInvalid
+  fullName: OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.IsInvalid
+  nameWithType: OpusEncoderSafeHandle.IsInvalid
+- uid: OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.IsInvalid*
+  name: IsInvalid
+  href: api/OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusEncoderSafeHandle_IsInvalid_
+  commentId: Overload:OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.IsInvalid
+  isSpec: "True"
+  fullName: OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.IsInvalid
+  nameWithType: OpusEncoderSafeHandle.IsInvalid
+- uid: OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.ReleaseHandle
+  name: ReleaseHandle()
+  href: api/OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusEncoderSafeHandle_ReleaseHandle
+  commentId: M:OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.ReleaseHandle
+  fullName: OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.ReleaseHandle()
+  nameWithType: OpusEncoderSafeHandle.ReleaseHandle()
+- uid: OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.ReleaseHandle*
+  name: ReleaseHandle
+  href: api/OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusEncoderSafeHandle_ReleaseHandle_
+  commentId: Overload:OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.ReleaseHandle
+  isSpec: "True"
+  fullName: OpusSharp.Core.SafeHandlers.OpusEncoderSafeHandle.ReleaseHandle
+  nameWithType: OpusEncoderSafeHandle.ReleaseHandle
+- uid: OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle
+  name: OpusMSDecoderSafeHandle
+  href: api/OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.html
+  commentId: T:OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle
+  fullName: OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle
+  nameWithType: OpusMSDecoderSafeHandle
+- uid: OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.#ctor
+  name: OpusMSDecoderSafeHandle()
+  href: api/OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusMSDecoderSafeHandle__ctor
+  commentId: M:OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.#ctor
+  name.vb: New()
+  fullName: OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.OpusMSDecoderSafeHandle()
+  fullName.vb: OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.New()
+  nameWithType: OpusMSDecoderSafeHandle.OpusMSDecoderSafeHandle()
+  nameWithType.vb: OpusMSDecoderSafeHandle.New()
+- uid: OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.#ctor*
+  name: OpusMSDecoderSafeHandle
+  href: api/OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusMSDecoderSafeHandle__ctor_
+  commentId: Overload:OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.OpusMSDecoderSafeHandle
+  fullName.vb: OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.New
+  nameWithType: OpusMSDecoderSafeHandle.OpusMSDecoderSafeHandle
+  nameWithType.vb: OpusMSDecoderSafeHandle.New
+- uid: OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.IsInvalid
+  name: IsInvalid
+  href: api/OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusMSDecoderSafeHandle_IsInvalid
+  commentId: P:OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.IsInvalid
+  fullName: OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.IsInvalid
+  nameWithType: OpusMSDecoderSafeHandle.IsInvalid
+- uid: OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.IsInvalid*
+  name: IsInvalid
+  href: api/OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusMSDecoderSafeHandle_IsInvalid_
+  commentId: Overload:OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.IsInvalid
+  isSpec: "True"
+  fullName: OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.IsInvalid
+  nameWithType: OpusMSDecoderSafeHandle.IsInvalid
+- uid: OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.ReleaseHandle
+  name: ReleaseHandle()
+  href: api/OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusMSDecoderSafeHandle_ReleaseHandle
+  commentId: M:OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.ReleaseHandle
+  fullName: OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.ReleaseHandle()
+  nameWithType: OpusMSDecoderSafeHandle.ReleaseHandle()
+- uid: OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.ReleaseHandle*
+  name: ReleaseHandle
+  href: api/OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusMSDecoderSafeHandle_ReleaseHandle_
+  commentId: Overload:OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.ReleaseHandle
+  isSpec: "True"
+  fullName: OpusSharp.Core.SafeHandlers.OpusMSDecoderSafeHandle.ReleaseHandle
+  nameWithType: OpusMSDecoderSafeHandle.ReleaseHandle
+- uid: OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle
+  name: OpusMSEncoderSafeHandle
+  href: api/OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.html
+  commentId: T:OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle
+  fullName: OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle
+  nameWithType: OpusMSEncoderSafeHandle
+- uid: OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.#ctor
+  name: OpusMSEncoderSafeHandle()
+  href: api/OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusMSEncoderSafeHandle__ctor
+  commentId: M:OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.#ctor
+  name.vb: New()
+  fullName: OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.OpusMSEncoderSafeHandle()
+  fullName.vb: OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.New()
+  nameWithType: OpusMSEncoderSafeHandle.OpusMSEncoderSafeHandle()
+  nameWithType.vb: OpusMSEncoderSafeHandle.New()
+- uid: OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.#ctor*
+  name: OpusMSEncoderSafeHandle
+  href: api/OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusMSEncoderSafeHandle__ctor_
+  commentId: Overload:OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.OpusMSEncoderSafeHandle
+  fullName.vb: OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.New
+  nameWithType: OpusMSEncoderSafeHandle.OpusMSEncoderSafeHandle
+  nameWithType.vb: OpusMSEncoderSafeHandle.New
+- uid: OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.IsInvalid
+  name: IsInvalid
+  href: api/OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusMSEncoderSafeHandle_IsInvalid
+  commentId: P:OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.IsInvalid
+  fullName: OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.IsInvalid
+  nameWithType: OpusMSEncoderSafeHandle.IsInvalid
+- uid: OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.IsInvalid*
+  name: IsInvalid
+  href: api/OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusMSEncoderSafeHandle_IsInvalid_
+  commentId: Overload:OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.IsInvalid
+  isSpec: "True"
+  fullName: OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.IsInvalid
+  nameWithType: OpusMSEncoderSafeHandle.IsInvalid
+- uid: OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.ReleaseHandle
+  name: ReleaseHandle()
+  href: api/OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusMSEncoderSafeHandle_ReleaseHandle
+  commentId: M:OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.ReleaseHandle
+  fullName: OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.ReleaseHandle()
+  nameWithType: OpusMSEncoderSafeHandle.ReleaseHandle()
+- uid: OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.ReleaseHandle*
+  name: ReleaseHandle
+  href: api/OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusMSEncoderSafeHandle_ReleaseHandle_
+  commentId: Overload:OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.ReleaseHandle
+  isSpec: "True"
+  fullName: OpusSharp.Core.SafeHandlers.OpusMSEncoderSafeHandle.ReleaseHandle
+  nameWithType: OpusMSEncoderSafeHandle.ReleaseHandle
+- uid: OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle
+  name: OpusRepacketizerSafeHandle
+  href: api/OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.html
+  commentId: T:OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle
+  fullName: OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle
+  nameWithType: OpusRepacketizerSafeHandle
+- uid: OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.#ctor
+  name: OpusRepacketizerSafeHandle()
+  href: api/OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusRepacketizerSafeHandle__ctor
+  commentId: M:OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.#ctor
+  name.vb: New()
+  fullName: OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.OpusRepacketizerSafeHandle()
+  fullName.vb: OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.New()
+  nameWithType: OpusRepacketizerSafeHandle.OpusRepacketizerSafeHandle()
+  nameWithType.vb: OpusRepacketizerSafeHandle.New()
+- uid: OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.#ctor*
+  name: OpusRepacketizerSafeHandle
+  href: api/OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusRepacketizerSafeHandle__ctor_
+  commentId: Overload:OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.OpusRepacketizerSafeHandle
+  fullName.vb: OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.New
+  nameWithType: OpusRepacketizerSafeHandle.OpusRepacketizerSafeHandle
+  nameWithType.vb: OpusRepacketizerSafeHandle.New
+- uid: OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.IsInvalid
+  name: IsInvalid
+  href: api/OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusRepacketizerSafeHandle_IsInvalid
+  commentId: P:OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.IsInvalid
+  fullName: OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.IsInvalid
+  nameWithType: OpusRepacketizerSafeHandle.IsInvalid
+- uid: OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.IsInvalid*
+  name: IsInvalid
+  href: api/OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusRepacketizerSafeHandle_IsInvalid_
+  commentId: Overload:OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.IsInvalid
+  isSpec: "True"
+  fullName: OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.IsInvalid
+  nameWithType: OpusRepacketizerSafeHandle.IsInvalid
+- uid: OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.ReleaseHandle
+  name: ReleaseHandle()
+  href: api/OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusRepacketizerSafeHandle_ReleaseHandle
+  commentId: M:OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.ReleaseHandle
+  fullName: OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.ReleaseHandle()
+  nameWithType: OpusRepacketizerSafeHandle.ReleaseHandle()
+- uid: OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.ReleaseHandle*
+  name: ReleaseHandle
+  href: api/OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.html#OpusSharp_Core_SafeHandlers_OpusRepacketizerSafeHandle_ReleaseHandle_
+  commentId: Overload:OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.ReleaseHandle
+  isSpec: "True"
+  fullName: OpusSharp.Core.SafeHandlers.OpusRepacketizerSafeHandle.ReleaseHandle
+  nameWithType: OpusRepacketizerSafeHandle.ReleaseHandle

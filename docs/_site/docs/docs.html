@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Quick Start | OpusSharp </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Quick Start | OpusSharp ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/AvionBlock/OpusSharp/blob/dev/docs/docs/docs.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="OpusSharp">
+            OpusSharp
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="quick-start">Quick Start</h1>
+<!---
+Title: Quick Start
+ShowInSidebar: false
+NoSidebar: true
+Xref: docs
+--->
+
+<p>The easiest way to get started with OpusSharp is to install the <a href="https://www.nuget.org/packages/OpusSharp.Core">OpusSharp.Core</a> package into a .NET application.</p>
+<h2 id="step-1-install-opussharpcore">Step 1: Install OpusSharp.Core</h2>
+<p>You can install OpusSharp.Core via the nuget package manager through your IDE, e.g. VS22, Rider, etc...</p>
+<p>Or you can install it via the dotnet CLI.</p>
+<pre><code class="lang-csharp">dotnet add package OpusSharp.Core --version x.y.z
+</code></pre>
+<h2 id="step-2-include-opus-dll">Step 2: Include Opus DLL.</h2>
+<p>By default, OpusSharp.Core DOES NOT contain the opus precompiled DLL's or binaries. This is so you can choose to provide your own DLL's or binary files instead of using OpusSharp's compiled binaries.</p>
+<p>However if you want to use the precompiled binaries that OpusSharp provides, you can install the OpusSharp.Natives package onto your platform specific projects via the nuget package manager through your IDE, e.g. VS22, Rider, etc...</p>
+<p>Or through the dotnet CLI.</p>
+<pre><code class="lang-csharp">dotnet add package OpusSharp.Natives --version x.y.z
+</code></pre>
+<h2 id="step-3-create-encoder-and-decoder">Step 3: Create Encoder and Decoder</h2>
+<p>Creating the OpusEncoder and OpusDecoder is as easy as</p>
+<h3 id="opusencoder">OpusEncoder</h3>
+<pre><code class="lang-csharp">using OpusSharp.Core;
+
+var encoder = new OpusEncoder(48000, 2, OpusPredefinedValues.OPUS_APPLICATION_VOIP);
+
+//20ms at 48khz is 960 samples
+byte[] audio = ...;
+byte[] encoded = new byte[1000];
+int encodedBytes = encoder.Encode(audio, 960, encoded, encoded.Length);
+Console.WriteLine(encodedBytes);
+</code></pre>
+<h3 id="opusdecoder">OpusDecoder</h3>
+<pre><code class="lang-csharp">using OpusSharp.Core;
+
+var decoder = new OpusDecoder(48000, 2);
+
+//20ms at 48khz is 960 samples
+byte[] encoded = ...;
+byte[] decoded = new byte[3840]; //Works out to around 3840 bytes for 20ms audio
+byte[] decodedSamples = decoder.Decode(encoded, encoded.Length, decoded, 960, false); //encoded.Length should not be used unless the size of the encoded audio is the exact same size.
+Console.WriteLine(decodedSamples);
+</code></pre>
+<h1 id="next-steps">Next Steps</h1>
+<p>📖 <a href="xref:examples">Read the API for more information about the library</a></p>
+<p>💬 <a href="https://github.com/AvionBlock/OpusSharp/discussions">Use the discussions for help.</a></p>
+<p>📗 <a href="xref:examples">Check out the examples.</a></p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/AvionBlock/OpusSharp/blob/dev/docs/docs/docs.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

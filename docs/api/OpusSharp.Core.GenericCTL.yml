@@ -1,0 +1,234 @@
+### YamlMime:ManagedReference
+items:
+- uid: OpusSharp.Core.GenericCTL
+  commentId: T:OpusSharp.Core.GenericCTL
+  id: GenericCTL
+  parent: OpusSharp.Core
+  children:
+  - OpusSharp.Core.GenericCTL.OPUS_GET_BANDWIDTH
+  - OpusSharp.Core.GenericCTL.OPUS_GET_FINAL_RANGE
+  - OpusSharp.Core.GenericCTL.OPUS_GET_PHASE_INVERSION_DISABLED
+  - OpusSharp.Core.GenericCTL.OPUS_GET_SAMPLE_RATE
+  - OpusSharp.Core.GenericCTL.OPUS_RESET_STATE
+  - OpusSharp.Core.GenericCTL.OPUS_SET_PHASE_INVERSION_DISABLED
+  langs:
+  - csharp
+  - vb
+  name: GenericCTL
+  nameWithType: GenericCTL
+  fullName: OpusSharp.Core.GenericCTL
+  type: Enum
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: GenericCTL
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 167
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: These macros are used with the opus_decoder_ctl and opus_encoder_ctl calls to generate a particular request.
+  example: []
+  syntax:
+    content: public enum GenericCTL
+    content.vb: Public Enum GenericCTL
+- uid: OpusSharp.Core.GenericCTL.OPUS_RESET_STATE
+  commentId: F:OpusSharp.Core.GenericCTL.OPUS_RESET_STATE
+  id: OPUS_RESET_STATE
+  parent: OpusSharp.Core.GenericCTL
+  langs:
+  - csharp
+  - vb
+  name: OPUS_RESET_STATE
+  nameWithType: GenericCTL.OPUS_RESET_STATE
+  fullName: OpusSharp.Core.GenericCTL.OPUS_RESET_STATE
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_RESET_STATE
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 172
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Resets the codec state to be equivalent to a freshly initialized state.
+  example: []
+  syntax:
+    content: OPUS_RESET_STATE = 4028
+    return:
+      type: OpusSharp.Core.GenericCTL
+- uid: OpusSharp.Core.GenericCTL.OPUS_GET_FINAL_RANGE
+  commentId: F:OpusSharp.Core.GenericCTL.OPUS_GET_FINAL_RANGE
+  id: OPUS_GET_FINAL_RANGE
+  parent: OpusSharp.Core.GenericCTL
+  langs:
+  - csharp
+  - vb
+  name: OPUS_GET_FINAL_RANGE
+  nameWithType: GenericCTL.OPUS_GET_FINAL_RANGE
+  fullName: OpusSharp.Core.GenericCTL.OPUS_GET_FINAL_RANGE
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_GET_FINAL_RANGE
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 177
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Gets the final state of the codec's entropy coder.
+  example: []
+  syntax:
+    content: OPUS_GET_FINAL_RANGE = 4031
+    return:
+      type: OpusSharp.Core.GenericCTL
+- uid: OpusSharp.Core.GenericCTL.OPUS_GET_BANDWIDTH
+  commentId: F:OpusSharp.Core.GenericCTL.OPUS_GET_BANDWIDTH
+  id: OPUS_GET_BANDWIDTH
+  parent: OpusSharp.Core.GenericCTL
+  langs:
+  - csharp
+  - vb
+  name: OPUS_GET_BANDWIDTH
+  nameWithType: GenericCTL.OPUS_GET_BANDWIDTH
+  fullName: OpusSharp.Core.GenericCTL.OPUS_GET_BANDWIDTH
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_GET_BANDWIDTH
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 182
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Gets the encoder's configured bandpass or the decoder's last bandpass.
+  example: []
+  syntax:
+    content: OPUS_GET_BANDWIDTH = 4009
+    return:
+      type: OpusSharp.Core.GenericCTL
+- uid: OpusSharp.Core.GenericCTL.OPUS_GET_SAMPLE_RATE
+  commentId: F:OpusSharp.Core.GenericCTL.OPUS_GET_SAMPLE_RATE
+  id: OPUS_GET_SAMPLE_RATE
+  parent: OpusSharp.Core.GenericCTL
+  langs:
+  - csharp
+  - vb
+  name: OPUS_GET_SAMPLE_RATE
+  nameWithType: GenericCTL.OPUS_GET_SAMPLE_RATE
+  fullName: OpusSharp.Core.GenericCTL.OPUS_GET_SAMPLE_RATE
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_GET_SAMPLE_RATE
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 187
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Gets the sampling rate the encoder or decoder was initialized with.
+  example: []
+  syntax:
+    content: OPUS_GET_SAMPLE_RATE = 4029
+    return:
+      type: OpusSharp.Core.GenericCTL
+- uid: OpusSharp.Core.GenericCTL.OPUS_SET_PHASE_INVERSION_DISABLED
+  commentId: F:OpusSharp.Core.GenericCTL.OPUS_SET_PHASE_INVERSION_DISABLED
+  id: OPUS_SET_PHASE_INVERSION_DISABLED
+  parent: OpusSharp.Core.GenericCTL
+  langs:
+  - csharp
+  - vb
+  name: OPUS_SET_PHASE_INVERSION_DISABLED
+  nameWithType: GenericCTL.OPUS_SET_PHASE_INVERSION_DISABLED
+  fullName: OpusSharp.Core.GenericCTL.OPUS_SET_PHASE_INVERSION_DISABLED
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_SET_PHASE_INVERSION_DISABLED
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 192
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: If set to 1, disables the use of phase inversion for intensity stereo, improving the quality of mono down-mixes, but slightly reducing normal stereo quality.
+  example: []
+  syntax:
+    content: OPUS_SET_PHASE_INVERSION_DISABLED = 4046
+    return:
+      type: OpusSharp.Core.GenericCTL
+- uid: OpusSharp.Core.GenericCTL.OPUS_GET_PHASE_INVERSION_DISABLED
+  commentId: F:OpusSharp.Core.GenericCTL.OPUS_GET_PHASE_INVERSION_DISABLED
+  id: OPUS_GET_PHASE_INVERSION_DISABLED
+  parent: OpusSharp.Core.GenericCTL
+  langs:
+  - csharp
+  - vb
+  name: OPUS_GET_PHASE_INVERSION_DISABLED
+  nameWithType: GenericCTL.OPUS_GET_PHASE_INVERSION_DISABLED
+  fullName: OpusSharp.Core.GenericCTL.OPUS_GET_PHASE_INVERSION_DISABLED
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_GET_PHASE_INVERSION_DISABLED
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 197
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Gets the encoder's configured phase inversion status.
+  example: []
+  syntax:
+    content: OPUS_GET_PHASE_INVERSION_DISABLED = 4047
+    return:
+      type: OpusSharp.Core.GenericCTL
+references:
+- uid: OpusSharp.Core
+  commentId: N:OpusSharp.Core
+  href: OpusSharp.html
+  name: OpusSharp.Core
+  nameWithType: OpusSharp.Core
+  fullName: OpusSharp.Core
+  spec.csharp:
+  - uid: OpusSharp
+    name: OpusSharp
+    href: OpusSharp.html
+  - name: .
+  - uid: OpusSharp.Core
+    name: Core
+    href: OpusSharp.Core.html
+  spec.vb:
+  - uid: OpusSharp
+    name: OpusSharp
+    href: OpusSharp.html
+  - name: .
+  - uid: OpusSharp.Core
+    name: Core
+    href: OpusSharp.Core.html
+- uid: OpusSharp.Core.GenericCTL
+  commentId: T:OpusSharp.Core.GenericCTL
+  parent: OpusSharp.Core
+  href: OpusSharp.Core.GenericCTL.html
+  name: GenericCTL
+  nameWithType: GenericCTL
+  fullName: OpusSharp.Core.GenericCTL

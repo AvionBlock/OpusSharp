@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-	<id>/</id>
-	<title>Documentation</title>
-	<link rel="self" href="/" />
-	<rights>2024</rights>
-	<updated>2024-11-11T07:07:30Z</updated>
-</feed>

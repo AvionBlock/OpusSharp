@@ -1,0 +1,698 @@
+### YamlMime:ManagedReference
+items:
+- uid: OpusSharp.Core.OpusPredefinedValues
+  commentId: T:OpusSharp.Core.OpusPredefinedValues
+  id: OpusPredefinedValues
+  parent: OpusSharp.Core
+  children:
+  - OpusSharp.Core.OpusPredefinedValues.OPUS_APPLICATION_AUDIO
+  - OpusSharp.Core.OpusPredefinedValues.OPUS_APPLICATION_RESTRICTED_LOWDELAY
+  - OpusSharp.Core.OpusPredefinedValues.OPUS_APPLICATION_VOIP
+  - OpusSharp.Core.OpusPredefinedValues.OPUS_AUTO
+  - OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_FULLBAND
+  - OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_MEDIUMBAND
+  - OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_NARROWBAND
+  - OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_SUPERWIDEBAND
+  - OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_WIDEBAND
+  - OpusSharp.Core.OpusPredefinedValues.OPUS_BITRATE_MAX
+  - OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_100_MS
+  - OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_10_MS
+  - OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_120_MS
+  - OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_20_MS
+  - OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_2_5_MS
+  - OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_40_MS
+  - OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_5_MS
+  - OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_60_MS
+  - OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_80_MS
+  - OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_ARG
+  - OpusSharp.Core.OpusPredefinedValues.OPUS_SIGNAL_MUSIC
+  - OpusSharp.Core.OpusPredefinedValues.OPUS_SIGNAL_VOICE
+  langs:
+  - csharp
+  - vb
+  name: OpusPredefinedValues
+  nameWithType: OpusPredefinedValues
+  fullName: OpusSharp.Core.OpusPredefinedValues
+  type: Enum
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OpusPredefinedValues
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 51
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Pre-defined values for CTL interface.
+  example: []
+  syntax:
+    content: public enum OpusPredefinedValues
+    content.vb: Public Enum OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_AUTO
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_AUTO
+  id: OPUS_AUTO
+  parent: OpusSharp.Core.OpusPredefinedValues
+  langs:
+  - csharp
+  - vb
+  name: OPUS_AUTO
+  nameWithType: OpusPredefinedValues.OPUS_AUTO
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_AUTO
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_AUTO
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 56
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Auto/default setting.
+  example: []
+  syntax:
+    content: OPUS_AUTO = -1000
+    return:
+      type: OpusSharp.Core.OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_BITRATE_MAX
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_BITRATE_MAX
+  id: OPUS_BITRATE_MAX
+  parent: OpusSharp.Core.OpusPredefinedValues
+  langs:
+  - csharp
+  - vb
+  name: OPUS_BITRATE_MAX
+  nameWithType: OpusPredefinedValues.OPUS_BITRATE_MAX
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_BITRATE_MAX
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_BITRATE_MAX
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 61
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Maximum bitrate.
+  example: []
+  syntax:
+    content: OPUS_BITRATE_MAX = -1
+    return:
+      type: OpusSharp.Core.OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_APPLICATION_VOIP
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_APPLICATION_VOIP
+  id: OPUS_APPLICATION_VOIP
+  parent: OpusSharp.Core.OpusPredefinedValues
+  langs:
+  - csharp
+  - vb
+  name: OPUS_APPLICATION_VOIP
+  nameWithType: OpusPredefinedValues.OPUS_APPLICATION_VOIP
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_APPLICATION_VOIP
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_APPLICATION_VOIP
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 66
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Best for most VoIP/Video Conference applications where listening quality and intelligibility matter most.
+  example: []
+  syntax:
+    content: OPUS_APPLICATION_VOIP = 2048
+    return:
+      type: OpusSharp.Core.OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_APPLICATION_AUDIO
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_APPLICATION_AUDIO
+  id: OPUS_APPLICATION_AUDIO
+  parent: OpusSharp.Core.OpusPredefinedValues
+  langs:
+  - csharp
+  - vb
+  name: OPUS_APPLICATION_AUDIO
+  nameWithType: OpusPredefinedValues.OPUS_APPLICATION_AUDIO
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_APPLICATION_AUDIO
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_APPLICATION_AUDIO
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 71
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Best for broadcast/high-fidelity application where the decoded audio should be as close as possible to the input.
+  example: []
+  syntax:
+    content: OPUS_APPLICATION_AUDIO = 2049
+    return:
+      type: OpusSharp.Core.OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_APPLICATION_RESTRICTED_LOWDELAY
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_APPLICATION_RESTRICTED_LOWDELAY
+  id: OPUS_APPLICATION_RESTRICTED_LOWDELAY
+  parent: OpusSharp.Core.OpusPredefinedValues
+  langs:
+  - csharp
+  - vb
+  name: OPUS_APPLICATION_RESTRICTED_LOWDELAY
+  nameWithType: OpusPredefinedValues.OPUS_APPLICATION_RESTRICTED_LOWDELAY
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_APPLICATION_RESTRICTED_LOWDELAY
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_APPLICATION_RESTRICTED_LOWDELAY
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 76
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Only use when lowest-achievable latency is what matters most. Voice-optimized modes cannot be used.
+  example: []
+  syntax:
+    content: OPUS_APPLICATION_RESTRICTED_LOWDELAY = 2051
+    return:
+      type: OpusSharp.Core.OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_SIGNAL_VOICE
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_SIGNAL_VOICE
+  id: OPUS_SIGNAL_VOICE
+  parent: OpusSharp.Core.OpusPredefinedValues
+  langs:
+  - csharp
+  - vb
+  name: OPUS_SIGNAL_VOICE
+  nameWithType: OpusPredefinedValues.OPUS_SIGNAL_VOICE
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_SIGNAL_VOICE
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_SIGNAL_VOICE
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 81
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Signal being encoded is voice.
+  example: []
+  syntax:
+    content: OPUS_SIGNAL_VOICE = 3001
+    return:
+      type: OpusSharp.Core.OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_SIGNAL_MUSIC
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_SIGNAL_MUSIC
+  id: OPUS_SIGNAL_MUSIC
+  parent: OpusSharp.Core.OpusPredefinedValues
+  langs:
+  - csharp
+  - vb
+  name: OPUS_SIGNAL_MUSIC
+  nameWithType: OpusPredefinedValues.OPUS_SIGNAL_MUSIC
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_SIGNAL_MUSIC
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_SIGNAL_MUSIC
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 86
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Signal being encoded is music.
+  example: []
+  syntax:
+    content: OPUS_SIGNAL_MUSIC = 3002
+    return:
+      type: OpusSharp.Core.OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_NARROWBAND
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_NARROWBAND
+  id: OPUS_BANDWIDTH_NARROWBAND
+  parent: OpusSharp.Core.OpusPredefinedValues
+  langs:
+  - csharp
+  - vb
+  name: OPUS_BANDWIDTH_NARROWBAND
+  nameWithType: OpusPredefinedValues.OPUS_BANDWIDTH_NARROWBAND
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_NARROWBAND
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_BANDWIDTH_NARROWBAND
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 91
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: 4 kHz bandpass.
+  example: []
+  syntax:
+    content: OPUS_BANDWIDTH_NARROWBAND = 1101
+    return:
+      type: OpusSharp.Core.OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_MEDIUMBAND
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_MEDIUMBAND
+  id: OPUS_BANDWIDTH_MEDIUMBAND
+  parent: OpusSharp.Core.OpusPredefinedValues
+  langs:
+  - csharp
+  - vb
+  name: OPUS_BANDWIDTH_MEDIUMBAND
+  nameWithType: OpusPredefinedValues.OPUS_BANDWIDTH_MEDIUMBAND
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_MEDIUMBAND
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_BANDWIDTH_MEDIUMBAND
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 96
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: 6 kHz bandpass.
+  example: []
+  syntax:
+    content: OPUS_BANDWIDTH_MEDIUMBAND = 1102
+    return:
+      type: OpusSharp.Core.OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_WIDEBAND
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_WIDEBAND
+  id: OPUS_BANDWIDTH_WIDEBAND
+  parent: OpusSharp.Core.OpusPredefinedValues
+  langs:
+  - csharp
+  - vb
+  name: OPUS_BANDWIDTH_WIDEBAND
+  nameWithType: OpusPredefinedValues.OPUS_BANDWIDTH_WIDEBAND
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_WIDEBAND
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_BANDWIDTH_WIDEBAND
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 101
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: 8 kHz bandpass.
+  example: []
+  syntax:
+    content: OPUS_BANDWIDTH_WIDEBAND = 1103
+    return:
+      type: OpusSharp.Core.OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_SUPERWIDEBAND
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_SUPERWIDEBAND
+  id: OPUS_BANDWIDTH_SUPERWIDEBAND
+  parent: OpusSharp.Core.OpusPredefinedValues
+  langs:
+  - csharp
+  - vb
+  name: OPUS_BANDWIDTH_SUPERWIDEBAND
+  nameWithType: OpusPredefinedValues.OPUS_BANDWIDTH_SUPERWIDEBAND
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_SUPERWIDEBAND
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_BANDWIDTH_SUPERWIDEBAND
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 106
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: 12 kHz bandpass.
+  example: []
+  syntax:
+    content: OPUS_BANDWIDTH_SUPERWIDEBAND = 1104
+    return:
+      type: OpusSharp.Core.OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_FULLBAND
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_FULLBAND
+  id: OPUS_BANDWIDTH_FULLBAND
+  parent: OpusSharp.Core.OpusPredefinedValues
+  langs:
+  - csharp
+  - vb
+  name: OPUS_BANDWIDTH_FULLBAND
+  nameWithType: OpusPredefinedValues.OPUS_BANDWIDTH_FULLBAND
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_BANDWIDTH_FULLBAND
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_BANDWIDTH_FULLBAND
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 111
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: 20 kHz bandpass.
+  example: []
+  syntax:
+    content: OPUS_BANDWIDTH_FULLBAND = 1105
+    return:
+      type: OpusSharp.Core.OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_ARG
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_ARG
+  id: OPUS_FRAMESIZE_ARG
+  parent: OpusSharp.Core.OpusPredefinedValues
+  langs:
+  - csharp
+  - vb
+  name: OPUS_FRAMESIZE_ARG
+  nameWithType: OpusPredefinedValues.OPUS_FRAMESIZE_ARG
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_ARG
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_FRAMESIZE_ARG
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 116
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Select frame size from the argument (default).
+  example: []
+  syntax:
+    content: OPUS_FRAMESIZE_ARG = 5000
+    return:
+      type: OpusSharp.Core.OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_2_5_MS
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_2_5_MS
+  id: OPUS_FRAMESIZE_2_5_MS
+  parent: OpusSharp.Core.OpusPredefinedValues
+  langs:
+  - csharp
+  - vb
+  name: OPUS_FRAMESIZE_2_5_MS
+  nameWithType: OpusPredefinedValues.OPUS_FRAMESIZE_2_5_MS
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_2_5_MS
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_FRAMESIZE_2_5_MS
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 121
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Use 2.5 ms frames.
+  example: []
+  syntax:
+    content: OPUS_FRAMESIZE_2_5_MS = 5001
+    return:
+      type: OpusSharp.Core.OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_5_MS
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_5_MS
+  id: OPUS_FRAMESIZE_5_MS
+  parent: OpusSharp.Core.OpusPredefinedValues
+  langs:
+  - csharp
+  - vb
+  name: OPUS_FRAMESIZE_5_MS
+  nameWithType: OpusPredefinedValues.OPUS_FRAMESIZE_5_MS
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_5_MS
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_FRAMESIZE_5_MS
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 126
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Use 5 ms frames.
+  example: []
+  syntax:
+    content: OPUS_FRAMESIZE_5_MS = 5002
+    return:
+      type: OpusSharp.Core.OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_10_MS
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_10_MS
+  id: OPUS_FRAMESIZE_10_MS
+  parent: OpusSharp.Core.OpusPredefinedValues
+  langs:
+  - csharp
+  - vb
+  name: OPUS_FRAMESIZE_10_MS
+  nameWithType: OpusPredefinedValues.OPUS_FRAMESIZE_10_MS
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_10_MS
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_FRAMESIZE_10_MS
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 131
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Use 10 ms frames.
+  example: []
+  syntax:
+    content: OPUS_FRAMESIZE_10_MS = 5003
+    return:
+      type: OpusSharp.Core.OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_20_MS
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_20_MS
+  id: OPUS_FRAMESIZE_20_MS
+  parent: OpusSharp.Core.OpusPredefinedValues
+  langs:
+  - csharp
+  - vb
+  name: OPUS_FRAMESIZE_20_MS
+  nameWithType: OpusPredefinedValues.OPUS_FRAMESIZE_20_MS
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_20_MS
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_FRAMESIZE_20_MS
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 136
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Use 20 ms frames.
+  example: []
+  syntax:
+    content: OPUS_FRAMESIZE_20_MS = 5004
+    return:
+      type: OpusSharp.Core.OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_40_MS
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_40_MS
+  id: OPUS_FRAMESIZE_40_MS
+  parent: OpusSharp.Core.OpusPredefinedValues
+  langs:
+  - csharp
+  - vb
+  name: OPUS_FRAMESIZE_40_MS
+  nameWithType: OpusPredefinedValues.OPUS_FRAMESIZE_40_MS
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_40_MS
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_FRAMESIZE_40_MS
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 141
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Use 40 ms frames.
+  example: []
+  syntax:
+    content: OPUS_FRAMESIZE_40_MS = 5005
+    return:
+      type: OpusSharp.Core.OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_60_MS
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_60_MS
+  id: OPUS_FRAMESIZE_60_MS
+  parent: OpusSharp.Core.OpusPredefinedValues
+  langs:
+  - csharp
+  - vb
+  name: OPUS_FRAMESIZE_60_MS
+  nameWithType: OpusPredefinedValues.OPUS_FRAMESIZE_60_MS
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_60_MS
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_FRAMESIZE_60_MS
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 146
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Use 60 ms frames.
+  example: []
+  syntax:
+    content: OPUS_FRAMESIZE_60_MS = 5006
+    return:
+      type: OpusSharp.Core.OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_80_MS
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_80_MS
+  id: OPUS_FRAMESIZE_80_MS
+  parent: OpusSharp.Core.OpusPredefinedValues
+  langs:
+  - csharp
+  - vb
+  name: OPUS_FRAMESIZE_80_MS
+  nameWithType: OpusPredefinedValues.OPUS_FRAMESIZE_80_MS
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_80_MS
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_FRAMESIZE_80_MS
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 151
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Use 80 ms frames.
+  example: []
+  syntax:
+    content: OPUS_FRAMESIZE_80_MS = 5007
+    return:
+      type: OpusSharp.Core.OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_100_MS
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_100_MS
+  id: OPUS_FRAMESIZE_100_MS
+  parent: OpusSharp.Core.OpusPredefinedValues
+  langs:
+  - csharp
+  - vb
+  name: OPUS_FRAMESIZE_100_MS
+  nameWithType: OpusPredefinedValues.OPUS_FRAMESIZE_100_MS
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_100_MS
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_FRAMESIZE_100_MS
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 156
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Use 100 ms frames.
+  example: []
+  syntax:
+    content: OPUS_FRAMESIZE_100_MS = 5008
+    return:
+      type: OpusSharp.Core.OpusPredefinedValues
+- uid: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_120_MS
+  commentId: F:OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_120_MS
+  id: OPUS_FRAMESIZE_120_MS
+  parent: OpusSharp.Core.OpusPredefinedValues
+  langs:
+  - csharp
+  - vb
+  name: OPUS_FRAMESIZE_120_MS
+  nameWithType: OpusPredefinedValues.OPUS_FRAMESIZE_120_MS
+  fullName: OpusSharp.Core.OpusPredefinedValues.OPUS_FRAMESIZE_120_MS
+  type: Field
+  source:
+    remote:
+      path: OpusSharp.Core/Enums.cs
+      branch: dev
+      repo: https://github.com/AvionBlock/OpusSharp.git
+    id: OPUS_FRAMESIZE_120_MS
+    path: ../OpusSharp.Core/Enums.cs
+    startLine: 161
+  assemblies:
+  - OpusSharp
+  namespace: OpusSharp.Core
+  summary: Use 120 ms frames.
+  example: []
+  syntax:
+    content: OPUS_FRAMESIZE_120_MS = 5009
+    return:
+      type: OpusSharp.Core.OpusPredefinedValues
+references:
+- uid: OpusSharp.Core
+  commentId: N:OpusSharp.Core
+  href: OpusSharp.html
+  name: OpusSharp.Core
+  nameWithType: OpusSharp.Core
+  fullName: OpusSharp.Core
+  spec.csharp:
+  - uid: OpusSharp
+    name: OpusSharp
+    href: OpusSharp.html
+  - name: .
+  - uid: OpusSharp.Core
+    name: Core
+    href: OpusSharp.Core.html
+  spec.vb:
+  - uid: OpusSharp
+    name: OpusSharp
+    href: OpusSharp.html
+  - name: .
+  - uid: OpusSharp.Core
+    name: Core
+    href: OpusSharp.Core.html
+- uid: OpusSharp.Core.OpusPredefinedValues
+  commentId: T:OpusSharp.Core.OpusPredefinedValues
+  parent: OpusSharp.Core
+  href: OpusSharp.Core.OpusPredefinedValues.html
+  name: OpusPredefinedValues
+  nameWithType: OpusPredefinedValues
+  fullName: OpusSharp.Core.OpusPredefinedValues
