@@ -4,335 +4,255 @@ using System;
 namespace OpusSharp.Core
 {
     /// <summary>
-    /// Audio encoder with opus.
+    /// An opus encoder.
     /// </summary>
-    public class OpusEncoder : Disposable
+    public class OpusEncoder : IDisposable
     {
-        private readonly OpusEncoderSafeHandle Encoder;
-
-        #region Variables
         /// <summary>
-        /// Sampling rate of input signal (Hz) This must be one of 8000, 12000, 16000, 24000, or 48000.
+        /// Direct safe handle for the <see cref="OpusEncoder"/>. IT IS NOT RECOMMENDED TO CLOSE THE HANDLE DIRECTLY! Instead use <see cref="Dispose(bool)"/> to dispose the handle and object safely.
         /// </summary>
-        public int SampleRate
+        protected OpusEncoderSafeHandle _handler;
+        private bool _disposed;
+
+        /// <summary>
+        /// Creates a new opus encoder.
+        /// </summary>
+        /// <param name="sample_rate">The sample rate, this must be one of 8000, 12000, 16000, 24000, or 48000.</param>
+        /// <param name="channels">Number of channels, this must be 1 or 2.</param>
+        /// <param name="application">Coding mode (one of <see cref="OpusPredefinedValues.OPUS_APPLICATION_VOIP"/>, <see cref="OpusPredefinedValues.OPUS_APPLICATION_AUDIO"/> or <see cref="OpusPredefinedValues.OPUS_APPLICATION_RESTRICTED_LOWDELAY"/></param>
+        /// <exception cref="OpusException" />
+        public unsafe OpusEncoder(int sample_rate, int channels, OpusPredefinedValues application)
         {
-            get
-            {
-                if (Encoder.IsClosed) return 0;
-                return EncoderCtl(Enums.GenericCtl.OPUS_GET_SAMPLE_RATE_REQUEST);
-            }
+            int error = 0;
+            _handler = NativeOpus.opus_encoder_create(sample_rate, channels, (int)application, &error);
+            CheckError(error);
         }
 
         /// <summary>
-        /// Number of channels (1 or 2) in input signal.
+        /// Encodes a pcm frame.
         /// </summary>
-        public int Channels { get; }
-
-        /// <summary>
-        /// Configures the bitrate in the encoder.
-        /// </summary>
-        public int Bitrate
-        {
-            get
-            {
-                if (Encoder.IsClosed) return 0;
-                return EncoderCtl(Enums.EncoderCtl.OPUS_GET_BITRATE_REQUEST);
-            }
-            set
-            {
-                if (Encoder.IsClosed) return;
-                EncoderCtl(Enums.EncoderCtl.OPUS_SET_BITRATE_REQUEST, value);
-            }
-        }
-
-        /// <summary>
-        /// The coding mode that the encoder is set to.
-        /// </summary>
-        public Enums.PreDefCtl OpusApplication
-        {
-            get
-            {
-                if (Encoder.IsClosed) return 0;
-                return (Enums.PreDefCtl)EncoderCtl(Enums.EncoderCtl.OPUS_GET_APPLICATION_REQUEST);
-            }
-            set
-            {
-                if (Encoder.IsClosed) return;
-                EncoderCtl(Enums.EncoderCtl.OPUS_SET_APPLICATION_REQUEST, (int)value);
-            }
-        }
-
-        /// <summary>
-        /// Configures the encoder's computational complexity. The supported range is 0-10 inclusive with 10 representing the highest complexity.
-        /// </summary>
-        public int Complexity
-        {
-            get
-            {
-                if (Encoder.IsClosed) return 0;
-                return EncoderCtl(Enums.EncoderCtl.OPUS_GET_COMPLEXITY_REQUEST);
-            }
-            set
-            {
-                if (Encoder.IsClosed) return;
-                EncoderCtl(Enums.EncoderCtl.OPUS_SET_COMPLEXITY_REQUEST, value);
-            }
-        }
-
-        /// <summary>
-        /// Configures the encoder's expected packet loss percentage. Loss percentage in the range 0-100, inclusive (default: 0).
-        /// </summary>
-        public int PacketLossPerc
-        {
-            get
-            {
-                if (Encoder.IsClosed) return 0;
-                return EncoderCtl(Enums.EncoderCtl.OPUS_GET_PACKET_LOSS_PERC_REQUEST);
-            }
-            set
-            {
-                if (Encoder.IsClosed) return;
-                EncoderCtl(Enums.EncoderCtl.OPUS_SET_PACKET_LOSS_PERC_REQUEST, value);
-            }
-        }
-
-        /// <summary>
-        /// Configures the type of signal being encoded.
-        /// </summary>
-        public Enums.PreDefCtl Signal
-        {
-            get
-            {
-                if (Encoder.IsClosed) return 0;
-                return (Enums.PreDefCtl)EncoderCtl(Enums.EncoderCtl.OPUS_GET_SIGNAL_REQUEST);
-            }
-            set
-            {
-                if (Encoder.IsClosed) return;
-                EncoderCtl(Enums.EncoderCtl.OPUS_SET_SIGNAL_REQUEST, (int)value);
-            }
-        }
-
-        /// <summary>
-        /// Enables or disables variable bitrate (VBR) in the encoder.
-        /// </summary>
-        public bool VBR
-        {
-            get
-            {
-                if (Encoder.IsClosed) return false;
-                return EncoderCtl(Enums.EncoderCtl.OPUS_GET_VBR_REQUEST) == 1;
-            }
-            set
-            {
-                if (Encoder.IsClosed) return;
-                EncoderCtl(Enums.EncoderCtl.OPUS_SET_VBR_REQUEST, value == true ? 1 : 0);
-            }
-        }
-
-        /// <summary>
-        /// Enables or disables constraint variable bitrate (CVBR) in the encoder.
-        /// </summary>
-        public bool VBRConstraint
-        {
-            get
-            {
-                if (Encoder.IsClosed) return false;
-                return EncoderCtl(Enums.EncoderCtl.OPUS_GET_VBR_CONSTRAINT_REQUEST) == 1;
-            }
-            set
-            {
-                if (Encoder.IsClosed) return;
-                EncoderCtl(Enums.EncoderCtl.OPUS_SET_VBR_CONSTRAINT_REQUEST, value == true ? 1 : 0);
-            }
-        }
-        #endregion
-
-        #region Methods
-        /// <summary>
-        /// Creates and initializes an opus encoder.
-        /// </summary>
-        /// <param name="SampleRate">Sampling rate of input signal (Hz) This must be one of 8000, 12000, 16000, 24000, or 48000.</param>
-        /// <param name="Channels">Number of channels (1 or 2) in input signal.</param>
-        /// <param name="Application">The coding mode that the encoder should set to.</param>
-        /// <exception cref="OpusException"></exception>
-        public OpusEncoder(int SampleRate, int Channels, Enums.PreDefCtl Application)
-        {
-            Encoder = NativeOpus.opus_encoder_create(SampleRate, Channels, (int)Application, out var Error);
-            CheckError((int)Error);
-
-            this.Channels = Channels;
-        }
-
-        /// <summary>
-        /// Encodes an Opus frame.
-        /// </summary>
-        /// <param name="input">Input signal (interleaved if 2 channels). length is frame_size*channels</param>
-        /// <param name="frame_size">Number of samples per channel in the input signal. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
-        /// <param name="output">Output payload</param>
-        /// <param name="inputOffset">Offset to start reading in the input.</param>
-        /// <param name="outputOffset">Offset to start writing in the output.</param>
-        /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see <see cref="Enums.OpusError"/>) on failure. Note: OpusSharp throws an error if there is a negative error code.</returns>
-        /// <exception cref="ObjectDisposedException"></exception>
-        /// <exception cref="OpusException"></exception>
-        public unsafe int Encode(byte[] input, int frame_size, byte[] output, int inputOffset = 0, int outputOffset = 0)
+        /// <param name="input">Input signal (interleaved if 2 channels). length is frame_size*channels.</param>
+        /// <param name="frame_size">The frame size of the pcm data. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
+        /// <param name="output">Output payload. This must contain storage for at least max_data_bytes.</param>
+        /// <param name="max_data_bytes">Size of the allocated memory for the output payload. This may be used to impose an upper limit on the instant bitrate, but should not be used as the only bitrate control. Use <see cref="EncoderCTL.OPUS_SET_BITRATE"/> to control the bitrate.</param>
+        /// <returns>The length of the encoded packet (in bytes).</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public unsafe int Encode(Span<byte> input, int frame_size, Span<byte> output, int max_data_bytes)
         {
             ThrowIfDisposed();
+            fixed (byte* inputPtr = input)
+            fixed (byte* outputPtr = output)
+            {
+                var result = NativeOpus.opus_encode(_handler, (short*)inputPtr, frame_size, outputPtr, max_data_bytes);
+                CheckError(result);
+                return result;
+            }
+        }
 
-            int result = 0;
-            fixed (byte* inPtr = input)
-            fixed (byte* outPtr = output)
-                result = NativeOpus.opus_encode(Encoder, inPtr + inputOffset, frame_size / 2, outPtr + outputOffset, output.Length - outputOffset);
+        /// <summary>
+        /// Encodes a pcm frame.
+        /// </summary>
+        /// <param name="input">Input signal (interleaved if 2 channels). length is frame_size*channels*sizeof(short).</param>
+        /// <param name="frame_size">The frame size of the pcm data. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
+        /// <param name="output">Output payload. This must contain storage for at least max_data_bytes.</param>
+        /// <param name="max_data_bytes">Size of the allocated memory for the output payload. This may be used to impose an upper limit on the instant bitrate, but should not be used as the only bitrate control. Use <see cref="EncoderCTL.OPUS_SET_BITRATE"/> to control the bitrate.</param>
+        /// <returns>The length of the encoded packet (in bytes).</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public unsafe int Encode(Span<short> input, int frame_size, Span<byte> output, int max_data_bytes)
+        {
+            ThrowIfDisposed();
+            fixed (short* inputPtr = input)
+            fixed (byte* outputPtr = output)
+            {
+                var result = NativeOpus.opus_encode(_handler, inputPtr, frame_size, outputPtr, max_data_bytes);
+                CheckError(result);
+                return result;
+            }
+        }
 
+        /// <summary>
+        /// Encodes a floating point pcm frame.
+        /// </summary>
+        /// <param name="input">Input signal (interleaved if 2 channels). length is frame_size*channels*sizeof(float).</param>
+        /// <param name="frame_size">The frame size of the pcm data. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
+        /// <param name="output">Output payload. This must contain storage for at least max_data_bytes.</param>
+        /// <param name="max_data_bytes">Size of the allocated memory for the output payload. This may be used to impose an upper limit on the instant bitrate, but should not be used as the only bitrate control. Use <see cref="EncoderCTL.OPUS_SET_BITRATE"/> to control the bitrate.</param>
+        /// <returns>The length of the encoded packet (in bytes).</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public unsafe int Encode(Span<float> input, int frame_size, Span<byte> output, int max_data_bytes)
+        {
+            ThrowIfDisposed();
+            fixed (float* inputPtr = input)
+            fixed (byte* outputPtr = output)
+            {
+                var result = NativeOpus.opus_encode_float(_handler, inputPtr, frame_size, outputPtr, max_data_bytes);
+                CheckError(result);
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Encodes a pcm frame.
+        /// </summary>
+        /// <param name="input">Input signal (interleaved if 2 channels). length is frame_size*channels.</param>
+        /// <param name="frame_size">The frame size of the pcm data. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
+        /// <param name="output">Output payload. This must contain storage for at least max_data_bytes.</param>
+        /// <param name="max_data_bytes">Size of the allocated memory for the output payload. This may be used to impose an upper limit on the instant bitrate, but should not be used as the only bitrate control. Use <see cref="EncoderCTL.OPUS_SET_BITRATE"/> to control the bitrate.</param>
+        /// <returns>The length of the encoded packet (in bytes).</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public int Encode(byte[] input, int frame_size, byte[] output, int max_data_bytes) => Encode(input.AsSpan(), frame_size, output.AsSpan(), max_data_bytes);
+
+        /// <summary>
+        /// Encodes a pcm frame.
+        /// </summary>
+        /// <param name="input">Input signal (interleaved if 2 channels). length is frame_size*channels*sizeof(short).</param>
+        /// <param name="frame_size">The frame size of the pcm data. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
+        /// <param name="output">Output payload. This must contain storage for at least max_data_bytes.</param>
+        /// <param name="max_data_bytes">Size of the allocated memory for the output payload. This may be used to impose an upper limit on the instant bitrate, but should not be used as the only bitrate control. Use <see cref="EncoderCTL.OPUS_SET_BITRATE"/> to control the bitrate.</param>
+        /// <returns>The length of the encoded packet (in bytes).</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public int Encode(short[] input, int frame_size, byte[] output, int max_data_bytes) => Encode(input.AsSpan(), frame_size, output.AsSpan(), max_data_bytes);
+
+        /// <summary>
+        /// Encodes a floating point pcm frame.
+        /// </summary>
+        /// <param name="input">Input signal (interleaved if 2 channels). length is frame_size*channels*sizeof(float).</param>
+        /// <param name="frame_size">The frame size of the pcm data. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
+        /// <param name="output">Output payload. This must contain storage for at least max_data_bytes.</param>
+        /// <param name="max_data_bytes">Size of the allocated memory for the output payload. This may be used to impose an upper limit on the instant bitrate, but should not be used as the only bitrate control. Use <see cref="EncoderCTL.OPUS_SET_BITRATE"/> to control the bitrate.</param>
+        /// <returns>The length of the encoded packet (in bytes).</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public int Encode(float[] input, int frame_size, byte[] output, int max_data_bytes) => Encode(input.AsSpan(), frame_size, output.AsSpan(), max_data_bytes);
+
+        /// <summary>
+        /// Performs a ctl request.
+        /// </summary>
+        /// <typeparam name="T">The type you want to input/output.</typeparam>
+        /// <param name="request">The request you want to specify.</param>
+        /// <param name="value">The input/output value.</param>
+        /// <returns>The result code of the request. See <see cref="OpusErrorCodes"/>.</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public unsafe int Ctl<T>(EncoderCTL request, ref T value) where T : unmanaged
+        {
+            ThrowIfDisposed();
+            fixed (void* valuePtr = &value)
+            {
+                var result = NativeOpus.opus_encoder_ctl(_handler, (int)request, valuePtr);
+                CheckError(result);
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Performs a ctl request.
+        /// </summary>
+        /// <typeparam name="T">The type you want to input/output.</typeparam>        
+        /// <typeparam name="T2">The second type you want to input/output.</typeparam>
+        /// <param name="request">The request you want to specify.</param>
+        /// <param name="value">The input/output value.</param>
+        /// <param name="value2">The second input/output value.</param>
+        /// <returns>The result code of the request. See <see cref="OpusErrorCodes"/>.</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public unsafe int Ctl<T, T2>(EncoderCTL request, ref T value, ref T2 value2) 
+            where T : unmanaged
+            where T2 : unmanaged
+        {
+            ThrowIfDisposed();
+            fixed (void* valuePtr = &value)
+            fixed (void* value2Ptr = &value2)
+            {
+                var result = NativeOpus.opus_encoder_ctl(_handler, (int)request, valuePtr, value2Ptr);
+                CheckError(result);
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Performs a ctl request.
+        /// </summary>
+        /// <param name="request">The request you want to specify.</param>
+        /// <returns>The result code of the request. See <see cref="OpusErrorCodes"/>.</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public unsafe int Ctl(GenericCTL request)
+        {
+            ThrowIfDisposed();
+            var result = NativeOpus.opus_encoder_ctl(_handler, (int)request);
             CheckError(result);
             return result;
         }
 
         /// <summary>
-        /// Encodes an Opus frame.
+        /// Performs a ctl request.
         /// </summary>
-        /// <param name="input">Input signal (interleaved if 2 channels). length is frame_size*channels*sizeof(short)</param>
-        /// <param name="frame_size">Number of samples per channel in the input signal. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
-        /// <param name="output">Output payload</param>
-        /// <param name="inputOffset">Offset to start reading in the input.</param>
-        /// <param name="outputOffset">Offset to start writing in the output.</param>
-        /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see <see cref="Enums.OpusError"/>) on failure. Note: OpusSharp throws an error if there is a negative error code.</returns>
-        /// <exception cref="ObjectDisposedException"></exception>
-        /// <exception cref="OpusException"></exception>
-        public unsafe int Encode(short[] input, int frame_size, byte[] output, int inputOffset = 0, int outputOffset = 0)
+        /// <typeparam name="T">The type you want to input/output.</typeparam>
+        /// <param name="request">The request you want to specify.</param>
+        /// <param name="value">The input/output value.</param>
+        /// <returns>The result code of the request. See <see cref="OpusErrorCodes"/>.</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public unsafe int Ctl<T>(GenericCTL request, ref T value) where T : unmanaged
         {
             ThrowIfDisposed();
+            fixed (void* valuePtr = &value)
+            {
+                var result = NativeOpus.opus_encoder_ctl(_handler, (int)request, valuePtr);
+                CheckError(result);
+                return result;
+            }
+        }
 
-            byte[] byteInput = new byte[input.Length * 2]; //Short to byte is 2 bytes.
-#pragma warning disable CA2018 // 'Buffer.BlockCopy' expects the number of bytes to be copied for the 'count' argument
-            Buffer.BlockCopy(input, 0, byteInput, 0, input.Length);
-#pragma warning restore CA2018 // 'Buffer.BlockCopy' expects the number of bytes to be copied for the 'count' argument
-
-            int result = 0;
-            fixed (byte* inPtr = byteInput)
-            fixed (byte* outPtr = output)
-                result = NativeOpus.opus_encode(Encoder, inPtr + inputOffset, frame_size, outPtr + outputOffset, output.Length - outputOffset);
-
-            CheckError(result);
-            Buffer.BlockCopy(byteInput, 0, output, 0, output.Length);
-            return result;
+        /// <inheritdoc/>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>
-        /// Encodes an Opus frame.
+        /// Dispose logic.
         /// </summary>
-        /// <param name="input">Input in float format (interleaved if 2 channels), with a normal range of +/-1.0. Samples with a range beyond +/-1.0 are supported but will be clipped by decoders using the integer API and should only be used if it is known that the far end supports extended dynamic range. length is frame_size*channels*sizeof(float)</param>
-        /// <param name="frame_size">Number of samples per channel in the input signal. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
-        /// <param name="output">Output payload</param>
-        /// <param name="inputOffset">Offset to start reading in the input.</param>
-        /// <param name="outputOffset">Offset to start writing in the output.</param>
-        /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see <see cref="Enums.OpusError"/>) on failure. Note: OpusSharp throws an error if there is a negative error code.</returns>
-        /// <exception cref="ObjectDisposedException"></exception>
-        /// <exception cref="OpusException"></exception>
-        public unsafe int EncodeFloat(float[] input, int frame_size, byte[] output, int inputOffset = 0, int outputOffset = 0)
+        /// <param name="disposing">Set to true if fully disposing.</param>
+        protected virtual void Dispose(bool disposing)
         {
-            ThrowIfDisposed();
+            if (_disposed) return;
 
-            int result = 0;
-            fixed (float* inPtr = input)
-            fixed (byte* outPtr = output)
-                result = NativeOpus.opus_encode_float(Encoder, inPtr + inputOffset, frame_size, outPtr + outputOffset, output.Length - outputOffset);
-
-            CheckError(result);
-            return result;
-        }
-
-        /// <summary>
-        /// Requests a CTL on the encoder.
-        /// </summary>
-        /// <param name="ctl">The encoder CTL to request.</param>
-        /// <param name="value">The value to input.</param>
-        /// <exception cref="ObjectDisposedException"></exception>
-        /// <exception cref="OpusException"></exception>
-        public void EncoderCtl(Enums.EncoderCtl ctl, int value)
-        {
-            ThrowIfDisposed();
-
-            CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)ctl, value));
-        }
-
-        /// <summary>
-        /// Requests a CTL on the encoder.
-        /// </summary>
-        /// <param name="ctl">The encoder CTL to request.</param>
-        /// <exception cref="ObjectDisposedException"></exception>
-        /// <exception cref="OpusException"></exception>
-        public int EncoderCtl(Enums.EncoderCtl ctl)
-        {
-            ThrowIfDisposed();
-
-            CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)ctl, out int val));
-            return val;
-        }
-
-        /// <summary>
-        /// Requests a CTL on the encoder.
-        /// </summary>
-        /// <param name="ctl">The encoder CTL to request.</param>
-        /// <param name="value">The value to input.</param>
-        /// <exception cref="ObjectDisposedException"></exception>
-        /// <exception cref="OpusException"></exception>
-        public void EncoderCtl(Enums.GenericCtl ctl, int value)
-        {
-            ThrowIfDisposed();
-
-            CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)ctl, value));
-        }
-
-        /// <summary>
-        /// Requests a CTL on the encoder.
-        /// </summary>
-        /// <param name="ctl">The encoder CTL to request.</param>
-        /// <exception cref="ObjectDisposedException"></exception>
-        /// <exception cref="OpusException"></exception>
-        public int EncoderCtl(Enums.GenericCtl ctl)
-        {
-            ThrowIfDisposed();
-
-            CheckError(NativeOpus.opus_encoder_ctl(Encoder, (int)ctl, out int val));
-            return val;
-        }
-
-        /// <summary>
-        /// Disposes the object.
-        /// </summary>
-        /// <param name="disposing"></param>
-        protected override void Dispose(bool disposing)
-        {
             if (disposing)
             {
-                if (!Encoder.IsClosed)
-                    Encoder.Close();
+                if (!_handler.IsClosed)
+                    _handler.Close();
             }
+
+            _disposed = true;
         }
 
         /// <summary>
-        /// Checks if the object is disposed and throws.
+        /// Throws an exception if this object is disposed or the handler is closed.
         /// </summary>
-        /// <exception cref="ObjectDisposedException"></exception>
-        private void ThrowIfDisposed()
+        /// <exception cref="ObjectDisposedException" />
+        protected virtual void ThrowIfDisposed()
         {
-            if(Encoder.IsClosed)
-            {
+            if (_disposed || _handler.IsClosed)
                 throw new ObjectDisposedException(GetType().FullName);
-            }
         }
-        #endregion
 
         /// <summary>
-        /// Check's for an opus error and throws if there is one.
+        /// Checks if there is an opus error and throws if the error is a negative value.
         /// </summary>
-        /// <param name="result"></param>
+        /// <param name="error">The error code to input.</param>
         /// <exception cref="OpusException"></exception>
-        protected static void CheckError(int result)
+        protected void CheckError(int error)
         {
-            if (result < 0)
-                throw new OpusException(((Enums.OpusError)result).ToString());
+            if (error < 0)
+                throw new OpusException(((OpusErrorCodes)error).ToString());
         }
     }
 }

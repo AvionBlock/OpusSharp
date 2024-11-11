@@ -1,27 +1,27 @@
-﻿using System.Runtime.InteropServices;
-using System;
+﻿using System;
+using System.Runtime.InteropServices;
 
 namespace OpusSharp.Core.SafeHandlers
 {
     /// <summary>
-    /// Managed wrapper over the OpusDecoder state.
+    /// Managed wrapper over the OpusDREDDecoder state.
     /// </summary>
-    public class OpusDecoderSafeHandle : SafeHandle
+    public class OpusDREDDecoderSafeHandle : SafeHandle
     {
         /// <summary>
         /// Creates a new <see cref="OpusDecoderSafeHandle"/>.
         /// </summary>
-        public OpusDecoderSafeHandle() : base(IntPtr.Zero, true)
+        public OpusDREDDecoderSafeHandle() : base(IntPtr.Zero, true)
         {
         }
-        
+
         /// <inheritdoc/>
         public override bool IsInvalid => handle == IntPtr.Zero;
 
         /// <inheritdoc/>
         protected override bool ReleaseHandle()
         {
-            NativeOpus.opus_decoder_destroy(handle);
+            NativeOpus.opus_dred_decoder_destroy(handle);
             return true;
         }
     }
