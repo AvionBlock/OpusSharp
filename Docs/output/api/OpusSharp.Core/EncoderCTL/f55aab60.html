@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="/assets/bootstrap/bootstrap.css" rel="stylesheet" />
+                <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto+Slab:wght@400;700&family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet" data-no-mirror>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.26.0/themes/prism.css">
+        <link href="/assets/css/theme.css" rel="stylesheet" />
+        <link href="/assets/css/styles.css" rel="stylesheet" />
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/a1cad7ed9a.js" crossorigin="anonymous" data-no-mirror></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.26.0/components/prism-core.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.26.0/plugins/autoloader/prism-autoloader.min.js" data-no-mirror></script>
+        <script src="https://cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+	    
+        <!-- Lunr search -->
+
+        
+
+        
+
+        <title>Documentation - OPUS_GET_EXPERT_FRAME_DURATION</title>
+    </head>
+    <body class="d-flex flex-column">
+        <div class="flex-grow-1 d-flex flex-column">
+            <div class="bg-nav">
+                <div class="container-xl py-3">
+                    <div class="row">
+                        <div class="offset-lg-2 col-12 col-lg-8 px-0">
+                            <nav class="navbar navbar-expand-md navbar-light align-items-start">
+    <a class="navbar-brand" href="/">
+                <span class="text-primary">Documentation</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapse-topnav" aria-controls="collapse-topnav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="collapse-topnav" class="collapse navbar-collapse flex-wrap">
+        <ul class="navbar-nav mr-auto">
+            
+        </ul>
+        <ul class="navbar-nav">
+                    <li class="nav-item">
+            <a class="nav-link" href="/docs">Quick Start</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/examples">Examples</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/api">API</a>
+        </li>
+
+            
+        </ul>
+    </div>
+</nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex-grow-1 d-flex flex-column">
+                    <!-- Titlebar -->
+                    <div id="titlebar" class="py-4">
+                        <div class="container-xl">
+                            <div class="row">
+                                <div class="offset-lg-2 col-12 col-lg-8 px-3 px-lg-0 w-100 d-flex flex-wrap align-items-end">
+                                    <div class="flex-grow-1">
+                                        <div class="breadcrumbs d-flex flex-column flex-md-row text-break">
+
+			<span><a href="/api/OpusSharp.Core/EncoderCTL">EncoderCTL</a>.</span>
+                                        </div>
+                                        <div class="text-white m-0 text-break title">
+
+    <div>O<wbr>P<wbr>U<wbr>S_<wbr>G<wbr>E<wbr>T_<wbr>E<wbr>X<wbr>P<wbr>E<wbr>R<wbr>T_<wbr>F<wbr>R<wbr>A<wbr>M<wbr>E_<wbr>D<wbr>U<wbr>R<wbr>A<wbr>T<wbr>I<wbr>O<wbr>N <small>Field</small></div>
+                                        </div>
+                                    </div>
+                                        <div class="navbar navbar-expand-md navbar-dark p-0">
+                                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#left-sidebar" aria-controls="left-sidebar" aria-expanded="false" aria-label="Toggle navigation">
+                                                <span class="navbar-toggler-icon"></span>
+                                            </button>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Under title -->
+                    <div id="undertitle">
+                        <div class="container-xl">
+                            <div class="row">
+                                    <div class="col-md-3 col-lg-2">
+                                    </div>
+                                    <div class="col-md-9 col-lg-8 bg-white">
+                                    </div>
+                                <div class="col-lg-2 d-none d-lg-block">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <!-- Body -->
+                <div class="flex-grow-1 d-flex flex-column">
+                        <div class="container-xl flex-grow-1 d-flex flex-column">
+                            <div class="row flex-grow-1 align-items-stretch">
+                                        <div class="col-md-3 col-lg-2 p-md-0 m-md-0 bg-body">
+                                            <div id="left-sidebar" class="sidebar collapse px-0 px-md-3 pt-3">
+
+	<div class="sidebar-root">
+		        <div class="sidebar-root bg-white mb-3 page-box font-size-sm">
+                <div class="sidebar-nav-item sidebar-header mb-0 pb-0">Namespace</div>
+                <div class="sidebar-nav-item  font-weight-normal mt-0 pt-0"><a href="/api/OpusSharp.Core">OpusSharp<wbr>.Core</a></div>
+                <div class="sidebar-nav-item sidebar-header mb-0 pb-0">Type</div>
+                <div class="sidebar-nav-item font-weight-normal mt-0 pt-0"><a href="/api/OpusSharp.Core/EncoderCTL">EncoderCTL</a></div>
+        </div>
+            <div class="sidebar-nav-item sidebar-header">Field Members</div>
+            <div class="sidebar-nav-children">
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/6267FBC8">OPUS_GET_APPLICATION</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/B08D266A">OPUS_GET_BITRATE</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/EF88CAFE">OPUS_GET_COMPLEXITY</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/8EF9D33C">O<wbr>P<wbr>U<wbr>S_<wbr>G<wbr>E<wbr>T_<wbr>D<wbr>R<wbr>E<wbr>D_<wbr>D<wbr>U<wbr>R<wbr>A<wbr>T<wbr>I<wbr>O<wbr>N</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/6AB9DDEF">OPUS_GET_DTX</a></div>
+                    <div class="sidebar-nav-item active"><a href="/api/OpusSharp.Core/EncoderCTL/F55AAB60">O<wbr>P<wbr>U<wbr>S_<wbr>G<wbr>E<wbr>T_<wbr>E<wbr>X<wbr>P<wbr>E<wbr>R<wbr>T_<wbr>F<wbr>R<wbr>A<wbr>M<wbr>E_<wbr>D<wbr>U<wbr>R<wbr>A<wbr>T<wbr>I<wbr>O<wbr>N</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/8BE7E786">O<wbr>P<wbr>U<wbr>S_<wbr>G<wbr>E<wbr>T_<wbr>F<wbr>O<wbr>R<wbr>C<wbr>E_<wbr>C<wbr>H<wbr>A<wbr>N<wbr>N<wbr>E<wbr>L<wbr>S</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/5DEC89B0">OPUS_GET_IN_DTX</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/E6A482AE">OPUS_GET_INBAND_FEC</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/6473A4FB">OPUS_GET_LOOKAHEAD</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/44EA4437">OPUS_GET_LSB_DEPTH</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/D5AD8BDA">O<wbr>P<wbr>U<wbr>S_<wbr>G<wbr>E<wbr>T_<wbr>M<wbr>A<wbr>X_<wbr>B<wbr>A<wbr>N<wbr>D<wbr>W<wbr>I<wbr>D<wbr>T<wbr>H</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/563D43FE">O<wbr>P<wbr>U<wbr>S_<wbr>G<wbr>E<wbr>T_<wbr>P<wbr>A<wbr>C<wbr>K<wbr>E<wbr>T_<wbr>L<wbr>O<wbr>S<wbr>S_<wbr>P<wbr>E<wbr>R<wbr>C</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/3959E9EE">O<wbr>P<wbr>U<wbr>S_<wbr>G<wbr>E<wbr>T_<wbr>P<wbr>R<wbr>E<wbr>D<wbr>I<wbr>C<wbr>T<wbr>I<wbr>O<wbr>N_<wbr>D<wbr>I<wbr>S<wbr>A<wbr>B<wbr>L<wbr>E<wbr>D</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/7FD9B115">OPUS_GET_SIGNAL</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/BD92320C">OPUS_GET_VBR</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/FEF5B757">O<wbr>P<wbr>U<wbr>S_<wbr>G<wbr>E<wbr>T_<wbr>V<wbr>B<wbr>R_<wbr>C<wbr>O<wbr>N<wbr>S<wbr>T<wbr>R<wbr>A<wbr>I<wbr>N<wbr>T</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/4E9DE506">OPUS_SET_APPLICATION</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/A60AAE6D">OPUS_SET_BANDWIDTH</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/F93A0974">OPUS_SET_BITRATE</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/983BD481">OPUS_SET_COMPLEXITY</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/5AEBBF2D">OPUS_SET_DNN_BLOB</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/3C478A58">O<wbr>P<wbr>U<wbr>S_<wbr>S<wbr>E<wbr>T_<wbr>D<wbr>R<wbr>E<wbr>D_<wbr>D<wbr>U<wbr>R<wbr>A<wbr>T<wbr>I<wbr>O<wbr>N</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/B7014C7C">OPUS_SET_DTX</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/603701C3">O<wbr>P<wbr>U<wbr>S_<wbr>S<wbr>E<wbr>T_<wbr>E<wbr>X<wbr>P<wbr>E<wbr>R<wbr>T_<wbr>F<wbr>R<wbr>A<wbr>M<wbr>E_<wbr>D<wbr>U<wbr>R<wbr>A<wbr>T<wbr>I<wbr>O<wbr>N</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/956CECA3">O<wbr>P<wbr>U<wbr>S_<wbr>S<wbr>E<wbr>T_<wbr>F<wbr>O<wbr>R<wbr>C<wbr>E_<wbr>C<wbr>H<wbr>A<wbr>N<wbr>N<wbr>E<wbr>L<wbr>S</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/91179CD1">OPUS_SET_INBAND_FEC</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/0826FA43">OPUS_SET_LSB_DEPTH</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/6713D2BE">O<wbr>P<wbr>U<wbr>S_<wbr>S<wbr>E<wbr>T_<wbr>M<wbr>A<wbr>X_<wbr>B<wbr>A<wbr>N<wbr>D<wbr>W<wbr>I<wbr>D<wbr>T<wbr>H</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/2A7D6850">O<wbr>P<wbr>U<wbr>S_<wbr>S<wbr>E<wbr>T_<wbr>P<wbr>A<wbr>C<wbr>K<wbr>E<wbr>T_<wbr>L<wbr>O<wbr>S<wbr>S_<wbr>P<wbr>E<wbr>R<wbr>C</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/E67EC7EF">O<wbr>P<wbr>U<wbr>S_<wbr>S<wbr>E<wbr>T_<wbr>P<wbr>R<wbr>E<wbr>D<wbr>I<wbr>C<wbr>T<wbr>I<wbr>O<wbr>N_<wbr>D<wbr>I<wbr>S<wbr>A<wbr>B<wbr>L<wbr>E<wbr>D</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/EDF8F43B">OPUS_SET_SIGNAL</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/602AA39F">OPUS_SET_VBR</a></div>
+                    <div class="sidebar-nav-item"><a href="/api/OpusSharp.Core/EncoderCTL/E07EBC72">O<wbr>P<wbr>U<wbr>S_<wbr>S<wbr>E<wbr>T_<wbr>V<wbr>B<wbr>R_<wbr>C<wbr>O<wbr>N<wbr>S<wbr>T<wbr>R<wbr>A<wbr>I<wbr>N<wbr>T</a></div>
+            </div>
+
+	</div>
+                                            </div>
+                                        </div>
+                                        <div id="content" class="col-md-9 col-lg-8 p-4 pt-md-0 bg-white">
+
+
+
+
+
+
+        <div class="lead mb-3">
+    Gets the encoder's configured use of variable duration frames.
+    </div>
+
+    <div class="p-3 bg-light page-box container small">
+        		<dl class="dl-horizontal">
+
+    		    <dt>Namespace</dt>
+    		    <dd><a href="/api/OpusSharp.Core">OpusSharp<wbr>.Core</a></dd>
+
+				<dt>Containing Type</dt>
+				<dd><a href="/api/OpusSharp.Core/EncoderCTL">EncoderCTL</a></dd>
+
+
+
+
+
+
+
+				<dt>Field Type</dt>
+				<dd><a href="/api/OpusSharp.Core/EncoderCTL">EncoderCTL</a></dd>
+	    </dl>
+
+    </div>
+		<h1 id="Syntax">Syntax</h1>
+		<pre class="language-csharp"><code class="language-csharp">OPUS_GET_EXPERT_FRAME_DURATION</code></pre>
+
+
+
+
+
+	<h1 id="ConstantValue">Constant Value</h1>
+	<div class="table-responsive">
+		<table class="table table-api table-striped table-hover two-cols">
+			<thead>
+				<tr>
+					<th>Value</th>
+					<th>Type</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>4041</td>
+					<td>Int32</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+
+
+
+
+
+
+                                        </div>
+                                <div class="col-lg-2 p-md-0 m-md-0 bg-body">
+                                    <div id="right-sidebar" class="sidebar px-0 px-md-3 pt-3">
+
+	        <div class="sidebar-root">
+            <div class="sidebar-nav-item sidebar-header">On This Page</div>
+            <div class="sidebar-nav-children">
+                    <div class="sidebar-nav-item"><a href="#Syntax">Syntax</a></div>
+                    <div class="sidebar-nav-item"><a href="#ConstantValue">Constant Value</a></div>
+            </div>
+        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div id="footer" class="p-3 text-white">
+            <div class="container-xl">
+                <div class="row">
+    <div class="offset-lg-2 col-12 col-lg-8">
+        <div class="pt-2 font-size-sm text-muted text-center">
+            Generated By <a class="text-muted" href="https://statiq.dev">Statiq</a>
+        </div>
+    </div>
+</div>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <script>
+            $(document).ready(function() {
+                quicklink.listen();
+
+                // Bootstrap tooltips
+                $('[data-toggle="tooltip"]').tooltip();
+
+				// Keeps the sidebars in view on wider viewports
+				let left = null;
+				let leftParent = null;
+				let right = null;
+				let rightParent = null;
+                function stickSidebars()
+				{
+				    if (left == null) {
+                        left = $('#left-sidebar');
+                        right = $('#right-sidebar');
+                    }
+                    if (left.length) {
+                        if (window.innerWidth >= 768) {
+                            if (leftParent == null) {
+                                leftParent = left.parent()[0];
+                            }
+                            if (leftParent) {
+                                let leftRect = leftParent.getBoundingClientRect();
+                                stickSidebar(left,  leftRect);
+                            }
+                        } else {
+                            left.css('position', 'relative');
+                            if (left.css('bottom') != 0) {
+                                left.css('bottom', '0');
+                            }
+                        }
+                    }
+                    if (right.length) {
+                        if (window.innerWidth >= 768) {
+                            if (rightParent == null) {
+                                rightParent = right.parent()[0];
+                            }
+                            if (rightParent) {
+                                let rightRect = rightParent.getBoundingClientRect();
+                                stickSidebar(right,  rightRect);
+                            }
+                        } else {
+                            right.css('position', 'relative');
+                            if (right.css('bottom') != 0) {
+                                right.css('bottom', '0');
+                            }
+                        }
+                    }
+				}
+				function stickSidebar(sidebar, rect) {
+                    // Bottom
+                    if (rect.bottom > window.innerHeight) {
+                        sidebar.css('bottom', rect.bottom - window.innerHeight + "px");
+                    } else {
+                        sidebar.css('bottom', 0);
+                    }
+                    // Top
+                    if (rect.top < 0) {
+                        sidebar.css('position', 'sticky');
+                    } else {
+                        sidebar.css('position', 'absolute');
+                    }
+				}
+				$(window).on("load", function() {
+				    stickSidebars();
+				});
+                $(window).scroll(function() {
+				    stickSidebars();
+				});
+				$(window).resize(function() {
+				    stickSidebars();
+				})
+
+                // Mermaid diagrams
+                mermaid.initialize(
+                {
+                    flowchart:
+                    {
+                        useMaxWidth: false
+                    },
+					startOnLoad: false,
+					cloneCssStyles: false
+                });
+                mermaid.init(undefined, ".mermaid");
+
+                // Remove the max-width setting that Mermaid sets
+                var mermaidSvg = $('.mermaid svg');
+                mermaidSvg.addClass('img-fluid');
+                mermaidSvg.css('max-width', '');
+
+                // Make it scrollable
+				var target = document.querySelector(".mermaid svg");
+				if(target !== null)
+				{
+					var panZoom = window.panZoom = svgPanZoom(target, {
+						zoomEnabled: true,
+						controlIconsEnabled: true,
+						fit: true,
+						center: true,
+                        maxZoom: 20,
+                        zoomScaleSensitivity: 0.6
+					});
+
+                    // Do the reset once right away to fit the diagram
+                    panZoom.resize();
+                    panZoom.fit();
+                    panZoom.center();
+
+                    $(window).resize(function(){
+                        panZoom.resize();
+                        panZoom.fit();
+                        panZoom.center();
+                    });
+				}
+            });
+        </script>
+
+        
+
+        
+    </body>
+</html>

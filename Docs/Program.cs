@@ -6,7 +6,8 @@
           await Bootstrapper
             .Factory
             .CreateDocs(args)
-            .AddSourceFiles("../../OpusSharp/OpusSharp.Core/**/{!.git,!bin,!obj,!packages,!*.Tests,}/**/*.cs")
+            .AddSourceFiles("../OpusSharp.Core/**/{!.git,!bin,!obj,!packages,!*.Tests,}/**/*.cs")
+            .AddSourceFiles("../../OpusSharp.Core/**/{!.git,!bin,!obj,!packages,!*.Tests,}/**/*.cs")
             .DeployToGitHubPages(
               "avionblock",
               "avionblock.github.io",
