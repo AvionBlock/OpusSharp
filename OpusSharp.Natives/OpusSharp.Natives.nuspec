@@ -3,9 +3,12 @@
   <metadata>
     <id>OpusSharp.Natives</id>
     <version>1.5.2</version>
+    <authors>The Opus Authors.</authors>
     <description>Contains native binaries for OpusSharp.</description>
-    <authors>The Opus Authors</authors>
-    <projectUrl>https://opus-codec.org/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+
+    <projectUrl>https://avionblock.github.io/OpusSharp/index.html</projectUrl>
+    <repository type="git" url="https://github.com/xiph/opus"></repository>
   </metadata>
   <files>
     <file src="runtimes\win-x64\native\opus.dll" target="runtimes\win-x64\native" />
@@ -22,5 +25,7 @@
     <file src="runtimes\linux-x86\native\libopus.so.0.10.1" target="runtimes\linux-x86\native" />
     <file src="runtimes\linux-arm64\native\libopus.so.0.10.1" target="runtimes\linux-arm64\native" />
     <file src="runtimes\linux-arm\native\libopus.so.0.10.1" target="runtimes\linux-arm\native" />
+
+    <file src="../README.md" target="docs" />
   </files>
 </package>

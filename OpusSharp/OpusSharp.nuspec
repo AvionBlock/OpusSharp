@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <package>
 	<metadata>
-		<id>OpusSharp.Core</id>
+		<id>OpusSharp</id>
 		<version>1.5.2</version>
 		<authors>SineVector241</authors>
-		<description>Standard library for OpusSharp.</description>
+		<description>OpusSharp library.</description>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<copyright>Copyright MIT</copyright>
 		<readme>docs/README.md</readme>
-		
+
 		<projectUrl>https://avionblock.github.io/OpusSharp/index.html</projectUrl>
 		<repository type="git" url="https://github.com/AvionBlock/OpusSharp"></repository>
 
@@ -17,11 +17,7 @@
 		  </group>
 		</dependencies>
 	</metadata>
-
 	<files>
-	  <file src="bin/Release/netstandard2.1/OpusSharp.dll" target="lib/netstandard2.1/OpusSharp.dll" />
-	  <file src="bin/Release/netstandard2.1/OpusSharp.pdb" target="lib/netstandard2.1/OpusSharp.pdb" />
-	  <file src="bin/Release/netstandard2.1/OpusSharp.xml" target="lib/netstandard2.1" />
-	  <file src="../README.md" target="docs" />
+		<file src="../README.md" target="docs" />
 	</files>
 </package>
