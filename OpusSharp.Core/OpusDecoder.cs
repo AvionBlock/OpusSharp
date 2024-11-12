@@ -28,6 +28,14 @@ namespace OpusSharp.Core
         }
 
         /// <summary>
+        /// Opus decoder destructor.
+        /// </summary>
+        ~OpusDecoder()
+        {
+            Dispose(false);
+        }
+
+        /// <summary>
         /// Decodes an opus encoded frame.
         /// </summary>
         /// <param name="input">Input payload. Use null to indicate packet loss</param>

@@ -29,6 +29,14 @@ namespace OpusSharp.Core
         }
 
         /// <summary>
+        /// Opus encoder destructor.
+        /// </summary>
+        ~OpusEncoder()
+        {
+            Dispose(false);
+        }
+
+        /// <summary>
         /// Encodes a pcm frame.
         /// </summary>
         /// <param name="input">Input signal (interleaved if 2 channels). length is frame_size*channels.</param>
