@@ -7,8 +7,9 @@
 		<description>Standard library for OpusSharp.</description>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<copyright>Copyright MIT</copyright>
+		<license type="file">LICENSE.txt</license>
 		<readme>docs/README.md</readme>
-		
+
 		<projectUrl>https://avionblock.github.io/OpusSharp/index.html</projectUrl>
 		<repository type="git" url="https://github.com/AvionBlock/OpusSharp"></repository>
 
@@ -23,5 +24,6 @@
 	  <file src="bin/Release/netstandard2.1/OpusSharp.pdb" target="lib/netstandard2.1/OpusSharp.pdb" />
 	  <file src="bin/Release/netstandard2.1/OpusSharp.xml" target="lib/netstandard2.1" />
 	  <file src="../README.md" target="docs" />
+	  <file src="../LICENSE.txt" target="" />
 	</files>
 </package>
