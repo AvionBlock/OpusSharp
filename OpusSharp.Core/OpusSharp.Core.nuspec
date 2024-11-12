@@ -2,21 +2,28 @@
 <package>
 	<metadata>
 		<id>OpusSharp.Core</id>
-		<version>1.0.4</version>
+		<version>1.5.2</version>
 		<authors>SineVector241</authors>
 		<description>Standard library for OpusSharp.</description>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<copyright>Copyright MIT</copyright>
+		<license type="file">LICENSE.txt</license>
+		<readme>docs/README.md</readme>
+
+		<projectUrl>https://avionblock.github.io/OpusSharp/index.html</projectUrl>
+		<repository type="git" url="https://github.com/AvionBlock/OpusSharp"></repository>
 
 		<dependencies>
-		  <group targetFramework="netstandard2.0">
+		  <group targetFramework="netstandard2.1">
 		  </group>
 		</dependencies>
 	</metadata>
 
 	<files>
-	  <file src="bin/Release/netstandard2.0/OpusSharp.dll" target="lib/netstandard2.0/OpusSharp.dll" />
-	  <file src="bin/Release/netstandard2.0/OpusSharp.pdb" target="lib/netstandard2.0/OpusSharp.pdb" />
-	  <file src="bin/Release/netstandard2.0/OpusSharp.xml" target="lib/netstandard2.0" />
+	  <file src="bin/Release/netstandard2.1/OpusSharp.dll" target="lib/netstandard2.1/OpusSharp.dll" />
+	  <file src="bin/Release/netstandard2.1/OpusSharp.pdb" target="lib/netstandard2.1/OpusSharp.pdb" />
+	  <file src="bin/Release/netstandard2.1/OpusSharp.xml" target="lib/netstandard2.1" />
+	  <file src="../README.md" target="docs" />
+	  <file src="../LICENSE.txt" target="" />
 	</files>
 </package>
