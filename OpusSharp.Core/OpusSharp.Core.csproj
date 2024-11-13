@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<AssemblyName>OpusSharp</AssemblyName>
+		<AssemblyName>OpusSharp.Core</AssemblyName>
 		<Nullable>enable</Nullable>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<TargetFrameworks>netstandard2.1</TargetFrameworks>

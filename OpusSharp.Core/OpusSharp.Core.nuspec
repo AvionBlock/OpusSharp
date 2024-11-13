@@ -20,9 +20,9 @@
 	</metadata>
 
 	<files>
-	  <file src="bin/Release/netstandard2.1/OpusSharp.dll" target="lib/netstandard2.1/OpusSharp.dll" />
-	  <file src="bin/Release/netstandard2.1/OpusSharp.pdb" target="lib/netstandard2.1/OpusSharp.pdb" />
-	  <file src="bin/Release/netstandard2.1/OpusSharp.xml" target="lib/netstandard2.1" />
+	  <file src="bin/Release/netstandard2.1/OpusSharp.Core.dll" target="lib/netstandard2.1/OpusSharp.Core.dll" />
+	  <file src="bin/Release/netstandard2.1/OpusSharp.Core.pdb" target="lib/netstandard2.1/OpusSharp.Core.pdb" />
+	  <file src="bin/Release/netstandard2.1/OpusSharp.Core.xml" target="lib/netstandard2.1" />
 	  <file src="../README.md" target="docs" />
 	  <file src="../LICENSE.txt" target="" />
 	</files>
