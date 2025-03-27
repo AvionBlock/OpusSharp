@@ -32,7 +32,7 @@ var channels = 1;
 var samplesPerFrame = sampleRate / (1000 / frameSizeMs) * channels; //960 samples per frame.
 var decoder = new OpusDecoder(sampleRate, channels);
 
-var decoded = new byte[1920]; //We get 1920 bytes from doing this calculation because 16/8 (16 bit audio, 1 byte is 8 bits) equals 2 multiplied by samplesPerFrame gets us bytes per frame. 16/(sizeof(byte) * 4) * samplesPerFrame
+var decoded = new byte[1920]; //We get 1920 bytes from doing this calculation because 16/8 (16 bit audio, 1 byte is 8 bits) equals 2 multiplied by samplesPerFrame gets us bytes per frame. 16/(sizeof(byte) * 8) * samplesPerFrame
 var decodedSamples = decoder.Decode(encoded, encodedBytes, decoded, 960, false); //Still don't know why opus only returns decoded samples but it does...
 ```
 
