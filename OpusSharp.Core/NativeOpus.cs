@@ -7,15 +7,11 @@ using System.Runtime.InteropServices;
 namespace OpusSharp.Core
 {
     /// <summary>
-    /// Native opus handler that directly calls the exported opus functions.
+    /// Native opus handler that directly calls the exported opus functions. Requires a dynamically loaded library.
     /// </summary>
     public static class NativeOpus
     {
-#if IOS
-        private const string DllName = "__Internal__";
-#else
         private const string DllName = "opus";
-#endif
 
         //Encoder
         /// <summary>
