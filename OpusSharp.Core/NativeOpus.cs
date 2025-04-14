@@ -178,6 +178,16 @@ namespace OpusSharp.Core
         /// <returns><see cref="OpusErrorCodes"/></returns>
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern unsafe int opus_decoder_ctl(OpusDecoderSafeHandle st, int request, void* data);
+        
+        /// <summary>
+        /// Perform a CTL function on an <see cref="OpusDecoderSafeHandle"/>.
+        /// </summary>
+        /// <param name="st">Decoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="DecoderCTL"/>.</param>
+        /// <param name="data">The data to input.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern unsafe int opus_decoder_ctl(OpusDecoderSafeHandle st, int request, int data);
 
         /// <summary>
         /// Frees an <see cref="OpusDecoderSafeHandle"/> allocated by <see cref="opus_decoder_create(int, int, int*)"/>.

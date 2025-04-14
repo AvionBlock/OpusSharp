@@ -14,18 +14,18 @@ namespace OpusSharp.Core
         /// <returns>Version string.</returns>
         public static unsafe string Version()
         {
-            byte* version = NativeOpus.opus_get_version_string();
+            var version = NativeOpus.opus_get_version_string();
             return Marshal.PtrToStringAnsi((IntPtr)version) ?? "";
         }
 
         /// <summary>
-        /// Converts an opus error code into a human readable string.
+        /// Converts an opus error code into a human-readable string.
         /// </summary>
         /// <param name="error">Error number.</param>
         /// <returns>Error string.</returns>
         public static unsafe string StringError(int error)
         {
-            byte* stringError = NativeOpus.opus_strerror(error);
+            var stringError = NativeOpus.opus_strerror(error);
             return Marshal.PtrToStringAnsi((IntPtr)stringError) ?? "";
         }
     }

@@ -358,6 +358,7 @@
         /// </summary>
         OPUS_GET_IN_DTX = 4049, //Encoder only, seems to be listed as generic in docs though.
 
+        //HOLDUP IS THIS SUPPOSED TO BE HERE?
         /// <summary>
         /// If non-zero, enables Deep Redundancy (DRED) and use the specified maximum number of 10-ms redundant frames.
         /// </summary>

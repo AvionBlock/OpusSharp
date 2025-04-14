@@ -1,6 +1,9 @@
 ﻿using OpusSharp.Core.SafeHandlers;
 using System;
 
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable FieldCanBeMadeReadOnly.Global
+// ReSharper disable InconsistentNaming
 namespace OpusSharp.Core
 {
     /// <summary>
@@ -9,7 +12,7 @@ namespace OpusSharp.Core
     public class OpusEncoder : IDisposable
     {
         /// <summary>
-        /// Direct safe handle for the <see cref="OpusEncoder"/>. IT IS NOT RECOMMENDED TO CLOSE THE HANDLE DIRECTLY! Instead use <see cref="Dispose(bool)"/> to dispose the handle and object safely.
+        /// Direct safe handle for the <see cref="OpusEncoder"/>. IT IS NOT RECOMMENDED TO CLOSE THE HANDLE DIRECTLY! Instead, use <see cref="Dispose(bool)"/> to dispose the handle and object safely.
         /// </summary>
         protected OpusEncoderSafeHandle _handler;
         private bool _disposed;
@@ -190,7 +193,7 @@ namespace OpusSharp.Core
         /// <returns>The result code of the request. See <see cref="OpusErrorCodes"/>.</returns>
         /// <exception cref="OpusException" />
         /// <exception cref="ObjectDisposedException" />
-        public unsafe int Ctl(GenericCTL request)
+        public int Ctl(GenericCTL request)
         {
             ThrowIfDisposed();
             var result = NativeOpus.opus_encoder_ctl(_handler, (int)request);
