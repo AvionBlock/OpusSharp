@@ -4,6 +4,38 @@ OpusSharp aims to be a cross platform, pure and ported C# compatible version of 
 > [!NOTE]
 > While OpusSharp.Core contains minimal pre-made decoder and encoder handlers, you can create your own as all the SafeHandlers and NativeOpus functions are exposed and fully documented. However to get a minimal setup working, check the example below.
 
+## Encoder Example
+```cs
+using OpusSharp.Core;
+
+byte[] someAudioData = ...;
+var frameSizeMs = 20;
+var sampleRate = 48000;
+var channels = 1;
+var samplesPerFrame = sampleRate / (1000 / frameSizeMs) * channels; //960 samples per frame.
+var encoder = new OpusEncoder(sampleRate, channels, OpusPredefinedValues.OPUS_APPLICATION_VOIP);
+
+byte[] encodedAudio = new byte[1000] //1000 bytes for an encoded buffer should be enough according to the opus documentation.
+var encodedBytes = encoder.Encode(someAudioData, samplesPerFrame, encodedAudio, encodedAudio.Length);
+
+//We can use encodedBytes to trim any excess data from the encodedAudio buffer before sending over the network or writing to a file.
+```
+
+## Decoder Example
+```cs
+using OpusSharp.Core;
+
+byte[] someEncodedAudio = ...;
+var frameSizeMs = 20;
+var sampleRate = 48000;
+var channels = 1;
+var samplesPerFrame = sampleRate / (1000 / frameSizeMs) * channels; //960 samples per frame.
+var decoder = new OpusDecoder(sampleRate, channels);
+
+var decoded = new byte[1920]; //We get 1920 bytes from doing this calculation because 16/8 (16 bit audio, 1 byte is 8 bits) equals 2 multiplied by samplesPerFrame gets us bytes per frame. 16/(sizeof(byte) * 8) * samplesPerFrame
+var decodedSamples = decoder.Decode(encoded, encodedBytes, decoded, 960, false); //Still don't know why opus only returns decoded samples but it does...
+```
+
 ## Basic NAudio Example
 ```cs
 using NAudio.Wave;
@@ -65,3 +97,6 @@ Please check [QuickStart](https://avionblock.github.io/OpusSharp/quick-start/ind
 
 ## API Documentation
 https://avionblock.github.io/OpusSharp/api/OpusSharp.Core.html
+
+## Opus License
+https://opus-codec.org/license/
