@@ -26,7 +26,7 @@ namespace OpusSharp.Core
         /// <exception cref="OpusException" />
         public unsafe OpusEncoder(int sample_rate, int channels, OpusPredefinedValues application)
         {
-            int error = 0;
+            var error = 0;
             _handler = NativeOpus.opus_encoder_create(sample_rate, channels, (int)application, &error);
             CheckError(error);
         }
@@ -144,6 +144,37 @@ namespace OpusSharp.Core
         /// <summary>
         /// Performs a ctl request.
         /// </summary>
+        /// <param name="request">The request you want to specify.</param>
+        /// <returns>The result code of the request. See <see cref="OpusErrorCodes"/>.</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public int Ctl(EncoderCTL request)
+        {
+            ThrowIfDisposed();
+            var result = NativeOpus.opus_encoder_ctl(_handler, (int)request);
+            CheckError(result);
+            return result;
+        }
+        
+        /// <summary>
+        /// Performs a ctl request.
+        /// </summary>
+        /// <param name="request">The request you want to specify.</param>
+        /// /// <param name="value">The input value.</param>
+        /// <returns>The result code of the request. See <see cref="OpusErrorCodes"/>.</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public int Ctl(EncoderCTL request, int value)
+        {
+            ThrowIfDisposed();
+            var result = NativeOpus.opus_encoder_ctl(_handler, (int)request, value);
+            CheckError(result);
+            return result;
+        }
+        
+        /// <summary>
+        /// Performs a ctl request.
+        /// </summary>
         /// <typeparam name="T">The type you want to input/output.</typeparam>
         /// <param name="request">The request you want to specify.</param>
         /// <param name="value">The input/output value.</param>
@@ -156,6 +187,50 @@ namespace OpusSharp.Core
             fixed (void* valuePtr = &value)
             {
                 var result = NativeOpus.opus_encoder_ctl(_handler, (int)request, valuePtr);
+                CheckError(result);
+                return result;
+            }
+        }
+        
+        /// <summary>
+        /// Performs a ctl request.
+        /// </summary>
+        /// <typeparam name="T">The type you want to input/output.</typeparam>
+        /// <param name="request">The request you want to specify.</param>
+        /// <param name="value">The input/output value.</param>
+        /// <param name="value2">The second input value.</param>
+        /// <returns>The result code of the request. See <see cref="OpusErrorCodes"/>.</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public unsafe int Ctl<T>(EncoderCTL request, ref T value, int value2) 
+            where T : unmanaged
+        {
+            ThrowIfDisposed();
+            fixed (void* valuePtr = &value)
+            {
+                var result = NativeOpus.opus_encoder_ctl(_handler, (int)request, valuePtr, value2);
+                CheckError(result);
+                return result;
+            }
+        }
+        
+        /// <summary>
+        /// Performs a ctl request.
+        /// </summary>
+        /// <typeparam name="T">The type you want to input/output.</typeparam>
+        /// <param name="request">The request you want to specify.</param>
+        /// <param name="value">The input value.</param>
+        /// <param name="value2">The second input/output value.</param>
+        /// <returns>The result code of the request. See <see cref="OpusErrorCodes"/>.</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public unsafe int Ctl<T>(EncoderCTL request, int value, ref T value2) 
+            where T : unmanaged
+        {
+            ThrowIfDisposed();
+            fixed (void* value2Ptr = &value2)
+            {
+                var result = NativeOpus.opus_encoder_ctl(_handler, (int)request, value, value2Ptr);
                 CheckError(result);
                 return result;
             }
@@ -197,6 +272,22 @@ namespace OpusSharp.Core
         {
             ThrowIfDisposed();
             var result = NativeOpus.opus_encoder_ctl(_handler, (int)request);
+            CheckError(result);
+            return result;
+        }
+        
+        /// <summary>
+        /// Performs a ctl set request.
+        /// </summary>
+        /// <param name="request">The request you want to specify.</param>
+        /// <param name="value">The input value.</param>
+        /// <returns>The result code of the request. See <see cref="OpusErrorCodes"/>.</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public int Ctl(GenericCTL request, int value)
+        {
+            ThrowIfDisposed();
+            var result = NativeOpus.opus_encoder_ctl(_handler, (int)request, value);
             CheckError(result);
             return result;
         }

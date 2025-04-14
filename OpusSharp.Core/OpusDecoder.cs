@@ -206,6 +206,22 @@ namespace OpusSharp.Core
             CheckError(result);
             return result;
         }
+        
+        /// <summary>
+        /// Performs a ctl set request.
+        /// </summary>
+        /// <param name="request">The request you want to specify.</param>
+        /// <param name="value">The input value.</param>
+        /// <returns>The result code of the request. See <see cref="OpusErrorCodes"/>.</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public int Ctl(GenericCTL request, int value)
+        {
+            ThrowIfDisposed();
+            var result = NativeOpus.opus_decoder_ctl(_handler, (int)request, value);
+            CheckError(result);
+            return result;
+        }
 
         /// <summary>
         /// Performs a ctl request.
