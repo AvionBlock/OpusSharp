@@ -1,4 +1,6 @@
-﻿namespace OpusSharp.Core
+﻿// ReSharper disable InconsistentNaming
+// ReSharper disable IdentifierTypo
+namespace OpusSharp.Core
 {
     /// <summary>
     /// Error codes for opus.
@@ -193,7 +195,7 @@
         OPUS_SET_PHASE_INVERSION_DISABLED = 4046,
 
         /// <summary>
-        /// Gets the encoder's configured phase inversion status.
+        /// Gets the decoder/encoder's configured phase inversion status.
         /// </summary>
         OPUS_GET_PHASE_INVERSION_DISABLED = 4047,
     }
@@ -357,7 +359,7 @@
         /// Gets the DTX state of the encoder.
         /// </summary>
         OPUS_GET_IN_DTX = 4049, //Encoder only, seems to be listed as generic in docs though.
-
+        
         /// <summary>
         /// If non-zero, enables Deep Redundancy (DRED) and use the specified maximum number of 10-ms redundant frames.
         /// </summary>

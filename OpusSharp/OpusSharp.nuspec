@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>OpusSharp</id>
-		<version>1.5.5</version>
+		<version>1.5.6</version>
 		<authors>SineVector241</authors>
 		<description>OpusSharp library.</description>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -14,7 +14,7 @@
 		<repository type="git" url="https://github.com/AvionBlock/OpusSharp"></repository>
 
 		<dependencies>
-		  <dependency id="OpusSharp.Core" version="1.5.2" />
+		  <dependency id="OpusSharp.Core" version="1.5.2.1" />
 		  <dependency id="OpusSharp.Natives" version="1.5.2.1" />
 		</dependencies>
 	</metadata>

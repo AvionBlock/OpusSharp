@@ -1,6 +1,9 @@
 ﻿using OpusSharp.Core.SafeHandlers;
 using System;
 
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable FieldCanBeMadeReadOnly.Global
+// ReSharper disable InconsistentNaming
 namespace OpusSharp.Core
 {
     /// <summary>
@@ -9,9 +12,10 @@ namespace OpusSharp.Core
     public class OpusDecoder : IDisposable
     {
         /// <summary>
-        /// Direct safe handle for the <see cref="OpusDecoder"/>. IT IS NOT RECOMMENDED TO CLOSE THE HANDLE DIRECTLY! Instead use <see cref="Dispose(bool)"/> to dispose the handle and object safely.
+        /// Direct safe handle for the <see cref="OpusDecoder"/>. IT IS NOT RECOMMENDED TO CLOSE THE HANDLE DIRECTLY! Instead, use <see cref="Dispose(bool)"/> to dispose the handle and object safely.
         /// </summary>
         protected OpusDecoderSafeHandle _handler;
+
         private bool _disposed;
 
         /// <summary>
@@ -22,7 +26,7 @@ namespace OpusSharp.Core
         /// <exception cref="OpusException" />
         public unsafe OpusDecoder(int sample_rate, int channels)
         {
-            int error = 0;
+            var error = 0;
             _handler = NativeOpus.opus_decoder_create(sample_rate, channels, &error);
             CheckError(error);
         }
@@ -110,7 +114,8 @@ namespace OpusSharp.Core
         /// <param name="frame_size">Number of samples per channel of available space in pcm. If this is less than the maximum packet duration (120ms; 5760 for 48kHz), this function will not be capable of decoding some packets. In the case of PLC (data==NULL) or FEC (decode_fec=true), then frame_size needs to be exactly the duration of audio that is missing, otherwise the decoder will not be in the optimal state to decode the next incoming packet. For the PLC and FEC cases, frame_size must be a multiple of 2.5 ms.</param>
         /// <param name="decode_fec">Request that any in-band forward error correction data be decoded. If no such data is available, the frame is decoded as if it were lost.</param>
         /// <returns>Number of decoded samples or <see cref="OpusErrorCodes"/>.</returns>
-        public unsafe int Decode(byte[]? input, int length, byte[] output, int frame_size, bool decode_fec) => Decode(input.AsSpan(), length, output.AsSpan(), frame_size, decode_fec);
+        public int Decode(byte[]? input, int length, byte[] output, int frame_size, bool decode_fec) =>
+            Decode(input.AsSpan(), length, output.AsSpan(), frame_size, decode_fec);
 
         /// <summary>
         /// Decodes an opus encoded frame.
@@ -121,7 +126,8 @@ namespace OpusSharp.Core
         /// <param name="frame_size">Number of samples per channel of available space in pcm. If this is less than the maximum packet duration (120ms; 5760 for 48kHz), this function will not be capable of decoding some packets. In the case of PLC (data==NULL) or FEC (decode_fec=true), then frame_size needs to be exactly the duration of audio that is missing, otherwise the decoder will not be in the optimal state to decode the next incoming packet. For the PLC and FEC cases, frame_size must be a multiple of 2.5 ms.</param>
         /// <param name="decode_fec">Request that any in-band forward error correction data be decoded. If no such data is available, the frame is decoded as if it were lost.</param>
         /// <returns>Number of decoded samples or <see cref="OpusErrorCodes"/>.</returns>
-        public unsafe int Decode(byte[]? input, int length, short[] output, int frame_size, bool decode_fec) => Decode(input.AsSpan(), length, output.AsSpan(), frame_size, decode_fec);
+        public int Decode(byte[]? input, int length, short[] output, int frame_size, bool decode_fec) =>
+            Decode(input.AsSpan(), length, output.AsSpan(), frame_size, decode_fec);
 
         /// <summary>
         /// Decodes an opus encoded frame.
@@ -132,10 +138,42 @@ namespace OpusSharp.Core
         /// <param name="frame_size">Number of samples per channel of available space in pcm. If this is less than the maximum packet duration (120ms; 5760 for 48kHz), this function will not be capable of decoding some packets. In the case of PLC (data==NULL) or FEC (decode_fec=true), then frame_size needs to be exactly the duration of audio that is missing, otherwise the decoder will not be in the optimal state to decode the next incoming packet. For the PLC and FEC cases, frame_size must be a multiple of 2.5 ms.</param>
         /// <param name="decode_fec">Request that any in-band forward error correction data be decoded. If no such data is available, the frame is decoded as if it were lost.</param>
         /// <returns>Number of decoded samples or <see cref="OpusErrorCodes"/>.</returns>
-        public unsafe int Decode(byte[]? input, int length, float[] output, int frame_size, bool decode_fec) => Decode(input.AsSpan(), length, output.AsSpan(), frame_size, decode_fec);
+        public int Decode(byte[]? input, int length, float[] output, int frame_size, bool decode_fec) =>
+            Decode(input.AsSpan(), length, output.AsSpan(), frame_size, decode_fec);
 
         /// <summary>
         /// Performs a ctl request.
+        /// </summary>
+        /// <param name="request">The request you want to specify.</param>
+        /// <returns>The result code of the request. See <see cref="OpusErrorCodes"/>.</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public int Ctl(DecoderCTL request)
+        {
+            ThrowIfDisposed();
+            var result = NativeOpus.opus_decoder_ctl(_handler, (int)request);
+            CheckError(result);
+            return result;
+        }
+        
+        /// <summary>
+        /// Performs a ctl set request.
+        /// </summary>
+        /// <param name="request">The request you want to specify.</param>
+        /// <param name="value">The input value.</param>
+        /// <returns>The result code of the request. See <see cref="OpusErrorCodes"/>.</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public int Ctl(DecoderCTL request, int value)
+        {
+            ThrowIfDisposed();
+            var result = NativeOpus.opus_decoder_ctl(_handler, (int)request, value);
+            CheckError(result);
+            return result;
+        }
+
+        /// <summary>
+        /// Performs a ctl get/set request.
         /// </summary>
         /// <typeparam name="T">The type you want to input/output.</typeparam>
         /// <param name="request">The request you want to specify.</param>
@@ -161,10 +199,26 @@ namespace OpusSharp.Core
         /// <returns>The result code of the request. See <see cref="OpusErrorCodes"/>.</returns>
         /// <exception cref="OpusException" />
         /// <exception cref="ObjectDisposedException" />
-        public unsafe int Ctl(GenericCTL request)
+        public int Ctl(GenericCTL request)
         {
             ThrowIfDisposed();
             var result = NativeOpus.opus_decoder_ctl(_handler, (int)request);
+            CheckError(result);
+            return result;
+        }
+        
+        /// <summary>
+        /// Performs a ctl set request.
+        /// </summary>
+        /// <param name="request">The request you want to specify.</param>
+        /// <param name="value">The input value.</param>
+        /// <returns>The result code of the request. See <see cref="OpusErrorCodes"/>.</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public int Ctl(GenericCTL request, int value)
+        {
+            ThrowIfDisposed();
+            var result = NativeOpus.opus_decoder_ctl(_handler, (int)request, value);
             CheckError(result);
             return result;
         }
