@@ -467,6 +467,8 @@ jobs:
         working-directory: ./build
         run: cmake --build . -j 2 --config Release --target package
 
-      - name: List Dir
-        working-directory: ./build
-        run: dir
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+           name: wasm-libopus.a
+           path: ./build/libopus.a
