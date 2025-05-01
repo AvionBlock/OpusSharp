@@ -444,4 +444,29 @@ jobs:
            name: macos-arm64-libopus.0.10.1.dylib
            path: ./build/libopus.0.10.1.dylib
 
-           
+  Wasm_Build_x64:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: mymindstorm/setup-emsdk@v14
+
+      - name: Clone Repository
+        run: git clone https://github.com/xiph/opus.git
+
+      - name: Autogen
+        run: ./opus/autogen.sh
+
+      - name: Create Build Dir
+        run: mkdir build
+
+      - name: Configure
+        working-directory: ./build
+        run: emcmake cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON
+
+      - name: Build
+        working-directory: ./build
+        run: cmake --build . -j 2 --config Release --target package
+
+      - name: List Dir
+        working-directory: ./build
+        run: dir
