@@ -5,7 +5,7 @@ namespace OpusSharp.Core.Extensions
     /// <summary>
     /// Contains the <see cref="OpusDecoder"/> helper extensions.
     /// </summary>
-    /// <remarks>OPUS_SET_COMPLEXITY & OPUS_GET_COMPLEXITY have not been added since they aren't documented yet in the opus documentation, However you can use these via the manual CTL functions.</remarks>
+    /// <remarks>OPUS_SET_COMPLEXITY and OPUS_GET_COMPLEXITY have not been added since they aren't documented yet in the opus documentation.</remarks>
     public static class OpusDecoderExtensions
     {
         /// <summary>
