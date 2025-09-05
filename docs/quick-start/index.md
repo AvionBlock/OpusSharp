@@ -11,9 +11,9 @@ Or you can install it via the dotnet CLI.
 dotnet add package OpusSharp.Core --version x.y.z
 ```
 
-## Step 2: Include Opus DLL.
+## Step 2: Include Opus Binaries.
 
-By default, OpusSharp.Core DOES NOT contain the opus precompiled DLL's or binaries. This is so you can choose to provide your own DLL's or binary files instead of using OpusSharp's compiled binaries.
+By default, OpusSharp.Core DOES NOT contain the opus precompiled binaries. This is so you can choose to provide your own binary files instead of using OpusSharp's compiled binaries.
 
 However if you want to use the precompiled binaries that OpusSharp provides, you can install the OpusSharp.Natives package onto your platform specific projects via the nuget package manager through your IDE, e.g. VS22, Rider, etc...
 
@@ -22,6 +22,9 @@ Or through the dotnet CLI.
 ```csharp
 dotnet add package OpusSharp.Natives --version x.y.z
 ```
+
+> [!NOTE]
+> iOS and WASM binaries are required to be statically linked! OpusSharp supports statically referenced binaries in `StaticNativeOpus` or through `new OpusDecoder(..., use_static: true);`. However, you will need to manually compile and reference a statically compiled opus library into your project!
 
 ## Step 3: Create Encoder and Decoder
 

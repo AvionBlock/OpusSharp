@@ -107,7 +107,8 @@ encoder.Ctl<int>(EncoderCTL.OPUS_SET_VBR, 1); //OpusSharp already checks if an e
 |Android    |✅ |✅ |✅   |✅   |
 |Windows    |✅ |✅ |✅   |✅   |
 |iOS        |❗ |❗ |❗   |❗   |
-|MacOS      |❗ |❗ |❗   |❗   |
+|MacOS      |✅ |❌ |❌   |✅   |
+|WASM       |✅ |❗ |❗   |❗   |
 
 ## Installation
 Please check [QuickStart](https://avionblock.github.io/OpusSharp/quick-start/index.html) OR [Nuget](https://www.nuget.org/packages/OpusSharp)
