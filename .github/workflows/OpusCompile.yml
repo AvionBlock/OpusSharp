@@ -31,11 +31,15 @@ jobs:
         working-directory: ./build
         run: cmake --build . -j 2 --config Release --target package
 
+      - name: Rename file 
+        working-directory: ./build
+        run: mv libopus.so.0.10.1 opus.so
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: linux-x86_64-libopus.so.0.10.1
-          path: ./build/libopus.so.0.10.1
+          name: linux-x86_64-opus.so
+          path: ./build/opus.so
 
   Linux_Build_x32:
     runs-on: ubuntu-latest
@@ -62,11 +66,15 @@ jobs:
         working-directory: ./build
         run: cmake --build . -j 2 --config Release --target package
 
+      - name: Rename file 
+        working-directory: ./build
+        run: mv libopus.so.0.10.1 opus.so
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: linux-x86-libopus.so.0.10.1
-          path: ./build/libopus.so.0.10.1
+          name: linux-x86-opus.so
+          path: ./build/opus.so
 
   Linux_Build_Arm64:
     runs-on: ubuntu-latest
@@ -93,11 +101,15 @@ jobs:
         working-directory: ./build
         run: cmake --build . -j 2 --config Release --target package
 
+      - name: Rename file 
+        working-directory: ./build
+        run: mv libopus.so.0.10.1 opus.so
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: linux-arm64-libopus.so.0.10.1
-          path: ./build/libopus.so.0.10.1
+          name: linux-arm64-opus.so
+          path: ./build/opus.so
 
   Linux_Build_Arm32:
     runs-on: ubuntu-latest
@@ -124,11 +136,15 @@ jobs:
         working-directory: ./build
         run: cmake --build . -j 2 --config Release --target package
 
+      - name: Rename file 
+        working-directory: ./build
+        run: mv libopus.so.0.10.1 opus.so
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: linux-arm32-libopus.so.0.10.1
-          path: ./build/libopus.so.0.10.1
+          name: linux-arm32-opus.so
+          path: ./build/opus.so
           
   Win_Build_x64:
     runs-on: windows-latest
@@ -407,11 +423,15 @@ jobs:
         working-directory: ./build
         run: cmake --build .
 
+      - name: Rename file 
+        working-directory: ./build
+        run: mv libopus.0.10.1.dylib opus.dylib
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-           name: macos-x86_64-libopus.0.10.1.dylib
-           path: ./build/libopus.0.10.1.dylib
+           name: macos-x86_64-opus.dylib
+           path: ./build/opus.dylib
 
   MacOS_Build_arm64:
     runs-on: macos-latest
@@ -438,11 +458,15 @@ jobs:
         working-directory: ./build
         run: cmake --build .
 
+      - name: Rename file 
+        working-directory: ./build
+        run: mv libopus.0.10.1.dylib opus.dylib
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-           name: macos-arm64-libopus.0.10.1.dylib
-           path: ./build/libopus.0.10.1.dylib
+           name: macos-arm64-opus.dylib
+           path: ./build/opus.dylib
 
   Wasm_Build_x64:
     runs-on: ubuntu-latest
