@@ -22,3 +22,23 @@ unsafe
 	safeHandle.Close();
 }
 ```
+
+## Using a statically linked native function
+
+```csharp
+using OpusSharp.Core.SafeHandlers;
+using OpusSharp.Core;
+
+unsafe
+{
+	int error = 0;
+	OpusEncoderSafeHandle safeHandle = StaticNativeOpus.opus_encoder_create(48000, 2, (int)OpusPredefinedValues.OPUS_APPLICATION_AUDIO, &error);
+	if(error < 0)
+		throw new OpusException(((OpusErrorCodes)error).ToString());
+
+	//Successfully created an OpusEncoder native object.
+
+	//Free/Close Object
+	safeHandle.Close();
+}
+```
