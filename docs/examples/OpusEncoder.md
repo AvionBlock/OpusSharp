@@ -5,6 +5,7 @@
 ```csharp
 using OpusSharp.Core;
 
+//Additionally. You can set use_static to true to make the library use a statically linked version of libopus. (usefuly for iOS distributions).
 OpusEncoder encoder = new OpusEncoder(48000, 2, OpusPredefinedValues.OPUS_APPLICATION_VOIP);
 
 int sampleRate = 0;
@@ -17,10 +18,10 @@ Console.WriteLine(sampleRate);
 ```csharp
 using OpusSharp.Core;
 
+//Additionally. You can set use_static to true to make the library use a statically linked version of libopus. (usefuly for iOS distributions).
 OpusEncoder encoder = new OpusEncoder(48000, 2, OpusPredefinedValues.OPUS_APPLICATION_VOIP);
 
-int vbr = 1; //1 == true, 0 == false
-encoder.Ctl<int>(EncoderCTL.OPUS_SET_VBR, ref vbr); //OpusSharp already checks if an error occurred with the CTL request and will throw an OpusException if there is an error, otherwise OpusErrorCodes.OPUS_OK.
+encoder.Ctl<int>(EncoderCTL.OPUS_SET_VBR, 1); //OpusSharp already checks if an error occurred with the CTL request and will throw an OpusException if there is an error, otherwise OpusErrorCodes.OPUS_OK.
 ```
 
 ## Calling a CTL via OpusSharp.Core.Extensions

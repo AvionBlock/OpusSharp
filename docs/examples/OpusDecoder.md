@@ -5,6 +5,7 @@
 ```csharp
 using OpusSharp.Core;
 
+//Additionally. You can set use_static to true to make the library use a statically linked version of libopus. (usefuly for iOS distributions).
 OpusDecoder decoder = new OpusDecoder(48000, 2);
 
 int sampleRate = 0;
@@ -17,6 +18,7 @@ Console.WriteLine(sampleRate);
 ```csharp
 using OpusSharp.Core;
 
+//Additionally. You can set use_static to true to make the library use a statically linked version of libopus. (usefuly for iOS distributions).
 OpusDecoder decoder = new OpusDecoder(48000, 2);
 
 //Most CTL set functions do not require a reference pointer, so we pass in the variable directly.
@@ -29,6 +31,7 @@ decoder.Ctl<int>(DecoderCTL.OPUS_SET_GAIN, 0); //OpusSharp already checks if an 
 using OpusSharp.Core;
 using OpusSharp.Core.Extensions;
 
+//Additionally. You can set use_static to true to make the library use a statically linked version of libopus. (usefuly for iOS distributions).
 OpusDecoder decoder = new OpusDecoder(48000, 2);
 
 decoder.SetGain(5); //Takes in a ushort.

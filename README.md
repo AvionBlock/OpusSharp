@@ -33,7 +33,7 @@ var samplesPerFrame = sampleRate / (1000 / frameSizeMs) * channels; //960 sample
 var decoder = new OpusDecoder(sampleRate, channels);
 
 var decoded = new byte[1920]; //We get 1920 bytes from doing this calculation because 16/8 (16 bit audio, 1 byte is 8 bits) equals 2 multiplied by samplesPerFrame gets us bytes per frame. 16/(sizeof(byte) * 8) * samplesPerFrame
-var decodedSamples = decoder.Decode(encoded, someEncodedAudio.Length, decoded, 960, false); //Still don't know why opus only returns decoded samples but it does...
+var decodedSamples = decoder.Decode(someEncodedAudio, someEncodedAudio.Length, decoded, samplesPerFrame, false);
 ```
 
 ## Basic NAudio Example
@@ -107,7 +107,8 @@ encoder.Ctl<int>(EncoderCTL.OPUS_SET_VBR, 1); //OpusSharp already checks if an e
 |Android    |✅ |✅ |✅   |✅   |
 |Windows    |✅ |✅ |✅   |✅   |
 |iOS        |❗ |❗ |❗   |❗   |
-|MacOS      |❗ |❗ |❗   |❗   |
+|MacOS      |✅ |❌ |❌   |✅   |
+|WASM       |✅ |❗ |❗   |❗   |
 
 ## Installation
 Please check [QuickStart](https://avionblock.github.io/OpusSharp/quick-start/index.html) OR [Nuget](https://www.nuget.org/packages/OpusSharp)

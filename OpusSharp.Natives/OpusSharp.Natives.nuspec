@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>OpusSharp.Natives</id>
-    <version>1.5.2.1</version>
+    <version>1.5.2.2</version>
     <authors>The Opus Authors.</authors>
     <description>Contains native binaries for OpusSharp.</description>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -26,6 +26,9 @@
     <file src="runtimes\linux-x86\native\opus.so" target="runtimes\linux-x86\native" />
     <file src="runtimes\linux-arm64\native\opus.so" target="runtimes\linux-arm64\native" />
     <file src="runtimes\linux-arm\native\opus.so" target="runtimes\linux-arm\native" />
+
+    <file src="runtimes\osx-x64\native\opus.dylib" target="runtimes\osx-x64\native" />
+    <file src="runtimes\osx-arm64\native\opus.dylib" target="runtimes\osx-arm64\native" />
 
     <file src="./README.md" target="docs" />
   </files>
