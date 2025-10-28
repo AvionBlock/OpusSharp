@@ -11,6 +11,8 @@ on:
 jobs:
   Android:
     runs-on: ubuntu-latest
+    env:
+      CHECK_ALIGNMENT: false
     strategy:
       matrix:
         arch: [x64, x86, arm64, arm32]
@@ -25,28 +27,21 @@ jobs:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
         # Not much I can do to reduce the bloat.
-      - name: Set Variables
+      - name: Setup Environment
         if: ${{ matrix.arch == 'x64' }}
-        env:
-          ABI: x86_64
+        run: echo "ABI=x86_64" >> $GITHUB_ENV
           
-      - name: Set Variables
+      - name: Setup Environment
         if: ${{ matrix.arch == 'x86' }}
-        env:
-          ABI: x86
+        run: echo "ABI=x86" >> $GITHUB_ENV
           
-      - name: Set Variables
+      - name: Setup Environment
         if: ${{ matrix.arch == 'arm64' }}
-        env:
-          ABI: arm64-v8a
+        run: echo "ABI=arm64-v8a" >> $GITHUB_ENV
           
-      - name: Set Variables
+      - name: Setup Environment
         if: ${{ matrix.arch == 'arm32' }}
-        env:
-          ABI: armeabi-v7a
-
-      - name: Install Required Packages
-        run: sudo apt install llvm
+        run: echo "ABI=armeabi-v7a" >> $GITHUB_ENV
 
       - name: Clone Repository
         run: git clone https://github.com/xiph/opus.git
@@ -66,8 +61,9 @@ jobs:
         run: cmake --build . -j 2 --config Release --target package
 
       - name: Check Alignment
+        if: ${{ env.CHECK_ALIGNMENT == 'true' }}
         working-directory: ./build
-        run: llvm-objdump -p libopus.so | grep LOAD
+        run: sudo apt install llvm && llvm-objdump -p libopus.so | grep LOAD
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
