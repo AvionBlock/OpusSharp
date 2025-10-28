@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        abi: [x86_64, x86, arm64-v8a, armeabi-v7a]
+        arch: [x64, x86, arm64, arm32]
     steps:
       - uses: actions/checkout@v4
       - uses: nttld/setup-ndk@v1
@@ -23,6 +23,24 @@ jobs:
           add-to-path: false
         env:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+
+        # Not much I can do to reduce the bloat.
+      - name: Set Variables
+        if: ${{ matrix.arch == 'x64' }}
+        env:
+          ABI: x86_64
+      - name: Set Variables
+        if: ${{ matrix.arch == 'x86' }}
+        env:
+          ABI: x86
+      - name: Set Variables
+        if: ${{ matrix.arch == 'arm64' }}
+        env:
+          ABI: arm64-v8a
+      - name: Set Variables
+        if: ${{ matrix.arch == 'arm32' }}
+        env:
+          ABI: armeabi-v7a
 
       - name: Install Required Packages
         run: sudo apt install llvm
@@ -38,7 +56,7 @@ jobs:
 
       - name: Configure
         working-directory: ./build
-        run: cmake ../opus -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake -DANDROID_ABI=${{ matrix.abi }} -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON -DCMAKE_SHARED_LINKER_FLAGS='-Wl,-z,max-page-size=16384,-z,common-page-size=16384' -DCMAKE_EXE_LINKER_FLAGS='-Wl,-z,max-page-size=16384,-z,common-page-size=16384'
+        run: cmake ../opus -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake -DANDROID_ABI=${{ env.ABI }} -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON -DCMAKE_SHARED_LINKER_FLAGS='-Wl,-z,max-page-size=16384,-z,common-page-size=16384' -DCMAKE_EXE_LINKER_FLAGS='-Wl,-z,max-page-size=16384,-z,common-page-size=16384'
 
       - name: Build
         working-directory: ./build
