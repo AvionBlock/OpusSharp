@@ -133,7 +133,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        arch: [x64, x86, arm64, arm32]
+        arch: [x64, x86, arm64] # Disabled arm32
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
