@@ -40,14 +40,14 @@ jobs:
             echo "ABI=armeabi-v7a" >> $GITHUB_ENV
           fi
 
+      - name: Create Build Directory
+        run: mkdir build
+
       - name: Clone Repository
         run: git clone https://github.com/xiph/opus.git
 
       - name: Autogen
         run: ./opus/autogen.sh
-
-      - name: Create Build Dir
-        run: mkdir build
 
       - name: Configure
         working-directory: ./build
@@ -97,14 +97,14 @@ jobs:
             echo "CXX_COMPILER=arm-linux-gnueabi-g++" >> $GITHUB_ENV
           fi
 
+      - name: Create Build Directory
+        run: mkdir build
+
       - name: Clone Repository
         run: git clone https://github.com/xiph/opus.git
 
       - name: Autogen
         run: ./opus/autogen.sh
-
-      - name: Create Build Dir
-        run: mkdir build
 
       - name: Configure
         working-directory: ./build
@@ -151,14 +151,14 @@ jobs:
             echo "ARCH=ARM" >> $env:GITHUB_ENV
           }
 
+      - name: Create Build Directory
+        run: mkdir build
+
       - name: Clone Repository
         run: git clone https://github.com/xiph/opus.git
 
       - name: Autogen
         run: ./opus/autogen.bat
-
-      - name: Create Build Dir
-        run: mkdir build
 
       - name: Configure
         working-directory: ./build
@@ -199,6 +199,9 @@ jobs:
             echo "OSX_ARCH=arm64" >> $GITHUB_ENV
           fi
 
+      - name: Create Build Directory
+        run: mkdir build
+        
       - name: Clone Repository
         run: git clone https://github.com/xiph/opus.git
 
@@ -223,20 +226,20 @@ jobs:
            name: macos-${{ matrix.arch }}-opus.dylib
            path: ./build/opus.dylib
 
-  Wasm_Build_x64:
+  Wasm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: mymindstorm/setup-emsdk@v14
+
+      - name: Create Build Dir
+        run: mkdir build
 
       - name: Clone Repository
         run: git clone https://github.com/xiph/opus.git
 
       - name: Autogen
         run: ./opus/autogen.sh
-
-      - name: Create Build Dir
-        run: mkdir build
 
       - name: Configure
         working-directory: ./build
