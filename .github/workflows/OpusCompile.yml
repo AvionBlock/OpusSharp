@@ -295,8 +295,8 @@ jobs:
         working-directory: ./build
         run: cmake --build . -j 2 --config Release --target package
 
-      - name: Install llvm-objdump
-        run: sudo apt install llvm-objdump
+      - name: Install llvm
+        run: sudo apt install llvm
 
       - name: Check 16KB Alignment
         working-directory: ./build
@@ -337,8 +337,8 @@ jobs:
         working-directory: ./build
         run: cmake --build . -j 2 --config Release --target package
 
-      - name: Install llvm-objdump
-        run: sudo apt install llvm-objdump
+      - name: Install llvm
+        run: sudo apt install llvm
         
       - name: Check 16KB Alignment
         working-directory: ./build
@@ -379,8 +379,8 @@ jobs:
         working-directory: ./build
         run: cmake --build . -j 2 --config Release --target package
 
-      - name: Install llvm-objdump
-        run: sudo apt install llvm-objdump
+      - name: Install llvm
+        run: sudo apt install llvm
 
       - name: Check 16KB Alignment
         working-directory: ./build
@@ -417,8 +417,8 @@ jobs:
         working-directory: ./build
         run: cmake ../opus -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake -DANDROID_ABI=armeabi-v7a -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON -DCMAKE_SHARED_LINKER_FLAGS='-Wl,-z,max-page-size=16384,-z,common-page-size=16384' -DCMAKE_EXE_LINKER_FLAGS='-Wl,-z,max-page-size=16384,-z,common-page-size=16384'
 
-      - name: Install llvm-objdump
-        run: sudo apt install llvm-objdump
+      - name: Install llvm
+        run: sudo apt install llvm
         
       - name: Check 16KB Alignment
         working-directory: ./build
