@@ -79,12 +79,12 @@ jobs:
       - name: Setup Environment
         run: |
           if [[ "${{ matrix.arch }}" == "x64" ]]; then
-            echo "C_COMPILER=-m64" >> $GITHUB_ENV
-            echo "CXX_COMPILER=-m64" >> $GITHUB_ENV
+            echo "C_FLAGS=-m64" >> $GITHUB_ENV
+            echo "CXX_FLAGS=-m64" >> $GITHUB_ENV
           elif [[ "${{ matrix.arch }}" == "x86" ]]; then
             sudo apt-get install g++-multilib
-            echo "C_COMPILER=-m32" >> $GITHUB_ENV
-            echo "CXX_COMPILER=-m32" >> $GITHUB_ENV
+            echo "C_FLAGS=-m32" >> $GITHUB_ENV
+            echo "CXX_FLAGS=-m32" >> $GITHUB_ENV
           elif [[ "${{ matrix.arch }}" == "arm64" ]]; then
             sudo apt-get install g++-aarch64-linux-gnu
             echo "C_COMPILER=aarch64-linux-gnu-gcc" >> $GITHUB_ENV
@@ -106,7 +106,12 @@ jobs:
 
       - name: Configure
         working-directory: ./build
-        run: cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_C_FLAGS=${{ env.C_COMPILER }} -DCMAKE_CXX_FLAGS=${{ env.CXX_COMPILER }}
+        run: |
+          if [[ "${{ matrix.arch }}" == "x64" || "${{ matrix.arch }}" == "x86" ]]; then
+            cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_C_FLAGS=${{ env.C_COMPILER }} -DCMAKE_CXX_FLAGS=${{ env.CXX_COMPILER }}
+          elif [[ "${{ matrix.arch }}" == "arm64" || "${{ matrix.arch }}" == "arm32" ]]; then
+            cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_C_COMPILER=${{ env.C_COMPILER }} -DCMAKE_CXX_COMPILER=${{ env.CXX_COMPILER }}
+          fi
 
       - name: Build
         working-directory: ./build
