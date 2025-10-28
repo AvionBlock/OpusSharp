@@ -141,15 +141,15 @@ jobs:
         # Not much I can do to reduce the bloat.
       - name: Setup Environment
         run: |
-          if [[ "${{ matrix.arch }}" == "x64" ]]; then
-            echo "ARCH=x64" >> $GITHUB_ENV
-          elif [[ "${{ matrix.arch }}" == "x86" ]]; then
-            echo "ARCH=Win32" >> $GITHUB_ENV
-          elif [[ "${{ matrix.arch }}" == "arm64" ]]; then
-            echo "ARCH=ARM64" >> $GITHUB_ENV
-          elif [[ "${{ matrix.arch }}" == "arm32" ]]; then
-            echo "ARCH=ARM" >> $GITHUB_ENV
-          fi
+          if "${{ matrix.arch }}" == "x64" (
+            echo "ARCH=x64" >> %GITHUB_ENV%
+          ) else if "${{ matrix.arch }}" == "x86" (
+            echo "ARCH=Win32" >> %GITHUB_ENV%
+          ) else if "${{ matrix.arch }}" == "arm64" (
+            echo "ARCH=ARM64" >> %GITHUB_ENV%
+          ) else if "${{ matrix.arch }}" == "arm32" ]] (
+            echo "ARCH=ARM" >> %GITHUB_ENV%
+          )
 
       - name: Clone Repository
         run: git clone https://github.com/xiph/opus.git
