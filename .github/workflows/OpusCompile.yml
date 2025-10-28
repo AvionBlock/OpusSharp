@@ -246,7 +246,7 @@ jobs:
 
       - name: Configure
         working-directory: ./build
-        run: cmake ../opus -G "Visual Studio 17 2022" -A ARM,version=10.0.22621.0 -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON
+        run: cmake ../opus -G "Visual Studio 17 2022" -A ARM,version=10.0.22621.755 -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON
 
       - name: Build
         working-directory: ./build
