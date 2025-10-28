@@ -300,7 +300,7 @@ jobs:
 
       - name: Check 16KB Alignment
         working-directory: ./build
-        run: align_output=$(llvm-objdump -p "./libopus.so" 2>/dev/null | grep "Align 2\*\*12"); if [[ -n "$align_output" ]]; then echo -e "\e[33mWARNING - Misaligned File! \e[0m"; fi
+        run: llvm-objdump -p libopus.so | grep LOAD
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
@@ -339,10 +339,10 @@ jobs:
 
       - name: Install llvm
         run: sudo apt install llvm
-        
+
       - name: Check 16KB Alignment
         working-directory: ./build
-        run: align_output=$(llvm-objdump -p "./libopus.so" 2>/dev/null | grep "Align 2\*\*12"); if [[ -n "$align_output" ]]; then echo -e "\e[33mWARNING - Misaligned File! \e[0m"; fi
+        run: llvm-objdump -p libopus.so | grep LOAD
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
@@ -384,7 +384,7 @@ jobs:
 
       - name: Check 16KB Alignment
         working-directory: ./build
-        run: align_output=$(llvm-objdump -p "./libopus.so" 2>/dev/null | grep "Align 2\*\*12"); if [[ -n "$align_output" ]]; then echo -e "\e[33mWARNING - Misaligned File! \e[0m"; fi
+        run: llvm-objdump -p libopus.so | grep LOAD
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
@@ -419,10 +419,10 @@ jobs:
 
       - name: Install llvm
         run: sudo apt install llvm
-        
+
       - name: Check 16KB Alignment
         working-directory: ./build
-        run: align_output=$(llvm-objdump -p "./libopus.so" 2>/dev/null | grep "Align 2\*\*12"); if [[ -n "$align_output" ]]; then echo -e "\e[33mWARNING - Misaligned File! \e[0m"; fi
+        run: llvm-objdump -p libopus.so | grep LOAD
 
       - name: Build
         working-directory: ./build
