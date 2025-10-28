@@ -16,6 +16,7 @@ jobs:
     strategy:
       matrix:
         arch: [x64, x86, arm64, arm32]
+      fail-fast: false
     steps:
       - uses: actions/checkout@v4
       - uses: nttld/setup-ndk@v1
@@ -72,6 +73,7 @@ jobs:
     strategy:
       matrix:
         arch: [x64, x86, arm64, arm32]
+      fail-fast: false
     steps:
       - uses: actions/checkout@v4
 
@@ -108,7 +110,7 @@ jobs:
         working-directory: ./build
         run: |
           if [[ "${{ matrix.arch }}" == "x64" || "${{ matrix.arch }}" == "x86" ]]; then
-            cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_C_FLAGS=${{ env.C_COMPILER }} -DCMAKE_CXX_FLAGS=${{ env.CXX_COMPILER }}
+            cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_C_FLAGS=${{ env.C_FLAGS }} -DCMAKE_CXX_FLAGS=${{ env.CXX_FLAGS }}
           elif [[ "${{ matrix.arch }}" == "arm64" || "${{ matrix.arch }}" == "arm32" ]]; then
             cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_C_COMPILER=${{ env.C_COMPILER }} -DCMAKE_CXX_COMPILER=${{ env.CXX_COMPILER }}
           fi
@@ -126,12 +128,28 @@ jobs:
         with:
           name: linux-${{ matrix.arch }}-opus.so
           path: ./build/opus.so
-          
-  Win_Build_x64:
-    if: false
+
+  Windows:
     runs-on: windows-latest
+    strategy:
+      matrix:
+        arch: [x64, x86, arm64, arm32]
+      fail-fast: false
     steps:
       - uses: actions/checkout@v4
+
+        # Not much I can do to reduce the bloat.
+      - name: Setup Environment
+        run: |
+          if [[ "${{ matrix.arch }}" == "x64" ]]; then
+            echo "ARCH=x64" >> $GITHUB_ENV
+          elif [[ "${{ matrix.arch }}" == "x86" ]]; then
+            echo "ARCH=Win32" >> $GITHUB_ENV
+          elif [[ "${{ matrix.arch }}" == "arm64" ]]; then
+            echo "ARCH=ARM64" >> $GITHUB_ENV
+          elif [[ "${{ matrix.arch }}" == "arm32" ]]; then
+            echo "ARCH=ARM" >> $GITHUB_ENV
+          fi
 
       - name: Clone Repository
         run: git clone https://github.com/xiph/opus.git
@@ -144,7 +162,12 @@ jobs:
 
       - name: Configure
         working-directory: ./build
-        run: cmake ../opus -G "Visual Studio 17 2022" -A x64 -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON
+        run: |
+          if [[ "${{ matrix.arch }}" == "arm32" ]]; then
+            cmake ../opus -G "Visual Studio 17 2022" -A ARM,version=10.0.22621.0 -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON
+          else
+            cmake ../opus -G "Visual Studio 17 2022" -A ${{ env.ARCH }} -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON
+          fi
 
       - name: Build
         working-directory: ./build
@@ -153,94 +176,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: win-x64-opus.dll
-          path: ./build/Release/opus.dll
-
-  Win_Build_x32:
-    if: false
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
-
-      - name: Autogen
-        run: ./opus/autogen.bat
-
-      - name: Create Build Dir
-        run: mkdir build
-
-      - name: Configure
-        working-directory: ./build
-        run: cmake ../opus -G "Visual Studio 17 2022" -A Win32 -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON
-
-      - name: Build
-        working-directory: ./build
-        run: cmake --build . -j 2 --config Release --target package
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: win-x32-opus.dll
-          path: ./build/Release/opus.dll
-          
-  Win_Build_arm64:
-    if: false
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
-
-      - name: Autogen
-        run: ./opus/autogen.bat
-
-      - name: Create Build Dir
-        run: mkdir build
-
-      - name: Configure
-        working-directory: ./build
-        run: cmake ../opus -G "Visual Studio 17 2022" -A ARM64 -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON
-
-      - name: Build
-        working-directory: ./build
-        run: cmake --build . -j 2 --config Release --target package
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: win-arm64-opus.dll
-          path: ./build/Release/opus.dll
-
-  Win_Build_arm32:
-    if: false
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
-
-      - name: Autogen
-        run: ./opus/autogen.bat
-
-      - name: Create Build Dir
-        run: mkdir build
-
-      - name: Configure
-        working-directory: ./build
-        run: cmake ../opus -G "Visual Studio 17 2022" -A ARM,version=10.0.22621.0 -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON
-
-      - name: Build
-        working-directory: ./build
-        run: cmake --build . -j 2 --config Release --target package
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: win-arm32-opus.dll
+          name: win-${{ matrix.arch }}-opus.dll
           path: ./build/Release/opus.dll
 
   MacOS_Build_x64:
