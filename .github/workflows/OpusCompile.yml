@@ -9,6 +9,51 @@ on:
   workflow_dispatch:
 
 jobs:
+  Android:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        abi: [x86_64, x86, arm64-v8a, armeabi-v7a]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: nttld/setup-ndk@v1
+        id: setup-ndk
+        with:
+          ndk-version: r28c
+          add-to-path: false
+        env:
+          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+
+      - name: Install Required Packages
+        run: sudo apt install llvm
+
+      - name: Clone Repository
+        run: git clone https://github.com/xiph/opus.git
+
+      - name: Autogen
+        run: ./opus/autogen.sh
+
+      - name: Create Build Dir
+        run: mkdir build
+
+      - name: Configure
+        working-directory: ./build
+        run: cmake ../opus -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake -DANDROID_ABI=${{ matrix.abi }} -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON -DCMAKE_SHARED_LINKER_FLAGS='-Wl,-z,max-page-size=16384,-z,common-page-size=16384' -DCMAKE_EXE_LINKER_FLAGS='-Wl,-z,max-page-size=16384,-z,common-page-size=16384'
+
+      - name: Build
+        working-directory: ./build
+        run: cmake --build . -j 2 --config Release --target package
+
+      - name: Check Alignment
+        working-directory: ./build
+        run: llvm-objdump -p libopus.so | grep LOAD
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-${{ matrix.abi }}-libopus.so
+          path: ./build/libopus.so
+
   Linux_Build_x64:
     if: false
     runs-on: ubuntu-latest
@@ -265,174 +310,6 @@ jobs:
         with:
           name: win-arm32-opus.dll
           path: ./build/Release/opus.dll
-
-  Android_Build_x64:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: nttld/setup-ndk@v1
-        id: setup-ndk
-        with:
-          ndk-version: r28c
-          add-to-path: false
-        env:
-          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
-
-      - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
-
-      - name: Autogen
-        run: ./opus/autogen.sh
-
-      - name: Create Build Dir
-        run: mkdir build
-
-      - name: Configure
-        working-directory: ./build
-        run: cmake ../opus -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake -DANDROID_ABI=x86_64 -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON -DCMAKE_SHARED_LINKER_FLAGS='-Wl,-z,max-page-size=16384,-z,common-page-size=16384' -DCMAKE_EXE_LINKER_FLAGS='-Wl,-z,max-page-size=16384,-z,common-page-size=16384'
-
-      - name: Build
-        working-directory: ./build
-        run: cmake --build . -j 2 --config Release --target package
-
-      - name: Install llvm
-        run: sudo apt install llvm
-
-      - name: Check 16KB Alignment
-        working-directory: ./build
-        run: misaligned=$(llvm-objdump -p libopus.so | grep LOAD | grep -e "Align 2\*\*13" -e "Align 2\*\*12"); if [[ -n "$misaligned" ]]; then echo -e "\e[31mFILE MISALIGNED! \e[0m"; fi
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-x64-libopus.so
-          path: ./build/libopus.so
-
-  Android_Build_x32:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: nttld/setup-ndk@v1
-        id: setup-ndk
-        with:
-          ndk-version: r28c
-          add-to-path: false
-        env:
-          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
-
-      - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
-
-      - name: Autogen
-        run: ./opus/autogen.sh
-
-      - name: Create Build Dir
-        run: mkdir build
-
-      - name: Configure
-        working-directory: ./build
-        run: cmake ../opus -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake -DANDROID_ABI=x86 -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON -DCMAKE_SHARED_LINKER_FLAGS='-Wl,-z,max-page-size=16384,-z,common-page-size=16384' -DCMAKE_EXE_LINKER_FLAGS='-Wl,-z,max-page-size=16384,-z,common-page-size=16384'
-
-      - name: Build
-        working-directory: ./build
-        run: cmake --build . -j 2 --config Release --target package
-
-      - name: Install llvm
-        run: sudo apt install llvm
-
-      - name: Check 16KB Alignment
-        working-directory: ./build
-        run: misaligned=$(llvm-objdump -p libopus.so | grep LOAD | grep -e "Align 2\*\*13" -e "Align 2\*\*12"); if [[ -n "$misaligned" ]]; then echo -e "\e[31mFILE MISALIGNED! \e[0m"; fi
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-x32-libopus.so
-          path: ./build/libopus.so
-          
-  Android_Build_Arm64:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: nttld/setup-ndk@v1
-        id: setup-ndk
-        with:
-          ndk-version: r28c
-          add-to-path: false
-        env:
-          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
-
-      - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
-
-      - name: Autogen
-        run: ./opus/autogen.sh
-
-      - name: Create Build Dir
-        run: mkdir build
-
-      - name: Configure
-        working-directory: ./build
-        run: cmake ../opus -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake -DANDROID_ABI=arm64-v8a -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON -DCMAKE_SHARED_LINKER_FLAGS='-Wl,-z,max-page-size=16384,-z,common-page-size=16384' -DCMAKE_EXE_LINKER_FLAGS='-Wl,-z,max-page-size=16384,-z,common-page-size=16384'
-
-      - name: Build
-        working-directory: ./build
-        run: cmake --build . -j 2 --config Release --target package
-
-      - name: Install llvm
-        run: sudo apt install llvm
-
-      - name: Check 16KB Alignment
-        working-directory: ./build
-        run: misaligned=$(llvm-objdump -p libopus.so | grep LOAD | grep -e "Align 2\*\*13" -e "Align 2\*\*12"); if [[ -n "$misaligned" ]]; then echo -e "\e[31mFILE MISALIGNED! \e[0m"; fi
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-arm64-libopus.so
-          path: ./build/libopus.so
-
-  Android_Build_Arm32:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: nttld/setup-ndk@v1
-        id: setup-ndk
-        with:
-          ndk-version: r28c
-          add-to-path: false
-        env:
-          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
-
-      - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
-
-      - name: Autogen
-        run: ./opus/autogen.sh
-
-      - name: Create Build Dir
-        run: mkdir build
-
-      - name: Configure
-        working-directory: ./build
-        run: cmake ../opus -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake -DANDROID_ABI=armeabi-v7a -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON -DCMAKE_SHARED_LINKER_FLAGS='-Wl,-z,max-page-size=16384,-z,common-page-size=16384' -DCMAKE_EXE_LINKER_FLAGS='-Wl,-z,max-page-size=16384,-z,common-page-size=16384'
-
-      - name: Build
-        working-directory: ./build
-        run: cmake --build . -j 2 --config Release --target package
-
-      - name: Install llvm
-        run: sudo apt install llvm
-
-      - name: Check 16KB Alignment
-        working-directory: ./build
-        run: misaligned=$(llvm-objdump -p libopus.so | grep LOAD | grep -e "Align 2\*\*13" -e "Align 2\*\*12"); if [[ -n "$misaligned" ]]; then echo -e "\e[31mFILE MISALIGNED! \e[0m"; fi
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-arm32-libopus.so
-          path: ./build/libopus.so
 
   MacOS_Build_x64:
     if: false
