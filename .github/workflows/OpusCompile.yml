@@ -88,11 +88,11 @@ jobs:
             echo "C_FLAGS=-m32" >> $GITHUB_ENV
             echo "CXX_FLAGS=-m32" >> $GITHUB_ENV
           elif [[ "${{ matrix.arch }}" == "arm64" ]]; then
-            sudo apt-get install g++-aarch64-linux-gnu
+            sudo apt-get install g++-aarch64-linux-gnu --fix-missing
             echo "C_COMPILER=aarch64-linux-gnu-gcc" >> $GITHUB_ENV
             echo "CXX_COMPILER=aarch64-linux-gnu-g++" >> $GITHUB_ENV
           elif [[ "${{ matrix.arch }}" == "arm32" ]]; then
-            sudo apt-get install g++-arm-linux-gnueabi
+            sudo apt-get install g++-arm-linux-gnueabi --fix-missing
             echo "C_COMPILER=arm-linux-gnueabi-gcc" >> $GITHUB_ENV
             echo "CXX_COMPILER=arm-linux-gnueabi-g++" >> $GITHUB_ENV
           fi
