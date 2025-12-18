@@ -84,15 +84,18 @@ jobs:
             echo "C_FLAGS=-m64" >> $GITHUB_ENV
             echo "CXX_FLAGS=-m64" >> $GITHUB_ENV
           elif [[ "${{ matrix.arch }}" == "x86" ]]; then
+            sudo apt-get update
             sudo apt-get install g++-multilib
             echo "C_FLAGS=-m32" >> $GITHUB_ENV
             echo "CXX_FLAGS=-m32" >> $GITHUB_ENV
           elif [[ "${{ matrix.arch }}" == "arm64" ]]; then
-            sudo apt-get install g++-aarch64-linux-gnu --fix-missing
+            sudo apt-get update
+            sudo apt-get install g++-aarch64-linux-gnu
             echo "C_COMPILER=aarch64-linux-gnu-gcc" >> $GITHUB_ENV
             echo "CXX_COMPILER=aarch64-linux-gnu-g++" >> $GITHUB_ENV
           elif [[ "${{ matrix.arch }}" == "arm32" ]]; then
-            sudo apt-get install g++-arm-linux-gnueabi --fix-missing
+            sudo apt-get update
+            sudo apt-get install g++-arm-linux-gnueabi
             echo "C_COMPILER=arm-linux-gnueabi-gcc" >> $GITHUB_ENV
             echo "CXX_COMPILER=arm-linux-gnueabi-g++" >> $GITHUB_ENV
           fi
@@ -118,6 +121,10 @@ jobs:
       - name: Build
         working-directory: ./build
         run: cmake --build . -j 2 --config Release --target package
+
+      - name: Show Files
+        working-directory: ./build
+        run: dir
 
       - name: Rename file 
         working-directory: ./build
