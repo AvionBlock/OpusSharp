@@ -65,6 +65,7 @@ namespace OpusSharp.Core
         /// <param name="data">Output payload. This must contain storage for at least max_data_bytes.</param>
         /// <param name="max_data_bytes">Size of the allocated memory for the output payload. This may be used to impose an upper limit on the instant bitrate, but should not be used as the only bitrate control. Use <see cref="EncoderCTL.OPUS_SET_BITRATE"/> to control the bitrate.</param>
         /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see <see cref="OpusErrorCodes"/>) on failure.</returns>
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern unsafe int opus_encode24(OpusEncoderSafeHandle st, int* pcm, int frame_size, byte* data, int max_data_bytes);
         
         /// <summary>
