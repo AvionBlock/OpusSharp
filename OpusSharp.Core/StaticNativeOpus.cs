@@ -57,6 +57,17 @@ namespace OpusSharp.Core
         public static extern unsafe int opus_encode(OpusEncoderSafeHandle st, short* pcm, int frame_size, byte* data, int max_data_bytes);
 
         /// <summary>
+        /// Encodes an Opus frame.
+        /// </summary>
+        /// <param name="st">Encoder state.</param>
+        /// <param name="pcm">Input signal (interleaved if 2 channels) representing (or slightly exceeding) 24-bit values. length is frame_size*channels*sizeof(int)</param>
+        /// <param name="frame_size">Number of samples per channel in the input signal. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
+        /// <param name="data">Output payload. This must contain storage for at least max_data_bytes.</param>
+        /// <param name="max_data_bytes">Size of the allocated memory for the output payload. This may be used to impose an upper limit on the instant bitrate, but should not be used as the only bitrate control. Use <see cref="EncoderCTL.OPUS_SET_BITRATE"/> to control the bitrate.</param>
+        /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see <see cref="OpusErrorCodes"/>) on failure.</returns>
+        public static extern unsafe int opus_encode24(OpusEncoderSafeHandle st, int* pcm, int frame_size, byte* data, int max_data_bytes);
+        
+        /// <summary>
         /// Encodes an Opus frame from floating point input.
         /// </summary>
         /// <param name="st">Encoder state.</param>
@@ -179,6 +190,19 @@ namespace OpusSharp.Core
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern unsafe int opus_decode(OpusDecoderSafeHandle st, byte* data, int len, short* pcm, int frame_size, int decode_fec);
 
+        /// <summary>
+        /// Decode an Opus packet.
+        /// </summary>
+        /// <param name="st">Decoder state.</param>
+        /// <param name="data">Input payload. Use a NULL pointer to indicate packet loss.</param>
+        /// <param name="len">Number of bytes in payload.</param>
+        /// <param name="pcm">Output signal (interleaved if 2 channels). length is frame_size*channels*sizeof(int).</param>
+        /// <param name="frame_size">Number of samples per channel of available space in pcm. If this is less than the maximum packet duration (120ms; 5760 for 48kHz), this function will not be capable of decoding some packets. In the case of PLC (data==NULL) or FEC (decode_fec=1), then frame_size needs to be exactly the duration of audio that is missing, otherwise the decoder will not be in the optimal state to decode the next incoming packet. For the PLC and FEC cases, frame_size must be a multiple of 2.5 ms.</param>
+        /// <param name="decode_fec">Flag (0 or 1) to request that any in-band forward error correction data be decoded. If no such data is available, the frame is decoded as if it were lost.</param>
+        /// <returns>Number of decoded samples or <see cref="OpusErrorCodes"/>.</returns>
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern unsafe int opus_decode24(OpusDecoderSafeHandle st, byte* data, int len, int* pcm, int frame_size, int decode_fec);
+        
         /// <summary>
         /// Decode an Opus packet with floating point output.
         /// </summary>
@@ -338,6 +362,18 @@ namespace OpusSharp.Core
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern unsafe int opus_decoder_dred_decode(OpusDecoderSafeHandle st, OpusDREDSafeHandle dred, int dred_offset, short* pcm, int frame_size);
 
+        /// <summary>
+        /// Decode audio from an <see cref="OpusDREDSafeHandle"/> packet with floating point output.
+        /// </summary>
+        /// <param name="st">Decoder state.</param>
+        /// <param name="dred">DRED state.</param>
+        /// <param name="dred_offset">position of the redundancy to decode (in samples before the beginning of the real audio data in the packet).</param>
+        /// <param name="pcm">Output signal (interleaved if 2 channels). length is frame_size*channels*sizeof(int)</param>
+        /// <param name="frame_size">Number of samples per channel to decode in pcm. frame_size must be a multiple of 2.5 ms.</param>
+        /// <returns>Number of decoded samples or <see cref="OpusErrorCodes"/>.</returns>
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern unsafe int opus_decoder_dred_decode24(OpusDecoderSafeHandle st, OpusDREDSafeHandle dred, int dred_offset, int* pcm, int frame_size);
+        
         /// <summary>
         /// Decode audio from an <see cref="OpusDREDSafeHandle"/> packet with floating point output.
         /// </summary>
@@ -637,6 +673,18 @@ namespace OpusSharp.Core
         public static extern unsafe int opus_multistream_encode(OpusMSEncoderSafeHandle st, short* pcm, int frame_size, byte* data, int max_data_bytes);
 
         /// <summary>
+        /// Encodes a multistream Opus frame.
+        /// </summary>
+        /// <param name="st">Multistream encoder state.</param>
+        /// <param name="pcm">The input signal as interleaved samples. This must contain frame_size*channels samples.</param>
+        /// <param name="frame_size">Number of samples per channel in the input signal. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
+        /// <param name="data">Output payload. This must contain storage for at least max_data_bytes.</param>
+        /// <param name="max_data_bytes">Size of the allocated memory for the output payload. This may be used to impose an upper limit on the instant bitrate, but should not be used as the only bitrate control. Use <see cref="EncoderCTL.OPUS_SET_BITRATE"/> to control the bitrate.</param>
+        /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see <see cref="OpusErrorCodes"/>) on failure.</returns>
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern unsafe int opus_multistream_encode24(OpusMSEncoderSafeHandle st, int* pcm, int frame_size, byte* data, int max_data_bytes);
+        
+        /// <summary>
         /// Encodes a multistream Opus frame from floating point input.
         /// </summary>
         /// <param name="st">Multistream encoder state.</param>
@@ -766,6 +814,19 @@ namespace OpusSharp.Core
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern unsafe int opus_multistream_decode(OpusMSDecoderSafeHandle st, byte* data, int len, short* pcm, int frame_size, int decode_fec);
 
+        /// <summary>
+        /// Decode a multistream Opus packet.
+        /// </summary>
+        /// <param name="st">Multistream decoder state.</param>
+        /// <param name="data">Input payload. Use a NULL pointer to indicate packet loss.</param>
+        /// <param name="len">Number of bytes in payload.</param>
+        /// <param name="pcm">Output signal, with interleaved samples. This must contain room for frame_size*channels samples.</param>
+        /// <param name="frame_size">The number of samples per channel of available space in pcm. If this is less than the maximum packet duration (120 ms; 5760 for 48kHz), this function will not be capable of decoding some packets. In the case of PLC (data==NULL) or FEC (decode_fec=1), then frame_size needs to be exactly the duration of audio that is missing, otherwise the decoder will not be in the optimal state to decode the next incoming packet. For the PLC and FEC cases, frame_size must be a multiple of 2.5 ms.</param>
+        /// <param name="decode_fec">Flag (0 or 1) to request that any in-band forward error correction data be decoded. If no such data is available, the frame is decoded as if it were lost.</param>
+        /// <returns>Number of samples decoded on success or a negative error code (see <see cref="OpusErrorCodes"/>) on failure.</returns>
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern unsafe int opus_multistream_decode24(OpusMSDecoderSafeHandle st, int* data, int len, short* pcm, int frame_size, int decode_fec);
+        
         /// <summary>
         /// Decode a multistream Opus packet with floating point output.
         /// </summary>

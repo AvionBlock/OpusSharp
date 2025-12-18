@@ -93,6 +93,30 @@ namespace OpusSharp.Core
                 return result;
             }
         }
+        
+        /// <summary>
+        /// Encodes a pcm frame.
+        /// </summary>
+        /// <param name="input">Input signal (interleaved if 2 channels). length is frame_size*channels*sizeof(int).</param>
+        /// <param name="frame_size">The frame size of the pcm data. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
+        /// <param name="output">Output payload. This must contain storage for at least max_data_bytes.</param>
+        /// <param name="max_data_bytes">Size of the allocated memory for the output payload. This may be used to impose an upper limit on the instant bitrate, but should not be used as the only bitrate control. Use <see cref="EncoderCTL.OPUS_SET_BITRATE"/> to control the bitrate.</param>
+        /// <returns>The length of the encoded packet (in bytes).</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public unsafe int Encode(Span<int> input, int frame_size, Span<byte> output, int max_data_bytes)
+        {
+            ThrowIfDisposed();
+            fixed (int* inputPtr = input)
+            fixed (byte* outputPtr = output)
+            {
+                var result = _useStatic
+                    ? StaticNativeOpus.opus_encode24(_handler, inputPtr, frame_size, outputPtr, max_data_bytes)
+                    : NativeOpus.opus_encode24(_handler, inputPtr, frame_size, outputPtr, max_data_bytes);
+                CheckError(result);
+                return result;
+            }
+        }
 
         /// <summary>
         /// Encodes a floating point pcm frame.
@@ -142,6 +166,19 @@ namespace OpusSharp.Core
         /// <exception cref="OpusException" />
         /// <exception cref="ObjectDisposedException" />
         public int Encode(short[] input, int frame_size, byte[] output, int max_data_bytes) =>
+            Encode(input.AsSpan(), frame_size, output.AsSpan(), max_data_bytes);
+        
+        /// <summary>
+        /// Encodes a pcm frame.
+        /// </summary>
+        /// <param name="input">Input signal (interleaved if 2 channels). length is frame_size*channels*sizeof(int).</param>
+        /// <param name="frame_size">The frame size of the pcm data. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder from using the LPC or hybrid modes.</param>
+        /// <param name="output">Output payload. This must contain storage for at least max_data_bytes.</param>
+        /// <param name="max_data_bytes">Size of the allocated memory for the output payload. This may be used to impose an upper limit on the instant bitrate, but should not be used as the only bitrate control. Use <see cref="EncoderCTL.OPUS_SET_BITRATE"/> to control the bitrate.</param>
+        /// <returns>The length of the encoded packet (in bytes).</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public int Encode(int[] input, int frame_size, byte[] output, int max_data_bytes) =>
             Encode(input.AsSpan(), frame_size, output.AsSpan(), max_data_bytes);
 
         /// <summary>
