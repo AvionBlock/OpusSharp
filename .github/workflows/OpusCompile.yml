@@ -122,13 +122,9 @@ jobs:
         working-directory: ./build
         run: cmake --build . -j 2 --config Release --target package
 
-      - name: Show Files
-        working-directory: ./build
-        run: dir
-
       - name: Rename file 
         working-directory: ./build
-        run: mv libopus.so.0.10.1 opus.so
+        run: mv libopus.so.0.11.0 opus.so
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
@@ -225,7 +221,7 @@ jobs:
 
       - name: Rename file 
         working-directory: ./build
-        run: mv libopus.0.10.1.dylib opus.dylib
+        run: mv libopus.0.11.0.dylib opus.dylib
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
