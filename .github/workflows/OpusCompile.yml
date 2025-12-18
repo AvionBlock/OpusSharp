@@ -9,257 +9,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  Linux_Build_x64:
+  Android:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
-
-      - name: Autogen
-        run: ./opus/autogen.sh
-
-      - name: Create Build Dir
-        run: mkdir build
-
-      - name: Configure
-        working-directory: ./build
-        run: cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON
-
-      - name: Build
-        working-directory: ./build
-        run: cmake --build . -j 2 --config Release --target package
-
-      - name: Rename file 
-        working-directory: ./build
-        run: mv libopus.so.0.10.1 opus.so
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: linux-x86_64-opus.so
-          path: ./build/opus.so
-
-  Linux_Build_x32:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Build Libraries
-        run: sudo apt-get install g++-multilib
-
-      - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
-
-      - name: Autogen
-        run: ./opus/autogen.sh
-
-      - name: Create Build Dir
-        run: mkdir build
-
-      - name: Configure
-        working-directory: ./build
-        run: cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_C_FLAGS=-m32 -DCMAKE_CXX_FLAGS=-m32
-
-      - name: Build
-        working-directory: ./build
-        run: cmake --build . -j 2 --config Release --target package
-
-      - name: Rename file 
-        working-directory: ./build
-        run: mv libopus.so.0.10.1 opus.so
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: linux-x86-opus.so
-          path: ./build/opus.so
-
-  Linux_Build_Arm64:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Build Libraries
-        run: sudo apt-get install g++-aarch64-linux-gnu
-
-      - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
-
-      - name: Autogen
-        run: ./opus/autogen.sh
-
-      - name: Create Build Dir
-        run: mkdir build
-
-      - name: Configure
-        working-directory: ./build
-        run: cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-g++
-
-      - name: Build
-        working-directory: ./build
-        run: cmake --build . -j 2 --config Release --target package
-
-      - name: Rename file 
-        working-directory: ./build
-        run: mv libopus.so.0.10.1 opus.so
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: linux-arm64-opus.so
-          path: ./build/opus.so
-
-  Linux_Build_Arm32:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Build Libraries
-        run: sudo apt-get install g++-arm-linux-gnueabi
-
-      - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
-
-      - name: Autogen
-        run: ./opus/autogen.sh
-
-      - name: Create Build Dir
-        run: mkdir build
-
-      - name: Configure
-        working-directory: ./build
-        run: cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_C_COMPILER=arm-linux-gnueabi-gcc -DCMAKE_CXX_COMPILER=arm-linux-gnueabi-g++
-
-      - name: Build
-        working-directory: ./build
-        run: cmake --build . -j 2 --config Release --target package
-
-      - name: Rename file 
-        working-directory: ./build
-        run: mv libopus.so.0.10.1 opus.so
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: linux-arm32-opus.so
-          path: ./build/opus.so
-          
-  Win_Build_x64:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
-
-      - name: Autogen
-        run: ./opus/autogen.bat
-
-      - name: Create Build Dir
-        run: mkdir build
-
-      - name: Configure
-        working-directory: ./build
-        run: cmake ../opus -G "Visual Studio 17 2022" -A x64 -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON
-
-      - name: Build
-        working-directory: ./build
-        run: cmake --build . -j 2 --config Release --target package
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: win-x64-opus.dll
-          path: ./build/Release/opus.dll
-
-  Win_Build_x32:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
-
-      - name: Autogen
-        run: ./opus/autogen.bat
-
-      - name: Create Build Dir
-        run: mkdir build
-
-      - name: Configure
-        working-directory: ./build
-        run: cmake ../opus -G "Visual Studio 17 2022" -A Win32 -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON
-
-      - name: Build
-        working-directory: ./build
-        run: cmake --build . -j 2 --config Release --target package
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: win-x32-opus.dll
-          path: ./build/Release/opus.dll
-          
-  Win_Build_arm64:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
-
-      - name: Autogen
-        run: ./opus/autogen.bat
-
-      - name: Create Build Dir
-        run: mkdir build
-
-      - name: Configure
-        working-directory: ./build
-        run: cmake ../opus -G "Visual Studio 17 2022" -A ARM64 -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON
-
-      - name: Build
-        working-directory: ./build
-        run: cmake --build . -j 2 --config Release --target package
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: win-arm64-opus.dll
-          path: ./build/Release/opus.dll
-
-  Win_Build_arm32:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
-
-      - name: Autogen
-        run: ./opus/autogen.bat
-
-      - name: Create Build Dir
-        run: mkdir build
-
-      - name: Configure
-        working-directory: ./build
-        run: cmake ../opus -G "Visual Studio 17 2022" -A ARM,version=10.0.22621.0 -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON
-
-      - name: Build
-        working-directory: ./build
-        run: cmake --build . -j 2 --config Release --target package
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: win-arm32-opus.dll
-          path: ./build/Release/opus.dll
-
-  Android_Build_x64:
-    runs-on: ubuntu-latest
+    env:
+      CHECK_ALIGNMENT: false
+    strategy:
+      matrix:
+        arch: [x64, x86, arm64, arm32]
+      fail-fast: false
     steps:
       - uses: actions/checkout@v4
       - uses: nttld/setup-ndk@v1
@@ -270,40 +27,81 @@ jobs:
         env:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
+        # Not much I can do to reduce the bloat.
+      - name: Setup Environment
+        run: |
+          if [[ "${{ matrix.arch }}" == "x64" ]]; then
+            echo "ABI=x86_64" >> $GITHUB_ENV
+          elif [[ "${{ matrix.arch }}" == "x86" ]]; then
+            echo "ABI=x86" >> $GITHUB_ENV
+          elif [[ "${{ matrix.arch }}" == "arm64" ]]; then
+            echo "ABI=arm64-v8a" >> $GITHUB_ENV
+          elif [[ "${{ matrix.arch }}" == "arm32" ]]; then
+            echo "ABI=armeabi-v7a" >> $GITHUB_ENV
+          fi
+
+      - name: Create Build Directory
+        run: mkdir build
+
       - name: Clone Repository
         run: git clone https://github.com/xiph/opus.git
 
       - name: Autogen
         run: ./opus/autogen.sh
 
-      - name: Create Build Dir
-        run: mkdir build
-
       - name: Configure
         working-directory: ./build
-        run: cmake ../opus -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake -DANDROID_ABI=x86_64 -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON
+        run: cmake ../opus -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake -DANDROID_ABI=${{ env.ABI }} -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON -DCMAKE_SHARED_LINKER_FLAGS='-Wl,-z,max-page-size=16384,-z,common-page-size=16384' -DCMAKE_EXE_LINKER_FLAGS='-Wl,-z,max-page-size=16384,-z,common-page-size=16384'
 
       - name: Build
         working-directory: ./build
         run: cmake --build . -j 2 --config Release --target package
 
+      - name: Check Alignment
+        if: ${{ env.CHECK_ALIGNMENT == 'true' }}
+        working-directory: ./build
+        run: sudo apt install llvm && llvm-objdump -p libopus.so | grep LOAD
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: android-x64-libopus.so
+          name: android-${{ matrix.arch }}-libopus.so
           path: ./build/libopus.so
 
-  Android_Build_x32:
+  Linux:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: [x64, x86, arm64, arm32]
+      fail-fast: false
     steps:
       - uses: actions/checkout@v4
-      - uses: nttld/setup-ndk@v1
-        id: setup-ndk
-        with:
-          ndk-version: r28c
-          add-to-path: false
-        env:
-          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+
+        # Not much I can do to reduce the bloat.
+      - name: Setup Environment
+        run: |
+          if [[ "${{ matrix.arch }}" == "x64" ]]; then
+            echo "C_FLAGS=-m64" >> $GITHUB_ENV
+            echo "CXX_FLAGS=-m64" >> $GITHUB_ENV
+          elif [[ "${{ matrix.arch }}" == "x86" ]]; then
+            sudo apt-get update
+            sudo apt-get install g++-multilib
+            echo "C_FLAGS=-m32" >> $GITHUB_ENV
+            echo "CXX_FLAGS=-m32" >> $GITHUB_ENV
+          elif [[ "${{ matrix.arch }}" == "arm64" ]]; then
+            sudo apt-get update
+            sudo apt-get install g++-aarch64-linux-gnu
+            echo "C_COMPILER=aarch64-linux-gnu-gcc" >> $GITHUB_ENV
+            echo "CXX_COMPILER=aarch64-linux-gnu-g++" >> $GITHUB_ENV
+          elif [[ "${{ matrix.arch }}" == "arm32" ]]; then
+            sudo apt-get update
+            sudo apt-get install g++-arm-linux-gnueabi
+            echo "C_COMPILER=arm-linux-gnueabi-gcc" >> $GITHUB_ENV
+            echo "CXX_COMPILER=arm-linux-gnueabi-g++" >> $GITHUB_ENV
+          fi
+
+      - name: Create Build Directory
+        run: mkdir build
 
       - name: Clone Repository
         run: git clone https://github.com/xiph/opus.git
@@ -311,47 +109,69 @@ jobs:
       - name: Autogen
         run: ./opus/autogen.sh
 
-      - name: Create Build Dir
-        run: mkdir build
-
       - name: Configure
         working-directory: ./build
-        run: cmake ../opus -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake -DANDROID_ABI=x86 -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON
+        run: |
+          if [[ "${{ matrix.arch }}" == "x64" || "${{ matrix.arch }}" == "x86" ]]; then
+            cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_C_FLAGS=${{ env.C_FLAGS }} -DCMAKE_CXX_FLAGS=${{ env.CXX_FLAGS }}
+          elif [[ "${{ matrix.arch }}" == "arm64" || "${{ matrix.arch }}" == "arm32" ]]; then
+            cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_C_COMPILER=${{ env.C_COMPILER }} -DCMAKE_CXX_COMPILER=${{ env.CXX_COMPILER }}
+          fi
 
       - name: Build
         working-directory: ./build
         run: cmake --build . -j 2 --config Release --target package
 
+      - name: Rename file 
+        working-directory: ./build
+        run: mv libopus.so.0.11.0 opus.so
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: android-x32-libopus.so
-          path: ./build/libopus.so
-          
-  Android_Build_Arm64:
-    runs-on: ubuntu-latest
+          name: linux-${{ matrix.arch }}-opus.so
+          path: ./build/opus.so
+
+  Windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        arch: [x64, x86, arm64] # Disabled arm32
+      fail-fast: false
     steps:
       - uses: actions/checkout@v4
-      - uses: nttld/setup-ndk@v1
-        id: setup-ndk
-        with:
-          ndk-version: r28c
-          add-to-path: false
-        env:
-          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+
+        # Not much I can do to reduce the bloat.
+      - name: Setup Environment
+        run: |
+          if ( "${{ matrix.arch }}" -eq "x64" ) {
+            echo "ARCH=x64" >> $env:GITHUB_ENV
+          } elseif ( "${{ matrix.arch }}" -eq "x86" ) {
+            echo "ARCH=Win32" >> $env:GITHUB_ENV
+          } elseif ( "${{ matrix.arch }}" -eq "arm64" ) {
+            echo "ARCH=ARM64" >> $env:GITHUB_ENV
+          } elseif ( "${{ matrix.arch }}" -eq "arm32" ) {
+            echo "ARCH=ARM" >> $env:GITHUB_ENV
+          }
+
+      - name: Create Build Directory
+        run: mkdir build
 
       - name: Clone Repository
         run: git clone https://github.com/xiph/opus.git
 
       - name: Autogen
-        run: ./opus/autogen.sh
-
-      - name: Create Build Dir
-        run: mkdir build
+        run: ./opus/autogen.bat
 
       - name: Configure
         working-directory: ./build
-        run: cmake ../opus -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake -DANDROID_ABI=arm64-v8a -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON
+        run: |
+          if ( "${{ matrix.arch }}" -eq "arm32" ) {
+            cmake ../opus -G "Visual Studio 17 2022" -A ARM,version=10.0.22621.0 -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON
+          }
+          else {
+            cmake ../opus -G "Visual Studio 17 2022" -A ${{ env.ARCH }} -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON
+          }
 
       - name: Build
         working-directory: ./build
@@ -360,64 +180,40 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: android-arm64-libopus.so
-          path: ./build/libopus.so
+          name: win-${{ matrix.arch }}-opus.dll
+          path: ./build/Release/opus.dll
 
-  Android_Build_Arm32:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: nttld/setup-ndk@v1
-        id: setup-ndk
-        with:
-          ndk-version: r28c
-          add-to-path: false
-        env:
-          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
-
-      - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
-
-      - name: Autogen
-        run: ./opus/autogen.sh
-
-      - name: Create Build Dir
-        run: mkdir build
-
-      - name: Configure
-        working-directory: ./build
-        run: cmake ../opus -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake -DANDROID_ABI=armeabi-v7a -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON
-
-      - name: Build
-        working-directory: ./build
-        run: cmake --build . -j 2 --config Release --target package
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-arm32-libopus.so
-          path: ./build/libopus.so
-
-  MacOS_Build_x64:
+  MacOS:
     runs-on: macos-latest
+    strategy:
+      matrix:
+        arch: [x64, arm64]
+      fail-fast: false
     steps:
       - uses: actions/checkout@v4
 
+        # Not much I can do to reduce the bloat.
+      - name: Setup Environment
+        run: |
+          brew install autoconf automake libtool
+          if [[ "${{ matrix.arch }}" == "x64" ]]; then
+            echo "OSX_ARCH=x86_64" >> $GITHUB_ENV
+          elif [[ "${{ matrix.arch }}" == "arm64" ]]; then
+            echo "OSX_ARCH=arm64" >> $GITHUB_ENV
+          fi
+
+      - name: Create Build Directory
+        run: mkdir build
+        
       - name: Clone Repository
         run: git clone https://github.com/xiph/opus.git
-
-      - name: Install AutoConf, AutoMake and LibTool # Needed for autogen.sh
-        run: brew install autoconf automake libtool
 
       - name: Autogen
         run: ./opus/autogen.sh
 
-      - name: Create Build Dir
-        run: mkdir build
-
       - name: Configure
         working-directory: ./build
-        run: cmake ../opus -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DCMAKE_OSX_ARCHITECTURES=x86_64
+        run: cmake ../opus -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DCMAKE_OSX_ARCHITECTURES=${{ env.OSX_ARCH }}
 
       - name: Build
         working-directory: ./build
@@ -425,63 +221,28 @@ jobs:
 
       - name: Rename file 
         working-directory: ./build
-        run: mv libopus.0.10.1.dylib opus.dylib
+        run: mv libopus.0.11.0.dylib opus.dylib
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-           name: macos-x86_64-opus.dylib
+           name: macos-${{ matrix.arch }}-opus.dylib
            path: ./build/opus.dylib
 
-  MacOS_Build_arm64:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
-
-      - name: Install AutoConf, AutoMake and LibTool # Needed for autogen.sh
-        run: brew install autoconf automake libtool
-
-      - name: Autogen
-        run: ./opus/autogen.sh
-
-      - name: Create Build Dir
-        run: mkdir build
-
-      - name: Configure
-        working-directory: ./build
-        run: cmake ../opus -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DCMAKE_OSX_ARCHITECTURES=arm64
-
-      - name: Build
-        working-directory: ./build
-        run: cmake --build .
-
-      - name: Rename file 
-        working-directory: ./build
-        run: mv libopus.0.10.1.dylib opus.dylib
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-           name: macos-arm64-opus.dylib
-           path: ./build/opus.dylib
-
-  Wasm_Build_x64:
+  Wasm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: mymindstorm/setup-emsdk@v14
 
+      - name: Create Build Dir
+        run: mkdir build
+
       - name: Clone Repository
         run: git clone https://github.com/xiph/opus.git
 
       - name: Autogen
         run: ./opus/autogen.sh
-
-      - name: Create Build Dir
-        run: mkdir build
 
       - name: Configure
         working-directory: ./build

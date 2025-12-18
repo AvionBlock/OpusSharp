@@ -61,6 +61,58 @@ namespace OpusSharp.Core.Extensions
             decoder.Ctl(DecoderCTL.OPUS_GET_PITCH, ref pitch);
             return pitch;
         }
+        
+        /// <summary>
+        /// Enables or disables the decoder's OSCE BWE module.
+        /// </summary>
+        /// <param name="decoder">The decoder state.</param>
+        /// <param name="enabled">Whether to enable or disable the OSCE BWE module.</param>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public static void SetOsceBwe(this OpusDecoder decoder, bool enabled)
+        {
+            decoder.Ctl(DecoderCTL.OPUS_SET_OSCE_BWE, enabled ? 1 : 0);
+        }
+
+        /// <summary>
+        /// Determines whether the decoder's OSCE BWE module is enabled or not.
+        /// </summary>
+        /// <param name="decoder">The decoder state.</param>
+        /// <returns>Whether the OSCE BWE module is enabled or not.</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public static bool GetOsceBwe(this OpusDecoder decoder)
+        {
+            var value = 0;
+            decoder.Ctl(DecoderCTL.OPUS_GET_OSCE_BWE, ref value);
+            return value == 1;
+        }
+        
+        /// <summary>
+        /// Sets whether the decoder should ignore extensions in the padding area.
+        /// </summary>
+        /// <param name="decoder">The decoder state.</param>
+        /// <param name="disabled">Whether to disable all found extensions in the padding area.</param>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public static void SetIgnoreExtensions(this OpusDecoder decoder, bool disabled)
+        {
+            decoder.Ctl(DecoderCTL.OPUS_SET_IGNORE_EXTENSIONS, disabled ? 1 : 0);
+        }
+
+        /// <summary>
+        /// Determines whether the decoder is ignoring extensions found in the padding area.
+        /// </summary>
+        /// <param name="decoder">The decoder state.</param>
+        /// <returns>Whether the decoder is ignoring extensions.</returns>
+        /// <exception cref="OpusException" />
+        /// <exception cref="ObjectDisposedException" />
+        public static bool GetIgnoreExtensions(this OpusDecoder decoder)
+        {
+            var value = 0;
+            decoder.Ctl(DecoderCTL.OPUS_GET_IGNORE_EXTENSIONS, ref value);
+            return value == 1;
+        }
 
         /// <summary>
         /// Resets the codec state to be equivalent to a freshly initialized state.
