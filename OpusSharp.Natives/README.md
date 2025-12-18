@@ -19,4 +19,4 @@ Android builds are 16kb aligned.
 
 iOS and WASM builds are not included as they need to be statically linked.
 
-Binaries have been updated to commit [8b2ec57](https://github.com/xiph/opus/commit/2785f8de02135bba3c1e6823a7d5b79ebd1b9473)
+Binaries have been updated to commit [2785f8d](https://github.com/xiph/opus/commit/2785f8de02135bba3c1e6823a7d5b79ebd1b9473)
