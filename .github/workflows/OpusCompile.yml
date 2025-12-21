@@ -8,6 +8,10 @@ on:
 
   workflow_dispatch:
 
+permissions:
+  contents: write
+  packages: write
+
 jobs:
   Android:
     runs-on: ubuntu-latest
@@ -228,6 +232,71 @@ jobs:
         with:
            name: macos-${{ matrix.arch }}-opus.dylib
            path: ./build/opus.dylib
+
+  iOS:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        target: [device, simulator-arm64, simulator-x86_64]
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Environment
+        run: |
+          brew install autoconf automake libtool
+          if [[ "${{ matrix.target }}" == "device" ]]; then
+            echo "SDK=iphoneos" >> $GITHUB_ENV
+            echo "ARCH=arm64" >> $GITHUB_ENV
+            echo "OUTPUT_NAME=ios-device-arm64" >> $GITHUB_ENV
+          elif [[ "${{ matrix.target }}" == "simulator-arm64" ]]; then
+            echo "SDK=iphonesimulator" >> $GITHUB_ENV
+            echo "ARCH=arm64" >> $GITHUB_ENV
+            echo "OUTPUT_NAME=ios-simulator-arm64" >> $GITHUB_ENV
+          elif [[ "${{ matrix.target }}" == "simulator-x86_64" ]]; then
+            echo "SDK=iphonesimulator" >> $GITHUB_ENV
+            echo "ARCH=x86_64" >> $GITHUB_ENV
+            echo "OUTPUT_NAME=ios-simulator-x86_64" >> $GITHUB_ENV
+          fi
+
+      - name: Create Build Directory
+        run: mkdir build
+
+      - name: Clone Repository
+        run: git clone https://github.com/xiph/opus.git
+
+      - name: Autogen
+        run: ./opus/autogen.sh
+
+      - name: Configure
+        working-directory: ./build
+        run: |
+          cmake ../opus \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DBUILD_SHARED_LIBS=OFF \
+            -DCMAKE_SYSTEM_NAME=iOS \
+            -DCMAKE_OSX_ARCHITECTURES=${{ env.ARCH }} \
+            -DCMAKE_OSX_DEPLOYMENT_TARGET=13.0 \
+            -DCMAKE_OSX_SYSROOT=${{ env.SDK }} \
+            -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+            -DOPUS_BUILD_PROGRAMS=OFF
+
+      - name: Build
+        working-directory: ./build
+        run: cmake --build . -j $(sysctl -n hw.ncpu) --config Release
+
+      - name: Verify Library
+        working-directory: ./build
+        run: |
+          echo "=== Built library for ${{ matrix.target }} ==="
+          find . -name "*.a" -exec file {} \;
+          find . -name "*.a" -exec lipo -info {} \;
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.OUTPUT_NAME }}-libopus.a
+          path: ./build/libopus.a
 
   Wasm:
     runs-on: ubuntu-latest
