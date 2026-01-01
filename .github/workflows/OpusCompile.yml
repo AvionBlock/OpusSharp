@@ -272,7 +272,6 @@ jobs:
         working-directory: ./build
         run: |
           cmake ../opus \
-            -G "Unix Makefiles"
             -DCMAKE_BUILD_TYPE=Release \
             -DBUILD_SHARED_LIBS=OFF \
             -DCMAKE_SYSTEM_NAME=iOS \
@@ -280,7 +279,9 @@ jobs:
             -DCMAKE_OSX_DEPLOYMENT_TARGET=13.0 \
             -DCMAKE_OSX_SYSROOT=${{ env.SDK }} \
             -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
-            -DOPUS_BUILD_PROGRAMS=OFF
+            -DOPUS_BUILD_PROGRAMS=OFF \
+            -DEC_PREFIX=opus_ec_ \
+            -DEC_PREFIX_OVERRIDE=1
 
       - name: Build
         working-directory: ./build
@@ -293,7 +294,7 @@ jobs:
           find . -name "*.a" -exec file {} \;
           find . -name "*.a" -exec lipo -info {} \;
 
-      - name: Sanitize symbols to avoid Unity symbol conflicts
+      - name: Sanitize symbols to avoid Unity symbol conflicts (simplified)
         working-directory: ./build
         run: |
           echo "Installing llvm (provides llvm-objcopy)..."
@@ -381,7 +382,8 @@ jobs:
           fi
 
           mkdir -p universal
-          echo "Found slices:" && printf '%s' "${slices[@]}"
+          echo "Found slices:" && printf '%s
+' "${slices[@]}"
 
           # Build xcodebuild args for all available slices (headers come from checked out repo)
           xc_args=()
@@ -393,6 +395,25 @@ jobs:
           if xcodebuild -create-xcframework "${xc_args[@]}" -output universal/libopus.xcframework; then
             echo "XCFramework created successfully."
             ls -la universal || true
+          else
+            echo "xcodebuild failed; attempting lipo fallback when possible..."
+            if [ ${#slices[@]} -eq 1 ]; then
+              cp "${slices[0]}" universal/libopus_universal.a
+              echo "Copied single slice to universal/libopus_universal.a"
+              lipo -info universal/libopus_universal.a || true
+            else
+              echo "Attempting lipo -create on available slices..."
+              if lipo -create "${slices[@]}" -output universal/libopus_universal.a; then
+                lipo -info universal/libopus_universal.a
+              else
+                echo "lipo failed; printing archs for inspection:" 
+                for s in "${slices[@]}"; do
+                  echo "$s -> $(lipo -info "$s")"
+                done
+                exit 1
+              fi
+            fi
+          fi
 
       - name: Upload Universal Artifact
         uses: actions/upload-artifact@v4
