@@ -279,7 +279,9 @@ jobs:
             -DCMAKE_OSX_DEPLOYMENT_TARGET=13.0 \
             -DCMAKE_OSX_SYSROOT=${{ env.SDK }} \
             -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
-            -DOPUS_BUILD_PROGRAMS=OFF
+            -DOPUS_BUILD_PROGRAMS=OFF \
+            -DEC_PREFIX=opus_ec_ \
+            -DEC_PREFIX_OVERRIDE=1
 
       - name: Build
         working-directory: ./build
@@ -292,11 +294,101 @@ jobs:
           find . -name "*.a" -exec file {} \;
           find . -name "*.a" -exec lipo -info {} \;
 
+      - name: Sanitize symbols to avoid Unity symbol conflicts (simplified)
+        working-directory: ./build
+        run: |
+          echo "Installing llvm (provides llvm-objcopy)..."
+          brew install llvm
+          # Ensure llvm tools are on PATH for the remainder of this step
+          export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+          set -euo pipefail
+
+          echo "Collecting global defined symbols from libopus.a..."
+          # Select only defined symbols (T,D,B,S) from the archive and deduplicate
+          nm -g libopus.a | awk '/ [TDBS] /{print $3}' | sort -u > allsyms.txt
+
+          echo "Creating symbol mapping for renaming (skipping public 'opus' symbols)..."
+          : > mapping.txt
+          grep -v -E '^_opus' allsyms.txt | while read -r sym; do
+            [ -z "$sym" ] && continue
+            echo "$sym ${sym}_libopus" >> mapping.txt
+          done
+
+          if [ -s mapping.txt ]; then
+            echo "Attempting archive-level objcopy rename (single step)..."
+
+            # Try operating on the archive directly (faster). If the tool doesn't support archives,
+            # fall back to extracting members and operating per-object (older llvm/objcopy may be limited).
+            if llvm-objcopy --redefine-syms=mapping.txt libopus.a; then
+              echo "Archive-level rename succeeded. Verifying..."
+              nm -g libopus.a | grep compute_allocation || true
+            else
+              echo "Archive-level rename failed; falling back to per-object processing..."
+              echo "Extracting libopus.a..."
+              ar -x libopus.a
+              echo "Applying symbol renames to object files..."
+              for f in *.o; do
+                llvm-objcopy --redefine-syms=mapping.txt "$f" || true
+              done
+              echo "Repacking sanitized lib into libopus_sanitized.a"
+              ar rcs libopus_sanitized.a *.o
+              echo "Verification: search for compute_allocation in sanitized archive (should be renamed or absent)"
+              nm -g libopus_sanitized.a | grep compute_allocation || true
+              mv libopus_sanitized.a libopus.a
+            fi
+          else
+            echo "No non-opus symbols found to rename. Skipping sanitization."
+          fi
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.OUTPUT_NAME }}-libopus.a
           path: ./build/libopus.a
+
+  iOS-universal:
+    runs-on: macos-latest
+    needs: iOS
+    steps:
+      - name: Download device artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ios-device-arm64-libopus.a
+          path: device
+
+      - name: Download simulator-arm64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ios-simulator-arm64-libopus.a
+          path: sim_arm64
+
+      - name: Download simulator-x86_64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ios-simulator-x86_64-libopus.a
+          path: sim_x86
+
+      - name: Create universal libopus.a
+        run: |
+          set -euo pipefail
+          echo "Finding slices..."
+          find device sim_arm64 sim_x86 -name "libopus.a" -print
+          slices=$(find device sim_arm64 sim_x86 -name "libopus.a" -print | tr '\n' ' ')
+          if [ -z "$slices" ]; then
+            echo "No slices found! Listing directories:" && ls -la device sim_arm64 sim_x86 || true
+            exit 1
+          fi
+          mkdir -p universal
+          echo "Creating universal binary from: $slices"
+          lipo -create $slices -output universal/libopus_universal.a
+          lipo -info universal/libopus_universal.a
+
+      - name: Upload Universal Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-universal-libopus.a
+          path: universal/libopus_universal.a
 
   Wasm:
     runs-on: ubuntu-latest
