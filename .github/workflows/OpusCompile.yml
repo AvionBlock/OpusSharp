@@ -382,8 +382,7 @@ jobs:
           fi
 
           mkdir -p universal
-          echo "Found slices:" && printf '%s
-' "${slices[@]}"
+          echo "Found slices:" && printf '%s' "${slices[@]}"
 
           # Build xcodebuild args for all available slices (headers come from checked out repo)
           xc_args=()
