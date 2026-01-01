@@ -272,6 +272,7 @@ jobs:
         working-directory: ./build
         run: |
           cmake ../opus \
+            -G "Unix Makefiles"
             -DCMAKE_BUILD_TYPE=Release \
             -DBUILD_SHARED_LIBS=OFF \
             -DCMAKE_SYSTEM_NAME=iOS \
@@ -279,9 +280,7 @@ jobs:
             -DCMAKE_OSX_DEPLOYMENT_TARGET=13.0 \
             -DCMAKE_OSX_SYSROOT=${{ env.SDK }} \
             -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
-            -DOPUS_BUILD_PROGRAMS=OFF \
-            -DEC_PREFIX=opus_ec_ \
-            -DEC_PREFIX_OVERRIDE=1
+            -DOPUS_BUILD_PROGRAMS=OFF
 
       - name: Build
         working-directory: ./build
@@ -294,7 +293,7 @@ jobs:
           find . -name "*.a" -exec file {} \;
           find . -name "*.a" -exec lipo -info {} \;
 
-      - name: Sanitize symbols to avoid Unity symbol conflicts (simplified)
+      - name: Sanitize symbols to avoid Unity symbol conflicts
         working-directory: ./build
         run: |
           echo "Installing llvm (provides llvm-objcopy)..."
@@ -351,6 +350,8 @@ jobs:
     runs-on: macos-latest
     needs: iOS
     steps:
+      - uses: actions/checkout@v4
+
       - name: Download device artifact
         uses: actions/download-artifact@v4
         with:
@@ -369,26 +370,35 @@ jobs:
           name: ios-simulator-x86_64-libopus.a
           path: sim_x86
 
-      - name: Create universal libopus.a
+      - name: Create XCFramework (use available slices)
         run: |
           set -euo pipefail
           echo "Finding slices..."
-          find device sim_arm64 sim_x86 -name "libopus.a" -print
-          slices=$(find device sim_arm64 sim_x86 -name "libopus.a" -print | tr '\n' ' ')
-          if [ -z "$slices" ]; then
+          readarray -t slices < <(find device sim_arm64 sim_x86 -name "libopus.a")
+          if [ ${#slices[@]} -eq 0 ]; then
             echo "No slices found! Listing directories:" && ls -la device sim_arm64 sim_x86 || true
             exit 1
           fi
+
           mkdir -p universal
-          echo "Creating universal binary from: $slices"
-          lipo -create $slices -output universal/libopus_universal.a
-          lipo -info universal/libopus_universal.a
+          echo "Found slices:" && printf '%s' "${slices[@]}"
+
+          # Build xcodebuild args for all available slices (headers come from checked out repo)
+          xc_args=()
+          for s in "${slices[@]}"; do
+            xc_args+=( -library "$s" -headers "opus/include" )
+          done
+
+          echo "Creating XCFramework with xcodebuild..."
+          if xcodebuild -create-xcframework "${xc_args[@]}" -output universal/libopus.xcframework; then
+            echo "XCFramework created successfully."
+            ls -la universal || true
 
       - name: Upload Universal Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ios-universal-libopus.a
-          path: universal/libopus_universal.a
+          name: ios-universal-libopus
+          path: universal/*
 
   Wasm:
     runs-on: ubuntu-latest
