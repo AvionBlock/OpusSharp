@@ -375,14 +375,20 @@ jobs:
         run: |
           set -euo pipefail
           echo "Finding slices..."
-          readarray -t slices < <(find device sim_arm64 sim_x86 -name "libopus.a")
+
+          # Collect slices into array (bash 3.x compatible - no readarray)
+          slices=()
+          while IFS= read -r file; do
+            [ -n "$file" ] && slices+=("$file")
+          done <<< "$(find device sim_arm64 sim_x86 -name "libopus.a" 2>/dev/null)"
+
           if [ ${#slices[@]} -eq 0 ]; then
             echo "No slices found! Listing directories:" && ls -la device sim_arm64 sim_x86 || true
             exit 1
           fi
 
           mkdir -p universal
-          echo "Found slices:" && printf '%s' "${slices[@]}"
+          echo "Found slices: ${slices[*]}"
 
           # Build xcodebuild args for all available slices (headers come from checked out repo)
           xc_args=()
@@ -405,7 +411,7 @@ jobs:
               if lipo -create "${slices[@]}" -output universal/libopus_universal.a; then
                 lipo -info universal/libopus_universal.a
               else
-                echo "lipo failed; printing archs for inspection:" 
+                echo "lipo failed; printing archs for inspection:"
                 for s in "${slices[@]}"; do
                   echo "$s -> $(lipo -info "$s")"
                 done
