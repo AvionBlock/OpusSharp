@@ -279,9 +279,7 @@ jobs:
             -DCMAKE_OSX_DEPLOYMENT_TARGET=13.0 \
             -DCMAKE_OSX_SYSROOT=${{ env.SDK }} \
             -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
-            -DOPUS_BUILD_PROGRAMS=OFF \
-            -DEC_PREFIX=opus_ec_ \
-            -DEC_PREFIX_OVERRIDE=1
+            -DOPUS_BUILD_PROGRAMS=OFF
 
       - name: Build
         working-directory: ./build
@@ -294,7 +292,7 @@ jobs:
           find . -name "*.a" -exec file {} \;
           find . -name "*.a" -exec lipo -info {} \;
 
-      - name: Sanitize symbols to avoid Unity symbol conflicts (simplified)
+      - name: Sanitize symbols to avoid Unity symbol conflicts
         working-directory: ./build
         run: |
           echo "Installing llvm (provides llvm-objcopy)..."
@@ -316,30 +314,14 @@ jobs:
           done
 
           if [ -s mapping.txt ]; then
-            echo "Attempting archive-level objcopy rename (single step)..."
-
-            # Try operating on the archive directly (faster). If the tool doesn't support archives,
-            # fall back to extracting members and operating per-object (older llvm/objcopy may be limited).
-            if llvm-objcopy --redefine-syms=mapping.txt libopus.a; then
-              echo "Archive-level rename succeeded. Verifying..."
-              nm -g libopus.a | grep compute_allocation || true
-            else
-              echo "Archive-level rename failed; falling back to per-object processing..."
-              echo "Extracting libopus.a..."
-              ar -x libopus.a
-              echo "Applying symbol renames to object files..."
-              for f in *.o; do
-                llvm-objcopy --redefine-syms=mapping.txt "$f" || true
-              done
-              echo "Repacking sanitized lib into libopus_sanitized.a"
-              ar rcs libopus_sanitized.a *.o
-              echo "Verification: search for compute_allocation in sanitized archive (should be renamed or absent)"
-              nm -g libopus_sanitized.a | grep compute_allocation || true
-              mv libopus_sanitized.a libopus.a
-            fi
+            echo "Applying symbol renames..."
+            llvm-objcopy --redefine-syms=mapping.txt libopus.a
+            echo "Verification:"
+            nm -g libopus.a | grep compute_allocation || true
           else
             echo "No non-opus symbols found to rename. Skipping sanitization."
           fi
+
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
