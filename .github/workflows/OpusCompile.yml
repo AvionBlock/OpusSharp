@@ -328,91 +328,69 @@ jobs:
         with:
           name: ${{ env.OUTPUT_NAME }}-libopus.a
           path: ./build/libopus.a
-          
-  Apple-universal:
-      runs-on: macos-latest
-      needs: [iOS, MacOS]
-      steps:
-        - uses: actions/checkout@v4
-  
-        - name: Clone opus for headers
-          run: git clone --depth 1 https://github.com/xiph/opus.git
-  
-        - name: Download device artifact
-          uses: actions/download-artifact@v4
-          with:
-            name: ios-device-arm64-libopus.a
-            path: device
-  
-        - name: Download simulator-arm64 artifact
-          uses: actions/download-artifact@v4
-          with:
-            name: ios-simulator-arm64-libopus.a
-            path: sim_arm64
-  
-        - name: Download simulator-x86_64 artifact
-          uses: actions/download-artifact@v4
-          with:
-            name: ios-simulator-x86_64-libopus.a
-            path: sim_x86
-  
-        - name: Download macOS-arm64 artifact
-          uses: actions/download-artifact@v4
-          with:
-            name: macos-arm64-opus.dylib
-            path: macos_arm64
-  
-        - name: Download macOS-x64 artifact
-          uses: actions/download-artifact@v4
-          with:
-            name: macos-x64-opus.dylib
-            path: macos_x64
-  
-        - name: Create XCFramework
-          run: |
-            set -euo pipefail
-            mkdir -p universal
-  
-            echo "=== Checking downloaded artifacts ==="
-            ls -la device/ sim_arm64/ sim_x86/ macos_arm64/ macos_x64/ || true
-  
-            echo "=== Architecture info ==="
-            lipo -info device/libopus.a || true
-            lipo -info sim_arm64/libopus.a || true
-            lipo -info sim_x86/libopus.a || true
-            file macos_arm64/opus.dylib || true
-            file macos_x64/opus.dylib || true
-  
-            # Combine simulator slices (arm64 + x86_64) into a fat library
-            echo "=== Creating fat simulator library ==="
-            mkdir -p simulator
-            lipo -create sim_arm64/libopus.a sim_x86/libopus.a -output simulator/libopus.a
-            echo "Fat simulator library:"
-            lipo -info simulator/libopus.a
-  
-            # Combine macOS slices (arm64 + x86_64) into a fat library
-            echo "=== Creating fat macOS library ==="
-            mkdir -p macos
-            lipo -create macos_arm64/opus.dylib macos_x64/opus.dylib -output macos/libopus.dylib
-            echo "Fat macOS library:"
-            lipo -info macos/libopus.dylib
-  
-            # Create XCFramework with device, simulator, and macOS
-            echo "=== Creating XCFramework ==="
-            xcodebuild -create-xcframework \
-              -library device/libopus.a -headers opus/include \
-              -library simulator/libopus.a -headers opus/include \
-              -library macos/libopus.dylib -headers opus/include \
-              -output universal/libopus.xcframework
-  
-            echo "=== XCFramework created ==="
-            ls -laR universal/
-  
-        - name: Upload Universal Artifact
-          uses: actions/upload-artifact@v4
-          with:
-            name: apple-universal-libopus
-            path: universal/*
+
+  iOS-universal:
+    runs-on: macos-latest
+    needs: iOS
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clone opus for headers
+        run: git clone --depth 1 https://github.com/xiph/opus.git
+
+      - name: Download device artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ios-device-arm64-libopus.a
+          path: device
+
+      - name: Download simulator-arm64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ios-simulator-arm64-libopus.a
+          path: sim_arm64
+
+      - name: Download simulator-x86_64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ios-simulator-x86_64-libopus.a
+          path: sim_x86
+
+      - name: Create XCFramework
+        run: |
+          set -euo pipefail
+          mkdir -p universal
+
+          echo "=== Checking downloaded artifacts ==="
+          ls -la device/ sim_arm64/ sim_x86/ || true
+
+          echo "=== Architecture info ==="
+          lipo -info device/libopus.a || true
+          lipo -info sim_arm64/libopus.a || true
+          lipo -info sim_x86/libopus.a || true
+
+          # Combine simulator slices (arm64 + x86_64) into a fat library
+          echo "=== Creating fat simulator library ==="
+          mkdir -p simulator
+          lipo -create sim_arm64/libopus.a sim_x86/libopus.a -output simulator/libopus.a
+          echo "Fat simulator library:"
+          lipo -info simulator/libopus.a
+
+          # Create XCFramework with device (arm64) and simulator (arm64+x86_64)
+          echo "=== Creating XCFramework ==="
+          xcodebuild -create-xcframework \
+            -library device/libopus.a -headers opus/include \
+            -library simulator/libopus.a -headers opus/include \
+            -output universal/libopus.xcframework
+
+          echo "=== XCFramework created ==="
+          ls -laR universal/
+
+      - name: Upload Universal Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-universal-libopus
+          path: universal/*
 
   Wasm:
     runs-on: ubuntu-latest
