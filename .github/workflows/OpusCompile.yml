@@ -292,11 +292,105 @@ jobs:
           find . -name "*.a" -exec file {} \;
           find . -name "*.a" -exec lipo -info {} \;
 
+      - name: Sanitize symbols to avoid Unity symbol conflicts
+        working-directory: ./build
+        run: |
+          echo "Installing llvm (provides llvm-objcopy)..."
+          brew install llvm
+          # Ensure llvm tools are on PATH for the remainder of this step
+          export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+          set -euo pipefail
+
+          echo "Collecting global defined symbols from libopus.a..."
+          # Select only defined symbols (T,D,B,S) from the archive and deduplicate
+          nm -g libopus.a | awk '/ [TDBS] /{print $3}' | sort -u > allsyms.txt
+
+          echo "Creating symbol mapping for renaming (skipping public 'opus' symbols)..."
+          : > mapping.txt
+          grep -v -E '^_opus' allsyms.txt | while read -r sym; do
+            [ -z "$sym" ] && continue
+            echo "$sym ${sym}_libopus" >> mapping.txt
+          done
+
+          if [ -s mapping.txt ]; then
+            echo "Applying symbol renames..."
+            llvm-objcopy --redefine-syms=mapping.txt libopus.a
+            echo "Verification:"
+            nm -g libopus.a | grep compute_allocation || true
+          else
+            echo "No non-opus symbols found to rename. Skipping sanitization."
+          fi
+
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.OUTPUT_NAME }}-libopus.a
           path: ./build/libopus.a
+
+  iOS-universal:
+    runs-on: macos-latest
+    needs: iOS
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clone opus for headers
+        run: git clone --depth 1 https://github.com/xiph/opus.git
+
+      - name: Download device artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ios-device-arm64-libopus.a
+          path: device
+
+      - name: Download simulator-arm64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ios-simulator-arm64-libopus.a
+          path: sim_arm64
+
+      - name: Download simulator-x86_64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ios-simulator-x86_64-libopus.a
+          path: sim_x86
+
+      - name: Create XCFramework
+        run: |
+          set -euo pipefail
+          mkdir -p universal
+
+          echo "=== Checking downloaded artifacts ==="
+          ls -la device/ sim_arm64/ sim_x86/ || true
+
+          echo "=== Architecture info ==="
+          lipo -info device/libopus.a || true
+          lipo -info sim_arm64/libopus.a || true
+          lipo -info sim_x86/libopus.a || true
+
+          # Combine simulator slices (arm64 + x86_64) into a fat library
+          echo "=== Creating fat simulator library ==="
+          mkdir -p simulator
+          lipo -create sim_arm64/libopus.a sim_x86/libopus.a -output simulator/libopus.a
+          echo "Fat simulator library:"
+          lipo -info simulator/libopus.a
+
+          # Create XCFramework with device (arm64) and simulator (arm64+x86_64)
+          echo "=== Creating XCFramework ==="
+          xcodebuild -create-xcframework \
+            -library device/libopus.a -headers opus/include \
+            -library simulator/libopus.a -headers opus/include \
+            -output universal/libopus.xcframework
+
+          echo "=== XCFramework created ==="
+          ls -laR universal/
+
+      - name: Upload Universal Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-universal-libopus
+          path: universal/*
 
   Wasm:
     runs-on: ubuntu-latest
