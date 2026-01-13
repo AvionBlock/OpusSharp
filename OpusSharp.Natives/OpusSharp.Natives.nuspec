@@ -2,7 +2,7 @@
 <package>
     <metadata>
         <id>OpusSharp.Natives</id>
-        <version>1.6.0.0</version>
+        <version>1.6.0.1</version>
         <authors>The Opus Authors.</authors>
         <description>Contains native binaries for OpusSharp.</description>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
