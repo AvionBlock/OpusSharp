@@ -8,6 +8,10 @@ on:
 
   workflow_dispatch:
 
+permissions:
+  contents: write
+  packages: write
+
 jobs:
   Android:
     runs-on: ubuntu-latest
@@ -228,6 +232,165 @@ jobs:
         with:
            name: macos-${{ matrix.arch }}-opus.dylib
            path: ./build/opus.dylib
+
+  iOS:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        target: [device, simulator-arm64, simulator-x86_64]
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Environment
+        run: |
+          brew install autoconf automake libtool
+          if [[ "${{ matrix.target }}" == "device" ]]; then
+            echo "SDK=iphoneos" >> $GITHUB_ENV
+            echo "ARCH=arm64" >> $GITHUB_ENV
+            echo "OUTPUT_NAME=ios-device-arm64" >> $GITHUB_ENV
+          elif [[ "${{ matrix.target }}" == "simulator-arm64" ]]; then
+            echo "SDK=iphonesimulator" >> $GITHUB_ENV
+            echo "ARCH=arm64" >> $GITHUB_ENV
+            echo "OUTPUT_NAME=ios-simulator-arm64" >> $GITHUB_ENV
+          elif [[ "${{ matrix.target }}" == "simulator-x86_64" ]]; then
+            echo "SDK=iphonesimulator" >> $GITHUB_ENV
+            echo "ARCH=x86_64" >> $GITHUB_ENV
+            echo "OUTPUT_NAME=ios-simulator-x86_64" >> $GITHUB_ENV
+          fi
+
+      - name: Create Build Directory
+        run: mkdir build
+
+      - name: Clone Repository
+        run: git clone https://github.com/xiph/opus.git
+
+      - name: Autogen
+        run: ./opus/autogen.sh
+
+      - name: Configure
+        working-directory: ./build
+        run: |
+          cmake ../opus \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DBUILD_SHARED_LIBS=OFF \
+            -DCMAKE_SYSTEM_NAME=iOS \
+            -DCMAKE_OSX_ARCHITECTURES=${{ env.ARCH }} \
+            -DCMAKE_OSX_DEPLOYMENT_TARGET=13.0 \
+            -DCMAKE_OSX_SYSROOT=${{ env.SDK }} \
+            -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+            -DOPUS_BUILD_PROGRAMS=OFF
+
+      - name: Build
+        working-directory: ./build
+        run: cmake --build . -j $(sysctl -n hw.ncpu) --config Release
+
+      - name: Verify Library
+        working-directory: ./build
+        run: |
+          echo "=== Built library for ${{ matrix.target }} ==="
+          find . -name "*.a" -exec file {} \;
+          find . -name "*.a" -exec lipo -info {} \;
+
+      - name: Sanitize symbols to avoid Unity symbol conflicts
+        working-directory: ./build
+        run: |
+          echo "Installing llvm (provides llvm-objcopy)..."
+          brew install llvm
+          # Ensure llvm tools are on PATH for the remainder of this step
+          export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+          set -euo pipefail
+
+          echo "Collecting global defined symbols from libopus.a..."
+          # Select only defined symbols (T,D,B,S) from the archive and deduplicate
+          nm -g libopus.a | awk '/ [TDBS] /{print $3}' | sort -u > allsyms.txt
+
+          echo "Creating symbol mapping for renaming (skipping public 'opus' symbols)..."
+          : > mapping.txt
+          grep -v -E '^_opus' allsyms.txt | while read -r sym; do
+            [ -z "$sym" ] && continue
+            echo "$sym ${sym}_libopus" >> mapping.txt
+          done
+
+          if [ -s mapping.txt ]; then
+            echo "Applying symbol renames..."
+            llvm-objcopy --redefine-syms=mapping.txt libopus.a
+            echo "Verification:"
+            nm -g libopus.a | grep compute_allocation || true
+          else
+            echo "No non-opus symbols found to rename. Skipping sanitization."
+          fi
+
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.OUTPUT_NAME }}-libopus.a
+          path: ./build/libopus.a
+
+  iOS-universal:
+    runs-on: macos-latest
+    needs: iOS
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clone opus for headers
+        run: git clone --depth 1 https://github.com/xiph/opus.git
+
+      - name: Download device artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ios-device-arm64-libopus.a
+          path: device
+
+      - name: Download simulator-arm64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ios-simulator-arm64-libopus.a
+          path: sim_arm64
+
+      - name: Download simulator-x86_64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ios-simulator-x86_64-libopus.a
+          path: sim_x86
+
+      - name: Create XCFramework
+        run: |
+          set -euo pipefail
+          mkdir -p universal
+
+          echo "=== Checking downloaded artifacts ==="
+          ls -la device/ sim_arm64/ sim_x86/ || true
+
+          echo "=== Architecture info ==="
+          lipo -info device/libopus.a || true
+          lipo -info sim_arm64/libopus.a || true
+          lipo -info sim_x86/libopus.a || true
+
+          # Combine simulator slices (arm64 + x86_64) into a fat library
+          echo "=== Creating fat simulator library ==="
+          mkdir -p simulator
+          lipo -create sim_arm64/libopus.a sim_x86/libopus.a -output simulator/libopus.a
+          echo "Fat simulator library:"
+          lipo -info simulator/libopus.a
+
+          # Create XCFramework with device (arm64) and simulator (arm64+x86_64)
+          echo "=== Creating XCFramework ==="
+          xcodebuild -create-xcframework \
+            -library device/libopus.a -headers opus/include \
+            -library simulator/libopus.a -headers opus/include \
+            -output universal/libopus.xcframework
+
+          echo "=== XCFramework created ==="
+          ls -laR universal/
+
+      - name: Upload Universal Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-universal-libopus
+          path: universal/*
 
   Wasm:
     runs-on: ubuntu-latest
