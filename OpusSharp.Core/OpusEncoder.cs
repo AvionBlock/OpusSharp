@@ -45,7 +45,7 @@ namespace OpusSharp.Core
         {
             Dispose(false);
         }
-
+#if NETSTANDARD2_1_OR_GREATER || NET8_0_OR_GREATER
         /// <summary>
         /// Encodes a pcm frame.
         /// </summary>
@@ -141,6 +141,7 @@ namespace OpusSharp.Core
                 return result;
             }
         }
+#endif
 
         /// <summary>
         /// Encodes a pcm frame.
@@ -152,8 +153,19 @@ namespace OpusSharp.Core
         /// <returns>The length of the encoded packet (in bytes).</returns>
         /// <exception cref="OpusException" />
         /// <exception cref="ObjectDisposedException" />
-        public int Encode(byte[] input, int frame_size, byte[] output, int max_data_bytes) =>
-            Encode(input.AsSpan(), frame_size, output.AsSpan(), max_data_bytes);
+        public unsafe int Encode(byte[] input, int frame_size, byte[] output, int max_data_bytes)
+        {
+            ThrowIfDisposed();
+            fixed (byte* inputPtr = input)
+            fixed (byte* outputPtr = output)
+            {
+                var result = _useStatic
+                    ? StaticNativeOpus.opus_encode(_handler, (short*)inputPtr, frame_size, outputPtr, max_data_bytes)
+                    : NativeOpus.opus_encode(_handler, (short*)inputPtr, frame_size, outputPtr, max_data_bytes);
+                CheckError(result);
+                return result;
+            }
+        }
 
         /// <summary>
         /// Encodes a pcm frame.
@@ -165,8 +177,19 @@ namespace OpusSharp.Core
         /// <returns>The length of the encoded packet (in bytes).</returns>
         /// <exception cref="OpusException" />
         /// <exception cref="ObjectDisposedException" />
-        public int Encode(short[] input, int frame_size, byte[] output, int max_data_bytes) =>
-            Encode(input.AsSpan(), frame_size, output.AsSpan(), max_data_bytes);
+        public unsafe int Encode(short[] input, int frame_size, byte[] output, int max_data_bytes)
+        {
+            ThrowIfDisposed();
+            fixed (short* inputPtr = input)
+            fixed (byte* outputPtr = output)
+            {
+                var result = _useStatic
+                    ? StaticNativeOpus.opus_encode(_handler, inputPtr, frame_size, outputPtr, max_data_bytes)
+                    : NativeOpus.opus_encode(_handler, inputPtr, frame_size, outputPtr, max_data_bytes);
+                CheckError(result);
+                return result;
+            }
+        }
         
         /// <summary>
         /// Encodes a pcm frame.
@@ -178,8 +201,19 @@ namespace OpusSharp.Core
         /// <returns>The length of the encoded packet (in bytes).</returns>
         /// <exception cref="OpusException" />
         /// <exception cref="ObjectDisposedException" />
-        public int Encode(int[] input, int frame_size, byte[] output, int max_data_bytes) =>
-            Encode(input.AsSpan(), frame_size, output.AsSpan(), max_data_bytes);
+        public unsafe int Encode(int[] input, int frame_size, byte[] output, int max_data_bytes)
+        {
+            ThrowIfDisposed();
+            fixed (int* inputPtr = input)
+            fixed (byte* outputPtr = output)
+            {
+                var result = _useStatic
+                    ? StaticNativeOpus.opus_encode24(_handler, inputPtr, frame_size, outputPtr, max_data_bytes)
+                    : NativeOpus.opus_encode24(_handler, inputPtr, frame_size, outputPtr, max_data_bytes);
+                CheckError(result);
+                return result;
+            }
+        }
 
         /// <summary>
         /// Encodes a floating point pcm frame.
@@ -191,8 +225,19 @@ namespace OpusSharp.Core
         /// <returns>The length of the encoded packet (in bytes).</returns>
         /// <exception cref="OpusException" />
         /// <exception cref="ObjectDisposedException" />
-        public int Encode(float[] input, int frame_size, byte[] output, int max_data_bytes) =>
-            Encode(input.AsSpan(), frame_size, output.AsSpan(), max_data_bytes);
+        public unsafe int Encode(float[] input, int frame_size, byte[] output, int max_data_bytes)
+        {
+            ThrowIfDisposed();
+            fixed (float* inputPtr = input)
+            fixed (byte* outputPtr = output)
+            {
+                var result = _useStatic
+                    ? StaticNativeOpus.opus_encode_float(_handler, inputPtr, frame_size, outputPtr, max_data_bytes)
+                    : NativeOpus.opus_encode_float(_handler, inputPtr, frame_size, outputPtr, max_data_bytes);
+                CheckError(result);
+                return result;
+            }
+        }
 
         /// <summary>
         /// Performs a ctl request.
