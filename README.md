@@ -36,6 +36,13 @@ var decoded = new byte[1920]; //We get 1920 bytes from doing this calculation be
 var decodedSamples = decoder.Decode(someEncodedAudio, someEncodedAudio.Length, decoded, samplesPerFrame, false);
 ```
 
+## Static Usage Example
+```csharp
+//(use_static: true) sets the encoder and decoder to use the StaticNativeOpus implementation.
+var encoder = new OpusEncoder(sampleRate, channels, OpusPredefinedValues.OPUS_APPLICATION_VOIP, use_static: true);
+var encoder = new OpusDecoder(sampleRate, channels, use_static: true);
+```
+
 ## Basic NAudio Example
 ```cs
 using NAudio.Wave;
