@@ -1,29 +1,39 @@
 <?xml version="1.0"?>
 <package>
-	<metadata>
-		<id>OpusSharp.Core</id>
-		<version>1.6.0.0</version>
-		<authors>SineVector241</authors>
-		<description>Standard library for OpusSharp.</description>
-		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<copyright>Copyright MIT</copyright>
-		<license type="file">LICENSE.txt</license>
-		<readme>docs/README.md</readme>
+    <metadata>
+        <id>OpusSharp.Core</id>
+        <version>1.6.0.1</version>
+        <authors>SineVector241</authors>
+        <description>Standard library for OpusSharp.</description>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <copyright>Copyright MIT</copyright>
+        <license type="file">LICENSE.txt</license>
+        <readme>docs/README.md</readme>
 
-		<projectUrl>https://avionblock.github.io/OpusSharp/index.html</projectUrl>
-		<repository type="git" url="https://github.com/AvionBlock/OpusSharp" />
+        <projectUrl>https://avionblock.github.io/OpusSharp/index.html</projectUrl>
+        <repository type="git" url="https://github.com/AvionBlock/OpusSharp"/>
 
-		<dependencies>
-		  <group targetFramework="netstandard2.1">
-		  </group>
-		</dependencies>
-	</metadata>
+        <dependencies>
+            <group targetFramework="netstandard2.0">
+            </group>
+            <group targetFramework="netstandard2.1">
+            </group>
+            <group targetFramework="net8.0">
+            </group>
+        </dependencies>
+    </metadata>
 
-	<files>
-	  <file src="bin/Release/netstandard2.1/OpusSharp.Core.dll" target="lib/netstandard2.1/OpusSharp.Core.dll" />
-	  <file src="bin/Release/netstandard2.1/OpusSharp.Core.pdb" target="lib/netstandard2.1/OpusSharp.Core.pdb" />
-	  <file src="bin/Release/netstandard2.1/OpusSharp.Core.xml" target="lib/netstandard2.1" />
-	  <file src="../README.md" target="docs" />
-	  <file src="../LICENSE.txt" target="" />
-	</files>
+    <files>
+        <file src="bin/Release/netstandard2.0/OpusSharp.Core.dll" target="lib/netstandard2.0/OpusSharp.Core.dll"/>
+        <file src="bin/Release/netstandard2.0/OpusSharp.Core.pdb" target="lib/netstandard2.0/OpusSharp.Core.pdb"/>
+        <file src="bin/Release/netstandard2.0/OpusSharp.Core.xml" target="lib/netstandard2.0"/>
+        <file src="bin/Release/netstandard2.1/OpusSharp.Core.dll" target="lib/netstandard2.1/OpusSharp.Core.dll"/>
+        <file src="bin/Release/netstandard2.1/OpusSharp.Core.pdb" target="lib/netstandard2.1/OpusSharp.Core.pdb"/>
+        <file src="bin/Release/netstandard2.1/OpusSharp.Core.xml" target="lib/netstandard2.1"/>
+        <file src="bin/Release/net8.0/OpusSharp.Core.dll" target="lib/net8.0/OpusSharp.Core.dll"/>
+        <file src="bin/Release/net8.0/OpusSharp.Core.pdb" target="lib/net8.0/OpusSharp.Core.pdb"/>
+        <file src="bin/Release/net8.0/OpusSharp.Core.xml" target="lib/net8.0"/>
+        <file src="../README.md" target="docs"/>
+        <file src="../LICENSE.txt" target=""/>
+    </files>
 </package>

@@ -13,10 +13,20 @@
 - win-x64: win-x64/native/opus.dll
 - win-x86: win-x86/native/opus.dll
 
-ARM32 is no longer supported by the windows OS.
+# Statically Linked Runtimes
 
-Android builds are 16kb aligned.
+> [!NOTE]
+> These are not included in the library, these can be downloaded separately in the provided link below!
+> 
+> https://github.com/AvionBlock/OpusSharp/actions/runs/20946608512
 
-iOS and WASM builds are not included as they need to be statically linked.
+- ios-device-arm64
+- ios-simulator-arm64
+- ios-simulator-x86_64
+- ios-universal
+- wasm
 
-Binaries have been updated to commit [2785f8d](https://github.com/xiph/opus/commit/2785f8de02135bba3c1e6823a7d5b79ebd1b9473)
+> [!NOTE]
+> - ARM32 is no longer supported by the windows OS and is no longer provided in this package.
+> - Android builds are 16kb aligned.
+> - Binaries have been updated to commit [c5a745b](https://github.com/xiph/opus/commit/c5a745b665831704e54ffdfb8f018573af11290f)
