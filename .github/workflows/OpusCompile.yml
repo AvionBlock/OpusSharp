@@ -269,6 +269,9 @@ jobs:
         run: |
           export PATH="/opt/homebrew/bin:/opt/homebrew/opt/libtool/libexec/gnubin:$PATH"
           cd ./opus
+          git fetch --tags --force
+          OPUS_VERSION="$(git describe --tags --always --match 'v*' | sed 's/^v//')"
+          echo "PACKAGE_VERSION=\"$OPUS_VERSION\"" > package_version
           autoreconf -isf
 
       - name: Build Static Library
