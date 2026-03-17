@@ -9,6 +9,7 @@
 - linux-x86: linux-x86/native/opus.so
 - osx-arm64: osx-arm64/native/opus.dylib
 - osx-x64: osx-x64/native/opus.dylib
+- ios: ios/native/libopus.xcframework
 - win-arm64: win-arm64/native/opus.dll
 - win-x64: win-x64/native/opus.dll
 - win-x86: win-x86/native/opus.dll
@@ -16,14 +17,8 @@
 # Statically Linked Runtimes
 
 > [!NOTE]
-> These are not included in the library, these can be downloaded separately in the provided link below!
-> 
-> https://github.com/AvionBlock/OpusSharp/actions/runs/20946608512
+> iOS is included in the package as `libopus.xcframework` and linked automatically for .NET iOS projects.
 
-- ios-device-arm64
-- ios-simulator-arm64
-- ios-simulator-x86_64
-- ios-universal
 - wasm
 
 > [!NOTE]

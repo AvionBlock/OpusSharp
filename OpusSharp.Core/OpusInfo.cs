@@ -18,7 +18,8 @@ namespace OpusSharp.Core
         /// <returns>Version string.</returns>
         public static unsafe string Version(bool use_static = false)
         {
-            var version = use_static
+            var useStaticImports = OpusRuntime.ShouldUseStaticImports(use_static);
+            var version = useStaticImports
                 ? StaticNativeOpus.opus_get_version_string()
                 : NativeOpus.opus_get_version_string();
             return Marshal.PtrToStringAnsi((IntPtr)version) ?? "";
@@ -32,7 +33,8 @@ namespace OpusSharp.Core
         /// <returns>Error string.</returns>
         public static unsafe string StringError(int error, bool use_static = false)
         {
-            var stringError = use_static ? StaticNativeOpus.opus_strerror(error) : NativeOpus.opus_strerror(error);
+            var useStaticImports = OpusRuntime.ShouldUseStaticImports(use_static);
+            var stringError = useStaticImports ? StaticNativeOpus.opus_strerror(error) : NativeOpus.opus_strerror(error);
             return Marshal.PtrToStringAnsi((IntPtr)stringError) ?? "";
         }
     }

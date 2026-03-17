@@ -29,9 +29,9 @@ namespace OpusSharp.Core
         /// <exception cref="OpusException" />
         public unsafe OpusDecoder(int sample_rate, int channels, bool use_static = false)
         {
-            _useStatic = use_static;
+            _useStatic = OpusRuntime.ShouldUseStaticImports(use_static);
             var error = 0;
-            _handler = use_static
+            _handler = _useStatic
                 ? StaticNativeOpus.opus_decoder_create(sample_rate, channels, &error)
                 : NativeOpus.opus_decoder_create(sample_rate, channels, &error);
             CheckError(error);
@@ -158,7 +158,7 @@ namespace OpusSharp.Core
             }
         }
 #endif
-        
+
         /// <summary>
         /// Decodes an opus encoded frame.
         /// </summary>
@@ -214,7 +214,7 @@ namespace OpusSharp.Core
                 return result;
             }
         }
-        
+
         /// <summary>
         /// Decodes an opus encoded frame.
         /// </summary>

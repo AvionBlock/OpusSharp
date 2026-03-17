@@ -30,9 +30,9 @@ namespace OpusSharp.Core
         public unsafe OpusEncoder(int sample_rate, int channels, OpusPredefinedValues application,
             bool use_static = false)
         {
-            _useStatic = use_static;
+            _useStatic = OpusRuntime.ShouldUseStaticImports(use_static);
             var error = 0;
-            _handler = use_static
+            _handler = _useStatic
                 ? StaticNativeOpus.opus_encoder_create(sample_rate, channels, (int)application, &error)
                 : NativeOpus.opus_encoder_create(sample_rate, channels, (int)application, &error);
             CheckError(error);
@@ -190,7 +190,7 @@ namespace OpusSharp.Core
                 return result;
             }
         }
-        
+
         /// <summary>
         /// Encodes a pcm frame.
         /// </summary>
