@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test-core:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+      - name: Run core tests
+        run: dotnet test ./OpusSharp.Core.Tests/OpusSharp.Core.Tests.csproj --configuration Release
+
+  smoke-apple:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+      - name: Install iOS workload
+        run: dotnet workload install ios
+      - name: Pack local NuGet feed
+        run: ./packall.sh
+      - name: Run host package smoke
+        run: dotnet run --project ./samples/PackageSmoke/Host/OpusSharp.Smoke.Host.csproj --configuration Release
+      - name: Build iOS package smoke
+        run: dotnet build ./samples/PackageSmoke/iOS/OpusSharp.Smoke.iOS.csproj --configuration Release -f net9.0-ios -p:RuntimeIdentifier=iossimulator-arm64

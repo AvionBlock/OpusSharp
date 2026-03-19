@@ -2,7 +2,7 @@
 <package>
     <metadata>
         <id>OpusSharp.Natives</id>
-        <version>1.6.0.1</version>
+        <version>1.7.0</version>
         <authors>The Opus Authors.</authors>
         <description>Contains native binaries for OpusSharp.</description>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -29,6 +29,9 @@
 
         <file src="runtimes\osx-x64\native\opus.dylib" target="runtimes\osx-x64\native"/>
         <file src="runtimes\osx-arm64\native\opus.dylib" target="runtimes\osx-arm64\native"/>
+        <file src="runtimes\ios\native\libopus.xcframework\**\*" target="runtimes\ios\native\libopus.xcframework"/>
+
+        <file src="buildTransitive\OpusSharp.Natives.targets" target="buildTransitive"/>
 
         <file src="./README.md" target="docs"/>
     </files>
