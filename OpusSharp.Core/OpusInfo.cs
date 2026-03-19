@@ -14,9 +14,9 @@ namespace OpusSharp.Core
         /// <summary>
         /// Gets the libopus version string.
         /// </summary>
-        /// <param name="use_static">Whether to use a statically linked version of opus.</param>
+        /// <param name="use_static">Set to <see langword="true"/> to force static imports, <see langword="false"/> to force dynamic imports, or <see langword="null"/> to auto-select based on platform.</param>
         /// <returns>Version string.</returns>
-        public static unsafe string Version(bool use_static = false)
+        public static unsafe string Version(bool? use_static = null)
         {
             var useStaticImports = OpusRuntime.ShouldUseStaticImports(use_static);
             var version = useStaticImports
@@ -29,9 +29,9 @@ namespace OpusSharp.Core
         /// Converts an opus error code into a human-readable string.
         /// </summary>
         /// <param name="error">Error number.</param>
-        /// <param name="use_static">Whether to use a statically linked version of opus.</param>
+        /// <param name="use_static">Set to <see langword="true"/> to force static imports, <see langword="false"/> to force dynamic imports, or <see langword="null"/> to auto-select based on platform.</param>
         /// <returns>Error string.</returns>
-        public static unsafe string StringError(int error, bool use_static = false)
+        public static unsafe string StringError(int error, bool? use_static = null)
         {
             var useStaticImports = OpusRuntime.ShouldUseStaticImports(use_static);
             var stringError = useStaticImports ? StaticNativeOpus.opus_strerror(error) : NativeOpus.opus_strerror(error);

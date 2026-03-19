@@ -4,9 +4,14 @@ namespace OpusSharp.Core
 {
     internal static class OpusRuntime
     {
-        public static bool ShouldUseStaticImports(bool useStatic)
+        public static bool ShouldUseStaticImports(bool? useStatic)
         {
-            return useStatic || IsStaticallyLinkedPlatform();
+            if (useStatic.HasValue)
+            {
+                return useStatic.Value;
+            }
+
+            return IsStaticallyLinkedPlatform();
         }
 
         private static bool IsStaticallyLinkedPlatform()
