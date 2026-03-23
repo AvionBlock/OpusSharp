@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <PackageId>OpusSharp.Natives</PackageId>
+    <Version>$(OpusSharpVersion)</Version>
+    <Authors>The Opus Authors.</Authors>
+    <Description>Contains native binaries for OpusSharp.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://avionblock.github.io/OpusSharp/index.html</PackageProjectUrl>
+    <RepositoryUrl>$(RepositoryUrl)</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IsPackable>true</IsPackable>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" Link="README.md" />
+    <None Include="runtimes\**\*" Pack="true" PackagePath="runtimes" />
+    <None Include="buildTransitive\OpusSharp.Natives.targets" Pack="true" PackagePath="buildTransitive" />
+  </ItemGroup>
+</Project>

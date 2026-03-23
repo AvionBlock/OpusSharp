@@ -6,9 +6,23 @@
 		<TargetFrameworks>netstandard2.0;netstandard2.1;net8.0;</TargetFrameworks>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+		<PackageId>OpusSharp.Core</PackageId>
+		<Version>$(OpusSharpVersion)</Version>
+		<Authors>SineVector241</Authors>
+		<Description>Standard library for OpusSharp.</Description>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageProjectUrl>https://avionblock.github.io/OpusSharp/index.html</PackageProjectUrl>
+		<RepositoryUrl>$(RepositoryUrl)</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
 		<NoWarn>$(NoWarn);nullable</NoWarn>
 		<LangVersion>8.0</LangVersion>
 	</PropertyGroup>
+	<ItemGroup>
+		<None Include="..\README.md" Pack="true" PackagePath="\" Link="README.md" />
+		<None Include="..\LICENSE.txt" Pack="true" PackagePath="\" Link="LICENSE.txt" />
+	</ItemGroup>
 </Project>

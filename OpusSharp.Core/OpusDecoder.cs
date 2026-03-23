@@ -25,13 +25,13 @@ namespace OpusSharp.Core
         /// </summary>
         /// <param name="sample_rate">The sample rate, this must be one of 8000, 12000, 16000, 24000, or 48000.</param>
         /// <param name="channels">Number of channels, this must be 1 or 2.</param>
-        /// <param name="use_static">Whether to use a statically linked version of opus.</param>
+        /// <param name="use_static">Set to <see langword="true"/> to force static imports, <see langword="false"/> to force dynamic imports, or <see langword="null"/> to auto-select based on platform.</param>
         /// <exception cref="OpusException" />
-        public unsafe OpusDecoder(int sample_rate, int channels, bool use_static = false)
+        public unsafe OpusDecoder(int sample_rate, int channels, bool? use_static = null)
         {
-            _useStatic = use_static;
+            _useStatic = OpusRuntime.ShouldUseStaticImports(use_static);
             var error = 0;
-            _handler = use_static
+            _handler = _useStatic
                 ? StaticNativeOpus.opus_decoder_create(sample_rate, channels, &error)
                 : NativeOpus.opus_decoder_create(sample_rate, channels, &error);
             CheckError(error);
@@ -158,7 +158,7 @@ namespace OpusSharp.Core
             }
         }
 #endif
-        
+
         /// <summary>
         /// Decodes an opus encoded frame.
         /// </summary>
@@ -214,7 +214,7 @@ namespace OpusSharp.Core
                 return result;
             }
         }
-        
+
         /// <summary>
         /// Decodes an opus encoded frame.
         /// </summary>

@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <OpusSharpSmokeVersion>1.6.0.2</OpusSharpSmokeVersion>
+    <RestoreSources>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\local-nuget'));https://api.nuget.org/v3/index.json</RestoreSources>
+  </PropertyGroup>
+</Project>
