@@ -449,6 +449,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         
+      - name: Create Runtimes Directory
+        run: mkdir runtimes
+        
       - name: Download android-arm32-libopus.so
         working-directory: ./runtimes
         uses: actions/download-artifact@v4
@@ -476,11 +479,3 @@ jobs:
         with:
           name: android-x86-libopus.so
           path: runtimes/android-x86
-      
-      - name: Print Runtimes Directory
-        working-directory: ./working-directory
-        run: dir
-        
-      - name: Print Android Runtimes Directory
-        working-directory: ./working-directory
-        run: dir ./android-arm64
