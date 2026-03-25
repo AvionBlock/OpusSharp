@@ -1,6 +1,9 @@
 <Project>
   <PropertyGroup>
-    <OpusSharpVersion>1.6.0.2</OpusSharpVersion>
+    <OpusSharpVersion>1.6.2</OpusSharpVersion>
+    <OpusSharpCoreVersion>1.6.0.2</OpusSharpCoreVersion>
+    <OpusSharpNativesVersion>1.6.0.2</OpusSharpNativesVersion>
+    <PackageProjectUrl>https://avionblock.github.io/OpusSharp/index.html</PackageProjectUrl>
     <RepositoryUrl>https://github.com/AvionBlock/OpusSharp</RepositoryUrl>
   </PropertyGroup>
 </Project>

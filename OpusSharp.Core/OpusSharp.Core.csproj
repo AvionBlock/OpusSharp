@@ -1,18 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<AssemblyName>OpusSharp.Core</AssemblyName>
+		<IsPackable>true</IsPackable>
 		<Nullable>enable</Nullable>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<TargetFrameworks>netstandard2.0;netstandard2.1;net8.0;</TargetFrameworks>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+		
 		<PackageId>OpusSharp.Core</PackageId>
-		<Version>$(OpusSharpVersion)</Version>
-		<Authors>SineVector241</Authors>
 		<Description>Standard library for OpusSharp.</Description>
+		<Version>$(OpusSharpCoreVersion)</Version>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-		<PackageProjectUrl>https://avionblock.github.io/OpusSharp/index.html</PackageProjectUrl>
+		<Copyright>MIT</Copyright>
+		<Authors>SineVector241</Authors>
+		
+		<PackageProjectUrl>$(PackageProjectUrl)</PackageProjectUrl>
 		<RepositoryUrl>$(RepositoryUrl)</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>

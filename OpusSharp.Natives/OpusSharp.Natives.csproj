@@ -1,18 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+    <IsPackable>true</IsPackable>
+    
     <PackageId>OpusSharp.Natives</PackageId>
-    <Version>$(OpusSharpVersion)</Version>
-    <Authors>The Opus Authors.</Authors>
     <Description>Contains native binaries for OpusSharp.</Description>
+    <Version>$(OpusSharpNativesVersion)</Version>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageProjectUrl>https://avionblock.github.io/OpusSharp/index.html</PackageProjectUrl>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <Authors>The Opus Authors.</Authors>
+    
+    <PackageProjectUrl>$(PackageProjectUrl)</PackageProjectUrl>
     <RepositoryUrl>$(RepositoryUrl)</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-    <IsPackable>true</IsPackable>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <NoWarn>$(NoWarn);NU5128</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
