@@ -1,5 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
+		<DefineConstants>
+			COMPILE_STATIC
+		</DefineConstants>
+		
 		<AssemblyName>OpusSharp.Core</AssemblyName>
 		<IsPackable>true</IsPackable>
 		<Nullable>enable</Nullable>
