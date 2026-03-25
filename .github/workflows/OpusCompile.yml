@@ -477,9 +477,9 @@ jobs:
           path: runtimes/android-x86
 
       - name: Print Runtimes Directory
-        working-directory: ./working-directory
+        working-directory: ./runtimes
         run: dir
 
       - name: Print Android Runtimes Directory
-        working-directory: ./working-directory
+        working-directory: ./runtimes
         run: dir ./android-arm64
