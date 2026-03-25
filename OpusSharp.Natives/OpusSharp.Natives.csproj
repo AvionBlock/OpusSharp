@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="\" Link="README.md" />
+    <None Include="LICENSE.txt" Pack="true" PackagePath="\" Link="LICENSE.txt" />
     <None Include="runtimes\**\*" Pack="true" PackagePath="runtimes" />
     <None Include="buildTransitive\OpusSharp.Natives.targets" Pack="true" PackagePath="buildTransitive" />
   </ItemGroup>
