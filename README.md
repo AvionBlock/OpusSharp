@@ -1,6 +1,6 @@
 # OpusSharp
 
-OpusSharp aims to be a cross platform, pure and ported C# compatible version of the native opus codec/library. The core library uses the native compiled DLL's/binaries. Windows, Android, Linux, macOS and iOS are supported. OpusSharp compiles the opus binaries using a github actions file which is available [here](.github/workflows/OpusCompile.yml).
+OpusSharp aims to be a cross-platform, pure and ported C# compatible version of the native opus codec/library. The core library uses the native compiled DLL's/binaries. Windows, Android, Linux, macOS and iOS are supported. OpusSharp compiles the opus binaries using a github actions file which is available [here](.github/workflows/OpusCompile.yml).
 
 > [!NOTE]
 > While OpusSharp.Core contains minimal pre-made decoder and encoder handlers, you can create your own as all the SafeHandlers and NativeOpus functions are exposed and fully documented. However to get a minimal setup working, check the example below.
