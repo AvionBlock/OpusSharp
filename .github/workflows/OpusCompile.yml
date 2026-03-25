@@ -265,32 +265,54 @@ jobs:
       - name: Clone Repository
         run: git clone https://github.com/xiph/opus.git
 
-      - name: Autogen
-        run: ./opus/autogen.sh
-
-      - name: Configure
-        working-directory: ./build
+      - name: Generate Build Scripts
         run: |
-          cmake ../opus \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DBUILD_SHARED_LIBS=OFF \
-            -DCMAKE_SYSTEM_NAME=iOS \
-            -DCMAKE_OSX_ARCHITECTURES=${{ env.ARCH }} \
-            -DCMAKE_OSX_DEPLOYMENT_TARGET=13.0 \
-            -DCMAKE_OSX_SYSROOT=${{ env.SDK }} \
-            -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
-            -DOPUS_BUILD_PROGRAMS=OFF
+          export PATH="/opt/homebrew/bin:/opt/homebrew/opt/libtool/libexec/gnubin:$PATH"
+          cd ./opus
+          git fetch --tags --force
+          OPUS_VERSION="$(git describe --tags --always --match 'v*' | sed 's/^v//')"
+          echo "PACKAGE_VERSION=\"$OPUS_VERSION\"" > package_version
+          autoreconf -isf
 
-      - name: Build
-        working-directory: ./build
-        run: cmake --build . -j $(sysctl -n hw.ncpu) --config Release
+      - name: Build Static Library
+        run: |
+          export PATH="/opt/homebrew/bin:/opt/homebrew/opt/libtool/libexec/gnubin:$PATH"
+          SDKROOT="$(xcrun --sdk "${{ env.SDK }}" --show-sdk-path)"
+          CC="$(xcrun --sdk "${{ env.SDK }}" --find clang)"
+          AR="$(xcrun --sdk "${{ env.SDK }}" --find ar)"
+          RANLIB="$(xcrun --sdk "${{ env.SDK }}" --find ranlib)"
+
+          if [[ "${{ matrix.target }}" == "device" ]]; then
+            HOST_TRIPLE="aarch64-apple-darwin"
+            MIN_VERSION_FLAG="-miphoneos-version-min=13.0"
+          elif [[ "${{ matrix.target }}" == "simulator-arm64" ]]; then
+            HOST_TRIPLE="aarch64-apple-darwin"
+            MIN_VERSION_FLAG="-mios-simulator-version-min=13.0"
+          else
+            HOST_TRIPLE="x86_64-apple-darwin"
+            MIN_VERSION_FLAG="-mios-simulator-version-min=13.0"
+          fi
+
+          cd ./build
+          ../opus/configure \
+            --host="$HOST_TRIPLE" \
+            --disable-shared \
+            --enable-static \
+            --disable-extra-programs \
+            --disable-doc \
+            CC="$CC" \
+            CFLAGS="-arch ${{ env.ARCH }} -isysroot $SDKROOT $MIN_VERSION_FLAG -O3" \
+            AR="$AR" \
+            RANLIB="$RANLIB"
+
+          make -j "$(sysctl -n hw.ncpu)" libopus.la
 
       - name: Verify Library
         working-directory: ./build
         run: |
           echo "=== Built library for ${{ matrix.target }} ==="
-          find . -name "*.a" -exec file {} \;
-          find . -name "*.a" -exec lipo -info {} \;
+          find . -path "*.libs/libopus.a" -exec file {} \;
+          find . -path "*.libs/libopus.a" -exec lipo -info {} \;
 
       - name: Sanitize symbols to avoid Unity symbol conflicts
         working-directory: ./build
@@ -302,9 +324,9 @@ jobs:
 
           set -euo pipefail
 
-          echo "Collecting global defined symbols from libopus.a..."
+          echo "Collecting global defined symbols from .libs/libopus.a..."
           # Select only defined symbols (T,D,B,S) from the archive and deduplicate
-          nm -g libopus.a | awk '/ [TDBS] /{print $3}' | sort -u > allsyms.txt
+          nm -g .libs/libopus.a | awk '/ [TDBS] /{print $3}' | sort -u > allsyms.txt
 
           echo "Creating symbol mapping for renaming (skipping public 'opus' symbols)..."
           : > mapping.txt
@@ -315,9 +337,9 @@ jobs:
 
           if [ -s mapping.txt ]; then
             echo "Applying symbol renames..."
-            llvm-objcopy --redefine-syms=mapping.txt libopus.a
+            llvm-objcopy --redefine-syms=mapping.txt .libs/libopus.a
             echo "Verification:"
-            nm -g libopus.a | grep compute_allocation || true
+            nm -g .libs/libopus.a | grep compute_allocation || true
           else
             echo "No non-opus symbols found to rename. Skipping sanitization."
           fi
@@ -327,7 +349,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.OUTPUT_NAME }}-libopus.a
-          path: ./build/libopus.a
+          path: ./build/.libs/libopus.a
 
   iOS-universal:
     runs-on: macos-latest
