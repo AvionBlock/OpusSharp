@@ -453,28 +453,24 @@ jobs:
         run: mkdir runtimes
         
       - name: Download android-arm32-libopus.so
-        working-directory: ./runtimes
         uses: actions/download-artifact@v4
         with:
           name: android-arm32-libopus.so
           path: runtimes/android-arm32
           
       - name: Download android-arm64-libopus.so
-        working-directory: ./runtimes
         uses: actions/download-artifact@v4
         with:
           name: android-arm64-libopus.so
           path: runtimes/android-arm64
           
       - name: Download android-x64-libopus.so
-        working-directory: ./runtimes
         uses: actions/download-artifact@v4
         with:
           name: android-x64-libopus.so
           path: runtimes/android-x64
           
       - name: Download android-x86-libopus.so
-        working-directory: ./runtimes
         uses: actions/download-artifact@v4
         with:
           name: android-x86-libopus.so
