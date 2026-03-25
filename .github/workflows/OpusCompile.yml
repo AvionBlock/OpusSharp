@@ -125,6 +125,10 @@ jobs:
       - name: Build
         working-directory: ./build
         run: cmake --build . -j 2 --config Release --target package
+        
+      - name: Print Directory
+        working-directory: ./build
+        run: dir
 
       - name: Rename file 
         working-directory: ./build
