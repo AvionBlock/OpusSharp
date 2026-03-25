@@ -126,13 +126,13 @@ jobs:
         working-directory: ./build
         run: cmake --build . -j 2 --config Release --target package
         
-      - name: Print Directory
+      - name: Print File
         working-directory: ./build
-        run: dir
+        run: file libopus.so.*.*.*
 
       - name: Rename file 
         working-directory: ./build
-        run: mv libopus.so.0.11.0 opus.so
+        run: mv libopus.so.*.*.* opus.so
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
