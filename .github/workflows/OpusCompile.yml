@@ -449,37 +449,97 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         
-      - name: Create Runtimes Directory
-        run: mkdir runtimes
-        
+      # Android
       - name: Download android-arm32-libopus.so
         uses: actions/download-artifact@v4
         with:
           name: android-arm32-libopus.so
-          path: runtimes/android-arm32
+          path: runtimes/android-arm/native
           
       - name: Download android-arm64-libopus.so
         uses: actions/download-artifact@v4
         with:
           name: android-arm64-libopus.so
-          path: runtimes/android-arm64
+          path: runtimes/android-arm64/native
           
       - name: Download android-x64-libopus.so
         uses: actions/download-artifact@v4
         with:
           name: android-x64-libopus.so
-          path: runtimes/android-x64
+          path: runtimes/android-x64/native
           
       - name: Download android-x86-libopus.so
         uses: actions/download-artifact@v4
         with:
           name: android-x86-libopus.so
-          path: runtimes/android-x86
+          path: runtimes/android-x86/native
+          
+      # iOS
+      - name: Download ios-universal-libopus
+        uses: actions/download-artifact@v4
+        with:
+          name: ios-universal-libopus
+          path: runtimes/ios/native
+          
+      # Linux
+      - name: Download linux-arm32-opus.so
+        uses: actions/download-artifact@v4
+        with:
+          name: linux-arm32-opus.so
+          path: runtimes/linux-arm/native
 
-      - name: Print Runtimes Directory
-        working-directory: ./runtimes
-        run: dir
+      - name: Download linux-arm64-opus.so
+        uses: actions/download-artifact@v4
+        with:
+          name: linux-arm64-opus.so
+          path: runtimes/linux-arm64/native
 
-      - name: Print Android Runtimes Directory
-        working-directory: ./runtimes
-        run: dir ./android-arm64
+      - name: Download linux-x64-opus.so
+        uses: actions/download-artifact@v4
+        with:
+          name: linux-x64-opus.so
+          path: runtimes/linux-x64/native
+
+      - name: Download linux-x86-opus.so
+        uses: actions/download-artifact@v4
+        with:
+          name: linux-x86-opus.so
+          path: runtimes/linux-x86/native
+      
+      # MacOS
+      - name: Download macos-arm64-opus.dylib
+        uses: actions/download-artifact@v4
+        with:
+          name: macos-arm64-opus.dylib
+          path: runtimes/osx-arm64/native
+
+      - name: Download macos-x64-opus.dylib
+        uses: actions/download-artifact@v4
+        with:
+          name: macos-x64-opus.dylib
+          path: runtimes/osx-x64/native
+          
+      # Windows
+      - name: Download win-arm64-opus.dll
+        uses: actions/download-artifact@v4
+        with:
+          name: win-arm64-opus.dll
+          path: runtimes/win-arm64/native
+
+      - name: Download win-x64-opus.dll
+        uses: actions/download-artifact@v4
+        with:
+          name: win-x64-opus.dll
+          path: runtimes/win-x64/native
+
+      - name: Download win-x86-opus.dll
+        uses: actions/download-artifact@v4
+        with:
+          name: win-x86-opus.dll
+          path: runtimes/win-x86/native
+          
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: All-Runtimes
+          path: ./runtimes
