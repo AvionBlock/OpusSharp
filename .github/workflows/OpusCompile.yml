@@ -117,18 +117,14 @@ jobs:
         working-directory: ./build
         run: |
           if [[ "${{ matrix.arch }}" == "x64" || "${{ matrix.arch }}" == "x86" ]]; then
-            cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_C_FLAGS=${{ env.C_FLAGS }} -DCMAKE_CXX_FLAGS=${{ env.CXX_FLAGS }} -DOUTPUT_NAME=opus
+            cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_C_FLAGS=${{ env.C_FLAGS }} -DCMAKE_CXX_FLAGS=${{ env.CXX_FLAGS }}
           elif [[ "${{ matrix.arch }}" == "arm64" || "${{ matrix.arch }}" == "arm32" ]]; then
-            cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_C_COMPILER=${{ env.C_COMPILER }} -DCMAKE_CXX_COMPILER=${{ env.CXX_COMPILER }} -DOUTPUT_NAME=opus
+            cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_C_COMPILER=${{ env.C_COMPILER }} -DCMAKE_CXX_COMPILER=${{ env.CXX_COMPILER }}
           fi
 
       - name: Build
         working-directory: ./build
         run: cmake --build . -j 2 --config Release --target package
-        
-      - name: Print File
-        working-directory: ./build
-        run: file libopus.so.*.*.*
 
       - name: Rename file 
         working-directory: ./build
@@ -229,7 +225,7 @@ jobs:
 
       - name: Rename file 
         working-directory: ./build
-        run: mv libopus.0.11.0.dylib opus.dylib
+        run: mv libopus.*.*.*.dylib opus.dylib
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
