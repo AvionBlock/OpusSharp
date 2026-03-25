@@ -117,9 +117,9 @@ jobs:
         working-directory: ./build
         run: |
           if [[ "${{ matrix.arch }}" == "x64" || "${{ matrix.arch }}" == "x86" ]]; then
-            cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_C_FLAGS=${{ env.C_FLAGS }} -DCMAKE_CXX_FLAGS=${{ env.CXX_FLAGS }}
+            cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_C_FLAGS=${{ env.C_FLAGS }} -DCMAKE_CXX_FLAGS=${{ env.CXX_FLAGS }} -DOUTPUT_NAME=opus
           elif [[ "${{ matrix.arch }}" == "arm64" || "${{ matrix.arch }}" == "arm32" ]]; then
-            cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_C_COMPILER=${{ env.C_COMPILER }} -DCMAKE_CXX_COMPILER=${{ env.CXX_COMPILER }}
+            cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_C_COMPILER=${{ env.C_COMPILER }} -DCMAKE_CXX_COMPILER=${{ env.CXX_COMPILER }} -DOUTPUT_NAME=opus
           fi
 
       - name: Build
