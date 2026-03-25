@@ -475,3 +475,11 @@ jobs:
         with:
           name: android-x86-libopus.so
           path: runtimes/android-x86
+
+      - name: Print Runtimes Directory
+        working-directory: ./working-directory
+        run: dir
+
+      - name: Print Android Runtimes Directory
+        working-directory: ./working-directory
+        run: dir ./android-arm64
