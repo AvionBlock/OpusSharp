@@ -1,3 +1,5 @@
+#define COMPILE_STATIC
+
 using System;
 using OpusSharp.Core.SafeHandlers;
 using System.Runtime.InteropServices;
