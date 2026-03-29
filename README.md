@@ -60,7 +60,7 @@ var encoder = new OpusEncoder(sampleRate, channels, OpusPredefinedValues.OPUS_AP
 var encoder = new OpusDecoder(sampleRate, channels, use_static: true);
 ```
 
-### Unity Example
+## Unity Example
 
 For unity integration, you may want to use `Static.OpusDecoder`, `Dynamic.OpusDecoder`, `Static.OpusEncoder` or
 `Dynamic.OpusEncoder` to prevent IL2CPP errors for example...
