@@ -60,6 +60,27 @@ byte[] decodedSamples = decoder.Decode(encoded, encoded.Length, decoded, 960, fa
 Console.WriteLine(decodedSamples);
 ```
 
+### Unity
+
+For unity integration, you may want to use `Static.OpusDecoder`, `Dynamic.OpusDecoder`, `Static.OpusEncoder` or 
+`Dynamic.OpusEncoder` to prevent IL2CPP errors for example...
+
+```csharp
+using OpusSharp.Core;
+    
+IOpusEncoder encoder;
+IOpusDecoder decoder;
+//Decoder
+#if UNITY_IOS && !UNITY_EDITOR
+encoder = new Static.OpusEncoder(...);
+decoder = new Static.OpusDecoder(...);
+#else
+encoder = new Dynamic.OpusEncoder(...);
+decoder = new Dynamic.OpusDecoder(...);
+```
+
+You can also copy the basic [OpusSharp.asmdef](https://github.com/AvionBlock/OpusSharp/blob/master/OpusSharp.asmdef) when you import OpusSharp as a package.
+
 # Next Steps
 
 📖 [Read the API for more information about the library](xref:OpusSharp.Core)

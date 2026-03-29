@@ -17,11 +17,12 @@
 # Statically Linked Runtimes
 
 > [!NOTE]
-> iOS is included in the package as `libopus.xcframework` and linked automatically for .NET iOS projects.
+> iOS is included in the package as `libopus.xcframework` and linked automatically for .NET iOS projects. WASM still
+> needs to be manually linked.
 
 - wasm
 
 > [!NOTE]
 > - ARM32 is no longer supported by the windows OS and is no longer provided in this package.
 > - Android builds are 16kb aligned.
-> - Binaries have been updated to commit [c5a745b](https://github.com/xiph/opus/commit/c5a745b665831704e54ffdfb8f018573af11290f)
+> - Binaries have been updated to commit [788cc89](https://github.com/xiph/opus/commit/788cc89ce4f2c42025d8c70ec1b4457dc89cd50f)
