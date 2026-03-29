@@ -6,6 +6,9 @@ using System;
 // ReSharper disable ClassNeverInstantiated.Global
 namespace OpusSharp.Core.Interfaces
 {
+    /// <summary>
+    /// An opus decoder interface.
+    /// </summary>
     public interface IOpusDecoder : IDisposable
     {
 #if NETSTANDARD2_1_OR_GREATER || NET8_0_OR_GREATER
