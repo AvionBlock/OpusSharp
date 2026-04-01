@@ -5,7 +5,10 @@
     <_OpusSharpIosFramework>$(_OpusSharpNativesRoot)runtimes\ios\native\libopus.xcframework</_OpusSharpIosFramework>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == 'ios' and Exists('$(_OpusSharpIosFramework)')">
+  <ItemGroup Condition="(
+    '$([MSBuild]::GetTargetPlatformIdentifier($(TargetFramework)))' == 'ios'
+    or '$(TargetFrameworkIdentifier)' == 'ios'
+  ) and Exists('$(_OpusSharpIosFramework)')">
     <NativeReference Include="$(_OpusSharpIosFramework)">
       <Kind>Framework</Kind>
       <SmartLink>False</SmartLink>
