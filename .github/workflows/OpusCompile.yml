@@ -55,11 +55,23 @@ jobs:
 
       - name: Configure
         working-directory: ./build
-        run: cmake ../opus -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake -DANDROID_ABI=${{ env.ABI }} -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON -DCMAKE_SHARED_LINKER_FLAGS='-Wl,-z,max-page-size=16384,-z,common-page-size=16384' -DCMAKE_EXE_LINKER_FLAGS='-Wl,-z,max-page-size=16384,-z,common-page-size=16384'
+        run: cmake ../opus -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake -DANDROID_ABI=${{ env.ABI }} -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DCMAKE_SHARED_LINKER_FLAGS='-Wl,-z,max-page-size=16384,-z,common-page-size=16384' -DCMAKE_EXE_LINKER_FLAGS='-Wl,-z,max-page-size=16384,-z,common-page-size=16384'
 
       - name: Build
         working-directory: ./build
-        run: cmake --build . -j 2 --config Release --target package
+        run: cmake --build . -j 2 --config Release
+
+      - name: Build with shim
+        working-directory: ./build
+        run: |
+          ${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/clang \
+            --target=$(case "${{ env.ABI }}" in x86_64) echo x86_64-linux-android21;; x86) echo i686-linux-android21;; arm64-v8a) echo aarch64-linux-android21;; armeabi-v7a) echo armv7a-linux-androideabi21;; esac) \
+            --sysroot=${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/sysroot \
+            -shared -o libopus.so \
+            -I../opus/include \
+            ../OpusSharp.Natives/opus_shim.c \
+            -Wl,--whole-archive libopus.a -Wl,--no-whole-archive \
+            -Wl,-z,max-page-size=16384,-z,common-page-size=16384
 
       - name: Check Alignment
         if: ${{ env.CHECK_ALIGNMENT == 'true' }}
@@ -117,18 +129,32 @@ jobs:
         working-directory: ./build
         run: |
           if [[ "${{ matrix.arch }}" == "x64" || "${{ matrix.arch }}" == "x86" ]]; then
-            cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_C_FLAGS=${{ env.C_FLAGS }} -DCMAKE_CXX_FLAGS=${{ env.CXX_FLAGS }}
+            cmake ../opus -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DCMAKE_C_FLAGS=${{ env.C_FLAGS }} -DCMAKE_CXX_FLAGS=${{ env.CXX_FLAGS }}
           elif [[ "${{ matrix.arch }}" == "arm64" || "${{ matrix.arch }}" == "arm32" ]]; then
-            cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_C_COMPILER=${{ env.C_COMPILER }} -DCMAKE_CXX_COMPILER=${{ env.CXX_COMPILER }}
+            cmake ../opus -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DCMAKE_C_COMPILER=${{ env.C_COMPILER }} -DCMAKE_CXX_COMPILER=${{ env.CXX_COMPILER }}
           fi
 
       - name: Build
         working-directory: ./build
-        run: cmake --build . -j 2 --config Release --target package
+        run: cmake --build . -j 2 --config Release
 
-      - name: Rename file 
+      - name: Build with shim
         working-directory: ./build
-        run: mv libopus.so.*.*.* opus.so
+        run: |
+          if [[ "${{ matrix.arch }}" == "x64" ]]; then
+            CC="gcc -m64"
+          elif [[ "${{ matrix.arch }}" == "x86" ]]; then
+            CC="gcc -m32"
+          elif [[ "${{ matrix.arch }}" == "arm64" ]]; then
+            CC=${{ env.C_COMPILER }}
+          elif [[ "${{ matrix.arch }}" == "arm32" ]]; then
+            CC=${{ env.C_COMPILER }}
+          fi
+          $CC -shared -o opus.so \
+            -I../opus/include \
+            ../OpusSharp.Natives/opus_shim.c \
+            -Wl,--whole-archive libopus.a -Wl,--no-whole-archive \
+            -lm
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
@@ -171,21 +197,30 @@ jobs:
         working-directory: ./build
         run: |
           if ( "${{ matrix.arch }}" -eq "arm32" ) {
-            cmake ../opus -G "Visual Studio 17 2022" -A ARM,version=10.0.22621.0 -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON
+            cmake ../opus -G "Visual Studio 17 2022" -A ARM,version=10.0.22621.0 -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=OFF
           }
           else {
-            cmake ../opus -G "Visual Studio 17 2022" -A ${{ env.ARCH }} -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON
+            cmake ../opus -G "Visual Studio 17 2022" -A ${{ env.ARCH }} -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=OFF
           }
 
       - name: Build
         working-directory: ./build
-        run: cmake --build . -j 2 --config Release --target package
+        run: cmake --build . -j 2 --config Release
+
+      - name: Build with shim
+        working-directory: ./build
+        shell: cmd
+        run: |
+          if "${{ env.ARCH }}"=="Win32" (set "VCARCH=x86") else if "${{ env.ARCH }}"=="x64" (set "VCARCH=amd64") else if "${{ env.ARCH }}"=="ARM64" (set "VCARCH=amd64_arm64") else if "${{ env.ARCH }}"=="ARM" (set "VCARCH=amd64_arm")
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" %VCARCH%
+          cl /O2 /MD /I..\opus\include /c ..\OpusSharp.Natives\opus_shim.c /Foopus_shim.obj
+          link /DLL /OUT:opus.dll opus_shim.obj Release\opus.lib ucrt.lib vcruntime.lib msvcrt.lib
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: win-${{ matrix.arch }}-opus.dll
-          path: ./build/Release/opus.dll
+          path: ./build/opus.dll
 
   MacOS:
     runs-on: macos-latest
@@ -217,15 +252,20 @@ jobs:
 
       - name: Configure
         working-directory: ./build
-        run: cmake ../opus -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DCMAKE_OSX_ARCHITECTURES=${{ env.OSX_ARCH }}
+        run: cmake ../opus -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DCMAKE_OSX_ARCHITECTURES=${{ env.OSX_ARCH }} -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 
       - name: Build
         working-directory: ./build
         run: cmake --build .
 
-      - name: Rename file 
+      - name: Build with shim
         working-directory: ./build
-        run: mv libopus.*.*.*.dylib opus.dylib
+        run: |
+          cc -arch ${{ env.OSX_ARCH }} -shared -o opus.dylib \
+            -I../opus/include \
+            ../OpusSharp.Natives/opus_shim.c \
+            -Wl,-force_load,libopus.a \
+            -install_name @rpath/opus.dylib
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
@@ -306,6 +346,25 @@ jobs:
             RANLIB="$RANLIB"
 
           make -j "$(sysctl -n hw.ncpu)" libopus.la
+
+      - name: Compile shim and add to archive
+        run: |
+          export PATH="/opt/homebrew/bin:/opt/homebrew/opt/libtool/libexec/gnubin:$PATH"
+          SDKROOT="$(xcrun --sdk "${{ env.SDK }}" --show-sdk-path)"
+          CC="$(xcrun --sdk "${{ env.SDK }}" --find clang)"
+          AR="$(xcrun --sdk "${{ env.SDK }}" --find ar)"
+          RANLIB="$(xcrun --sdk "${{ env.SDK }}" --find ranlib)"
+
+          if [[ "${{ matrix.target }}" == "device" ]]; then
+            MIN_VERSION_FLAG="-miphoneos-version-min=13.0"
+          else
+            MIN_VERSION_FLAG="-mios-simulator-version-min=13.0"
+          fi
+
+          $CC -arch ${{ env.ARCH }} -isysroot $SDKROOT $MIN_VERSION_FLAG -O3 \
+            -I./opus/include -c ./OpusSharp.Natives/opus_shim.c -o build/opus_shim.o
+          $AR rcs build/.libs/libopus.a build/opus_shim.o
+          $RANLIB build/.libs/libopus.a
 
       - name: Verify Library
         working-directory: ./build
@@ -431,11 +490,17 @@ jobs:
 
       - name: Configure
         working-directory: ./build
-        run: emcmake cmake ../opus -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON
+        run: emcmake cmake ../opus -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON
 
       - name: Build
         working-directory: ./build
-        run: cmake --build . -j 2 --config Release --target package
+        run: cmake --build . -j 2 --config Release
+
+      - name: Add shim to archive
+        working-directory: ./build
+        run: |
+          emcc -O2 -I../opus/include -c ../OpusSharp.Natives/opus_shim.c -o opus_shim.o
+          emar rcs libopus.a opus_shim.o
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
