@@ -214,7 +214,7 @@ jobs:
           if "${{ env.ARCH }}"=="Win32" (set "VCARCH=x86") else if "${{ env.ARCH }}"=="x64" (set "VCARCH=amd64") else if "${{ env.ARCH }}"=="ARM64" (set "VCARCH=amd64_arm64") else if "${{ env.ARCH }}"=="ARM" (set "VCARCH=amd64_arm")
           call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" %VCARCH%
           cl /O2 /MD /I..\opus\include /c ..\OpusSharp.Natives\opus_shim.c /Foopus_shim.obj
-          link /DLL /OUT:opus.dll opus_shim.obj Release\opus.lib ucrt.lib vcruntime.lib msvcrt.lib
+          link /DLL /OUT:opus.dll opus_shim.obj /WHOLEARCHIVE:Release\opus.lib ucrt.lib vcruntime.lib msvcrt.lib
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
