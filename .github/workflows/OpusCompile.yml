@@ -214,7 +214,9 @@ jobs:
           if "${{ env.ARCH }}"=="Win32" (set "VCARCH=x86") else if "${{ env.ARCH }}"=="x64" (set "VCARCH=amd64") else if "${{ env.ARCH }}"=="ARM64" (set "VCARCH=amd64_arm64") else if "${{ env.ARCH }}"=="ARM" (set "VCARCH=amd64_arm")
           call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" %VCARCH%
           cl /O2 /MD /I..\opus\include /c ..\OpusSharp.Natives\opus_shim.c /Foopus_shim.obj
-          link /DLL /OUT:opus.dll opus_shim.obj Release\opus.lib ucrt.lib vcruntime.lib msvcrt.lib
+          dumpbin /symbols Release\opus.lib > opus_symbols.txt
+          powershell -NoProfile -Command "$s = (gc opus_symbols.txt) | Where-Object {$_ -match 'External\s+\|\s+(opus_\S+)'} | ForEach-Object { [regex]::Match($_, 'External\s+\|\s+(\S+)').Groups[1].Value -replace '^_','' } | Sort-Object -Unique; [IO.File]::WriteAllText('opus.def', \"EXPORTS`r`n\" + ($s -join \"`r`n\") + \"`r`n\")"
+          link /DLL /OUT:opus.dll /DEF:opus.def opus_shim.obj Release\opus.lib ucrt.lib vcruntime.lib msvcrt.lib
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
