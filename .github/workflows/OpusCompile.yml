@@ -12,6 +12,11 @@ permissions:
   contents: write
   packages: write
 
+env:
+  OPUS_REPOSITORY: https://gitlab.xiph.org/xiph/opus.git
+  OPUS_VERSION: 1.6.1
+  OPUS_REF: v1.6.1
+
 jobs:
   Android:
     runs-on: ubuntu-latest
@@ -48,7 +53,7 @@ jobs:
         run: mkdir build
 
       - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
+        run: git clone --branch ${{ env.OPUS_REF }} --depth 1 ${{ env.OPUS_REPOSITORY }} opus
 
       - name: Autogen
         run: ./opus/autogen.sh
@@ -121,7 +126,7 @@ jobs:
         run: mkdir build
 
       - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
+        run: git clone --branch ${{ env.OPUS_REF }} --depth 1 ${{ env.OPUS_REPOSITORY }} opus
 
       - name: Autogen
         run: ./opus/autogen.sh
@@ -189,7 +194,7 @@ jobs:
         run: mkdir build
 
       - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
+        run: git clone --branch ${{ env.OPUS_REF }} --depth 1 ${{ env.OPUS_REPOSITORY }} opus
 
       - name: Autogen
         run: ./opus/autogen.bat
@@ -248,7 +253,7 @@ jobs:
         run: mkdir build
         
       - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
+        run: git clone --branch ${{ env.OPUS_REF }} --depth 1 ${{ env.OPUS_REPOSITORY }} opus
 
       - name: Autogen
         run: ./opus/autogen.sh
@@ -306,15 +311,13 @@ jobs:
         run: mkdir build
 
       - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
+        run: git clone --branch ${{ env.OPUS_REF }} --depth 1 ${{ env.OPUS_REPOSITORY }} opus
 
       - name: Generate Build Scripts
         run: |
           export PATH="/opt/homebrew/bin:/opt/homebrew/opt/libtool/libexec/gnubin:$PATH"
           cd ./opus
-          git fetch --tags --force
-          OPUS_VERSION="$(git describe --tags --always --match 'v*' | sed 's/^v//')"
-          echo "PACKAGE_VERSION=\"$OPUS_VERSION\"" > package_version
+          echo "PACKAGE_VERSION=\"${{ env.OPUS_VERSION }}\"" > package_version
           autoreconf -isf
 
       - name: Build Static Library
@@ -420,7 +423,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Clone opus for headers
-        run: git clone --depth 1 https://github.com/xiph/opus.git
+        run: git clone --branch ${{ env.OPUS_REF }} --depth 1 ${{ env.OPUS_REPOSITORY }} opus
 
       - name: Download device artifact
         uses: actions/download-artifact@v4
@@ -486,7 +489,7 @@ jobs:
         run: mkdir build
 
       - name: Clone Repository
-        run: git clone https://github.com/xiph/opus.git
+        run: git clone --branch ${{ env.OPUS_REF }} --depth 1 ${{ env.OPUS_REPOSITORY }} opus
 
       - name: Autogen
         run: ./opus/autogen.sh
@@ -605,6 +608,13 @@ jobs:
         with:
           name: win-x86-opus.dll
           path: runtimes/win-x86/native
+
+      # WASM
+      - name: Download wasm-libopus.a
+        uses: actions/download-artifact@v4
+        with:
+          name: wasm-libopus.a
+          path: runtimes/browser-wasm/native
           
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
