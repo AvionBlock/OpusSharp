@@ -27,8 +27,8 @@ jobs:
         arch: [x64, x86, arm64, arm32]
       fail-fast: false
     steps:
-      - uses: actions/checkout@v4
-      - uses: nttld/setup-ndk@v1
+      - uses: actions/checkout@v6.0.2
+      - uses: nttld/setup-ndk@v1.6.0
         id: setup-ndk
         with:
           ndk-version: r28c
@@ -85,7 +85,7 @@ jobs:
         run: sudo apt install llvm && llvm-objdump -p libopus.so | grep LOAD
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: android-${{ matrix.arch }}-libopus.so
           path: ./build/libopus.so
@@ -97,7 +97,7 @@ jobs:
         arch: [x64, x86, arm64, arm32]
       fail-fast: false
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6.0.2
 
         # Not much I can do to reduce the bloat.
       - name: Setup Environment
@@ -163,7 +163,7 @@ jobs:
             -lm
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: linux-${{ matrix.arch }}-opus.so
           path: ./build/opus.so
@@ -175,7 +175,7 @@ jobs:
         arch: [x64, x86, arm64] # Disabled arm32
       fail-fast: false
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6.0.2
 
         # Not much I can do to reduce the bloat.
       - name: Setup Environment
@@ -225,7 +225,7 @@ jobs:
           link /DLL /OUT:opus.dll /DEF:opus.def opus_shim.obj Release\opus.lib ucrt.lib vcruntime.lib msvcrt.lib
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: win-${{ matrix.arch }}-opus.dll
           path: ./build/opus.dll
@@ -237,7 +237,7 @@ jobs:
         arch: [x64, arm64]
       fail-fast: false
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6.0.2
 
         # Not much I can do to reduce the bloat.
       - name: Setup Environment
@@ -276,7 +276,7 @@ jobs:
             -install_name @rpath/opus.dylib
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7.0.1
         with:
            name: macos-${{ matrix.arch }}-opus.dylib
            path: ./build/opus.dylib
@@ -288,7 +288,7 @@ jobs:
         target: [device, simulator-arm64, simulator-x86_64]
       fail-fast: false
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6.0.2
 
       - name: Setup Environment
         run: |
@@ -411,7 +411,7 @@ jobs:
 
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: ${{ env.OUTPUT_NAME }}-libopus.a
           path: ./build/.libs/libopus.a
@@ -420,25 +420,25 @@ jobs:
     runs-on: macos-latest
     needs: iOS
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6.0.2
 
       - name: Clone opus for headers
         run: git clone --branch ${{ env.OPUS_REF }} --depth 1 ${{ env.OPUS_REPOSITORY }} opus
 
       - name: Download device artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8.0.1
         with:
           name: ios-device-arm64-libopus.a
           path: device
 
       - name: Download simulator-arm64 artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8.0.1
         with:
           name: ios-simulator-arm64-libopus.a
           path: sim_arm64
 
       - name: Download simulator-x86_64 artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8.0.1
         with:
           name: ios-simulator-x86_64-libopus.a
           path: sim_x86
@@ -474,7 +474,7 @@ jobs:
           ls -laR universal/
 
       - name: Upload Universal Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: ios-universal-libopus
           path: universal/*
@@ -482,8 +482,8 @@ jobs:
   Wasm:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: mymindstorm/setup-emsdk@v14
+      - uses: actions/checkout@v6.0.2
+      - uses: mymindstorm/setup-emsdk@v16
 
       - name: Create Build Dir
         run: mkdir build
@@ -509,7 +509,7 @@ jobs:
           emar rcs libopus.a opus_shim.o
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7.0.1
         with:
            name: wasm-libopus.a
            path: ./build/libopus.a
@@ -518,106 +518,106 @@ jobs:
     runs-on: ubuntu-latest
     needs: [Android, iOS-universal, MacOS, Linux, Windows, Wasm]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6.0.2
         
       # Android
       - name: Download android-arm32-libopus.so
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8.0.1
         with:
           name: android-arm32-libopus.so
           path: runtimes/android-arm/native
           
       - name: Download android-arm64-libopus.so
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8.0.1
         with:
           name: android-arm64-libopus.so
           path: runtimes/android-arm64/native
           
       - name: Download android-x64-libopus.so
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8.0.1
         with:
           name: android-x64-libopus.so
           path: runtimes/android-x64/native
           
       - name: Download android-x86-libopus.so
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8.0.1
         with:
           name: android-x86-libopus.so
           path: runtimes/android-x86/native
           
       # iOS
       - name: Download ios-universal-libopus
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8.0.1
         with:
           name: ios-universal-libopus
           path: runtimes/ios/native
           
       # Linux
       - name: Download linux-arm32-opus.so
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8.0.1
         with:
           name: linux-arm32-opus.so
           path: runtimes/linux-arm/native
 
       - name: Download linux-arm64-opus.so
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8.0.1
         with:
           name: linux-arm64-opus.so
           path: runtimes/linux-arm64/native
 
       - name: Download linux-x64-opus.so
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8.0.1
         with:
           name: linux-x64-opus.so
           path: runtimes/linux-x64/native
 
       - name: Download linux-x86-opus.so
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8.0.1
         with:
           name: linux-x86-opus.so
           path: runtimes/linux-x86/native
       
       # MacOS
       - name: Download macos-arm64-opus.dylib
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8.0.1
         with:
           name: macos-arm64-opus.dylib
           path: runtimes/osx-arm64/native
 
       - name: Download macos-x64-opus.dylib
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8.0.1
         with:
           name: macos-x64-opus.dylib
           path: runtimes/osx-x64/native
           
       # Windows
       - name: Download win-arm64-opus.dll
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8.0.1
         with:
           name: win-arm64-opus.dll
           path: runtimes/win-arm64/native
 
       - name: Download win-x64-opus.dll
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8.0.1
         with:
           name: win-x64-opus.dll
           path: runtimes/win-x64/native
 
       - name: Download win-x86-opus.dll
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8.0.1
         with:
           name: win-x86-opus.dll
           path: runtimes/win-x86/native
 
       # WASM
       - name: Download wasm-libopus.a
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8.0.1
         with:
           name: wasm-libopus.a
           path: runtimes/browser-wasm/native
           
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: All-Runtimes
           path: ./runtimes
