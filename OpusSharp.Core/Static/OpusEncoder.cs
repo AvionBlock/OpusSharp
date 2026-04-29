@@ -164,7 +164,7 @@ namespace OpusSharp.Core.Static
         public int Ctl(EncoderCTL request)
         {
             ThrowIfDisposed();
-            var result = StaticNativeOpus.opus_encoder_ctl_noargs(_handler, (int)request);
+            var result = StaticNativeOpus.opussharp_encoder_ctl(_handler, (int)request);
             CheckError(result);
             return result;
         }
@@ -173,7 +173,7 @@ namespace OpusSharp.Core.Static
         public int Ctl(EncoderCTL request, int value)
         {
             ThrowIfDisposed();
-            var result = StaticNativeOpus.opus_encoder_ctl_i(_handler, (int)request, value);
+            var result = StaticNativeOpus.opussharp_encoder_ctl_i(_handler, (int)request, value);
             CheckError(result);
             return result;
         }
@@ -184,7 +184,7 @@ namespace OpusSharp.Core.Static
             ThrowIfDisposed();
             fixed (void* valuePtr = &value)
             {
-                var result = StaticNativeOpus.opus_encoder_ctl_p(_handler, (int)request, valuePtr);
+                var result = StaticNativeOpus.opussharp_encoder_ctl_p(_handler, (int)request, valuePtr);
                 CheckError(result);
                 return result;
             }
@@ -196,7 +196,7 @@ namespace OpusSharp.Core.Static
             ThrowIfDisposed();
             fixed (void* valuePtr = &value)
             {
-                var result = StaticNativeOpus.opus_encoder_ctl_pi(_handler, (int)request, valuePtr, value2);
+                var result = StaticNativeOpus.opussharp_encoder_ctl_pi(_handler, (int)request, valuePtr, value2);
                 CheckError(result);
                 return result;
             }
@@ -208,7 +208,7 @@ namespace OpusSharp.Core.Static
             ThrowIfDisposed();
             fixed (void* value2Ptr = &value2)
             {
-                var result = StaticNativeOpus.opus_encoder_ctl_ip(_handler, (int)request, value, value2Ptr);
+                var result = StaticNativeOpus.opussharp_encoder_ctl_ip(_handler, (int)request, value, value2Ptr);
                 CheckError(result);
                 return result;
             }
@@ -222,7 +222,7 @@ namespace OpusSharp.Core.Static
             fixed (void* valuePtr = &value)
             fixed (void* value2Ptr = &value2)
             {
-                var result = StaticNativeOpus.opus_encoder_ctl_pp(_handler, (int)request, valuePtr, value2Ptr);
+                var result = StaticNativeOpus.opussharp_encoder_ctl_pp(_handler, (int)request, valuePtr, value2Ptr);
                 CheckError(result);
                 return result;
             }
@@ -232,7 +232,7 @@ namespace OpusSharp.Core.Static
         public int Ctl(GenericCTL request)
         {
             ThrowIfDisposed();
-            var result = StaticNativeOpus.opus_encoder_ctl_noargs(_handler, (int)request);
+            var result = StaticNativeOpus.opussharp_encoder_ctl(_handler, (int)request);
             CheckError(result);
             return result;
         }
@@ -241,7 +241,7 @@ namespace OpusSharp.Core.Static
         public int Ctl(GenericCTL request, int value)
         {
             ThrowIfDisposed();
-            var result = StaticNativeOpus.opus_encoder_ctl_i(_handler, (int)request, value);
+            var result = StaticNativeOpus.opussharp_encoder_ctl_i(_handler, (int)request, value);
             CheckError(result);
             return result;
         }
@@ -252,7 +252,7 @@ namespace OpusSharp.Core.Static
             ThrowIfDisposed();
             fixed (void* valuePtr = &value)
             {
-                var result = StaticNativeOpus.opus_encoder_ctl_p(_handler, (int)request, valuePtr);
+                var result = StaticNativeOpus.opussharp_encoder_ctl_p(_handler, (int)request, valuePtr);
                 CheckError(result);
                 return result;
             }
