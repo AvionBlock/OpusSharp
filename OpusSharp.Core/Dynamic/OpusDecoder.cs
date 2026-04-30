@@ -174,7 +174,7 @@ namespace OpusSharp.Core.Dynamic
         public int Ctl(DecoderCTL request)
         {
             ThrowIfDisposed();
-            var result = NativeOpus.opussharp_decoder_ctl(_handler, (int)request);
+            var result = NativeOpus.opus_decoder_ctl(_handler, (int)request);
             CheckError(result);
             return result;
         }
@@ -183,7 +183,7 @@ namespace OpusSharp.Core.Dynamic
         public int Ctl(DecoderCTL request, int value)
         {
             ThrowIfDisposed();
-            var result = NativeOpus.opussharp_decoder_ctl_i(_handler, (int)request, value);
+            var result = NativeOpus.opus_decoder_ctl(_handler, (int)request, value);
             CheckError(result);
             return result;
         }
@@ -194,7 +194,7 @@ namespace OpusSharp.Core.Dynamic
             ThrowIfDisposed();
             fixed (void* valuePtr = &value)
             {
-                var result = NativeOpus.opussharp_decoder_ctl_p(_handler, (int)request, valuePtr);
+                var result = NativeOpus.opus_decoder_ctl(_handler, (int)request, valuePtr);
                 CheckError(result);
                 return result;
             }
@@ -204,7 +204,7 @@ namespace OpusSharp.Core.Dynamic
         public int Ctl(GenericCTL request)
         {
             ThrowIfDisposed();
-            var result = NativeOpus.opussharp_decoder_ctl(_handler, (int)request);
+            var result = NativeOpus.opus_decoder_ctl(_handler, (int)request);
             CheckError(result);
             return result;
         }
@@ -213,7 +213,7 @@ namespace OpusSharp.Core.Dynamic
         public int Ctl(GenericCTL request, int value)
         {
             ThrowIfDisposed();
-            var result = NativeOpus.opussharp_decoder_ctl_i(_handler, (int)request, value);
+            var result = NativeOpus.opus_decoder_ctl(_handler, (int)request, value);
             CheckError(result);
             return result;
         }
@@ -224,7 +224,7 @@ namespace OpusSharp.Core.Dynamic
             ThrowIfDisposed();
             fixed (void* valuePtr = &value)
             {
-                var result = NativeOpus.opussharp_decoder_ctl_p(_handler, (int)request, valuePtr);
+                var result = NativeOpus.opus_decoder_ctl(_handler, (int)request, valuePtr);
                 CheckError(result);
                 return result;
             }
