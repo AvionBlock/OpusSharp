@@ -11,7 +11,8 @@ namespace OpusSharp.Core
 
         private static bool IsStaticallyLinkedPlatform()
         {
-            return RuntimeInformation.IsOSPlatform(OSPlatform.Create("IOS"));
+            return RuntimeInformation.IsOSPlatform(OSPlatform.Create("IOS"))
+                || RuntimeInformation.IsOSPlatform(OSPlatform.Create("BROWSER"));
         }
     }
 }

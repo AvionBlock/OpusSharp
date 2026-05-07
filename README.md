@@ -54,7 +54,7 @@ var decodedSamples = decoder.Decode(someEncodedAudio, someEncodedAudio.Length, d
 This example shows a forced usage of OpusSharp to use the statically linked opus binary.
 
 ```csharp
-// On iOS OpusSharp switches to StaticNativeOpus automatically.
+// On iOS and browser WASM OpusSharp switches to StaticNativeOpus automatically.
 // You can still force the same behavior manually with use_static: true.
 var encoder = new OpusEncoder(sampleRate, channels, OpusPredefinedValues.OPUS_APPLICATION_VOIP, use_static: true);
 var encoder = new OpusDecoder(sampleRate, channels, use_static: true);
@@ -67,7 +67,7 @@ For unity integration, you may want to use `Static.OpusDecoder`, `Dynamic.OpusDe
 
 ```csharp
 using OpusSharp.Core;
-    
+
 IOpusEncoder encoder;
 IOpusDecoder decoder;
 //Decoder
@@ -153,15 +153,16 @@ encoder.Ctl<int>(EncoderCTL.OPUS_SET_VBR, 1); //OpusSharp already checks if an e
 - ❎ Can be supported but no reason to.
 - ❗ Not yet available.
 - ❌ Not planned, Not supported.
+- ➖ Not applicable for this platform.
 
-| Device  | x64 | x86 | arm32 | arm64 |
-|---------|-----|-----|-------|-------|
-| Linux   | ✅   | ✅   | ✅     | ✅     |
-| Android | ✅   | ✅   | ✅     | ✅     |
-| Windows | ✅   | ✅   | ✅     | ✅     |
-| iOS     | ❌   | ❌   | ❌     | ✅     |
-| MacOS   | ✅   | ❌   | ❌     | ✅     |
-| WASM    | ✅   | ❗   | ❗     | ❗     |
+| Device  | x64 | x86 | arm32 | arm64 | browser-wasm |
+| ------- | --- | --- | ----- | ----- | ------------ |
+| Linux   | ✅  | ✅  | ✅    | ✅    | ➖           |
+| Android | ✅  | ✅  | ✅    | ✅    | ➖           |
+| Windows | ✅  | ✅  | ✅    | ✅    | ➖           |
+| iOS     | ❌  | ❌  | ❌    | ✅    | ➖           |
+| MacOS   | ✅  | ❌  | ❌    | ✅    | ➖           |
+| WASM    | ➖  | ➖  | ➖    | ➖    | ✅           |
 
 ## Installation
 
@@ -169,6 +170,8 @@ Please check [QuickStart](https://avionblock.github.io/OpusSharp/quick-start/ind
 OR [Nuget](https://www.nuget.org/packages/OpusSharp).
 For the default cross-platform experience, install [OpusSharp](https://www.nuget.org/packages/OpusSharp). It brings in
 both `OpusSharp.Core` and the prebuilt native assets, including automatic iOS linking through `OpusSharp.Natives`.
+Browser WebAssembly apps also receive the packaged `browser-wasm/native/libopus.a` automatically as a
+`NativeFileReference`.
 
 If you want to manage native binaries yourself, only install the `OpusSharp.Core` package.
 
@@ -181,6 +184,7 @@ https://avionblock.github.io/OpusSharp/api/OpusSharp.Core.html
 https://opus-codec.org/license/
 
 ## Support The Creator
+
 Kofi Donations only go through to SineVector241. Sponsoring hasn't been setup yet...
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Z8Z0MLA2P)
