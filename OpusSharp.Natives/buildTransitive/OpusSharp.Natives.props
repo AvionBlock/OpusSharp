@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <_OpusSharpNativesRoot>$(MSBuildThisFileDirectory)../</_OpusSharpNativesRoot>
+    <_OpusSharpWasmLibrary>$(_OpusSharpNativesRoot)runtimes/browser-wasm/native/libopus.a</_OpusSharpWasmLibrary>
+  </PropertyGroup>
+
+  <ItemGroup Condition="(
+    '$(RuntimeIdentifier)' == 'browser-wasm'
+    or $([System.String]::Copy('$(RuntimeIdentifiers)').Contains('browser-wasm'))
+    or '$([MSBuild]::GetTargetPlatformIdentifier($(TargetFramework)))' == 'browser'
+  ) and Exists('$(_OpusSharpWasmLibrary)')">
+    <NativeFileReference Include="$(_OpusSharpWasmLibrary)" />
+  </ItemGroup>
+</Project>
