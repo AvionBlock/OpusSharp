@@ -26,7 +26,7 @@ dotnet add package OpusSharp.Natives --version x.y.z
 ```
 
 > [!NOTE]
-> iOS binaries are shipped through `OpusSharp.Natives` as `libopus.xcframework` and linked automatically in .NET iOS projects. At runtime OpusSharp automatically switches to `StaticNativeOpus` on iOS, so manually passing `use_static: true` is optional. WASM still requires manual static linking.
+> iOS binaries are shipped through `OpusSharp.Natives` as `libopus.xcframework` and linked automatically in .NET iOS projects. WASM binaries are shipped as `libopus.a` and linked automatically in `browser-wasm` projects through `NativeFileReference`. At runtime OpusSharp automatically switches to `StaticNativeOpus` on iOS and browser WASM, so manually passing `use_static: true` is optional.
 
 ## Step 3: Create Encoder and Decoder
 
