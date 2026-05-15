@@ -1069,10 +1069,10 @@ namespace OpusSharp.Core
         /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="EncoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
         /// <returns><see cref="OpusErrorCodes"/></returns>
 #if NET8_0_OR_GREATER
-        [LibraryImport(DllName)]
+        [LibraryImport(DllName, EntryPoint = "opussharp_ms_encoder_ctl")]
         public static partial int opus_ms_encoder_ctl(OpusMSEncoderSafeHandle st, int request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
 #else
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DllName, EntryPoint = "opussharp_ms_encoder_ctl", CallingConvention = CallingConvention.Cdecl)]
         public static extern int opus_ms_encoder_ctl(OpusMSEncoderSafeHandle st, int request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
 #endif
         
@@ -1276,10 +1276,10 @@ namespace OpusSharp.Core
         /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="DecoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
         /// <returns><see cref="OpusErrorCodes"/></returns>
 #if NET8_0_OR_GREATER
-        [LibraryImport(DllName)]
+        [LibraryImport(DllName, EntryPoint = "opussharp_ms_decoder_ctl")]
         public static partial int opus_ms_decoder_ctl(OpusMSDecoderSafeHandle st, int request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
 #else
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DllName, EntryPoint = "opussharp_ms_decoder_ctl", CallingConvention = CallingConvention.Cdecl)]
         public static extern int opus_ms_decoder_ctl(OpusMSDecoderSafeHandle st, int request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
 #endif
         
