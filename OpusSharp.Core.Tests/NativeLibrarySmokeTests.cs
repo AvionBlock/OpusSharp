@@ -57,24 +57,17 @@ public sealed class NativeLibrarySmokeTests
     }
 
     [Fact]
-    public void MultistreamCtlNoArgumentImports_TargetShimSymbols()
+    public void MultistreamCtlNoArgumentOverloads_AreManagedWrappers()
     {
-        AssertLibraryImportEntryPoint(
-            typeof(NativeOpus),
-            nameof(NativeOpus.opus_ms_encoder_ctl),
-            "opussharp_ms_encoder_ctl");
-        AssertLibraryImportEntryPoint(
-            typeof(NativeOpus),
-            nameof(NativeOpus.opus_ms_decoder_ctl),
-            "opussharp_ms_decoder_ctl");
-        AssertLibraryImportEntryPoint(
-            typeof(StaticNativeOpus),
-            nameof(StaticNativeOpus.opus_ms_encoder_ctl),
-            "opussharp_ms_encoder_ctl");
-        AssertLibraryImportEntryPoint(
-            typeof(StaticNativeOpus),
-            nameof(StaticNativeOpus.opus_ms_decoder_ctl),
-            "opussharp_ms_decoder_ctl");
+        AssertPublicCtlOverloadIsManagedWrapper(typeof(NativeOpus), nameof(NativeOpus.opus_ms_encoder_ctl), 2);
+        AssertPublicCtlOverloadIsManagedWrapper(typeof(NativeOpus), nameof(NativeOpus.opus_ms_decoder_ctl), 2);
+        AssertPublicCtlOverloadIsManagedWrapper(typeof(StaticNativeOpus), nameof(StaticNativeOpus.opus_ms_encoder_ctl), 2);
+        AssertPublicCtlOverloadIsManagedWrapper(typeof(StaticNativeOpus), nameof(StaticNativeOpus.opus_ms_decoder_ctl), 2);
+
+        AssertPrivateLibraryImportSymbol(typeof(NativeOpus), "opus_multistream_encoder_ctl");
+        AssertPrivateLibraryImportSymbol(typeof(NativeOpus), "opus_multistream_decoder_ctl");
+        AssertPrivateLibraryImportSymbol(typeof(StaticNativeOpus), "opus_multistream_encoder_ctl");
+        AssertPrivateLibraryImportSymbol(typeof(StaticNativeOpus), "opus_multistream_decoder_ctl");
     }
 
     [Fact]
@@ -200,14 +193,23 @@ public sealed class NativeLibrarySmokeTests
         Assert.Contains("$raw.Substring(1) + '=' + $raw", workflow);
     }
 
-    private static void AssertLibraryImportEntryPoint(Type type, string methodName, string expectedEntryPoint)
+    private static void AssertPublicCtlOverloadIsManagedWrapper(Type type, string methodName, int parameterCount)
     {
         var method = Assert.Single(
             type.GetMethods(BindingFlags.Public | BindingFlags.Static),
-            method => method.Name == methodName && method.GetParameters().Length == 2);
-        var importAttribute = Assert.Single(method.GetCustomAttributes<LibraryImportAttribute>());
+            method => method.Name == methodName && method.GetParameters().Length == parameterCount);
 
-        Assert.Equal(expectedEntryPoint, importAttribute.EntryPoint);
+        Assert.Empty(method.GetCustomAttributes<LibraryImportAttribute>());
+        Assert.Empty(method.GetCustomAttributes<DllImportAttribute>());
+    }
+
+    private static void AssertPrivateLibraryImportSymbol(Type type, string methodName)
+    {
+        var method = Assert.Single(
+            type.GetMethods(BindingFlags.NonPublic | BindingFlags.Static),
+            method => method.Name == methodName && method.GetParameters().Length == 2);
+
+        Assert.Equal(methodName, GetImportedSymbol(method));
     }
 
     private static IEnumerable<MethodInfo> GetPublicCtlMethods(params Type[] types)

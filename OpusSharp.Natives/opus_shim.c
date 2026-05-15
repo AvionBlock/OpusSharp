@@ -72,11 +72,6 @@ SHIM_EXPORT int opussharp_dred_decoder_ctl_p(OpusDREDDecoder *dred_dec, int requ
 
 /* === Multistream Encoder CTL === */
 
-SHIM_EXPORT int opussharp_ms_encoder_ctl(OpusMSEncoder *st, int request)
-{
-    return opus_multistream_encoder_ctl(st, request);
-}
-
 SHIM_EXPORT int opussharp_ms_encoder_ctl_i(OpusMSEncoder *st, int request, int value)
 {
     return opus_multistream_encoder_ctl(st, request, value);
@@ -103,11 +98,6 @@ SHIM_EXPORT int opussharp_ms_encoder_ctl_pp(OpusMSEncoder *st, int request, void
 }
 
 /* === Multistream Decoder CTL === */
-
-SHIM_EXPORT int opussharp_ms_decoder_ctl(OpusMSDecoder *st, int request)
-{
-    return opus_multistream_decoder_ctl(st, request);
-}
 
 SHIM_EXPORT int opussharp_ms_decoder_ctl_i(OpusMSDecoder *st, int request, int value)
 {

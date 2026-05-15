@@ -1069,12 +1069,21 @@ namespace OpusSharp.Core
         /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="EncoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
         /// <returns><see cref="OpusErrorCodes"/></returns>
 #if NET8_0_OR_GREATER
-        [LibraryImport(DllName, EntryPoint = "opussharp_ms_encoder_ctl")]
-        public static partial int opus_ms_encoder_ctl(OpusMSEncoderSafeHandle st, int request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
+        [LibraryImport(DllName)]
+        private static partial int opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle st, int request);
 #else
-        [DllImport(DllName, EntryPoint = "opussharp_ms_encoder_ctl", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_ms_encoder_ctl(OpusMSEncoderSafeHandle st, int request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle st, int request);
 #endif
+
+        /// <summary>
+        /// Perform a CTL function on a <see cref="OpusMSEncoderSafeHandle"/>.
+        /// </summary>
+        /// <param name="st">Multistream encoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="EncoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
+        public static int opus_ms_encoder_ctl(OpusMSEncoderSafeHandle st, int request) =>
+            opus_multistream_encoder_ctl(st, request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
         
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
@@ -1276,12 +1285,21 @@ namespace OpusSharp.Core
         /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="DecoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
         /// <returns><see cref="OpusErrorCodes"/></returns>
 #if NET8_0_OR_GREATER
-        [LibraryImport(DllName, EntryPoint = "opussharp_ms_decoder_ctl")]
-        public static partial int opus_ms_decoder_ctl(OpusMSDecoderSafeHandle st, int request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
+        [LibraryImport(DllName)]
+        private static partial int opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle st, int request);
 #else
-        [DllImport(DllName, EntryPoint = "opussharp_ms_decoder_ctl", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_ms_decoder_ctl(OpusMSDecoderSafeHandle st, int request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle st, int request);
 #endif
+
+        /// <summary>
+        /// Perform a CTL function on a <see cref="OpusMSEncoderSafeHandle"/>.
+        /// </summary>
+        /// <param name="st">Multistream decoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="DecoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
+        public static int opus_ms_decoder_ctl(OpusMSDecoderSafeHandle st, int request) =>
+            opus_multistream_decoder_ctl(st, request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
         
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
