@@ -1,6 +1,8 @@
 <Project>
+  <Import Project="..\..\Directory.Build.props" />
+
   <PropertyGroup>
-    <OpusSharpSmokeVersion>1.6.0.2</OpusSharpSmokeVersion>
+    <OpusSharpSmokeVersion>$(OpusSharpVersion)</OpusSharpSmokeVersion>
     <RestoreSources>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\local-nuget'));https://api.nuget.org/v3/index.json</RestoreSources>
   </PropertyGroup>
 </Project>
