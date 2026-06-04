@@ -36,3 +36,20 @@ jobs:
         run: dotnet run --project ./samples/PackageSmoke/Host/OpusSharp.Smoke.Host.csproj --configuration Release
       - name: Build iOS package smoke
         run: dotnet build ./samples/PackageSmoke/iOS/OpusSharp.Smoke.iOS.csproj --configuration Release -f net9.0-ios -p:RuntimeIdentifier=iossimulator-arm64
+
+  smoke-browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6.0.2
+      - uses: actions/setup-dotnet@v5.2.0
+        with:
+          dotnet-version: 10.0.x
+      - name: Install WebAssembly workload
+        run: dotnet workload install wasm-tools
+      - name: Pack local NuGet feed
+        run: ./packall.sh
+      - name: Build browser package smoke
+        run: dotnet build ./samples/PackageSmoke/Browser/OpusSharp.Smoke.Browser.csproj --configuration Release
+      - name: Run browser package smoke
+        working-directory: ./samples/PackageSmoke/Browser/bin/Release/net10.0-browser
+        run: node --input-type=module -e "const { dotnet } = await import('./wwwroot/_framework/dotnet.js'); const { getConfig, runMain } = await dotnet.create(); const exitCode = await runMain(getConfig().mainAssemblyName, []); if (exitCode) process.exit(exitCode);"

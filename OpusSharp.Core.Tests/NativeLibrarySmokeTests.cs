@@ -193,6 +193,94 @@ public sealed class NativeLibrarySmokeTests
         Assert.Contains("$raw.Substring(1) + '=' + $raw", workflow);
     }
 
+    [Fact]
+    public void BrowserWasm_DefaultRuntimeUsesOpusModuleInsteadOfInternal()
+    {
+        var runtimeSource = File.ReadAllText(Path.Combine(
+            TestNativeLibraryBootstrapper.GetRepositoryRoot(),
+            "OpusSharp.Core",
+            "OpusRuntime.cs"));
+
+        Assert.Equal("opus", GetNativeDllName(typeof(NativeOpus)));
+        Assert.Equal("__Internal", GetNativeDllName(typeof(StaticNativeOpus)));
+        Assert.Contains("OSPlatform.Create(\"IOS\")", runtimeSource);
+        Assert.DoesNotContain("OSPlatform.Create(\"BROWSER\")", runtimeSource);
+    }
+
+    [Fact]
+    public void BrowserWasmNatives_RegisterOpusPInvokeModule()
+    {
+        var root = TestNativeLibraryBootstrapper.GetRepositoryRoot();
+        var props = File.ReadAllText(Path.Combine(
+            root,
+            "OpusSharp.Natives",
+            "buildTransitive",
+            "OpusSharp.Natives.props"));
+        var targets = File.ReadAllText(Path.Combine(
+            root,
+            "OpusSharp.Natives",
+            "buildTransitive",
+            "OpusSharp.Natives.targets"));
+
+        Assert.Contains("runtimes/browser-wasm/native/libopus.a", props);
+        Assert.Contains("<NativeFileReference Include=\"$(_OpusSharpWasmLibrary)\" />", props);
+        Assert.Contains("BeforeTargets=\"_GenerateManagedToNative\"", targets);
+        Assert.Contains("<_WasmPInvokeModules Include=\"opus\" />", targets);
+    }
+
+    [Fact]
+    public void BrowserPackageSmoke_UsesOnlyTopLevelOpusSharpPackage()
+    {
+        var browserSmokeRoot = Path.Combine(
+            TestNativeLibraryBootstrapper.GetRepositoryRoot(),
+            "samples",
+            "PackageSmoke",
+            "Browser");
+        var project = File.ReadAllText(Path.Combine(browserSmokeRoot, "OpusSharp.Smoke.Browser.csproj"));
+        var program = File.ReadAllText(Path.Combine(browserSmokeRoot, "Program.cs"));
+
+        Assert.Contains("<TargetFramework>net10.0-browser</TargetFramework>", project);
+        Assert.Contains("<WasmMainHTMLPath>wwwroot/index.html</WasmMainHTMLPath>", project);
+        Assert.Contains("<WasmMainJSPath>wwwroot/main.js</WasmMainJSPath>", project);
+        Assert.Contains("PackageReference Include=\"OpusSharp\"", project);
+        Assert.DoesNotContain("OpusSharp.Natives", project);
+        Assert.True(File.Exists(Path.Combine(browserSmokeRoot, "wwwroot", "index.html")));
+        Assert.True(File.Exists(Path.Combine(browserSmokeRoot, "wwwroot", "main.js")));
+        Assert.Contains("new OpusEncoder", program);
+        Assert.Contains("new OpusDecoder", program);
+        Assert.Contains("encoder.Encode", program);
+        Assert.Contains("decoder.Decode", program);
+    }
+
+    [Fact]
+    public void BrowserWasmArchive_ContainsStackCheckRuntimeMember()
+    {
+        var root = TestNativeLibraryBootstrapper.GetRepositoryRoot();
+        var archivePath = Path.Combine(
+            root,
+            "OpusSharp.Natives",
+            "runtimes",
+            "browser-wasm",
+            "native",
+            "libopus.a");
+        var stackCheckSource = File.ReadAllText(Path.Combine(
+            root,
+            "OpusSharp.Natives",
+            "wasm_stack_chk.c"));
+        var workflow = File.ReadAllText(Path.Combine(
+            root,
+            ".github",
+            "workflows",
+            "OpusCompile.yml"));
+
+        AssertFileContainsAsciiSymbol(archivePath, "wasm_stack_chk.o");
+        AssertFileContainsAsciiSymbol(archivePath, "__stack_chk_fail");
+        AssertFileContainsAsciiSymbol(archivePath, "__stack_chk_guard");
+        Assert.Contains("__builtin_trap", stackCheckSource);
+        Assert.Contains("wasm_stack_chk.c", workflow);
+        Assert.Contains("wasm_stack_chk.o", workflow);
+    }
+
     private static void AssertPublicCtlOverloadIsManagedWrapper(Type type, string methodName, int parameterCount)
     {
         var method = Assert.Single(
@@ -245,6 +333,15 @@ public sealed class NativeLibrarySmokeTests
         return string.IsNullOrEmpty(importAttribute.EntryPoint)
             ? method.Name
             : importAttribute.EntryPoint;
+    }
+
+    private static string GetNativeDllName(Type type)
+    {
+        var field = type.GetField("DllName", BindingFlags.NonPublic | BindingFlags.Static);
+
+        Assert.NotNull(field);
+
+        return Assert.IsType<string>(field!.GetRawConstantValue());
     }
 
     private static IEnumerable<string> GetSupportedNativeRuntimeFiles()
