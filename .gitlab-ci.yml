@@ -45,7 +45,7 @@ Compile Linux:
       -DCMAKE_CXX_FLAGS=$CXX_FLAGS
     
     # Build
-    - cmake --build ../build
+    - cmake --build ./build
   
     # Shim Link.
     - $CC -shared -o ./build/opus.so -I ./opus/include ./OpusSharp.Natives/opus_shim.c -Wl,--whole-archive libopus.a -Wl,--no-whole-archive -lm
