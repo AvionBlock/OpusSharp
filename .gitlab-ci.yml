@@ -32,14 +32,14 @@ Compile Linux:
   script:
     # Setup Environment
     - apt-get update
-    - apt-get install git
+    - apt-get install -y git
     - |
       if [[ "$ARCH" == "x86" ]]; then
-        apt-get install g++-multilib
+        apt-get install -y g++-multilib
       elif [[ "$ARCH" == "arm64" ]]; then
-        apt-get install g++-aarch64-linux-gnu
+        apt-get install -y g++-aarch64-linux-gnu
       elif [[ "$ARCH" == "arm32" ]]; then
-        apt-get install g++-arm-linux-gnueabi
+        apt-get install -y g++-arm-linux-gnueabi
       fi
     
     - mkdir build
