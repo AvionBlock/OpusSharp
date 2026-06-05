@@ -46,7 +46,6 @@ Compile Linux:
     - git clone --branch $OPUS_REF --depth 1 $OPUS_REPOSITORY opus
     - ./opus/autogen.sh
     - mkdir build
-    - cd ./build
   
     # Build.
     - cmake -S . -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Release
