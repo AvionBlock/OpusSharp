@@ -16,6 +16,18 @@ Compile Linux:
         CC: gcc -m64
         C_FLAGS: -m64
         CXX_FLAGS: -m64
+      - ARCH: x86
+        CC: gcc -m32
+        C_FLAGS: -m32
+        CXX_FLAGS: -m32
+      - ARCH: arm64
+        CC: aarch64-linux-gnu-gcc
+        C_COMPILER: aarch64-linux-gnu-gcc
+        CXX_COMPILER: aarch64-linux-gnu-g++
+      - ARCH: arm32
+        CC: arm-linux-gnueabi-gcc
+        C_COMPILER: arm-linux-gnueabi-gcc
+        CXX_COMPILER: arm-linux-gnueabi-g++
 
   before_script:
     # Setup Environment.
@@ -36,16 +48,27 @@ Compile Linux:
     - mkdir build
   
     # Configure.
-    - cmake -S ./opus -B ./build 
-      -DCMAKE_BUILD_TYPE=Release 
-      -DBUILD_SHARED_LIBS=OFF 
-      -DOPUS_BUILD_PROGRAMS=ON 
-      -DCMAKE_POSITION_INDEPENDENT_CODE=ON 
-      -DCMAKE_C_FLAGS=$C_FLAGS 
-      -DCMAKE_CXX_FLAGS=$CXX_FLAGS
+    - |
+      if [[ "$ARCH" == "x64" || "$ARCH" == "x86" ]]; then
+        cmake -S ./opus -B ./build 
+          -DCMAKE_BUILD_TYPE=Release 
+          -DBUILD_SHARED_LIBS=OFF 
+          -DOPUS_BUILD_PROGRAMS=ON 
+          -DCMAKE_POSITION_INDEPENDENT_CODE=ON 
+          -DCMAKE_C_FLAGS=$C_FLAGS 
+          -DCMAKE_CXX_FLAGS=$CXX_FLAGS
+      elif [[ "$ARCH" == "arm64" || "$ARCH" == "arm32" ]]; then
+        cmake -S ./opus -B ./build 
+          -DCMAKE_BUILD_TYPE=Release 
+          -DBUILD_SHARED_LIBS=OFF 
+          -DOPUS_BUILD_PROGRAMS=ON 
+          -DCMAKE_POSITION_INDEPENDENT_CODE=ON 
+          -DCMAKE_C_COMPILER=$C_FLAGS 
+          -DCMAKE_CXX_COMPILER=$CXX_FLAGS
+      fi
     
     # Build
     - cmake --build ./build
   
     # Shim Link.
-    - $CC -shared -o ./build/opus.so -I ./opus/include ./OpusSharp.Natives/opus_shim.c -Wl,--whole-archive ./build/libopus.a -Wl,--no-whole-archive -lm
+    - $CC -shared -o opus.so -I ./opus/include ./OpusSharp.Natives/opus_shim.c -Wl,--whole-archive ./build/libopus.a -Wl,--no-whole-archive -lm
