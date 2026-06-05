@@ -28,11 +28,11 @@ Compile Linux:
         CC: arm-linux-gnueabi-gcc
         C_COMPILER: arm-linux-gnueabi-gcc
         CXX_COMPILER: arm-linux-gnueabi-g++
-          
+  before_script:
+    - apt-get update &&
+      apt-get install -y cmake ninja-build git automake libtool wget
   script:
-    # Setup Environment
-    - apt-get update
-    - apt-get install -y git curl autoconf automake libtool pkg-config m4 make cmake
+    # Setup Environment.
     - |
       if [[ "$ARCH" == "x86" ]]; then
         apt-get install -y g++-multilib
@@ -42,11 +42,17 @@ Compile Linux:
         apt-get install -y g++-arm-linux-gnueabi
       fi
     
-    - mkdir build
+    # Clone and setup opus.
     - git clone --branch $OPUS_REF --depth 1 $OPUS_REPOSITORY opus
     - ./opus/autogen.sh
+    - mkdir build
     - cd ./build
-    - cmake --build . -j 2 --config Release
+  
+    # Build.
+    - cmake S . -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Release
+    - cmake --build build
+  
+    # Shim Link.
     - |
       $CC -shared -o \
       -I../opus/include \
