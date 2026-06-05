@@ -16,23 +16,11 @@ Compile Linux:
         CC: gcc -m64
         C_FLAGS: -m64
         CXX_FLAGS: -m64
-      - ARCH: x86
-        CC: gcc -m32
-        C_FLAGS: -m32
-        CXX_FLAGS: -m32
-      - ARCH: arm64
-        CC: aarch64-linux-gnu-gcc
-        C_COMPILER: aarch64-linux-gnu-gcc
-        CXX_COMPILER: aarch64-linux-gnu-g++
-      - ARCH: arm32
-        CC: arm-linux-gnueabi-gcc
-        C_COMPILER: arm-linux-gnueabi-gcc
-        CXX_COMPILER: arm-linux-gnueabi-g++
+
   before_script:
+    # Setup Environment.
     - apt-get update &&
       apt-get install -y cmake ninja-build git automake libtool wget
-  script:
-    # Setup Environment.
     - |
       if [[ "$ARCH" == "x86" ]]; then
         apt-get install -y g++-multilib
@@ -41,7 +29,7 @@ Compile Linux:
       elif [[ "$ARCH" == "arm32" ]]; then
         apt-get install -y g++-arm-linux-gnueabi
       fi
-    
+  script:
     # Clone and setup opus.
     - git clone --branch $OPUS_REF --depth 1 $OPUS_REPOSITORY opus
     - ./opus/autogen.sh
@@ -51,6 +39,9 @@ Compile Linux:
     - cd opus
     - cmake -S . -B ../build -G "Ninja" -DCMAKE_BUILD_TYPE=Release
     - cmake --build ../build
+  
+    # Print
+    - dir ./include
   
     # Shim Link.
     - cd ../build
