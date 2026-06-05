@@ -50,21 +50,9 @@ Compile Linux:
     # Configure.
     - |
       if [[ "$ARCH" == "x64" || "$ARCH" == "x86" ]]; then
-        cmake -S ./opus -B ./build 
-          -DCMAKE_BUILD_TYPE=Release 
-          -DBUILD_SHARED_LIBS=OFF 
-          -DOPUS_BUILD_PROGRAMS=ON 
-          -DCMAKE_POSITION_INDEPENDENT_CODE=ON 
-          -DCMAKE_C_FLAGS=$C_FLAGS 
-          -DCMAKE_CXX_FLAGS=$CXX_FLAGS
+        cmake -S ./opus -B ./build -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DOPUS_BUILD_PROGRAMS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DCMAKE_C_FLAGS=$C_FLAGS -DCMAKE_CXX_FLAGS=$CXX_FLAGS
       elif [[ "$ARCH" == "arm64" || "$ARCH" == "arm32" ]]; then
-        cmake -S ./opus -B ./build 
-          -DCMAKE_BUILD_TYPE=Release 
-          -DBUILD_SHARED_LIBS=OFF 
-          -DOPUS_BUILD_PROGRAMS=ON 
-          -DCMAKE_POSITION_INDEPENDENT_CODE=ON 
-          -DCMAKE_C_COMPILER=$C_FLAGS 
-          -DCMAKE_CXX_COMPILER=$CXX_FLAGS
+        cmake -S ./opus -B ./build -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DOPUS_BUILD_PROGRAMS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DCMAKE_C_COMPILER=$C_FLAGS -DCMAKE_CXX_COMPILER=$CXX_FLAGS
       fi
     
     # Build
