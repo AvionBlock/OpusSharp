@@ -1,5 +1,5 @@
 stages:
-  - Linux
+  - Build
 
 variables:
   OPUS_REPOSITORY: https://gitlab.xiph.org/xiph/opus.git
@@ -7,24 +7,24 @@ variables:
   OPUS_REF: v1.6.1
 
 Compile Linux:
-  stage: Linux
+  stage: Build
   tags:
     - ubuntu
   parallel:
     matrix:
-      - ARCH: x64
+      - ARCH_TYPE: x64
         CC: gcc -m64
         C_FLAGS: -m64
         CXX_FLAGS: -m64
-      - ARCH: x86
+      - ARCH_TYPE: x86
         CC: gcc -m32
         C_FLAGS: -m32
         CXX_FLAGS: -m32
-      - ARCH: arm64
+      - ARCH_TYPE: arm64
         CC: aarch64-linux-gnu-gcc
         C_COMPILER: aarch64-linux-gnu-gcc
         CXX_COMPILER: aarch64-linux-gnu-g++
-      - ARCH: arm32
+      - ARCH_TYPE: arm32
         CC: arm-linux-gnueabi-gcc
         C_COMPILER: arm-linux-gnueabi-gcc
         CXX_COMPILER: arm-linux-gnueabi-g++
@@ -34,11 +34,11 @@ Compile Linux:
     - apt-get update &&
       apt-get install -y cmake git automake libtool wget
     - |
-      if [[ "$ARCH" == "x86" ]]; then
+      if [[ "$ARCH_TYPE" == "x86" ]]; then
         apt-get install -y g++-multilib
-      elif [[ "$ARCH" == "arm64" ]]; then
+      elif [[ "$ARCH_TYPE" == "arm64" ]]; then
         apt-get install -y g++-aarch64-linux-gnu
-      elif [[ "$ARCH" == "arm32" ]]; then
+      elif [[ "$ARCH_TYPE" == "arm32" ]]; then
         apt-get install -y g++-arm-linux-gnueabi
       fi
   script:
@@ -49,9 +49,9 @@ Compile Linux:
   
     # Configure.
     - |
-      if [[ "$ARCH" == "x64" || "$ARCH" == "x86" ]]; then
+      if [[ "$ARCH_TYPE" == "x64" || "$ARCH_TYPE" == "x86" ]]; then
         cmake -S ./opus -B ./build -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DOPUS_BUILD_PROGRAMS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DCMAKE_C_FLAGS=$C_FLAGS -DCMAKE_CXX_FLAGS=$CXX_FLAGS
-      elif [[ "$ARCH" == "arm64" || "$ARCH" == "arm32" ]]; then
+      elif [[ "$ARCH_TYPE" == "arm64" || "$ARCH_TYPE" == "arm32" ]]; then
         cmake -S ./opus -B ./build -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DOPUS_BUILD_PROGRAMS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DCMAKE_C_COMPILER=$C_FLAGS -DCMAKE_CXX_COMPILER=$CXX_FLAGS
       fi
     
@@ -63,6 +63,40 @@ Compile Linux:
   
   # Upload Artifact
   artifacts:
-    name: "linux-$ARCH-opus.so"
+    name: "linux-$ARCH_TYPE-opus.so"
     paths:
       - ./opus.so
+    
+Compile Windows:
+  stage: Build
+  tags:
+    - windows
+  parallel:
+    matrix:
+      - ARCH_TYPE: x64
+        ARCH: x64
+        VCARCH: amd64
+      - ARCH_TYPE: x86
+        ARCH: Win32
+        VCARCH: x86
+      - ARCH_TYPE: arm64
+        ARCH: ARM64
+        VCARCH: amd64_arm64
+  script:
+    # Clone and setup opus.
+    - git clone --branch $OPUS_REF --depth 1 $OPUS_REPOSITORY opus
+    - ./opus/autogen.bat
+    - mkdir build
+  
+    # Configure
+    - cmake ./opus -G "Visual Studio 17 2022" -A $ARCH -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=OFF -DBUILD_SHARED_LIBS=OFF
+  
+    # Build
+    - cmake --build ./build --config Release
+    
+    # Build Shim
+    - call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" $VCARCH
+    - cl /O2 /MD /I .\opus\include /c .\OpusSharp.Natives\opus_shim.c /Foopus_shim.obj
+    - dumpbin /symbols Release\opus.lib > opus_symbols.txt
+    - powershell -NoProfile -Command "$s = (gc opus_symbols.txt) | Where-Object {$_ -match 'External\s+\|\s+(_?opus_\S+)'} | ForEach-Object { $raw = [regex]::Match($_, 'External\s+\|\s+(\S+)').Groups[1].Value; if ($raw.StartsWith('_')) { $raw.Substring(1) + '=' + $raw } else { $raw } } | Sort-Object -Unique; [IO.File]::WriteAllText('opus.def', \"EXPORTS`r`n\" + ($s -join \"`r`n\") + \"`r`n\")"
+    - link /DLL /OUT:opus.dll /DEF:opus.def opus_shim.obj Release\opus.lib ucrt.lib vcruntime.lib msvcrt.lib
