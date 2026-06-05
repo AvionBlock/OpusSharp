@@ -32,13 +32,13 @@ Compile Linux:
   script:
     # Setup Environment
     - |
-      if [[ "${{ matrix.arch }}" == "x86" ]]; then
+      if [[ "$[[ matrix.ARCH ]]" == "x86" ]]; then
         sudo apt-get update
         sudo apt-get install g++-multilib
-      elif [[ "${{ matrix.arch }}" == "arm64" ]]; then
+      elif [[ "$[[ matrix.ARCH ]]" == "arm64" ]]; then
         sudo apt-get update
         sudo apt-get install g++-aarch64-linux-gnu
-      elif [[ "${{ matrix.arch }}" == "arm32" ]]; then
+      elif [[ "$[[ matrix.ARCH ]] == "arm32" ]]; then
         sudo apt-get update
         sudo apt-get install g++-arm-linux-gnueabi
       fi
