@@ -32,16 +32,21 @@ Compile Linux:
   script:
     # Setup Environment
     - apt-get update
-    - apt-get install -y g++-multilib g++-aarch64-linux-gnu g++-arm-linux-gnueabi git curl autoconf automake libtool pkg-config m4 make
+    - apt-get install -y git curl autoconf automake libtool pkg-config m4 make
+    - |
+      if [[ "$ARCH" == "x86" ]]; then
+        apt-get install -y g++-multilib
+      elif [[ "$ARCH" == "arm64" ]]; then
+        apt-get install -y g++-aarch64-linux-gnu
+      elif [[ "$ARCH" == "arm32" ]]; then
+        apt-get install -y g++-arm-linux-gnueabi
+      fi
     
-    # Create Build
     - mkdir build
     - git clone --branch $OPUS_REF --depth 1 $OPUS_REPOSITORY opus
     - ./opus/autogen.sh
     - cd ./build
     - cmake --build . -j 2 --config Release
-  
-    # Shim Link
     - |
       $CC -shared -o \
       -I../opus/include \
