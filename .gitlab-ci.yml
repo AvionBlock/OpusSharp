@@ -40,9 +40,6 @@ Compile Linux:
     - cmake -S . -B ../build -G "Ninja" -DCMAKE_BUILD_TYPE=Release
     - cmake --build ../build
   
-    # Print
-    - dir ./include
-  
     # Shim Link.
     - cd ../build
-    - $CC -shared -o -I ../opus/include ../OpusSharp.Natives/opus_shim.c -Wl,--whole-archive libopus.a -Wl,--no-whole-archive -lm
+    - $CC -shared -o opus.so -I ../opus/include ../OpusSharp.Natives/opus_shim.c -Wl,--whole-archive libopus.a -Wl,--no-whole-archive -lm
