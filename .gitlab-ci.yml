@@ -53,9 +53,5 @@ Compile Linux:
     - cmake --build ../build
   
     # Shim Link.
-    - |
-      $CC -shared -o \
-      -I../opus/include \
-      ../OpusSharp.Native/opus_shim.c \
-      -Wl,--whole-archive libopus.a -Wl,--no-whole-archive \
-      -lm
+    - cd ../build
+    - $CC -shared -o -I ../opus/include ../OpusSharp.Natives/opus_shim.c -Wl,--whole-archive libopus.a -Wl,--no-whole-archive -lm
