@@ -33,6 +33,7 @@ Compile Linux:
     # Setup Environment
     - apt-get update
     - apt-get install -y git
+    - apt-get install -y curl
     - |
       if [[ "$ARCH" == "x86" ]]; then
         apt-get install -y g++-multilib
