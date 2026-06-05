@@ -31,16 +31,14 @@ Compile Linux:
           
   script:
     # Setup Environment
+    - apt update
     - apt install git
     - |
       if [[ "$ARCH" == "x86" ]]; then
-        apt update
         apt install g++-multilib
       elif [[ "$ARCH" == "arm64" ]]; then
-        apt update
         apt install g++-aarch64-linux-gnu
       elif [[ "$ARCH" == "arm32" ]]; then
-        apt update
         apt install g++-arm-linux-gnueabi
       fi
     
