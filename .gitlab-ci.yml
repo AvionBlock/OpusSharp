@@ -48,7 +48,7 @@ Compile Linux:
     - mkdir build
   
     # Build.
-    - cd build
+    - cd opus
     - cmake -S . -B ../build -G "Ninja" -DCMAKE_BUILD_TYPE=Release
     - cmake --build ../build
   
