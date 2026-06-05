@@ -20,7 +20,7 @@ Compile Linux:
   before_script:
     # Setup Environment.
     - apt-get update &&
-      apt-get install -y cmake ninja-build git automake libtool wget
+      apt-get install -y cmake git automake libtool wget
     - |
       if [[ "$ARCH" == "x86" ]]; then
         apt-get install -y g++-multilib
@@ -35,11 +35,17 @@ Compile Linux:
     - ./opus/autogen.sh
     - mkdir build
   
-    # Build.
-    - cd opus
-    - cmake -S . -B ../build -G "Ninja" -DCMAKE_BUILD_TYPE=Release
+    # Configure.
+    - cmake -S ./opus -B ./build 
+      -DCMAKE_BUILD_TYPE=Release 
+      -DBUILD_SHARED_LIBS=OFF 
+      -DOPUS_BUILD_PROGRAMS=ON 
+      -DCMAKE_POSITION_INDEPENDENT_CODE=ON 
+      -DCMAKE_C_FLAGS=$C_FLAGS 
+      -DCMAKE_CXX_FLAGS=$CXX_FLAGS
+    
+    # Build
     - cmake --build ../build
   
     # Shim Link.
-    - cd ../build
-    - $CC -shared -o opus.so -I ../opus/include ../OpusSharp.Natives/opus_shim.c -Wl,--whole-archive libopus.a -Wl,--no-whole-archive -lm
+    - $CC -shared -o ./build/opus.so -I ./opus/include ./OpusSharp.Natives/opus_shim.c -Wl,--whole-archive libopus.a -Wl,--no-whole-archive -lm
