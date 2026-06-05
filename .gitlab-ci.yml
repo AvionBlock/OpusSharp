@@ -60,3 +60,9 @@ Compile Linux:
   
     # Shim Link.
     - $CC -shared -o opus.so -I ./opus/include ./OpusSharp.Natives/opus_shim.c -Wl,--whole-archive ./build/libopus.a -Wl,--no-whole-archive -lm
+  
+  # Upload Artifact
+  artifacts:
+    name: "linux-$[[ matrix.ARCH ]]-opus.so"
+    paths:
+      - ./opus.so
