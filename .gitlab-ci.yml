@@ -32,7 +32,7 @@ Compile Linux:
   script:
     # Setup Environment
     - apt-get update
-    - apt-get install -y git curl autoconf automake libtool pkg-config m4 make
+    - apt-get install -y git curl autoconf automake libtool pkg-config m4 make cmake
     - |
       if [[ "$ARCH" == "x86" ]]; then
         apt-get install -y g++-multilib
