@@ -82,10 +82,9 @@ Compile Windows:
       - ARCH_TYPE: arm64
         ARCH: ARM64
         VCARCH: amd64_arm64
-  before_script: 
+  script:
     # Install git...
     - winget install --id Git.Git -e --source winget
-  script:
     # Clone and setup opus.
     - git clone --branch $OPUS_REF --depth 1 $OPUS_REPOSITORY opus
     - ./opus/autogen.bat
