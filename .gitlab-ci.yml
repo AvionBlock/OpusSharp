@@ -38,7 +38,7 @@ Compile Linux:
       elif [[ "$[[ matrix.ARCH ]]" == "arm64" ]]; then
         sudo apt-get update
         sudo apt-get install g++-aarch64-linux-gnu
-      elif [[ "$[[ matrix.ARCH ]] == "arm32" ]]; then
+      elif [[ "$[[ matrix.ARCH ]]" == "arm32" ]]; then
         sudo apt-get update
         sudo apt-get install g++-arm-linux-gnueabi
       fi
