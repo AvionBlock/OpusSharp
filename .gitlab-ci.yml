@@ -63,6 +63,6 @@ Compile Linux:
   
   # Upload Artifact
   artifacts:
-    name: "linux-$[[ matrix.ARCH ]]-opus.so"
+    name: "linux-$ARCH-opus.so"
     paths:
       - ./opus.so
