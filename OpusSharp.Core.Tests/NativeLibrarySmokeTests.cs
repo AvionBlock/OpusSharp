@@ -169,7 +169,7 @@ public sealed class NativeLibrarySmokeTests
     }
 
     [Fact]
-    public void NativesPackage_ExcludesUnsupportedWindowsRuntimes()
+    public void NativesPackage_ExcludesUnsupportedWindowsArmRuntime()
     {
         var project = File.ReadAllText(Path.Combine(
             TestNativeLibraryBootstrapper.GetRepositoryRoot(),
@@ -177,7 +177,7 @@ public sealed class NativeLibrarySmokeTests
             "OpusSharp.Natives.csproj"));
 
         Assert.Contains("runtimes\\win-arm\\**\\*", project);
-        Assert.Contains("runtimes\\win-x86\\**\\*", project);
+        Assert.DoesNotContain("runtimes\\win-x86\\**\\*", project);
     }
 
     [Fact]

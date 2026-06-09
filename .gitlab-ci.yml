@@ -47,7 +47,7 @@ cache:
 test:linux:
   stage: test
   tags:
-    - linux
+    - ubuntu
   extends:
     - .dotnet_9_unix
     - .test_artifacts
@@ -93,7 +93,7 @@ pack:packages:
 smoke:host:linux:
   stage: smoke
   tags:
-    - linux
+    - ubuntu
   needs:
     - job: pack:packages
       artifacts: true
