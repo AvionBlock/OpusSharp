@@ -1,104 +1,158 @@
 stages:
-  - Build
+  - test
+  - pack
+  - smoke
+
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_TAG'
+    - if: '$CI_COMMIT_BRANCH'
 
 variables:
-  OPUS_REPOSITORY: https://gitlab.xiph.org/xiph/opus.git
-  OPUS_VERSION: 1.6.1
-  OPUS_REF: v1.6.1
+  DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+  DOTNET_NOLOGO: "1"
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1"
+  NUGET_PACKAGES: "$CI_PROJECT_DIR/.nuget/packages"
 
-Compile Linux:
-  stage: Build
-  tags:
-    - ubuntu
-  parallel:
-    matrix:
-      - ARCH_TYPE: x64
-        CC: gcc -m64
-        C_FLAGS: -m64
-        CXX_FLAGS: -m64
-      - ARCH_TYPE: x86
-        CC: gcc -m32
-        C_FLAGS: -m32
-        CXX_FLAGS: -m32
-      - ARCH_TYPE: arm64
-        CC: aarch64-linux-gnu-gcc
-        C_COMPILER: aarch64-linux-gnu-gcc
-        CXX_COMPILER: aarch64-linux-gnu-g++
-      - ARCH_TYPE: arm32
-        CC: arm-linux-gnueabi-gcc
-        C_COMPILER: arm-linux-gnueabi-gcc
-        CXX_COMPILER: arm-linux-gnueabi-g++
+cache:
+  key: "$CI_JOB_NAME_SLUG"
+  paths:
+    - .dotnet/
+    - .nuget/packages/
 
+.dotnet_9_unix:
   before_script:
-    # Setup Environment.
-    - apt-get update &&
-      apt-get install -y cmake git automake libtool wget
-    - |
-      if [[ "$ARCH_TYPE" == "x86" ]]; then
-        apt-get install -y g++-multilib
-      elif [[ "$ARCH_TYPE" == "arm64" ]]; then
-        apt-get install -y g++-aarch64-linux-gnu
-      elif [[ "$ARCH_TYPE" == "arm32" ]]; then
-        apt-get install -y g++-arm-linux-gnueabi
-      fi
-  script:
-    # Clone and setup opus.
-    - git clone --branch $OPUS_REF --depth 1 $OPUS_REPOSITORY opus
-    - ./opus/autogen.sh
-    - mkdir build
-  
-    # Configure.
-    - |
-      if [[ "$ARCH_TYPE" == "x64" || "$ARCH_TYPE" == "x86" ]]; then
-        cmake -S ./opus -B ./build -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DOPUS_BUILD_PROGRAMS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DCMAKE_C_FLAGS=$C_FLAGS -DCMAKE_CXX_FLAGS=$CXX_FLAGS
-      elif [[ "$ARCH_TYPE" == "arm64" || "$ARCH_TYPE" == "arm32" ]]; then
-        cmake -S ./opus -B ./build -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DOPUS_BUILD_PROGRAMS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DCMAKE_C_COMPILER=$C_FLAGS -DCMAKE_CXX_COMPILER=$CXX_FLAGS
-      fi
-    
-    # Build
-    - cmake --build ./build
-  
-    # Shim Link.
-    - $CC -shared -o opus.so -I ./opus/include ./OpusSharp.Natives/opus_shim.c -Wl,--whole-archive ./build/libopus.a -Wl,--no-whole-archive -lm
-  
-  # Upload Artifact
+    - export DOTNET_INSTALL_DIR="$CI_PROJECT_DIR/.dotnet"
+    - export PATH="$DOTNET_INSTALL_DIR:$PATH"
+    - curl -fsSL https://dot.net/v1/dotnet-install.sh -o dotnet-install.sh
+    - sh dotnet-install.sh --channel 9.0 --install-dir "$DOTNET_INSTALL_DIR" --no-path
+    - dotnet --info
+
+.dotnet_9_windows:
+  before_script:
+    - $env:DOTNET_INSTALL_DIR = "$env:CI_PROJECT_DIR\.dotnet"
+    - $env:PATH = "$env:DOTNET_INSTALL_DIR;$env:PATH"
+    - Invoke-WebRequest https://dot.net/v1/dotnet-install.ps1 -OutFile dotnet-install.ps1
+    - .\dotnet-install.ps1 -Channel 9.0 -InstallDir $env:DOTNET_INSTALL_DIR -NoPath
+    - dotnet --info
+
+.test_artifacts:
   artifacts:
-    name: "linux-$ARCH_TYPE-opus.so"
+    when: always
+    expire_in: 1 week
     paths:
-      - ./opus.so
-    
-Compile Windows:
-  stage: Build
+      - TestResults/
+
+test:linux:
+  stage: test
+  tags:
+    - linux
+  extends:
+    - .dotnet_9_unix
+    - .test_artifacts
+  script:
+    - dotnet restore ./OpusSharp.sln
+    - dotnet test ./OpusSharp.Core.Tests/OpusSharp.Core.Tests.csproj --configuration Release --no-restore --logger "trx;LogFileName=test-results.trx" --results-directory ./TestResults
+
+test:macos:
+  stage: test
+  tags:
+    - macos
+  extends:
+    - .dotnet_9_unix
+    - .test_artifacts
+  script:
+    - dotnet restore ./OpusSharp.sln
+    - dotnet test ./OpusSharp.Core.Tests/OpusSharp.Core.Tests.csproj --configuration Release --no-restore --logger "trx;LogFileName=test-results.trx" --results-directory ./TestResults
+
+test:windows:
+  stage: test
   tags:
     - windows
-  parallel:
-    matrix:
-      - ARCH_TYPE: x64
-        ARCH: x64
-        VCARCH: amd64
-      - ARCH_TYPE: x86
-        ARCH: Win32
-        VCARCH: x86
-      - ARCH_TYPE: arm64
-        ARCH: ARM64
-        VCARCH: amd64_arm64
+  extends:
+    - .dotnet_9_windows
+    - .test_artifacts
   script:
-    # Install git...
-    - winget install --id Git.Git -e --source winget
-    # Clone and setup opus.
-    - git clone --branch $OPUS_REF --depth 1 $OPUS_REPOSITORY opus
-    - ./opus/autogen.bat
-    - mkdir build
-  
-    # Configure
-    - cmake ./opus -G "Visual Studio 17 2022" -A $ARCH -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=OFF -DBUILD_SHARED_LIBS=OFF
-  
-    # Build
-    - cmake --build ./build --config Release
-    
-    # Build Shim
-    - call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" $VCARCH
-    - cl /O2 /MD /I .\opus\include /c .\OpusSharp.Natives\opus_shim.c /Foopus_shim.obj
-    - dumpbin /symbols Release\opus.lib > opus_symbols.txt
-    - powershell -NoProfile -Command "$s = (gc opus_symbols.txt) | Where-Object {$_ -match 'External\s+\|\s+(_?opus_\S+)'} | ForEach-Object { $raw = [regex]::Match($_, 'External\s+\|\s+(\S+)').Groups[1].Value; if ($raw.StartsWith('_')) { $raw.Substring(1) + '=' + $raw } else { $raw } } | Sort-Object -Unique; [IO.File]::WriteAllText('opus.def', \"EXPORTS`r`n\" + ($s -join \"`r`n\") + \"`r`n\")"
-    - link /DLL /OUT:opus.dll /DEF:opus.def opus_shim.obj Release\opus.lib ucrt.lib vcruntime.lib msvcrt.lib
+    - dotnet restore .\OpusSharp.sln
+    - dotnet test .\OpusSharp.Core.Tests\OpusSharp.Core.Tests.csproj --configuration Release --no-restore --logger "trx;LogFileName=test-results.trx" --results-directory .\TestResults
+
+pack:packages:
+  stage: pack
+  image: mcr.microsoft.com/dotnet/sdk:10.0
+  tags:
+    - docker
+  script:
+    - dotnet --info
+    - sh ./packall.sh
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - local-nuget/*.nupkg
+
+smoke:host:linux:
+  stage: smoke
+  tags:
+    - linux
+  needs:
+    - job: pack:packages
+      artifacts: true
+  extends:
+    - .dotnet_9_unix
+  script:
+    - dotnet run --project ./samples/PackageSmoke/Host/OpusSharp.Smoke.Host.csproj --configuration Release
+
+smoke:host:macos:
+  stage: smoke
+  tags:
+    - macos
+  needs:
+    - job: pack:packages
+      artifacts: true
+  extends:
+    - .dotnet_9_unix
+  script:
+    - dotnet run --project ./samples/PackageSmoke/Host/OpusSharp.Smoke.Host.csproj --configuration Release
+
+smoke:host:windows:
+  stage: smoke
+  tags:
+    - windows
+  needs:
+    - job: pack:packages
+      artifacts: true
+  extends:
+    - .dotnet_9_windows
+  script:
+    - dotnet run --project .\samples\PackageSmoke\Host\OpusSharp.Smoke.Host.csproj --configuration Release
+
+smoke:ios:
+  stage: smoke
+  tags:
+    - macos
+  needs:
+    - job: pack:packages
+      artifacts: true
+  extends:
+    - .dotnet_9_unix
+  script:
+    - dotnet workload install ios
+    - dotnet build ./samples/PackageSmoke/iOS/OpusSharp.Smoke.iOS.csproj --configuration Release -f net9.0-ios -p:RuntimeIdentifier=iossimulator-arm64
+
+smoke:browser:
+  stage: smoke
+  image: mcr.microsoft.com/dotnet/sdk:10.0
+  tags:
+    - docker
+  needs:
+    - job: pack:packages
+      artifacts: true
+  before_script:
+    - apt-get update
+    - apt-get install -y --no-install-recommends nodejs
+    - dotnet --info
+    - dotnet workload install wasm-tools
+  script:
+    - dotnet build ./samples/PackageSmoke/Browser/OpusSharp.Smoke.Browser.csproj --configuration Release
+    - cd ./samples/PackageSmoke/Browser/bin/Release/net10.0-browser
+    - node --input-type=module -e "const { dotnet } = await import('./wwwroot/_framework/dotnet.js'); const { getConfig, runMain } = await dotnet.create(); const exitCode = await runMain(getConfig().mainAssemblyName, []); if (exitCode) process.exit(exitCode);"
