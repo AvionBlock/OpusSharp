@@ -1,5 +1,8 @@
 stages:
   - test
+  - native
+  - universal
+  - collect
   - pack
   - smoke
 
@@ -9,141 +12,775 @@ workflow:
     - if: '$CI_COMMIT_TAG'
     - if: '$CI_COMMIT_BRANCH'
 
+default:
+  interruptible: true
+
 variables:
+  DEBIAN_FRONTEND: noninteractive
+  DOTNET_CLI_HOME: "$CI_PROJECT_DIR/.dotnet-home"
   DOTNET_CLI_TELEMETRY_OPTOUT: "1"
   DOTNET_NOLOGO: "1"
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1"
   NUGET_PACKAGES: "$CI_PROJECT_DIR/.nuget/packages"
+  OPUS_REPOSITORY: "https://gitlab.xiph.org/xiph/opus.git"
+  OPUS_VERSION: "1.6.1"
+  OPUS_REF: "v1.6.1"
 
 cache:
   key: "$CI_JOB_NAME_SLUG"
   paths:
-    - .dotnet/
     - .nuget/packages/
 
-.dotnet_9_unix:
-  before_script:
-    - export DOTNET_INSTALL_DIR="$CI_PROJECT_DIR/.dotnet"
-    - export PATH="$DOTNET_INSTALL_DIR:$PATH"
-    - curl -fsSL https://dot.net/v1/dotnet-install.sh -o dotnet-install.sh
-    - sh dotnet-install.sh --channel 9.0 --install-dir "$DOTNET_INSTALL_DIR" --no-path
-    - dotnet --info
+.linux_docker:
+  tags:
+    - ubuntu-docker
 
-.dotnet_9_windows:
+.windows_shell:
+  tags:
+    - windows
   before_script:
-    - $env:DOTNET_INSTALL_DIR = "$env:CI_PROJECT_DIR\.dotnet"
-    - $env:PATH = "$env:DOTNET_INSTALL_DIR;$env:PATH"
-    - Invoke-WebRequest https://dot.net/v1/dotnet-install.ps1 -OutFile dotnet-install.ps1
-    - .\dotnet-install.ps1 -Channel 9.0 -InstallDir $env:DOTNET_INSTALL_DIR -NoPath
-    - dotnet --info
+    - |
+      $ErrorActionPreference = "Stop"
+      if (Get-Variable PSNativeCommandUseErrorActionPreference -ErrorAction SilentlyContinue) {
+        $PSNativeCommandUseErrorActionPreference = $true
+      }
+      $env:DOTNET_CLI_HOME = Join-Path $env:CI_PROJECT_DIR ".dotnet-home"
+      $env:NUGET_PACKAGES = Join-Path $env:CI_PROJECT_DIR ".nuget\packages"
+      New-Item -ItemType Directory -Force -Path $env:DOTNET_CLI_HOME, $env:NUGET_PACKAGES | Out-Null
 
-.test_artifacts:
+.macos_shell:
+  tags:
+    - macos
+  before_script:
+    - |
+      export DOTNET_CLI_HOME="$CI_PROJECT_DIR/.dotnet-home"
+      export NUGET_PACKAGES="$CI_PROJECT_DIR/.nuget/packages"
+      export PATH="/opt/homebrew/bin:/opt/homebrew/opt/libtool/libexec/gnubin:/opt/homebrew/opt/llvm/bin:/usr/local/bin:/usr/local/opt/libtool/libexec/gnubin:/usr/local/opt/llvm/bin:$PATH"
+      mkdir -p "$DOTNET_CLI_HOME" "$NUGET_PACKAGES"
+
+test:core:linux:
+  stage: test
+  extends: .linux_docker
+  image: mcr.microsoft.com/dotnet/sdk:9.0
+  script:
+    - dotnet --info
+    - dotnet test ./OpusSharp.Core.Tests/OpusSharp.Core.Tests.csproj --configuration Release --logger "trx;LogFileName=test-results.trx" --results-directory ./TestResults
   artifacts:
     when: always
     expire_in: 1 week
     paths:
       - TestResults/
 
-test:linux:
+test:core:windows:
   stage: test
-  tags:
-    - ubuntu
-  extends:
-    - .dotnet_9_unix
-    - .test_artifacts
+  extends: .windows_shell
   script:
-    - dotnet restore ./OpusSharp.sln
-    - dotnet test ./OpusSharp.Core.Tests/OpusSharp.Core.Tests.csproj --configuration Release --no-restore --logger "trx;LogFileName=test-results.trx" --results-directory ./TestResults
+    - dotnet --info
+    - dotnet test .\OpusSharp.Core.Tests\OpusSharp.Core.Tests.csproj --configuration Release --logger "trx;LogFileName=test-results.trx" --results-directory .\TestResults
+  artifacts:
+    when: always
+    expire_in: 1 week
+    paths:
+      - TestResults/
 
-test:macos:
+test:core:macos:
   stage: test
-  tags:
-    - macos
-  extends:
-    - .dotnet_9_unix
-    - .test_artifacts
+  extends: .macos_shell
   script:
-    - dotnet restore ./OpusSharp.sln
-    - dotnet test ./OpusSharp.Core.Tests/OpusSharp.Core.Tests.csproj --configuration Release --no-restore --logger "trx;LogFileName=test-results.trx" --results-directory ./TestResults
+    - dotnet --info
+    - dotnet test ./OpusSharp.Core.Tests/OpusSharp.Core.Tests.csproj --configuration Release --logger "trx;LogFileName=test-results.trx" --results-directory ./TestResults
+  artifacts:
+    when: always
+    expire_in: 1 week
+    paths:
+      - TestResults/
 
-test:windows:
-  stage: test
-  tags:
-    - windows
-  extends:
-    - .dotnet_9_windows
-    - .test_artifacts
+.native_linux:
+  stage: native
+  extends: .linux_docker
+  image: ubuntu:24.04
   script:
-    - dotnet restore .\OpusSharp.sln
-    - dotnet test .\OpusSharp.Core.Tests\OpusSharp.Core.Tests.csproj --configuration Release --no-restore --logger "trx;LogFileName=test-results.trx" --results-directory .\TestResults
+    - |
+      set -euxo pipefail
+      BUILD_ROOT="$CI_PROJECT_DIR/.ci-build/$CI_JOB_NAME_SLUG"
+      ARTIFACT_ROOT="$CI_PROJECT_DIR/.ci-artifacts/linux-$ARCH"
+      rm -rf "$BUILD_ROOT" "$ARTIFACT_ROOT"
+      mkdir -p "$BUILD_ROOT" "$ARTIFACT_ROOT"
+
+      apt-get update
+      apt-get install -y --no-install-recommends \
+        autoconf \
+        automake \
+        ca-certificates \
+        cmake \
+        g++ \
+        gcc \
+        git \
+        libtool \
+        make \
+        pkg-config
+
+      CMAKE_ARGS=(
+        -DBUILD_SHARED_LIBS=OFF
+        -DCMAKE_BUILD_TYPE=Release
+        -DOPUS_BUILD_PROGRAMS=ON
+        -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+      )
+
+      case "$ARCH" in
+        x64)
+          CMAKE_ARGS+=(-DCMAKE_C_FLAGS=-m64 -DCMAKE_CXX_FLAGS=-m64)
+          CC="gcc -m64"
+          ;;
+        x86)
+          apt-get install -y --no-install-recommends g++-multilib
+          CMAKE_ARGS+=(-DCMAKE_C_FLAGS=-m32 -DCMAKE_CXX_FLAGS=-m32)
+          CC="gcc -m32"
+          ;;
+        arm64)
+          apt-get install -y --no-install-recommends g++-aarch64-linux-gnu
+          CMAKE_ARGS+=(
+            -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc
+            -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-g++
+          )
+          CC="aarch64-linux-gnu-gcc"
+          ;;
+        arm32)
+          apt-get install -y --no-install-recommends g++-arm-linux-gnueabi
+          CMAKE_ARGS+=(
+            -DCMAKE_C_COMPILER=arm-linux-gnueabi-gcc
+            -DCMAKE_CXX_COMPILER=arm-linux-gnueabi-g++
+          )
+          CC="arm-linux-gnueabi-gcc"
+          ;;
+        *)
+          echo "Unsupported Linux architecture: $ARCH" >&2
+          exit 1
+          ;;
+      esac
+
+      git clone --branch "$OPUS_REF" --depth 1 "$OPUS_REPOSITORY" "$BUILD_ROOT/opus"
+      "$BUILD_ROOT/opus/autogen.sh"
+
+      mkdir "$BUILD_ROOT/build"
+      cd "$BUILD_ROOT/build"
+      cmake "$BUILD_ROOT/opus" "${CMAKE_ARGS[@]}"
+      cmake --build . -j 2 --config Release
+
+      $CC -shared -o opus.so \
+        -I"$BUILD_ROOT/opus/include" \
+        "$CI_PROJECT_DIR/OpusSharp.Natives/opus_shim.c" \
+        -Wl,--whole-archive libopus.a -Wl,--no-whole-archive \
+        -lm
+
+      cp opus.so "$ARTIFACT_ROOT/opus.so"
+  artifacts:
+    expire_in: 1 week
+    name: "linux-$ARCH-opus.so"
+    paths:
+      - ".ci-artifacts/linux-$ARCH/opus.so"
+
+native:linux:x64:
+  extends: .native_linux
+  variables:
+    ARCH: x64
+
+native:linux:x86:
+  extends: .native_linux
+  variables:
+    ARCH: x86
+
+native:linux:arm64:
+  extends: .native_linux
+  variables:
+    ARCH: arm64
+
+native:linux:arm32:
+  extends: .native_linux
+  variables:
+    ARCH: arm32
+
+.native_android:
+  stage: native
+  extends: .linux_docker
+  image: ubuntu:24.04
+  cache:
+    key: android-ndk-r28c
+    paths:
+      - .android-ndk/
+  variables:
+    ANDROID_NDK_HOME: "$CI_PROJECT_DIR/.android-ndk/android-ndk-r28c"
+    CHECK_ALIGNMENT: "false"
+  script:
+    - |
+      set -euxo pipefail
+      BUILD_ROOT="$CI_PROJECT_DIR/.ci-build/$CI_JOB_NAME_SLUG"
+      ARTIFACT_ROOT="$CI_PROJECT_DIR/.ci-artifacts/android-$ARCH"
+      rm -rf "$BUILD_ROOT" "$ARTIFACT_ROOT"
+      mkdir -p "$BUILD_ROOT" "$ARTIFACT_ROOT" "$CI_PROJECT_DIR/.android-ndk"
+
+      apt-get update
+      apt-get install -y --no-install-recommends \
+        autoconf \
+        automake \
+        ca-certificates \
+        cmake \
+        curl \
+        git \
+        libtool \
+        make \
+        unzip
+
+      if [ ! -f "$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake" ]; then
+        curl -fsSL "https://dl.google.com/android/repository/android-ndk-r28c-linux.zip" -o "$BUILD_ROOT/android-ndk.zip"
+        unzip -q "$BUILD_ROOT/android-ndk.zip" -d "$CI_PROJECT_DIR/.android-ndk"
+      fi
+
+      case "$ARCH" in
+        x64) ABI="x86_64" ;;
+        x86) ABI="x86" ;;
+        arm64) ABI="arm64-v8a" ;;
+        arm32) ABI="armeabi-v7a" ;;
+        *)
+          echo "Unsupported Android architecture: $ARCH" >&2
+          exit 1
+          ;;
+      esac
+
+      git clone --branch "$OPUS_REF" --depth 1 "$OPUS_REPOSITORY" "$BUILD_ROOT/opus"
+      "$BUILD_ROOT/opus/autogen.sh"
+
+      mkdir "$BUILD_ROOT/build"
+      cd "$BUILD_ROOT/build"
+      cmake "$BUILD_ROOT/opus" \
+        -DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake" \
+        -DANDROID_ABI="$ABI" \
+        -DBUILD_SHARED_LIBS=OFF \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DOPUS_BUILD_PROGRAMS=ON \
+        -DBUILD_TESTING=ON \
+        -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+        -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-z,max-page-size=16384,-z,common-page-size=16384" \
+        -DCMAKE_EXE_LINKER_FLAGS="-Wl,-z,max-page-size=16384,-z,common-page-size=16384"
+
+      cmake --build . -j 2 --config Release
+
+      "$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/clang" \
+        --target="$(case "$ABI" in x86_64) echo x86_64-linux-android21;; x86) echo i686-linux-android21;; arm64-v8a) echo aarch64-linux-android21;; armeabi-v7a) echo armv7a-linux-androideabi21;; esac)" \
+        --sysroot="$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/sysroot" \
+        -shared -o libopus.so \
+        -I"$BUILD_ROOT/opus/include" \
+        "$CI_PROJECT_DIR/OpusSharp.Natives/opus_shim.c" \
+        -Wl,--whole-archive libopus.a -Wl,--no-whole-archive \
+        -Wl,-z,max-page-size=16384,-z,common-page-size=16384 \
+        -lm
+
+      if [ "$CHECK_ALIGNMENT" = "true" ]; then
+        apt-get install -y --no-install-recommends llvm
+        llvm-objdump -p libopus.so | grep LOAD
+      fi
+
+      cp libopus.so "$ARTIFACT_ROOT/libopus.so"
+  artifacts:
+    expire_in: 1 week
+    name: "android-$ARCH-libopus.so"
+    paths:
+      - ".ci-artifacts/android-$ARCH/libopus.so"
+
+native:android:x64:
+  extends: .native_android
+  variables:
+    ARCH: x64
+
+native:android:x86:
+  extends: .native_android
+  variables:
+    ARCH: x86
+
+native:android:arm64:
+  extends: .native_android
+  variables:
+    ARCH: arm64
+
+native:android:arm32:
+  extends: .native_android
+  variables:
+    ARCH: arm32
+
+.native_windows:
+  stage: native
+  extends: .windows_shell
+  script:
+    - |
+      $ErrorActionPreference = "Stop"
+      $buildRoot = Join-Path $env:CI_PROJECT_DIR ".ci-build\$env:CI_JOB_NAME_SLUG"
+      $artifactRoot = Join-Path $env:CI_PROJECT_DIR ".ci-artifacts\win-$env:ARCH"
+      Remove-Item -Recurse -Force $buildRoot, $artifactRoot -ErrorAction SilentlyContinue
+      New-Item -ItemType Directory -Force -Path $buildRoot, $artifactRoot | Out-Null
+
+      $vswhere = Join-Path ${env:ProgramFiles(x86)} "Microsoft Visual Studio\Installer\vswhere.exe"
+      if (-not (Test-Path $vswhere)) {
+        throw "vswhere.exe was not found. Install Visual Studio 2022 Build Tools with C++ workload."
+      }
+
+      $vsPath = & $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+      if (-not $vsPath) {
+        throw "Visual Studio 2022 C++ tools were not found."
+      }
+
+      $vcvars = Join-Path $vsPath "VC\Auxiliary\Build\vcvarsall.bat"
+      if (-not (Test-Path $vcvars)) {
+        throw "vcvarsall.bat was not found at '$vcvars'."
+      }
+
+      if (-not (Get-Command cmake -ErrorAction SilentlyContinue)) {
+        throw "cmake was not found. Install CMake and make sure it is available in PATH for the runner user."
+      }
+
+      git clone --branch $env:OPUS_REF --depth 1 $env:OPUS_REPOSITORY "$buildRoot\opus"
+      & "$buildRoot\opus\autogen.bat"
+
+      New-Item -ItemType Directory -Force -Path "$buildRoot\build" | Out-Null
+      Push-Location "$buildRoot\build"
+      cmake "$buildRoot\opus" -G "Visual Studio 17 2022" -A $env:CMAKE_ARCH -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=OFF
+      cmake --build . -j 2 --config Release
+
+      $vcArch = switch ($env:CMAKE_ARCH) {
+        "Win32" { "x86" }
+        "x64" { "amd64" }
+        "ARM64" { "amd64_arm64" }
+        default { throw "Unsupported CMAKE_ARCH '$env:CMAKE_ARCH'." }
+      }
+
+      @'
+      $s = (Get-Content opus_symbols.txt) |
+          Where-Object { $_ -match 'External\s+\|\s+(_?opus_\S+)' } |
+          ForEach-Object {
+              $raw = [regex]::Match($_, 'External\s+\|\s+(\S+)').Groups[1].Value
+              if ($raw.StartsWith('_')) { $raw.Substring(1) + '=' + $raw } else { $raw }
+          } |
+          Sort-Object -Unique
+
+      [IO.File]::WriteAllText('opus.def', "EXPORTS`r`n" + ($s -join "`r`n") + "`r`n")
+      '@ | Set-Content -Encoding UTF8 make-def.ps1
+
+      $cmd = @"
+      @echo off
+      call "$vcvars" $vcArch
+      if errorlevel 1 exit /b %errorlevel%
+      cl /O2 /MD /I"$buildRoot\opus\include" /c "$env:CI_PROJECT_DIR\OpusSharp.Natives\opus_shim.c" /Foopus_shim.obj
+      if errorlevel 1 exit /b %errorlevel%
+      dumpbin /symbols Release\opus.lib > opus_symbols.txt
+      if errorlevel 1 exit /b %errorlevel%
+      powershell -NoProfile -ExecutionPolicy Bypass -File make-def.ps1
+      if errorlevel 1 exit /b %errorlevel%
+      link /DLL /OUT:opus.dll /DEF:opus.def opus_shim.obj Release\opus.lib ucrt.lib vcruntime.lib msvcrt.lib
+      exit /b %errorlevel%
+      "@
+      $cmd | Set-Content -Encoding ASCII build-with-shim.cmd
+      cmd /c build-with-shim.cmd
+      if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      Pop-Location
+      Copy-Item "$buildRoot\build\opus.dll" "$artifactRoot\opus.dll"
+  artifacts:
+    expire_in: 1 week
+    name: "win-$ARCH-opus.dll"
+    paths:
+      - ".ci-artifacts/win-$ARCH/opus.dll"
+
+native:windows:x64:
+  extends: .native_windows
+  variables:
+    ARCH: x64
+    CMAKE_ARCH: x64
+
+native:windows:x86:
+  extends: .native_windows
+  variables:
+    ARCH: x86
+    CMAKE_ARCH: Win32
+
+native:windows:arm64:
+  extends: .native_windows
+  variables:
+    ARCH: arm64
+    CMAKE_ARCH: ARM64
+
+.native_macos:
+  stage: native
+  extends: .macos_shell
+  script:
+    - |
+      set -euxo pipefail
+      BUILD_ROOT="$CI_PROJECT_DIR/.ci-build/$CI_JOB_NAME_SLUG"
+      ARTIFACT_ROOT="$CI_PROJECT_DIR/.ci-artifacts/macos-$ARCH"
+      rm -rf "$BUILD_ROOT" "$ARTIFACT_ROOT"
+      mkdir -p "$BUILD_ROOT" "$ARTIFACT_ROOT"
+
+      command -v autoconf
+      command -v automake
+      command -v cmake
+      command -v git
+      command -v libtoolize
+
+      case "$ARCH" in
+        x64) OSX_ARCH="x86_64" ;;
+        arm64) OSX_ARCH="arm64" ;;
+        *)
+          echo "Unsupported macOS architecture: $ARCH" >&2
+          exit 1
+          ;;
+      esac
+
+      git clone --branch "$OPUS_REF" --depth 1 "$OPUS_REPOSITORY" "$BUILD_ROOT/opus"
+      "$BUILD_ROOT/opus/autogen.sh"
+
+      mkdir "$BUILD_ROOT/build"
+      cd "$BUILD_ROOT/build"
+      cmake "$BUILD_ROOT/opus" \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DBUILD_SHARED_LIBS=OFF \
+        -DCMAKE_OSX_ARCHITECTURES="$OSX_ARCH" \
+        -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+
+      cmake --build .
+
+      cc -arch "$OSX_ARCH" -shared -o opus.dylib \
+        -I"$BUILD_ROOT/opus/include" \
+        "$CI_PROJECT_DIR/OpusSharp.Natives/opus_shim.c" \
+        -Wl,-force_load,libopus.a \
+        -install_name @rpath/opus.dylib
+
+      cp opus.dylib "$ARTIFACT_ROOT/opus.dylib"
+  artifacts:
+    expire_in: 1 week
+    name: "macos-$ARCH-opus.dylib"
+    paths:
+      - ".ci-artifacts/macos-$ARCH/opus.dylib"
+
+native:macos:x64:
+  extends: .native_macos
+  variables:
+    ARCH: x64
+
+native:macos:arm64:
+  extends: .native_macos
+  variables:
+    ARCH: arm64
+
+.native_ios:
+  stage: native
+  extends: .macos_shell
+  script:
+    - |
+      set -euxo pipefail
+      BUILD_ROOT="$CI_PROJECT_DIR/.ci-build/$CI_JOB_NAME_SLUG"
+      ARTIFACT_ROOT="$CI_PROJECT_DIR/.ci-artifacts/$OUTPUT_NAME"
+      rm -rf "$BUILD_ROOT" "$ARTIFACT_ROOT"
+      mkdir -p "$BUILD_ROOT" "$ARTIFACT_ROOT"
+
+      command -v autoconf
+      command -v automake
+      command -v libtoolize
+      command -v llvm-objcopy
+      xcodebuild -version
+
+      git clone --branch "$OPUS_REF" --depth 1 "$OPUS_REPOSITORY" "$BUILD_ROOT/opus"
+
+      cd "$BUILD_ROOT/opus"
+      echo "PACKAGE_VERSION=\"$OPUS_VERSION\"" > package_version
+      autoreconf -isf
+
+      SDKROOT="$(xcrun --sdk "$SDK" --show-sdk-path)"
+      CC="$(xcrun --sdk "$SDK" --find clang)"
+      AR="$(xcrun --sdk "$SDK" --find ar)"
+      RANLIB="$(xcrun --sdk "$SDK" --find ranlib)"
+
+      case "$IOS_TARGET" in
+        device)
+          HOST_TRIPLE="aarch64-apple-darwin"
+          MIN_VERSION_FLAG="-miphoneos-version-min=13.0"
+          ;;
+        simulator-arm64)
+          HOST_TRIPLE="aarch64-apple-darwin"
+          MIN_VERSION_FLAG="-mios-simulator-version-min=13.0"
+          ;;
+        simulator-x86_64)
+          HOST_TRIPLE="x86_64-apple-darwin"
+          MIN_VERSION_FLAG="-mios-simulator-version-min=13.0"
+          ;;
+        *)
+          echo "Unsupported iOS target: $IOS_TARGET" >&2
+          exit 1
+          ;;
+      esac
+
+      mkdir "$BUILD_ROOT/build"
+      cd "$BUILD_ROOT/build"
+      "$BUILD_ROOT/opus/configure" \
+        --host="$HOST_TRIPLE" \
+        --disable-shared \
+        --enable-static \
+        --disable-extra-programs \
+        --disable-doc \
+        CC="$CC" \
+        CFLAGS="-arch $IOS_ARCH -isysroot $SDKROOT $MIN_VERSION_FLAG -O3" \
+        AR="$AR" \
+        RANLIB="$RANLIB"
+
+      make -j "$(sysctl -n hw.ncpu)" libopus.la
+
+      "$CC" -arch "$IOS_ARCH" -isysroot "$SDKROOT" "$MIN_VERSION_FLAG" -O3 \
+        -I"$BUILD_ROOT/opus/include" \
+        -c "$CI_PROJECT_DIR/OpusSharp.Natives/opus_shim.c" \
+        -o "$BUILD_ROOT/build/opus_shim.o"
+      "$AR" rcs "$BUILD_ROOT/build/.libs/libopus.a" "$BUILD_ROOT/build/opus_shim.o"
+      "$RANLIB" "$BUILD_ROOT/build/.libs/libopus.a"
+
+      file "$BUILD_ROOT/build/.libs/libopus.a"
+      lipo -info "$BUILD_ROOT/build/.libs/libopus.a"
+
+      nm -g "$BUILD_ROOT/build/.libs/libopus.a" | awk '/ [TDBS] /{print $3}' | sort -u > allsyms.txt
+      : > mapping.txt
+      grep -v -E '^_opus' allsyms.txt | while read -r sym; do
+        [ -z "$sym" ] && continue
+        echo "$sym ${sym}_libopus" >> mapping.txt
+      done
+
+      if [ -s mapping.txt ]; then
+        llvm-objcopy --redefine-syms=mapping.txt "$BUILD_ROOT/build/.libs/libopus.a"
+        nm -g "$BUILD_ROOT/build/.libs/libopus.a" | grep compute_allocation || true
+      fi
+
+      cp "$BUILD_ROOT/build/.libs/libopus.a" "$ARTIFACT_ROOT/libopus.a"
+  artifacts:
+    expire_in: 1 week
+    name: "$OUTPUT_NAME-libopus.a"
+    paths:
+      - ".ci-artifacts/$OUTPUT_NAME/libopus.a"
+
+native:ios:device:
+  extends: .native_ios
+  variables:
+    IOS_TARGET: device
+    SDK: iphoneos
+    IOS_ARCH: arm64
+    OUTPUT_NAME: ios-device-arm64
+
+native:ios:simulator-arm64:
+  extends: .native_ios
+  variables:
+    IOS_TARGET: simulator-arm64
+    SDK: iphonesimulator
+    IOS_ARCH: arm64
+    OUTPUT_NAME: ios-simulator-arm64
+
+native:ios:simulator-x86_64:
+  extends: .native_ios
+  variables:
+    IOS_TARGET: simulator-x86_64
+    SDK: iphonesimulator
+    IOS_ARCH: x86_64
+    OUTPUT_NAME: ios-simulator-x86_64
+
+native:wasm:
+  stage: native
+  extends: .linux_docker
+  image: emscripten/emsdk:latest
+  script:
+    - |
+      set -euxo pipefail
+      BUILD_ROOT="$CI_PROJECT_DIR/.ci-build/$CI_JOB_NAME_SLUG"
+      ARTIFACT_ROOT="$CI_PROJECT_DIR/.ci-artifacts/wasm"
+      rm -rf "$BUILD_ROOT" "$ARTIFACT_ROOT"
+      mkdir -p "$BUILD_ROOT" "$ARTIFACT_ROOT"
+
+      apt-get update
+      apt-get install -y --no-install-recommends \
+        autoconf \
+        automake \
+        ca-certificates \
+        git \
+        libtool \
+        make
+
+      git clone --branch "$OPUS_REF" --depth 1 "$OPUS_REPOSITORY" "$BUILD_ROOT/opus"
+      "$BUILD_ROOT/opus/autogen.sh"
+
+      mkdir "$BUILD_ROOT/build"
+      cd "$BUILD_ROOT/build"
+      emcmake cmake "$BUILD_ROOT/opus" -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON
+      cmake --build . -j 2 --config Release
+
+      emcc -O2 -I"$BUILD_ROOT/opus/include" -c "$CI_PROJECT_DIR/OpusSharp.Natives/opus_shim.c" -o opus_shim.o
+      emcc -O2 -fno-stack-protector -c "$CI_PROJECT_DIR/OpusSharp.Natives/wasm_stack_chk.c" -o wasm_stack_chk.o
+      emar rcs libopus.a opus_shim.o wasm_stack_chk.o
+
+      cp libopus.a "$ARTIFACT_ROOT/libopus.a"
+  artifacts:
+    expire_in: 1 week
+    name: wasm-libopus.a
+    paths:
+      - .ci-artifacts/wasm/libopus.a
+
+native:ios:universal:
+  stage: universal
+  extends: .macos_shell
+  needs:
+    - job: native:ios:device
+      artifacts: true
+    - job: native:ios:simulator-arm64
+      artifacts: true
+    - job: native:ios:simulator-x86_64
+      artifacts: true
+  script:
+    - |
+      set -euxo pipefail
+      BUILD_ROOT="$CI_PROJECT_DIR/.ci-build/$CI_JOB_NAME_SLUG"
+      ARTIFACT_ROOT="$CI_PROJECT_DIR/.ci-artifacts/ios-universal"
+      rm -rf "$BUILD_ROOT" "$ARTIFACT_ROOT"
+      mkdir -p "$BUILD_ROOT/device" "$BUILD_ROOT/sim_arm64" "$BUILD_ROOT/sim_x86" "$BUILD_ROOT/simulator" "$ARTIFACT_ROOT"
+
+      git clone --branch "$OPUS_REF" --depth 1 "$OPUS_REPOSITORY" "$BUILD_ROOT/opus"
+
+      cp "$CI_PROJECT_DIR/.ci-artifacts/ios-device-arm64/libopus.a" "$BUILD_ROOT/device/libopus.a"
+      cp "$CI_PROJECT_DIR/.ci-artifacts/ios-simulator-arm64/libopus.a" "$BUILD_ROOT/sim_arm64/libopus.a"
+      cp "$CI_PROJECT_DIR/.ci-artifacts/ios-simulator-x86_64/libopus.a" "$BUILD_ROOT/sim_x86/libopus.a"
+
+      lipo -info "$BUILD_ROOT/device/libopus.a"
+      lipo -info "$BUILD_ROOT/sim_arm64/libopus.a"
+      lipo -info "$BUILD_ROOT/sim_x86/libopus.a"
+
+      lipo -create "$BUILD_ROOT/sim_arm64/libopus.a" "$BUILD_ROOT/sim_x86/libopus.a" -output "$BUILD_ROOT/simulator/libopus.a"
+      lipo -info "$BUILD_ROOT/simulator/libopus.a"
+
+      xcodebuild -create-xcframework \
+        -library "$BUILD_ROOT/device/libopus.a" -headers "$BUILD_ROOT/opus/include" \
+        -library "$BUILD_ROOT/simulator/libopus.a" -headers "$BUILD_ROOT/opus/include" \
+        -output "$ARTIFACT_ROOT/libopus.xcframework"
+  artifacts:
+    expire_in: 1 week
+    name: ios-universal-libopus
+    paths:
+      - .ci-artifacts/ios-universal/libopus.xcframework/
+
+runtimes:collect:
+  stage: collect
+  extends: .linux_docker
+  image: ubuntu:24.04
+  needs:
+    - job: native:android:arm32
+      artifacts: true
+    - job: native:android:arm64
+      artifacts: true
+    - job: native:android:x64
+      artifacts: true
+    - job: native:android:x86
+      artifacts: true
+    - job: native:ios:universal
+      artifacts: true
+    - job: native:linux:arm32
+      artifacts: true
+    - job: native:linux:arm64
+      artifacts: true
+    - job: native:linux:x64
+      artifacts: true
+    - job: native:linux:x86
+      artifacts: true
+    - job: native:macos:arm64
+      artifacts: true
+    - job: native:macos:x64
+      artifacts: true
+    - job: native:windows:arm64
+      artifacts: true
+    - job: native:windows:x64
+      artifacts: true
+    - job: native:windows:x86
+      artifacts: true
+    - job: native:wasm
+      artifacts: true
+  script:
+    - install -Dm755 .ci-artifacts/android-arm32/libopus.so OpusSharp.Natives/runtimes/android-arm/native/libopus.so
+    - install -Dm755 .ci-artifacts/android-arm64/libopus.so OpusSharp.Natives/runtimes/android-arm64/native/libopus.so
+    - install -Dm755 .ci-artifacts/android-x64/libopus.so OpusSharp.Natives/runtimes/android-x64/native/libopus.so
+    - install -Dm755 .ci-artifacts/android-x86/libopus.so OpusSharp.Natives/runtimes/android-x86/native/libopus.so
+    - rm -rf OpusSharp.Natives/runtimes/ios/native/libopus.xcframework
+    - mkdir -p OpusSharp.Natives/runtimes/ios/native
+    - cp -R .ci-artifacts/ios-universal/libopus.xcframework OpusSharp.Natives/runtimes/ios/native/libopus.xcframework
+    - install -Dm755 .ci-artifacts/linux-arm32/opus.so OpusSharp.Natives/runtimes/linux-arm/native/opus.so
+    - install -Dm755 .ci-artifacts/linux-arm64/opus.so OpusSharp.Natives/runtimes/linux-arm64/native/opus.so
+    - install -Dm755 .ci-artifacts/linux-x64/opus.so OpusSharp.Natives/runtimes/linux-x64/native/opus.so
+    - install -Dm755 .ci-artifacts/linux-x86/opus.so OpusSharp.Natives/runtimes/linux-x86/native/opus.so
+    - install -Dm755 .ci-artifacts/macos-arm64/opus.dylib OpusSharp.Natives/runtimes/osx-arm64/native/opus.dylib
+    - install -Dm755 .ci-artifacts/macos-x64/opus.dylib OpusSharp.Natives/runtimes/osx-x64/native/opus.dylib
+    - install -Dm755 .ci-artifacts/win-arm64/opus.dll OpusSharp.Natives/runtimes/win-arm64/native/opus.dll
+    - install -Dm755 .ci-artifacts/win-x64/opus.dll OpusSharp.Natives/runtimes/win-x64/native/opus.dll
+    - install -Dm755 .ci-artifacts/win-x86/opus.dll OpusSharp.Natives/runtimes/win-x86/native/opus.dll
+    - install -Dm644 .ci-artifacts/wasm/libopus.a OpusSharp.Natives/runtimes/browser-wasm/native/libopus.a
+  artifacts:
+    expire_in: 1 week
+    name: all-runtimes
+    paths:
+      - OpusSharp.Natives/runtimes/
 
 pack:packages:
   stage: pack
-  image: mcr.microsoft.com/dotnet/sdk:10.0
-  tags:
-    - docker
+  extends: .linux_docker
+  image: mcr.microsoft.com/dotnet/sdk:9.0
+  needs:
+    - job: runtimes:collect
+      artifacts: true
   script:
     - dotnet --info
     - sh ./packall.sh
   artifacts:
     expire_in: 1 week
+    name: local-nuget
     paths:
       - local-nuget/*.nupkg
 
 smoke:host:linux:
   stage: smoke
-  tags:
-    - ubuntu
+  extends: .linux_docker
+  image: mcr.microsoft.com/dotnet/sdk:9.0
   needs:
     - job: pack:packages
       artifacts: true
-  extends:
-    - .dotnet_9_unix
-  script:
-    - dotnet run --project ./samples/PackageSmoke/Host/OpusSharp.Smoke.Host.csproj --configuration Release
-
-smoke:host:macos:
-  stage: smoke
-  tags:
-    - macos
-  needs:
-    - job: pack:packages
-      artifacts: true
-  extends:
-    - .dotnet_9_unix
   script:
     - dotnet run --project ./samples/PackageSmoke/Host/OpusSharp.Smoke.Host.csproj --configuration Release
 
 smoke:host:windows:
   stage: smoke
-  tags:
-    - windows
+  extends: .windows_shell
   needs:
     - job: pack:packages
       artifacts: true
-  extends:
-    - .dotnet_9_windows
   script:
     - dotnet run --project .\samples\PackageSmoke\Host\OpusSharp.Smoke.Host.csproj --configuration Release
 
-smoke:ios:
+smoke:host:macos:
   stage: smoke
-  tags:
-    - macos
+  extends: .macos_shell
   needs:
     - job: pack:packages
       artifacts: true
-  extends:
-    - .dotnet_9_unix
   script:
-    - dotnet workload install ios
+    - dotnet run --project ./samples/PackageSmoke/Host/OpusSharp.Smoke.Host.csproj --configuration Release
+
+smoke:ios:
+  stage: smoke
+  extends: .macos_shell
+  needs:
+    - job: pack:packages
+      artifacts: true
+  script:
     - dotnet build ./samples/PackageSmoke/iOS/OpusSharp.Smoke.iOS.csproj --configuration Release -f net9.0-ios -p:RuntimeIdentifier=iossimulator-arm64
 
 smoke:browser:
   stage: smoke
+  extends: .linux_docker
   image: mcr.microsoft.com/dotnet/sdk:10.0
-  tags:
-    - docker
   needs:
     - job: pack:packages
       artifacts: true

@@ -181,16 +181,14 @@ public sealed class NativeLibrarySmokeTests
     }
 
     [Fact]
-    public void WindowsNativeBuildWorkflow_HandlesDecoratedX86OpusSymbols()
+    public void WindowsNativeBuildJob_HandlesDecoratedX86OpusSymbols()
     {
-        var workflow = File.ReadAllText(Path.Combine(
+        var gitlabCi = File.ReadAllText(Path.Combine(
             TestNativeLibraryBootstrapper.GetRepositoryRoot(),
-            ".github",
-            "workflows",
-            "OpusCompile.yml"));
+            ".gitlab-ci.yml"));
 
-        Assert.Contains("_?opus_\\S+", workflow);
-        Assert.Contains("$raw.Substring(1) + '=' + $raw", workflow);
+        Assert.Contains("_?opus_\\S+", gitlabCi);
+        Assert.Contains("$raw.Substring(1) + '=' + $raw", gitlabCi);
     }
 
     [Fact]
