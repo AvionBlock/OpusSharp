@@ -814,10 +814,17 @@ smoke:browser:
       artifacts: true
   before_script:
     - apt-get update
-    - apt-get install -y --no-install-recommends nodejs python3 python-is-python3
+    - apt-get install -y --no-install-recommends ca-certificates curl gnupg python3 python-is-python3
+    - mkdir -p /etc/apt/keyrings
+    - curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+    - echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_24.x nodistro main" > /etc/apt/sources.list.d/nodesource.list
+    - apt-get update
+    - apt-get install -y --no-install-recommends nodejs
+    - node --version
     - dotnet --info
     - dotnet workload install wasm-tools
   script:
     - dotnet build ./samples/PackageSmoke/Browser/OpusSharp.Smoke.Browser.csproj --configuration Release
     - cd ./samples/PackageSmoke/Browser/bin/Release/net10.0-browser
+    - printf '{"type":"module"}\n' > package.json
     - node --input-type=module -e "const { dotnet } = await import('./wwwroot/_framework/dotnet.js'); const { getConfig, runMain } = await dotnet.create(); const exitCode = await runMain(getConfig().mainAssemblyName, []); if (exitCode) process.exit(exitCode);"
