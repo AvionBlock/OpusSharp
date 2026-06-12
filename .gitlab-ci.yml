@@ -359,20 +359,14 @@ native:android:arm32:
       Push-Location "$buildRoot\build"
 
       @'
-      $rawSymbols = (Get-Content opus_symbols.txt) |
-          Where-Object { $_ -match '\bSECT[0-9A-F]+\b' -and $_ -notmatch '\bUNDEF\b' -and $_ -match 'External\s+\|\s+(_?opus_\S+)' } |
+      $s = (Get-Content opus_symbols.txt) |
+          Where-Object { $_ -match 'External\s+\|\s+(opus_\S+)' } |
           ForEach-Object {
-              [regex]::Match($_, 'External\s+\|\s+(\S+)').Groups[1].Value
+              [regex]::Match($_, 'External\s+\|\s+(\S+)').Groups[1].Value -replace '^_', ''
           } |
           Sort-Object -Unique
 
-      $exports = $rawSymbols |
-          ForEach-Object {
-              if ($_.StartsWith('_')) { $_.Substring(1) + '=' + $_ } else { $_ }
-          }
-
-      [IO.File]::WriteAllText('opus.def', "EXPORTS`r`n" + ($exports -join "`r`n") + "`r`n")
-      [IO.File]::WriteAllText('opus.includes.rsp', (($rawSymbols | ForEach-Object { "/INCLUDE:$($_)" }) -join "`r`n") + "`r`n")
+      [IO.File]::WriteAllText('opus.def', "EXPORTS`r`n" + ($s -join "`r`n") + "`r`n")
       '@ | Set-Content -Encoding UTF8 make-def.ps1
 
       cmake "$buildRoot\opus" -G "$env:WINDOWS_CMAKE_GENERATOR" -A $env:CMAKE_ARCH -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=OFF
@@ -390,7 +384,7 @@ native:android:arm32:
       if errorlevel 1 exit /b %errorlevel%
       powershell -NoProfile -ExecutionPolicy Bypass -File make-def.ps1
       if errorlevel 1 exit /b %errorlevel%
-      link /DLL /OUT:opus.dll /DEF:opus.def opus_shim.obj @opus.includes.rsp Release\opus.lib /WHOLEARCHIVE:"Release\opus.lib" ucrt.lib vcruntime.lib msvcrt.lib
+      link /DLL /OUT:opus.dll /DEF:opus.def opus_shim.obj Release\opus.lib ucrt.lib vcruntime.lib msvcrt.lib
       if errorlevel 1 exit /b %errorlevel%
       exit /b %errorlevel%
       "@

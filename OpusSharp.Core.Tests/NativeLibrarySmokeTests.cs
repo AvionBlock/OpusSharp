@@ -187,12 +187,12 @@ public sealed class NativeLibrarySmokeTests
             TestNativeLibraryBootstrapper.GetRepositoryRoot(),
             ".gitlab-ci.yml"));
 
-        Assert.Contains("_?opus_\\S+", gitlabCi);
-        Assert.Contains("\\bSECT[0-9A-F]+\\b", gitlabCi);
-        Assert.Contains("\\bUNDEF\\b", gitlabCi);
-        Assert.Contains("opus.includes.rsp", gitlabCi);
-        Assert.Contains("/INCLUDE:$($_)", gitlabCi);
-        Assert.Contains("/WHOLEARCHIVE:\"Release\\opus.lib\"", gitlabCi);
+        Assert.Contains("External\\s+\\|\\s+(opus_\\S+)", gitlabCi);
+        Assert.Contains("-replace '^_', ''", gitlabCi);
+        Assert.Contains("link /DLL /OUT:opus.dll /DEF:opus.def opus_shim.obj Release\\opus.lib", gitlabCi);
+        Assert.DoesNotContain("_?opus_\\S+", gitlabCi);
+        Assert.DoesNotContain("/WHOLEARCHIVE", gitlabCi);
+        Assert.DoesNotContain("opus.includes.rsp", gitlabCi);
     }
 
     [Fact]
