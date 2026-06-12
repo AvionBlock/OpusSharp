@@ -814,7 +814,7 @@ smoke:browser:
       artifacts: true
   before_script:
     - apt-get update
-    - apt-get install -y --no-install-recommends nodejs
+    - apt-get install -y --no-install-recommends nodejs python3 python-is-python3
     - dotnet --info
     - dotnet workload install wasm-tools
   script:
