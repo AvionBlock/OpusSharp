@@ -118,6 +118,7 @@ test:core:macos:
         automake \
         ca-certificates \
         cmake \
+        curl \
         g++ \
         gcc \
         git \
@@ -429,11 +430,18 @@ native:windows:arm64:
       rm -rf "$BUILD_ROOT" "$ARTIFACT_ROOT"
       mkdir -p "$BUILD_ROOT" "$ARTIFACT_ROOT"
 
-      command -v autoconf
-      command -v automake
-      command -v cmake
-      command -v git
-      command -v libtoolize
+      require_tool() {
+        if ! command -v "$1" >/dev/null 2>&1; then
+          echo "Missing '$1'. Install macOS runner dependencies: brew install autoconf automake libtool cmake llvm git" >&2
+          exit 1
+        fi
+      }
+
+      require_tool autoconf
+      require_tool automake
+      require_tool cmake
+      require_tool git
+      require_tool libtoolize
 
       case "$ARCH" in
         x64) OSX_ARCH="x86_64" ;;
@@ -491,10 +499,18 @@ native:macos:arm64:
       rm -rf "$BUILD_ROOT" "$ARTIFACT_ROOT"
       mkdir -p "$BUILD_ROOT" "$ARTIFACT_ROOT"
 
-      command -v autoconf
-      command -v automake
-      command -v libtoolize
-      command -v llvm-objcopy
+      require_tool() {
+        if ! command -v "$1" >/dev/null 2>&1; then
+          echo "Missing '$1'. Install macOS runner dependencies: brew install autoconf automake libtool cmake llvm git" >&2
+          exit 1
+        fi
+      }
+
+      require_tool autoconf
+      require_tool automake
+      require_tool libtoolize
+      require_tool llvm-objcopy
+      require_tool xcodebuild
       xcodebuild -version
 
       git clone --branch "$OPUS_REF" --depth 1 "$OPUS_REPOSITORY" "$BUILD_ROOT/opus"
@@ -612,6 +628,7 @@ native:wasm:
         autoconf \
         automake \
         ca-certificates \
+        curl \
         git \
         libtool \
         make
