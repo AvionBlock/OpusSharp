@@ -188,7 +188,9 @@ public sealed class NativeLibrarySmokeTests
             ".gitlab-ci.yml"));
 
         Assert.Contains("_?opus_\\S+", gitlabCi);
+        Assert.Contains("\\bSECT[0-9A-F]+\\b", gitlabCi);
         Assert.Contains("$raw.Substring(1) + '=' + $raw", gitlabCi);
+        Assert.Contains("/WHOLEARCHIVE:Release\\opus.lib", gitlabCi);
     }
 
     [Fact]

@@ -360,7 +360,7 @@ native:android:arm32:
 
       @'
       $s = (Get-Content opus_symbols.txt) |
-          Where-Object { $_ -match 'External\s+\|\s+(_?opus_\S+)' } |
+          Where-Object { $_ -match '\bSECT[0-9A-F]+\b' -and $_ -match 'External\s+\|\s+(_?opus_\S+)' } |
           ForEach-Object {
               $raw = [regex]::Match($_, 'External\s+\|\s+(\S+)').Groups[1].Value
               if ($raw.StartsWith('_')) { $raw.Substring(1) + '=' + $raw } else { $raw }
@@ -385,7 +385,7 @@ native:android:arm32:
       if errorlevel 1 exit /b %errorlevel%
       powershell -NoProfile -ExecutionPolicy Bypass -File make-def.ps1
       if errorlevel 1 exit /b %errorlevel%
-      link /DLL /OUT:opus.dll /DEF:opus.def opus_shim.obj Release\opus.lib ucrt.lib vcruntime.lib msvcrt.lib
+      link /DLL /OUT:opus.dll /DEF:opus.def opus_shim.obj /WHOLEARCHIVE:Release\opus.lib ucrt.lib vcruntime.lib msvcrt.lib
       if errorlevel 1 exit /b %errorlevel%
       exit /b %errorlevel%
       "@
