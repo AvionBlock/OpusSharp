@@ -25,6 +25,7 @@ variables:
   OPUS_REPOSITORY: "https://gitlab.xiph.org/xiph/opus.git"
   OPUS_VERSION: "1.6.1"
   OPUS_REF: "v1.6.1"
+  WINDOWS_CMAKE_GENERATOR: "Visual Studio 18 2026"
 
 cache:
   key: "$CI_JOB_NAME_SLUG"
@@ -320,12 +321,12 @@ native:android:arm32:
 
       $vswhere = Join-Path ${env:ProgramFiles(x86)} "Microsoft Visual Studio\Installer\vswhere.exe"
       if (-not (Test-Path $vswhere)) {
-        throw "vswhere.exe was not found. Install Visual Studio 2022 Build Tools with C++ workload."
+        throw "vswhere.exe was not found. Install Visual Studio with the C++ workload."
       }
 
       $vsPath = & $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
       if (-not $vsPath) {
-        throw "Visual Studio 2022 C++ tools were not found."
+        throw "Visual Studio C++ tools were not found."
       }
 
       $vcvars = Join-Path $vsPath "VC\Auxiliary\Build\vcvarsall.bat"
@@ -337,20 +338,20 @@ native:android:arm32:
         throw "cmake was not found. Install CMake and make sure it is available in PATH for the runner user."
       }
 
-      git clone --branch $env:OPUS_REF --depth 1 $env:OPUS_REPOSITORY "$buildRoot\opus"
-      & "$buildRoot\opus\autogen.bat"
-
-      New-Item -ItemType Directory -Force -Path "$buildRoot\build" | Out-Null
-      Push-Location "$buildRoot\build"
-      cmake "$buildRoot\opus" -G "Visual Studio 17 2022" -A $env:CMAKE_ARCH -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=OFF
-      cmake --build . -j 2 --config Release
-
       $vcArch = switch ($env:CMAKE_ARCH) {
         "Win32" { "x86" }
         "x64" { "amd64" }
         "ARM64" { "amd64_arm64" }
         default { throw "Unsupported CMAKE_ARCH '$env:CMAKE_ARCH'." }
       }
+
+      git clone --branch $env:OPUS_REF --depth 1 $env:OPUS_REPOSITORY "$buildRoot\opus"
+      if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      & "$buildRoot\opus\autogen.bat"
+      if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      New-Item -ItemType Directory -Force -Path "$buildRoot\build" | Out-Null
+      Push-Location "$buildRoot\build"
 
       @'
       $s = (Get-Content opus_symbols.txt) |
@@ -364,6 +365,11 @@ native:android:arm32:
       [IO.File]::WriteAllText('opus.def', "EXPORTS`r`n" + ($s -join "`r`n") + "`r`n")
       '@ | Set-Content -Encoding UTF8 make-def.ps1
 
+      cmake "$buildRoot\opus" -G "$env:WINDOWS_CMAKE_GENERATOR" -A $env:CMAKE_ARCH -DCMAKE_BUILD_TYPE=Release -DOPUS_BUILD_PROGRAMS=ON -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=OFF
+      if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      cmake --build . -j 2 --config Release
+      if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
       $cmd = @"
       @echo off
       call "$vcvars" $vcArch
@@ -375,6 +381,7 @@ native:android:arm32:
       powershell -NoProfile -ExecutionPolicy Bypass -File make-def.ps1
       if errorlevel 1 exit /b %errorlevel%
       link /DLL /OUT:opus.dll /DEF:opus.def opus_shim.obj Release\opus.lib ucrt.lib vcruntime.lib msvcrt.lib
+      if errorlevel 1 exit /b %errorlevel%
       exit /b %errorlevel%
       "@
       $cmd | Set-Content -Encoding ASCII build-with-shim.cmd

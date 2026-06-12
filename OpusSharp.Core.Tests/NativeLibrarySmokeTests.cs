@@ -452,7 +452,21 @@ public sealed class NativeLibrarySmokeTests
 
         public static string GetRepositoryRoot()
         {
-            return Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../../"));
+            var directory = new DirectoryInfo(AppContext.BaseDirectory);
+
+            while (directory is not null)
+            {
+                if (File.Exists(Path.Combine(directory.FullName, "OpusSharp.sln")) &&
+                    Directory.Exists(Path.Combine(directory.FullName, "OpusSharp.Natives")))
+                {
+                    return directory.FullName;
+                }
+
+                directory = directory.Parent;
+            }
+
+            throw new DirectoryNotFoundException(
+                $"Could not find repository root from '{AppContext.BaseDirectory}'.");
         }
 
         public static string GetOutputNativeLibraryPath()
