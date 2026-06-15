@@ -171,7 +171,7 @@ namespace OpusSharp.Core.Static
         }
 
         /// <inheritdoc/>
-        public int Ctl(DecoderCTL request)
+        public virtual int Ctl(DecoderCTL request)
         {
             ThrowIfDisposed();
             var result = StaticNativeOpus.opus_decoder_ctl(_handler, (int)request);
@@ -180,7 +180,7 @@ namespace OpusSharp.Core.Static
         }
 
         /// <inheritdoc/>
-        public int Ctl(DecoderCTL request, int value)
+        public virtual int Ctl(DecoderCTL request, int value)
         {
             ThrowIfDisposed();
             var result = StaticNativeOpus.opussharp_decoder_ctl_i(_handler, (int)request, value);
@@ -189,7 +189,7 @@ namespace OpusSharp.Core.Static
         }
 
         /// <inheritdoc/>
-        public unsafe int Ctl<T>(DecoderCTL request, ref T value) where T : unmanaged
+        public virtual unsafe int Ctl<T>(DecoderCTL request, ref T value) where T : unmanaged
         {
             ThrowIfDisposed();
             fixed (void* valuePtr = &value)
@@ -201,7 +201,7 @@ namespace OpusSharp.Core.Static
         }
 
         /// <inheritdoc/>
-        public int Ctl(GenericCTL request)
+        public virtual int Ctl(GenericCTL request)
         {
             ThrowIfDisposed();
             var result = StaticNativeOpus.opus_decoder_ctl(_handler, (int)request);
@@ -210,7 +210,7 @@ namespace OpusSharp.Core.Static
         }
 
         /// <inheritdoc/>
-        public int Ctl(GenericCTL request, int value)
+        public virtual int Ctl(GenericCTL request, int value)
         {
             ThrowIfDisposed();
             var result = StaticNativeOpus.opussharp_decoder_ctl_i(_handler, (int)request, value);
@@ -219,7 +219,7 @@ namespace OpusSharp.Core.Static
         }
 
         /// <inheritdoc/>
-        public unsafe int Ctl<T>(GenericCTL request, ref T value) where T : unmanaged
+        public virtual unsafe int Ctl<T>(GenericCTL request, ref T value) where T : unmanaged
         {
             ThrowIfDisposed();
             fixed (void* valuePtr = &value)
