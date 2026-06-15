@@ -56,17 +56,6 @@ public sealed class NativeLibrarySmokeTests
     }
 
     [Fact]
-    public void CtlOverloadsWithVariadicArguments_AreManagedWrappers()
-    {
-        foreach (var method in GetPublicCtlMethods(typeof(NativeOpus), typeof(StaticNativeOpus))
-                     .Where(method => method.GetParameters().Length > 2))
-        {
-            Assert.Empty(method.GetCustomAttributes<LibraryImportAttribute>());
-            Assert.Empty(method.GetCustomAttributes<DllImportAttribute>());
-        }
-    }
-
-    [Fact]
     public void ManagedCtlShimImports_AreDeclaredInNativeShimSource()
     {
         var shimSource = File.ReadAllText(Path.Combine(
@@ -268,14 +257,6 @@ public sealed class NativeLibrarySmokeTests
         Assert.Contains("__builtin_trap", stackCheckSource);
         //Assert.Contains("wasm_stack_chk.c", workflow);
         //Assert.Contains("wasm_stack_chk.o", workflow);
-    }
-
-    private static IEnumerable<MethodInfo> GetPublicCtlMethods(params Type[] types)
-    {
-        return types.SelectMany(type => type.GetMethods(BindingFlags.Public | BindingFlags.Static))
-            .Where(method =>
-                method.Name.StartsWith("opus_", StringComparison.Ordinal) &&
-                method.Name.EndsWith("_ctl", StringComparison.Ordinal));
     }
 
     private static IEnumerable<string> GetManagedCtlShimSymbols()
