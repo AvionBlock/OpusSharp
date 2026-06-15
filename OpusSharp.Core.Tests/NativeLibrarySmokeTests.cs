@@ -2,7 +2,6 @@ using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using OpusSharp.Core;
 using Xunit;
 
 namespace OpusSharp.Core.Tests;
@@ -54,20 +53,6 @@ public sealed class NativeLibrarySmokeTests
         var exception = new OpusException();
 
         Assert.NotNull(exception);
-    }
-
-    [Fact]
-    public void MultistreamCtlNoArgumentOverloads_AreManagedWrappers()
-    {
-        AssertPublicCtlOverloadIsManagedWrapper(typeof(NativeOpus), nameof(NativeOpus.opus_ms_encoder_ctl), 2);
-        AssertPublicCtlOverloadIsManagedWrapper(typeof(NativeOpus), nameof(NativeOpus.opus_ms_decoder_ctl), 2);
-        AssertPublicCtlOverloadIsManagedWrapper(typeof(StaticNativeOpus), nameof(StaticNativeOpus.opus_ms_encoder_ctl), 2);
-        AssertPublicCtlOverloadIsManagedWrapper(typeof(StaticNativeOpus), nameof(StaticNativeOpus.opus_ms_decoder_ctl), 2);
-
-        AssertPrivateLibraryImportSymbol(typeof(NativeOpus), "opus_multistream_encoder_ctl");
-        AssertPrivateLibraryImportSymbol(typeof(NativeOpus), "opus_multistream_decoder_ctl");
-        AssertPrivateLibraryImportSymbol(typeof(StaticNativeOpus), "opus_multistream_encoder_ctl");
-        AssertPrivateLibraryImportSymbol(typeof(StaticNativeOpus), "opus_multistream_decoder_ctl");
     }
 
     [Fact]
@@ -283,25 +268,6 @@ public sealed class NativeLibrarySmokeTests
         Assert.Contains("wasm_stack_chk.o", workflow);
     }
 
-    private static void AssertPublicCtlOverloadIsManagedWrapper(Type type, string methodName, int parameterCount)
-    {
-        var method = Assert.Single(
-            type.GetMethods(BindingFlags.Public | BindingFlags.Static),
-            method => method.Name == methodName && method.GetParameters().Length == parameterCount);
-
-        Assert.Empty(method.GetCustomAttributes<LibraryImportAttribute>());
-        Assert.Empty(method.GetCustomAttributes<DllImportAttribute>());
-    }
-
-    private static void AssertPrivateLibraryImportSymbol(Type type, string methodName)
-    {
-        var method = Assert.Single(
-            type.GetMethods(BindingFlags.NonPublic | BindingFlags.Static),
-            method => method.Name == methodName && method.GetParameters().Length == 2);
-
-        Assert.Equal(methodName, GetImportedSymbol(method));
-    }
-
     private static IEnumerable<MethodInfo> GetPublicCtlMethods(params Type[] types)
     {
         return types.SelectMany(type => type.GetMethods(BindingFlags.Public | BindingFlags.Static))
@@ -343,7 +309,7 @@ public sealed class NativeLibrarySmokeTests
 
         Assert.NotNull(field);
 
-        return Assert.IsType<string>(field!.GetRawConstantValue());
+        return Assert.IsType<string>(field.GetRawConstantValue());
     }
 
     private static IEnumerable<string> GetSupportedNativeRuntimeFiles()

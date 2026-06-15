@@ -1,20 +1,23 @@
 using System;
 using OpusSharp.Core.SafeHandlers;
 using System.Runtime.InteropServices;
-                                   
+
 //This is for rider purposes ONLY!
 // ReSharper disable All
 #pragma warning disable CA1401
 namespace OpusSharp.Core
 {
     /// <summary>
-    /// Native opus handler that directly calls the exported opus functions. Requires a dynamically loaded library.
+    /// Native opus handler that directly calls the exported opus functions. Requires a statically linked opus library.
     /// </summary>
     public static partial class StaticNativeOpus
     {
         private const string DllName = "__Internal";
+    }
 
-        //Encoder
+    //Encoder
+    public static partial class StaticNativeOpus
+    {
         /// <summary>
         /// Gets the size of an <see cref="OpusEncoderSafeHandle"/> structure.
         /// </summary>
@@ -38,10 +41,12 @@ namespace OpusSharp.Core
         /// <returns><see cref="StaticOpusEncoderSafeHandle"/></returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial StaticOpusEncoderSafeHandle opus_encoder_create(int Fs, int channels, int application, int* error);
+        public static unsafe partial StaticOpusEncoderSafeHandle opus_encoder_create(int Fs, int channels, int application,
+            int* error);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe StaticOpusEncoderSafeHandle opus_encoder_create(int Fs, int channels, int application, int* error);
+        public static extern unsafe StaticOpusEncoderSafeHandle opus_encoder_create(int Fs, int channels, int application,
+            int* error);
 #endif
 
         /// <summary>
@@ -71,10 +76,12 @@ namespace OpusSharp.Core
         /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see <see cref="OpusErrorCodes"/>) on failure.</returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial int opus_encode(OpusEncoderSafeHandle st, short* pcm, int frame_size, byte* data, int max_data_bytes);
+        public static unsafe partial int opus_encode(OpusEncoderSafeHandle st, short* pcm, int frame_size, byte* data,
+            int max_data_bytes);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe int opus_encode(OpusEncoderSafeHandle st, short* pcm, int frame_size, byte* data, int max_data_bytes);
+        public static extern unsafe int opus_encode(OpusEncoderSafeHandle st, short* pcm, int frame_size, byte* data,
+            int max_data_bytes);
 #endif
 
         /// <summary>
@@ -88,12 +95,14 @@ namespace OpusSharp.Core
         /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see <see cref="OpusErrorCodes"/>) on failure.</returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial int opus_encode24(OpusEncoderSafeHandle st, int* pcm, int frame_size, byte* data, int max_data_bytes);
+        public static unsafe partial int opus_encode24(OpusEncoderSafeHandle st, int* pcm, int frame_size, byte* data,
+            int max_data_bytes);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe int opus_encode24(OpusEncoderSafeHandle st, int* pcm, int frame_size, byte* data, int max_data_bytes);
+        public static extern unsafe int opus_encode24(OpusEncoderSafeHandle st, int* pcm, int frame_size, byte* data,
+            int max_data_bytes);
 #endif
-        
+
         /// <summary>
         /// Encodes an Opus frame from floating point input.
         /// </summary>
@@ -105,10 +114,12 @@ namespace OpusSharp.Core
         /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see <see cref="OpusErrorCodes"/>) on failure.</returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial int opus_encode_float(OpusEncoderSafeHandle st, float* pcm, int frame_size, byte* data, int max_data_bytes);
+        public static unsafe partial int opus_encode_float(OpusEncoderSafeHandle st, float* pcm, int frame_size,
+            byte* data, int max_data_bytes);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe int opus_encode_float(OpusEncoderSafeHandle st, float* pcm, int frame_size, byte* data, int max_data_bytes);
+        public static extern unsafe int opus_encode_float(OpusEncoderSafeHandle st, float* pcm, int frame_size,
+            byte* data, int max_data_bytes);
 #endif
 
         /// <summary>
@@ -131,20 +142,14 @@ namespace OpusSharp.Core
         /// <returns><see cref="OpusErrorCodes"/></returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static partial int opus_encoder_ctl(OpusEncoderSafeHandle st, int request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
+        public static partial int
+            opus_encoder_ctl(OpusEncoderSafeHandle st, int request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_encoder_ctl(OpusEncoderSafeHandle st, int request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
+        public static extern int
+            opus_encoder_ctl(OpusEncoderSafeHandle st, int request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
 #endif
-        
 
-#if NET8_0_OR_GREATER
-        [LibraryImport(DllName)]
-        private static partial int opussharp_encoder_ctl_i(OpusEncoderSafeHandle st, int request, int data);
-#else
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        private static extern int opussharp_encoder_ctl_i(OpusEncoderSafeHandle st, int request, int data);
-#endif
         /// <summary>
         /// Perform a CTL function on an <see cref="OpusEncoderSafeHandle"/>.
         /// </summary>
@@ -152,16 +157,14 @@ namespace OpusSharp.Core
         /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="EncoderCTL"/>.</param>
         /// <param name="data">The data to input.</param>
         /// <returns><see cref="OpusErrorCodes"/></returns>
-        public static int opus_encoder_ctl(OpusEncoderSafeHandle st, int request, int data) => 
-            opussharp_encoder_ctl_i(st, request, data);
-        
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        private static unsafe partial int opussharp_encoder_ctl_p(OpusEncoderSafeHandle st, int request, void* data);
+        public static partial int opus_encoder_ctl(OpusEncoderSafeHandle st, int request, int data);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe int opussharp_encoder_ctl_p(OpusEncoderSafeHandle st, int request, void* data);
+        public static extern int opus_encoder_ctl(OpusEncoderSafeHandle st, int request, int data);
 #endif
+
         /// <summary>
         /// Perform a CTL function on an <see cref="OpusEncoderSafeHandle"/>.
         /// </summary>
@@ -169,64 +172,171 @@ namespace OpusSharp.Core
         /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="EncoderCTL"/>.</param>
         /// <param name="data">The data to input/output.</param>
         /// <returns><see cref="OpusErrorCodes"/></returns>
-        public static unsafe int opus_encoder_ctl(OpusEncoderSafeHandle st, int request, void* data) =>
-            opussharp_encoder_ctl_p(st, request, data);
-        
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        private static unsafe partial int opussharp_encoder_ctl_pi(OpusEncoderSafeHandle st, int request, void* data, int data2);
+        public static unsafe partial int opus_encoder_ctl(OpusEncoderSafeHandle st, int request, void* data);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe int opussharp_encoder_ctl_pi(OpusEncoderSafeHandle st, int request, void* data, int data2);
+        public static extern unsafe int opus_encoder_ctl(OpusEncoderSafeHandle st, int request, void* data);
 #endif
+
         /// <summary>
-        /// Perform a CTL function on an Opus encoder.
+        /// Perform a CTL function on an <see cref="OpusEncoderSafeHandle"/>.
         /// </summary>
         /// <param name="st">Encoder state.</param>
         /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="EncoderCTL"/>.</param>
         /// <param name="data">The data to input/output.</param>
         /// <param name="data2">The second data to input.</param>
         /// <returns><see cref="OpusErrorCodes"/></returns>
-        public static unsafe int opus_encoder_ctl(OpusEncoderSafeHandle st, int request, void* data, int data2) =>
-            opussharp_encoder_ctl_pi(st, request, data, data2);
-        
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        private static unsafe partial int opussharp_encoder_ctl_ip(OpusEncoderSafeHandle st, int request, int data, void* data2);
+        public static unsafe partial int opus_encoder_ctl(OpusEncoderSafeHandle st, int request, void* data, int data2);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe int opussharp_encoder_ctl_ip(OpusEncoderSafeHandle st, int request, int data, void* data2);
+        public static extern unsafe int opus_encoder_ctl(OpusEncoderSafeHandle st, int request, void* data, int data2);
 #endif
+
         /// <summary>
-        /// Perform a CTL function on an Opus encoder.
+        /// Perform a CTL function on an <see cref="OpusEncoderSafeHandle"/>.
         /// </summary>
         /// <param name="st">Encoder state.</param>
         /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="EncoderCTL"/>.</param>
         /// <param name="data">The data to input.</param>
         /// <param name="data2">The second data to input/output.</param>
         /// <returns><see cref="OpusErrorCodes"/></returns>
-        public static unsafe int opus_encoder_ctl(OpusEncoderSafeHandle st, int request, int data, void* data2) =>
-            opussharp_encoder_ctl_ip(st, request, data, data2);
-        
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        private static unsafe partial int opussharp_encoder_ctl_pp(OpusEncoderSafeHandle st, int request, void* data, void* data2);
+        public static unsafe partial int opus_encoder_ctl(OpusEncoderSafeHandle st, int request, int data, void* data2);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe int opussharp_encoder_ctl_pp(OpusEncoderSafeHandle st, int request, void* data, void* data2);
+        public static extern unsafe int opus_encoder_ctl(OpusEncoderSafeHandle st, int request, int data, void* data2);
 #endif
+
         /// <summary>
-        /// Perform a CTL function on an Opus encoder.
+        /// Perform a CTL function on an <see cref="OpusEncoderSafeHandle"/>.
         /// </summary>
         /// <param name="st">Encoder state.</param>
         /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="EncoderCTL"/>.</param>
         /// <param name="data">The data to input/output.</param>
         /// <param name="data2">The second data to input/output.</param>
         /// <returns><see cref="OpusErrorCodes"/></returns>
-        public static unsafe int opus_encoder_ctl(OpusEncoderSafeHandle st, int request, void* data, void* data2) =>
-            opussharp_encoder_ctl_pp(st, request, data, data2);
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static unsafe partial int opus_encoder_ctl(OpusEncoderSafeHandle st, int request, void* data,
+            void* data2);
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern unsafe int
+            opus_encoder_ctl(OpusEncoderSafeHandle st, int request, void* data, void* data2);
+#endif
+    }
 
-        //Decoder
+    //Opus Encoder Shim CTL
+    public static partial class StaticNativeOpus
+    {
+        /// <summary>
+        /// Perform an OpusSharp Shim CTL function on an <see cref="OpusEncoderSafeHandle"/>.
+        /// </summary>
+        /// <remarks>
+        /// Similar to the regular CTL function except it goes through a special shim to prevent invalid memory reading/writing interop. Requires an opus binary with the required shim function.
+        /// </remarks>
+        /// <param name="st">Encoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="EncoderCTL"/>.</param>
+        /// <param name="data">The data to input.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static partial int opussharp_encoder_ctl_i(OpusEncoderSafeHandle st, int request, int data);
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int opussharp_encoder_ctl_i(OpusEncoderSafeHandle st, int request, int data);
+#endif
+
+        /// <summary>
+        /// Perform an OpusSharp Shim CTL function on an <see cref="OpusEncoderSafeHandle"/>.
+        /// </summary>
+        /// <remarks>
+        /// Similar to the regular CTL function except it goes through a special shim to prevent invalid memory reading/writing interop. Requires an opus binary with the required shim function.
+        /// </remarks>
+        /// <param name="st">Encoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="EncoderCTL"/>.</param>
+        /// <param name="data">The data to input/output.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static unsafe partial int opussharp_encoder_ctl_p(OpusEncoderSafeHandle st, int request, void* data);
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern unsafe int opussharp_encoder_ctl_p(OpusEncoderSafeHandle st, int request, void* data);
+#endif
+
+        /// <summary>
+        /// Perform an OpusSharp Shim CTL function on an <see cref="OpusEncoderSafeHandle"/>.
+        /// </summary>
+        /// <remarks>
+        /// Similar to the regular CTL function except it goes through a special shim to prevent invalid memory reading/writing interop. Requires an opus binary with the required shim function.
+        /// </remarks>
+        /// <param name="st">Encoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="EncoderCTL"/>.</param>
+        /// <param name="data">The data to input/output.</param>
+        /// <param name="data2">The second data to input.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static unsafe partial int opussharp_encoder_ctl_pi(OpusEncoderSafeHandle st, int request, void* data,
+            int data2);
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern unsafe int opussharp_encoder_ctl_pi(OpusEncoderSafeHandle st, int request, void* data,
+            int data2);
+#endif
+
+        /// <summary>
+        /// Perform an OpusSharp Shim CTL function on an <see cref="OpusEncoderSafeHandle"/>.
+        /// </summary>
+        /// <remarks>
+        /// Similar to the regular CTL function except it goes through a special shim to prevent invalid memory reading/writing interop. Requires an opus binary with the required shim function.
+        /// </remarks>
+        /// <param name="st">Encoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="EncoderCTL"/>.</param>
+        /// <param name="data">The data to input.</param>
+        /// <param name="data2">The second data to input/output.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static unsafe partial int opussharp_encoder_ctl_ip(OpusEncoderSafeHandle st, int request, int data,
+            void* data2);
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern unsafe int opussharp_encoder_ctl_ip(OpusEncoderSafeHandle st, int request, int data,
+            void* data2);
+#endif
+
+        /// <summary>
+        /// Perform a CTL function on an <see cref="OpusEncoderSafeHandle"/>.
+        /// </summary>
+        /// <remarks>
+        /// Similar to the regular CTL function except it goes through a special shim to prevent invalid memory reading/writing interop. Requires an opus binary with the required shim function.
+        /// </remarks>
+        /// <param name="st">Encoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="EncoderCTL"/>.</param>
+        /// <param name="data">The data to input/output.</param>
+        /// <param name="data2">The second data to input/output.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static unsafe partial int opussharp_encoder_ctl_pp(OpusEncoderSafeHandle st, int request, void* data,
+            void* data2);
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern unsafe int opussharp_encoder_ctl_pp(OpusEncoderSafeHandle st, int request, void* data,
+            void* data2);
+#endif
+    }
+
+    //Opus Decoder
+    public static partial class StaticNativeOpus
+    {
         /// <summary>
         /// Gets the size of an <see cref="OpusDecoderSafeHandle"/> structure.
         /// </summary>
@@ -282,10 +392,12 @@ namespace OpusSharp.Core
         /// <returns>Number of decoded samples or <see cref="OpusErrorCodes"/>.</returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial int opus_decode(OpusDecoderSafeHandle st, byte* data, int len, short* pcm, int frame_size, int decode_fec);
+        public static unsafe partial int opus_decode(OpusDecoderSafeHandle st, byte* data, int len, short* pcm,
+            int frame_size, int decode_fec);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe int opus_decode(OpusDecoderSafeHandle st, byte* data, int len, short* pcm, int frame_size, int decode_fec);
+        public static extern unsafe int opus_decode(OpusDecoderSafeHandle st, byte* data, int len, short* pcm,
+            int frame_size, int decode_fec);
 #endif
 
         /// <summary>
@@ -300,12 +412,14 @@ namespace OpusSharp.Core
         /// <returns>Number of decoded samples or <see cref="OpusErrorCodes"/>.</returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial int opus_decode24(OpusDecoderSafeHandle st, byte* data, int len, int* pcm, int frame_size, int decode_fec);
+        public static unsafe partial int opus_decode24(OpusDecoderSafeHandle st, byte* data, int len, int* pcm,
+            int frame_size, int decode_fec);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe int opus_decode24(OpusDecoderSafeHandle st, byte* data, int len, int* pcm, int frame_size, int decode_fec);
+        public static extern unsafe int opus_decode24(OpusDecoderSafeHandle st, byte* data, int len, int* pcm,
+            int frame_size, int decode_fec);
 #endif
-        
+
         /// <summary>
         /// Decode an Opus packet with floating point output.
         /// </summary>
@@ -318,59 +432,13 @@ namespace OpusSharp.Core
         /// <returns>Number of decoded samples or <see cref="OpusErrorCodes"/></returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial int opus_decode_float(OpusDecoderSafeHandle st, byte* data, int len, float* pcm, int frame_size, int decode_fec);
+        public static unsafe partial int opus_decode_float(OpusDecoderSafeHandle st, byte* data, int len, float* pcm,
+            int frame_size, int decode_fec);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe int opus_decode_float(OpusDecoderSafeHandle st, byte* data, int len, float* pcm, int frame_size, int decode_fec);
+        public static extern unsafe int opus_decode_float(OpusDecoderSafeHandle st, byte* data, int len, float* pcm,
+            int frame_size, int decode_fec);
 #endif
-
-        /// <summary>
-        /// Perform a CTL function on an <see cref="OpusDecoderSafeHandle"/>.
-        /// </summary>
-        /// <param name="st">Decoder state.</param>
-        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="DecoderCTL"/>.</param>
-        /// <returns><see cref="OpusErrorCodes"/></returns>
-#if NET8_0_OR_GREATER
-        [LibraryImport(DllName)]
-        public static partial int opus_decoder_ctl(OpusDecoderSafeHandle st, int request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
-#else
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_decoder_ctl(OpusDecoderSafeHandle st, int request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
-#endif
-        
-#if NET8_0_OR_GREATER
-        [LibraryImport(DllName)]
-        private static partial int opussharp_decoder_ctl_i(OpusDecoderSafeHandle st, int request, int data);
-#else
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        private static extern int opussharp_decoder_ctl_i(OpusDecoderSafeHandle st, int request, int data);
-#endif
-        /// <summary>
-        /// Perform a CTL function on an <see cref="OpusDecoderSafeHandle"/>.
-        /// </summary>
-        /// <param name="st">Decoder state.</param>
-        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="DecoderCTL"/>.</param>
-        /// <param name="data">The data to input.</param>
-        /// <returns><see cref="OpusErrorCodes"/></returns>
-        public static int opus_decoder_ctl(OpusDecoderSafeHandle st, int request, int data) =>
-            opussharp_decoder_ctl_i(st, request, data);
-        
-#if NET8_0_OR_GREATER
-        [LibraryImport(DllName)]
-        private static unsafe partial int opussharp_decoder_ctl_p(OpusDecoderSafeHandle st, int request, void* data);
-#else
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe int opussharp_decoder_ctl_p(OpusDecoderSafeHandle st, int request, void* data);
-#endif
-        /// <summary>
-        /// Perform a CTL function on an <see cref="OpusDecoderSafeHandle"/>.
-        /// </summary>
-        /// <param name="st">Decoder state.</param>
-        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="DecoderCTL"/>.</param>
-        /// <param name="data">The data to input or output.</param>
-        /// <returns><see cref="OpusErrorCodes"/></returns>
-        public static unsafe int opus_decoder_ctl(OpusDecoderSafeHandle st, int request, void* data) =>
-            opussharp_decoder_ctl_p(st, request, data);
 
         /// <summary>
         /// Frees an <see cref="OpusDecoderSafeHandle"/> allocated by <see cref="opus_decoder_create(int, int, int*)"/>.
@@ -384,7 +452,96 @@ namespace OpusSharp.Core
         public static extern void opus_decoder_destroy(IntPtr st);
 #endif
 
-        //Dred Decoder
+        /// <summary>
+        /// Perform a CTL function on an <see cref="OpusDecoderSafeHandle"/>.
+        /// </summary>
+        /// <param name="st">Decoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="DecoderCTL"/>.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static partial int
+            opus_decoder_ctl(OpusDecoderSafeHandle st, int request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int
+            opus_decoder_ctl(OpusDecoderSafeHandle st, int request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
+#endif
+
+        /// <summary>
+        /// Perform a CTL function on an <see cref="OpusDecoderSafeHandle"/>.
+        /// </summary>
+        /// <param name="st">Decoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="DecoderCTL"/>.</param>
+        /// <param name="data">The data to input.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static partial int opus_decoder_ctl(OpusDecoderSafeHandle st, int request, int data);
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int opus_decoder_ctl(OpusDecoderSafeHandle st, int request, int data);
+#endif
+
+        /// <summary>
+        /// Perform a CTL function on an <see cref="OpusDecoderSafeHandle"/>.
+        /// </summary>
+        /// <param name="st">Decoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="DecoderCTL"/>.</param>
+        /// <param name="data">The data to input or output.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static unsafe partial int opus_decoder_ctl(OpusDecoderSafeHandle st, int request, void* data);
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern unsafe int opus_decoder_ctl(OpusDecoderSafeHandle st, int request, void* data);
+#endif
+    }
+
+    //Decoder Shim CTL
+    public static partial class StaticNativeOpus
+    {
+        /// <summary>
+        /// Perform an OpusSharp Shim CTL function on an <see cref="OpusDecoderSafeHandle"/>.
+        /// </summary>
+        /// <remarks>
+        /// Similar to the regular CTL function except it goes through a special shim to prevent invalid memory reading/writing interop. Requires an opus binary with the required shim function.
+        /// </remarks>
+        /// <param name="st">Decoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="DecoderCTL"/>.</param>
+        /// <param name="data">The data to input.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static partial int opussharp_decoder_ctl_i(OpusDecoderSafeHandle st, int request, int data);
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int opussharp_decoder_ctl_i(OpusDecoderSafeHandle st, int request, int data);
+#endif
+
+        /// <summary>
+        /// Perform an OpusSharp Shim CTL function on an <see cref="OpusDecoderSafeHandle"/>.
+        /// </summary>
+        /// <remarks>
+        /// Similar to the regular CTL function except it goes through a special shim to prevent invalid memory reading/writing interop. Requires an opus binary with the required shim function.
+        /// </remarks>
+        /// <param name="st">Decoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="DecoderCTL"/>.</param>
+        /// <param name="data">The data to input or output.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static unsafe partial int opussharp_decoder_ctl_p(OpusDecoderSafeHandle st, int request, void* data);
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern unsafe int opussharp_decoder_ctl_p(OpusDecoderSafeHandle st, int request, void* data);
+#endif
+    }
+
+    //Opus DRED Decoder
+    public static partial class StaticNativeOpus
+    {
         /// <summary>
         /// Gets the size of an <see cref="OpusDREDDecoderSafeHandle"/> structure.
         /// </summary>
@@ -424,6 +581,41 @@ namespace OpusSharp.Core
 #endif
 
         /// <summary>
+        /// Perform a CTL function on an <see cref="OpusDREDDecoderSafeHandle"/>.
+        /// </summary>
+        /// <param name="dred_dec">DRED Decoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="DecoderCTL"/>.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static partial int
+            opus_dred_decoder_ctl(OpusDREDDecoderSafeHandle dred_dec,
+                int request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int
+            opus_dred_decoder_ctl(OpusDREDDecoderSafeHandle dred_dec,
+                int request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
+#endif
+
+        /// <summary>
+        /// Perform a CTL function on an <see cref="OpusDREDDecoderSafeHandle"/>.
+        /// </summary>
+        /// <param name="dred_dec">DRED Decoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="DecoderCTL"/>.</param>
+        /// <param name="data">The data to input or output.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static unsafe partial int opus_dred_decoder_ctl(OpusDREDDecoderSafeHandle dred_dec, int request,
+            void* data);
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern unsafe int opus_dred_decoder_ctl(OpusDREDDecoderSafeHandle dred_dec, int request,
+            void* data);
+#endif
+
+        /// <summary>
         /// Frees an <see cref="OpusDREDDecoderSafeHandle"/> allocated by <see cref="opus_dred_decoder_create(int*)"/>.
         /// </summary>
         /// <param name="dec">State to be freed.</param>
@@ -434,39 +626,35 @@ namespace OpusSharp.Core
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void opus_dred_decoder_destroy(IntPtr dec);
 #endif
+    }
 
+    //Opus DRED Decoder Shim CTL
+    public static partial class StaticNativeOpus
+    {
         /// <summary>
-        /// Perform a CTL function on an <see cref="OpusDREDDecoderSafeHandle"/>.
+        /// Perform an OpusSharp Shim CTL function on an <see cref="OpusDREDDecoderSafeHandle"/>.
         /// </summary>
-        /// <param name="dred_dec">DRED Decoder state.</param>
-        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="DecoderCTL"/>.</param>
-        /// <returns><see cref="OpusErrorCodes"/></returns>
-#if NET8_0_OR_GREATER
-        [LibraryImport(DllName)]
-        public static partial int opus_dred_decoder_ctl(OpusDREDDecoderSafeHandle dred_dec, int request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
-#else
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_dred_decoder_ctl(OpusDREDDecoderSafeHandle dred_dec, int request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
-#endif
-        
-#if NET8_0_OR_GREATER
-        [LibraryImport(DllName)]
-        private static unsafe partial int opussharp_dred_decoder_ctl_p(OpusDREDDecoderSafeHandle dred_dec, int request, void* data);
-#else
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe int opussharp_dred_decoder_ctl_p(OpusDREDDecoderSafeHandle dred_dec, int request, void* data);
-#endif
-        /// <summary>
-        /// Perform a CTL function on an <see cref="OpusDREDDecoderSafeHandle"/>.
-        /// </summary>
+        /// <remarks>
+        /// Similar to the regular CTL function except it goes through a special shim to prevent invalid memory reading/writing interop. Requires an opus binary with the required shim function.
+        /// </remarks>
         /// <param name="dred_dec">DRED Decoder state.</param>
         /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/> or <see cref="DecoderCTL"/>.</param>
         /// <param name="data">The data to input or output.</param>
         /// <returns><see cref="OpusErrorCodes"/></returns>
-        public static unsafe int opus_dred_decoder_ctl(OpusDREDDecoderSafeHandle dred_dec, int request, void* data) =>
-            opussharp_dred_decoder_ctl_p(dred_dec, request, data);
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static unsafe partial int opussharp_dred_decoder_ctl_p(OpusDREDDecoderSafeHandle dred_dec, int request,
+            void* data);
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern unsafe int opussharp_dred_decoder_ctl_p(OpusDREDDecoderSafeHandle dred_dec, int request,
+            void* data);
+#endif
+    }
 
-        //Dred Packet?
+    //Opus DRED
+    public static partial class StaticNativeOpus
+    {
         /// <summary>
         /// Gets the size of an <see cref="OpusDREDSafeHandle"/> structure.
         /// </summary>
@@ -518,10 +706,12 @@ namespace OpusSharp.Core
         /// <returns>Offset (positive) of the first decoded DRED samples, zero if no DRED is present, or <see cref="OpusErrorCodes"/></returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial int opus_dred_parse(OpusDREDDecoderSafeHandle dred_dec, OpusDREDSafeHandle dred, byte* data, int len, int max_dred_samples, int sampling_rate, int* dred_end, int defer_processing);
+        public static unsafe partial int opus_dred_parse(OpusDREDDecoderSafeHandle dred_dec, OpusDREDSafeHandle dred,
+            byte* data, int len, int max_dred_samples, int sampling_rate, int* dred_end, int defer_processing);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe int opus_dred_parse(OpusDREDDecoderSafeHandle dred_dec, OpusDREDSafeHandle dred, byte* data, int len, int max_dred_samples, int sampling_rate, int* dred_end, int defer_processing);
+        public static extern unsafe int opus_dred_parse(OpusDREDDecoderSafeHandle dred_dec, OpusDREDSafeHandle dred,
+            byte* data, int len, int max_dred_samples, int sampling_rate, int* dred_end, int defer_processing);
 #endif
 
         /// <summary>
@@ -533,14 +723,16 @@ namespace OpusSharp.Core
         /// <returns><see cref="OpusErrorCodes"/></returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static partial int opus_dred_process(OpusDREDDecoderSafeHandle dred_dec, OpusDREDSafeHandle src, OpusDREDSafeHandle dst);
+        public static partial int opus_dred_process(OpusDREDDecoderSafeHandle dred_dec, OpusDREDSafeHandle src,
+            OpusDREDSafeHandle dst);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int opus_dred_process(OpusDREDDecoderSafeHandle dred_dec, OpusDREDSafeHandle src, OpusDREDSafeHandle dst);
+        public static extern int opus_dred_process(OpusDREDDecoderSafeHandle dred_dec, OpusDREDSafeHandle src,
+            OpusDREDSafeHandle dst);
 #endif
 
         /// <summary>
-        /// Decode audio from an <see cref="OpusDREDSafeHandle"/> packet with floating point output.
+        /// Decode audio from an <see cref="OpusDREDSafeHandle"/> packet with 16-bit output.
         /// </summary>
         /// <param name="st">Decoder state.</param>
         /// <param name="dred">DRED state.</param>
@@ -550,14 +742,16 @@ namespace OpusSharp.Core
         /// <returns>Number of decoded samples or <see cref="OpusErrorCodes"/>.</returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial int opus_decoder_dred_decode(OpusDecoderSafeHandle st, OpusDREDSafeHandle dred, int dred_offset, short* pcm, int frame_size);
+        public static unsafe partial int opus_decoder_dred_decode(OpusDecoderSafeHandle st, OpusDREDSafeHandle dred,
+            int dred_offset, short* pcm, int frame_size);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe int opus_decoder_dred_decode(OpusDecoderSafeHandle st, OpusDREDSafeHandle dred, int dred_offset, short* pcm, int frame_size);
+        public static extern unsafe int opus_decoder_dred_decode(OpusDecoderSafeHandle st, OpusDREDSafeHandle dred,
+            int dred_offset, short* pcm, int frame_size);
 #endif
 
         /// <summary>
-        /// Decode audio from an <see cref="OpusDREDSafeHandle"/> packet with floating point output.
+        /// Decode audio from an <see cref="OpusDREDSafeHandle"/> packet with 24-bit output.
         /// </summary>
         /// <param name="st">Decoder state.</param>
         /// <param name="dred">DRED state.</param>
@@ -567,12 +761,14 @@ namespace OpusSharp.Core
         /// <returns>Number of decoded samples or <see cref="OpusErrorCodes"/>.</returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial int opus_decoder_dred_decode24(OpusDecoderSafeHandle st, OpusDREDSafeHandle dred, int dred_offset, int* pcm, int frame_size);
+        public static unsafe partial int opus_decoder_dred_decode24(OpusDecoderSafeHandle st, OpusDREDSafeHandle dred,
+            int dred_offset, int* pcm, int frame_size);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe int opus_decoder_dred_decode24(OpusDecoderSafeHandle st, OpusDREDSafeHandle dred, int dred_offset, int* pcm, int frame_size);
+        public static extern unsafe int opus_decoder_dred_decode24(OpusDecoderSafeHandle st, OpusDREDSafeHandle dred,
+            int dred_offset, int* pcm, int frame_size);
 #endif
-        
+
         /// <summary>
         /// Decode audio from an <see cref="OpusDREDSafeHandle"/> packet with floating point output.
         /// </summary>
@@ -584,13 +780,18 @@ namespace OpusSharp.Core
         /// <returns>Number of decoded samples or <see cref="OpusErrorCodes"/>.</returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial int opus_decoder_dred_decode_float(OpusDecoderSafeHandle st, OpusDREDSafeHandle dred, int dred_offset, float* pcm, int frame_size);
+        public static unsafe partial int opus_decoder_dred_decode_float(OpusDecoderSafeHandle st,
+            OpusDREDSafeHandle dred, int dred_offset, float* pcm, int frame_size);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe int opus_decoder_dred_decode_float(OpusDecoderSafeHandle st, OpusDREDSafeHandle dred, int dred_offset, float* pcm, int frame_size);
+        public static extern unsafe int opus_decoder_dred_decode_float(OpusDecoderSafeHandle st,
+            OpusDREDSafeHandle dred, int dred_offset, float* pcm, int frame_size);
 #endif
+    }
 
-        //Opus Packet Parsers
+    //Opus Packet
+    public static partial class StaticNativeOpus
+    {
         /// <summary>
         /// Parse an opus packet into one or more frames.
         /// </summary>
@@ -603,10 +804,12 @@ namespace OpusSharp.Core
         /// <returns>number of frames.</returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial int opus_packet_parse(byte* data, int len, byte* out_toc, byte*[] frames, short[] size, int* payload_offset);
+        public static unsafe partial int opus_packet_parse(byte* data, int len, byte* out_toc, byte*[] frames,
+            short[] size, int* payload_offset);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe int opus_packet_parse(byte* data, int len, byte* out_toc, byte*[] frames, short[] size, int* payload_offset);
+        public static extern unsafe int opus_packet_parse(byte* data, int len, byte* out_toc, byte*[] frames,
+            short[] size, int* payload_offset);
 #endif
 
         /// <summary>
@@ -706,7 +909,11 @@ namespace OpusSharp.Core
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern unsafe int opus_decoder_get_nb_samples(OpusDecoderSafeHandle dec, byte* packet, int len);
 #endif
+    }
 
+    //Opus DSP
+    public static partial class StaticNativeOpus
+    {
         /// <summary>
         /// Applies soft-clipping to bring a float signal within the [-1,1] range.
         /// </summary>
@@ -716,13 +923,18 @@ namespace OpusSharp.Core
         /// <param name="softclip_mem">State memory for the soft clipping process (one float per channel, initialized to zero).</param>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial void opus_pcm_soft_clip(float* pcm, int frame_size, int channels, float* softclip_mem);
+        public static unsafe partial void opus_pcm_soft_clip(float* pcm, int frame_size, int channels,
+            float* softclip_mem);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe void opus_pcm_soft_clip(float* pcm, int frame_size, int channels, float* softclip_mem);
+        public static extern unsafe void opus_pcm_soft_clip(float* pcm, int frame_size, int channels,
+            float* softclip_mem);
 #endif
+    }
 
-        //Repacketizer
+    //Opus Repacketizer
+    public static partial class StaticNativeOpus
+    {
         /// <summary>
         /// Gets the size of an <see cref="OpusRepacketizerSafeHandle"/> structure.
         /// </summary>
@@ -798,10 +1010,12 @@ namespace OpusSharp.Core
         /// <returns>The total size of the output packet on success, or an <see cref="OpusErrorCodes"/> on failure.</returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial int opus_repacketizer_out_range(OpusRepacketizerSafeHandle rp, int begin, int end, byte* data, int maxlen);
+        public static unsafe partial int opus_repacketizer_out_range(OpusRepacketizerSafeHandle rp, int begin, int end,
+            byte* data, int maxlen);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe int opus_repacketizer_out_range(OpusRepacketizerSafeHandle rp, int begin, int end, byte* data, int maxlen);
+        public static extern unsafe int opus_repacketizer_out_range(OpusRepacketizerSafeHandle rp, int begin, int end,
+            byte* data, int maxlen);
 #endif
 
         /// <summary>
@@ -891,8 +1105,11 @@ namespace OpusSharp.Core
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern unsafe int opus_multistream_packet_unpad(byte* data, int len, int nb_streams);
 #endif
+    }
 
-        //Multistream Encoder
+    //Opus MultiStream Encoder
+    public static partial class StaticNativeOpus
+    {
         /// <summary>
         /// Gets the size of an <see cref="OpusMSEncoderSafeHandle"/> structure.
         /// </summary>
@@ -934,10 +1151,12 @@ namespace OpusSharp.Core
         /// <returns><see cref="StaticOpusMSEncoderSafeHandle"/></returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial StaticOpusMSEncoderSafeHandle opus_multistream_encoder_create(int Fs, int channels, int streams, int coupled_streams, byte* mapping, int application, int* error);
+        public static unsafe partial StaticOpusMSEncoderSafeHandle opus_multistream_encoder_create(int Fs, int channels,
+            int streams, int coupled_streams, byte* mapping, int application, int* error);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe StaticOpusMSEncoderSafeHandle opus_multistream_encoder_create(int Fs, int channels, int streams, int coupled_streams, byte* mapping, int application, int* error);
+        public static extern unsafe StaticOpusMSEncoderSafeHandle opus_multistream_encoder_create(int Fs, int channels,
+            int streams, int coupled_streams, byte* mapping, int application, int* error);
 #endif
 
         /// <summary>
@@ -954,10 +1173,14 @@ namespace OpusSharp.Core
         /// <returns></returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial StaticOpusMSEncoderSafeHandle opus_multistream_surround_encoder_create(int Fs, int channels, int mapping_family, int* streams, int* coupled_streams, byte* mapping, int application, int* error);
+        public static unsafe partial StaticOpusMSEncoderSafeHandle opus_multistream_surround_encoder_create(int Fs,
+            int channels, int mapping_family, int* streams, int* coupled_streams, byte* mapping, int application,
+            int* error);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe StaticOpusMSEncoderSafeHandle opus_multistream_surround_encoder_create(int Fs, int channels, int mapping_family, int* streams, int* coupled_streams, byte* mapping, int application, int* error);
+        public static extern unsafe StaticOpusMSEncoderSafeHandle opus_multistream_surround_encoder_create(int Fs,
+            int channels, int mapping_family, int* streams, int* coupled_streams, byte* mapping, int application,
+            int* error);
 #endif
 
         /// <summary>
@@ -973,10 +1196,12 @@ namespace OpusSharp.Core
         /// <returns><see cref="OpusErrorCodes.OPUS_OK"/> on success, or an error code (see <see cref="OpusErrorCodes"/>) on failure.</returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial int opus_multistream_encoder_init(OpusMSEncoderSafeHandle st, int Fs, int channels, int streams, int coupled_streams, byte* mapping, int application);
+        public static unsafe partial int opus_multistream_encoder_init(OpusMSEncoderSafeHandle st, int Fs, int channels,
+            int streams, int coupled_streams, byte* mapping, int application);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe int opus_multistream_encoder_init(OpusMSEncoderSafeHandle st, int Fs, int channels, int streams, int coupled_streams, byte* mapping, int application);
+        public static extern unsafe int opus_multistream_encoder_init(OpusMSEncoderSafeHandle st, int Fs, int channels,
+            int streams, int coupled_streams, byte* mapping, int application);
 #endif
 
         /// <summary>
@@ -993,10 +1218,12 @@ namespace OpusSharp.Core
         /// <returns></returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial int opus_multistream_surround_encoder_init(OpusMSEncoderSafeHandle st, int Fs, int channels, int mapping_family, int* streams, int* coupled_streams, byte* mapping, int application);
+        public static unsafe partial int opus_multistream_surround_encoder_init(OpusMSEncoderSafeHandle st, int Fs,
+            int channels, int mapping_family, int* streams, int* coupled_streams, byte* mapping, int application);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe int opus_multistream_surround_encoder_init(OpusMSEncoderSafeHandle st, int Fs, int channels, int mapping_family, int* streams, int* coupled_streams, byte* mapping, int application);
+        public static extern unsafe int opus_multistream_surround_encoder_init(OpusMSEncoderSafeHandle st, int Fs,
+            int channels, int mapping_family, int* streams, int* coupled_streams, byte* mapping, int application);
 #endif
 
         /// <summary>
@@ -1010,10 +1237,12 @@ namespace OpusSharp.Core
         /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see <see cref="OpusErrorCodes"/>) on failure.</returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial int opus_multistream_encode(OpusMSEncoderSafeHandle st, short* pcm, int frame_size, byte* data, int max_data_bytes);
+        public static unsafe partial int opus_multistream_encode(OpusMSEncoderSafeHandle st, short* pcm, int frame_size,
+            byte* data, int max_data_bytes);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe int opus_multistream_encode(OpusMSEncoderSafeHandle st, short* pcm, int frame_size, byte* data, int max_data_bytes);
+        public static extern unsafe int opus_multistream_encode(OpusMSEncoderSafeHandle st, short* pcm, int frame_size,
+            byte* data, int max_data_bytes);
 #endif
 
         /// <summary>
@@ -1027,12 +1256,14 @@ namespace OpusSharp.Core
         /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see <see cref="OpusErrorCodes"/>) on failure.</returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial int opus_multistream_encode24(OpusMSEncoderSafeHandle st, int* pcm, int frame_size, byte* data, int max_data_bytes);
+        public static unsafe partial int opus_multistream_encode24(OpusMSEncoderSafeHandle st, int* pcm, int frame_size,
+            byte* data, int max_data_bytes);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe int opus_multistream_encode24(OpusMSEncoderSafeHandle st, int* pcm, int frame_size, byte* data, int max_data_bytes);
+        public static extern unsafe int opus_multistream_encode24(OpusMSEncoderSafeHandle st, int* pcm, int frame_size,
+            byte* data, int max_data_bytes);
 #endif
-        
+
         /// <summary>
         /// Encodes a multistream Opus frame from floating point input.
         /// </summary>
@@ -1044,10 +1275,12 @@ namespace OpusSharp.Core
         /// <returns>The length of the encoded packet (in bytes) on success or a negative error code (see <see cref="OpusErrorCodes"/>) on failure.</returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial int opus_multistream_encode_float(OpusMSEncoderSafeHandle st, float* pcm, int frame_size, byte* data, int max_data_bytes);
+        public static unsafe partial int opus_multistream_encode_float(OpusMSEncoderSafeHandle st, float* pcm,
+            int frame_size, byte* data, int max_data_bytes);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe int opus_multistream_encode_float(OpusMSEncoderSafeHandle st, float* pcm, int frame_size, byte* data, int max_data_bytes);
+        public static extern unsafe int opus_multistream_encode_float(OpusMSEncoderSafeHandle st, float* pcm,
+            int frame_size, byte* data, int max_data_bytes);
 #endif
 
         /// <summary>
@@ -1070,10 +1303,10 @@ namespace OpusSharp.Core
         /// <returns><see cref="OpusErrorCodes"/></returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        private static partial int opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle st, int request);
+        public static partial int opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle st, int request);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        private static extern int opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle st, int request);
+        public static extern int opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle st, int request);
 #endif
 
         /// <summary>
@@ -1081,34 +1314,16 @@ namespace OpusSharp.Core
         /// </summary>
         /// <param name="st">Multistream encoder state.</param>
         /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="EncoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
-        /// <returns><see cref="OpusErrorCodes"/></returns>
-        public static int opus_ms_encoder_ctl(OpusMSEncoderSafeHandle st, int request) =>
-            opus_multistream_encoder_ctl(st, request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
-        
-#if NET8_0_OR_GREATER
-        [LibraryImport(DllName)]
-        private static partial int opussharp_ms_encoder_ctl_i(OpusMSEncoderSafeHandle st, int request, int data);
-#else
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        private static extern int opussharp_ms_encoder_ctl_i(OpusMSEncoderSafeHandle st, int request, int data);
-#endif
-        /// <summary>
-        /// Perform a CTL function on a <see cref="OpusMSEncoderSafeHandle"/>.
-        /// </summary>
-        /// <param name="st">Multistream encoder state.</param>
-        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="EncoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
         /// <param name="data">The input data.</param>
         /// <returns><see cref="OpusErrorCodes"/></returns>
-        public static int opus_ms_encoder_ctl(OpusMSEncoderSafeHandle st, int request, int data) =>
-            opussharp_ms_encoder_ctl_i(st, request, data);
-        
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        private static unsafe partial int opussharp_ms_encoder_ctl_p(OpusMSEncoderSafeHandle st, int request, void* data);
+        public static partial int opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle st, int request, int data);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe int opussharp_ms_encoder_ctl_p(OpusMSEncoderSafeHandle st, int request, void* data);
+        public static extern int opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle st, int request, int data);
 #endif
+
         /// <summary>
         /// Perform a CTL function on a <see cref="OpusMSEncoderSafeHandle"/>.
         /// </summary>
@@ -1116,16 +1331,16 @@ namespace OpusSharp.Core
         /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="EncoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
         /// <param name="data">The input/output data.</param>
         /// <returns><see cref="OpusErrorCodes"/></returns>
-        public static unsafe int opus_ms_encoder_ctl(OpusMSEncoderSafeHandle st, int request, void* data) =>
-            opussharp_ms_encoder_ctl_p(st, request, data);
-        
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        private static unsafe partial int opussharp_ms_encoder_ctl_pi(OpusMSEncoderSafeHandle st, int request, void* data, int data2);
+        public static unsafe partial int opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle st, int request,
+            void* data);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe int opussharp_ms_encoder_ctl_pi(OpusMSEncoderSafeHandle st, int request, void* data, int data2);
+        public static extern unsafe int opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle st, int request,
+            void* data);
 #endif
+
         /// <summary>
         /// Perform a CTL function on a <see cref="OpusMSEncoderSafeHandle"/>.
         /// </summary>
@@ -1134,16 +1349,16 @@ namespace OpusSharp.Core
         /// <param name="data">The input/output data.</param>
         /// <param name="data2">The input data.</param>
         /// <returns><see cref="OpusErrorCodes"/></returns>
-        public static unsafe int opus_ms_encoder_ctl(OpusMSEncoderSafeHandle st, int request, void* data, int data2) =>
-            opussharp_ms_encoder_ctl_pi(st, request, data, data2);
-        
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        private static unsafe partial int opussharp_ms_encoder_ctl_ip(OpusMSEncoderSafeHandle st, int request, int data, void* data2);
+        public static unsafe partial int opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle st, int request,
+            void* data, int data2);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe int opussharp_ms_encoder_ctl_ip(OpusMSEncoderSafeHandle st, int request, int data, void* data2);
+        public static extern unsafe int opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle st, int request,
+            void* data, int data2);
 #endif
+
         /// <summary>
         /// Perform a CTL function on a <see cref="OpusMSEncoderSafeHandle"/>.
         /// </summary>
@@ -1152,16 +1367,16 @@ namespace OpusSharp.Core
         /// <param name="data">The input data.</param>
         /// <param name="data2">The input/output data.</param>
         /// <returns><see cref="OpusErrorCodes"/></returns>
-        public static unsafe int opus_ms_encoder_ctl(OpusMSEncoderSafeHandle st, int request, int data, void* data2) =>
-            opussharp_ms_encoder_ctl_ip(st, request, data, data2);
-        
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        private static unsafe partial int opussharp_ms_encoder_ctl_pp(OpusMSEncoderSafeHandle st, int request, void* data, void* data2);
+        public static unsafe partial int opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle st, int request, int data,
+            void* data2);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe int opussharp_ms_encoder_ctl_pp(OpusMSEncoderSafeHandle st, int request, void* data, void* data2);
+        public static extern unsafe int opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle st, int request, int data,
+            void* data2);
 #endif
+
         /// <summary>
         /// Perform a CTL function on a <see cref="OpusMSEncoderSafeHandle"/>.
         /// </summary>
@@ -1170,10 +1385,125 @@ namespace OpusSharp.Core
         /// <param name="data">The input/output data.</param>
         /// <param name="data2">The input/output data.</param>
         /// <returns><see cref="OpusErrorCodes"/></returns>
-        public static unsafe int opus_ms_encoder_ctl(OpusMSEncoderSafeHandle st, int request, void* data, void* data2) =>
-            opussharp_ms_encoder_ctl_pp(st, request, data, data2);
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static unsafe partial int opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle st, int request,
+            void* data, void* data2);
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern unsafe int opus_multistream_encoder_ctl(OpusMSEncoderSafeHandle st, int request,
+            void* data, void* data2);
+#endif
+    }
 
-        //Multistream Decoder
+    //Opus MultiStream Encoder Shim CTL
+    public static partial class StaticNativeOpus
+    {
+        /// <summary>
+        /// Perform an OpusSharp Shim CTL function on a <see cref="OpusMSEncoderSafeHandle"/>.
+        /// </summary>
+        /// <remarks>
+        /// Similar to the regular CTL function except it goes through a special shim to prevent invalid memory reading/writing interop. Requires an opus binary with the required shim function.
+        /// </remarks>
+        /// <param name="st">Multistream encoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="EncoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
+        /// <param name="data">The input data.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static partial int opussharp_ms_encoder_ctl_i(OpusMSEncoderSafeHandle st, int request, int data);
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int opussharp_ms_encoder_ctl_i(OpusMSEncoderSafeHandle st, int request, int data);
+#endif
+
+        /// <summary>
+        /// Perform an OpusSharp Shim CTL function on a <see cref="OpusMSEncoderSafeHandle"/>.
+        /// </summary>
+        /// <remarks>
+        /// Similar to the regular CTL function except it goes through a special shim to prevent invalid memory reading/writing interop. Requires an opus binary with the required shim function.
+        /// </remarks>
+        /// <param name="st">Multistream encoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="EncoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
+        /// <param name="data">The input/output data.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static unsafe partial int
+            opussharp_ms_encoder_ctl_p(OpusMSEncoderSafeHandle st, int request, void* data);
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern unsafe int opussharp_ms_encoder_ctl_p(OpusMSEncoderSafeHandle st, int request,
+            void* data);
+#endif
+
+        /// <summary>
+        /// Perform an OpusSharp Shim CTL function on a <see cref="OpusMSEncoderSafeHandle"/>.
+        /// </summary>
+        /// <remarks>
+        /// Similar to the regular CTL function except it goes through a special shim to prevent invalid memory reading/writing interop. Requires an opus binary with the required shim function.
+        /// </remarks>
+        /// <param name="st">Multistream encoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="EncoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
+        /// <param name="data">The input/output data.</param>
+        /// <param name="data2">The input data.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static unsafe partial int opussharp_ms_encoder_ctl_pi(OpusMSEncoderSafeHandle st, int request,
+            void* data, int data2);
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern unsafe int opussharp_ms_encoder_ctl_pi(OpusMSEncoderSafeHandle st, int request,
+            void* data, int data2);
+#endif
+
+        /// <summary>
+        /// Perform an OpusSharp Shim CTL function on a <see cref="OpusMSEncoderSafeHandle"/>.
+        /// </summary>
+        /// <remarks>
+        /// Similar to the regular CTL function except it goes through a special shim to prevent invalid memory reading/writing interop. Requires an opus binary with the required shim function.
+        /// </remarks>
+        /// <param name="st">Multistream encoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="EncoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
+        /// <param name="data">The input data.</param>
+        /// <param name="data2">The input/output data.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static unsafe partial int opussharp_ms_encoder_ctl_ip(OpusMSEncoderSafeHandle st, int request, int data,
+            void* data2);
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern unsafe int opussharp_ms_encoder_ctl_ip(OpusMSEncoderSafeHandle st, int request, int data,
+            void* data2);
+#endif
+
+        /// <summary>
+        /// Perform an OpusSharp Shim CTL function on a <see cref="OpusMSEncoderSafeHandle"/>.
+        /// </summary>
+        /// <remarks>
+        /// Similar to the regular CTL function except it goes through a special shim to prevent invalid memory reading/writing interop. Requires an opus binary with the required shim function.
+        /// </remarks>
+        /// <param name="st">Multistream encoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="EncoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
+        /// <param name="data">The input/output data.</param>
+        /// <param name="data2">The input/output data.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static unsafe partial int opussharp_ms_encoder_ctl_pp(OpusMSEncoderSafeHandle st, int request,
+            void* data, void* data2);
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern unsafe int opussharp_ms_encoder_ctl_pp(OpusMSEncoderSafeHandle st, int request,
+            void* data, void* data2);
+#endif
+    }
+
+    //Opus MultiStream Decoder
+    public static partial class StaticNativeOpus
+    {
         /// <summary>
         /// Gets the size of an <see cref="OpusMSDecoderSafeHandle"/> structure.
         /// </summary>
@@ -1200,10 +1530,12 @@ namespace OpusSharp.Core
         /// <returns><see cref="StaticOpusMSDecoderSafeHandle"/></returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial StaticOpusMSDecoderSafeHandle opus_multistream_decoder_create(int Fs, int channels, int streams, int coupled_streams, byte* mapping, int* error);
+        public static unsafe partial StaticOpusMSDecoderSafeHandle opus_multistream_decoder_create(int Fs, int channels,
+            int streams, int coupled_streams, byte* mapping, int* error);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe StaticOpusMSDecoderSafeHandle opus_multistream_decoder_create(int Fs, int channels, int streams, int coupled_streams, byte* mapping, int* error);
+        public static extern unsafe StaticOpusMSDecoderSafeHandle opus_multistream_decoder_create(int Fs, int channels,
+            int streams, int coupled_streams, byte* mapping, int* error);
 #endif
 
         /// <summary>
@@ -1218,10 +1550,12 @@ namespace OpusSharp.Core
         /// <returns><see cref="OpusErrorCodes.OPUS_OK"/> on success, or an error code (see <see cref="OpusErrorCodes"/>) on failure.</returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial int opus_multistream_decoder_init(OpusMSDecoderSafeHandle st, int Fs, int channels, int streams, int coupled_streams, byte* mapping);
+        public static unsafe partial int opus_multistream_decoder_init(OpusMSDecoderSafeHandle st, int Fs, int channels,
+            int streams, int coupled_streams, byte* mapping);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe int opus_multistream_decoder_init(OpusMSDecoderSafeHandle st, int Fs, int channels, int streams, int coupled_streams, byte* mapping);
+        public static extern unsafe int opus_multistream_decoder_init(OpusMSDecoderSafeHandle st, int Fs, int channels,
+            int streams, int coupled_streams, byte* mapping);
 #endif
 
         /// <summary>
@@ -1236,10 +1570,12 @@ namespace OpusSharp.Core
         /// <returns>Number of samples decoded on success or a negative error code (see <see cref="OpusErrorCodes"/>) on failure.</returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial int opus_multistream_decode(OpusMSDecoderSafeHandle st, byte* data, int len, short* pcm, int frame_size, int decode_fec);
+        public static unsafe partial int opus_multistream_decode(OpusMSDecoderSafeHandle st, byte* data, int len,
+            short* pcm, int frame_size, int decode_fec);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe int opus_multistream_decode(OpusMSDecoderSafeHandle st, byte* data, int len, short* pcm, int frame_size, int decode_fec);
+        public static extern unsafe int opus_multistream_decode(OpusMSDecoderSafeHandle st, byte* data, int len,
+            short* pcm, int frame_size, int decode_fec);
 #endif
 
         /// <summary>
@@ -1254,12 +1590,14 @@ namespace OpusSharp.Core
         /// <returns>Number of samples decoded on success or a negative error code (see <see cref="OpusErrorCodes"/>) on failure.</returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial int opus_multistream_decode24(OpusMSDecoderSafeHandle st, int* data, int len, short* pcm, int frame_size, int decode_fec);
+        public static unsafe partial int opus_multistream_decode24(OpusMSDecoderSafeHandle st, int* data, int len,
+            short* pcm, int frame_size, int decode_fec);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe int opus_multistream_decode24(OpusMSDecoderSafeHandle st, int* data, int len, short* pcm, int frame_size, int decode_fec);
+        public static extern unsafe int opus_multistream_decode24(OpusMSDecoderSafeHandle st, int* data, int len,
+            short* pcm, int frame_size, int decode_fec);
 #endif
-        
+
         /// <summary>
         /// Decode a multistream Opus packet with floating point output.
         /// </summary>
@@ -1272,10 +1610,12 @@ namespace OpusSharp.Core
         /// <returns>Number of samples decoded on success or a negative error code (see <see cref="OpusErrorCodes"/>) on failure.</returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        public static unsafe partial int opus_multistream_decode_float(OpusMSDecoderSafeHandle st, byte* data, int len, float* pcm, int frame_size, int decode_fec);
+        public static unsafe partial int opus_multistream_decode_float(OpusMSDecoderSafeHandle st, byte* data, int len,
+            float* pcm, int frame_size, int decode_fec);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe int opus_multistream_decode_float(OpusMSDecoderSafeHandle st, byte* data, int len, float* pcm, int frame_size, int decode_fec);
+        public static extern unsafe int opus_multistream_decode_float(OpusMSDecoderSafeHandle st, byte* data, int len,
+            float* pcm, int frame_size, int decode_fec);
 #endif
 
         /// <summary>
@@ -1286,28 +1626,12 @@ namespace OpusSharp.Core
         /// <returns><see cref="OpusErrorCodes"/></returns>
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        private static partial int opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle st, int request);
+        public static partial int opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle st, int request);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        private static extern int opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle st, int request);
+        public static extern int opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle st, int request);
 #endif
 
-        /// <summary>
-        /// Perform a CTL function on a <see cref="OpusMSEncoderSafeHandle"/>.
-        /// </summary>
-        /// <param name="st">Multistream decoder state.</param>
-        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="DecoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
-        /// <returns><see cref="OpusErrorCodes"/></returns>
-        public static int opus_ms_decoder_ctl(OpusMSDecoderSafeHandle st, int request) =>
-            opus_multistream_decoder_ctl(st, request); //Apparently GenericCTL.OPUS_RESET_STATE exists.
-        
-#if NET8_0_OR_GREATER
-        [LibraryImport(DllName)]
-        private static partial int opussharp_ms_decoder_ctl_i(OpusMSDecoderSafeHandle st, int request, int data);
-#else
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        private static extern int opussharp_ms_decoder_ctl_i(OpusMSDecoderSafeHandle st, int request, int data);
-#endif
         /// <summary>
         /// Perform a CTL function on a <see cref="OpusMSEncoderSafeHandle"/>.
         /// </summary>
@@ -1315,16 +1639,14 @@ namespace OpusSharp.Core
         /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="DecoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
         /// <param name="data">The input data.</param>
         /// <returns><see cref="OpusErrorCodes"/></returns>
-        public static int opus_ms_decoder_ctl(OpusMSDecoderSafeHandle st, int request, int data) =>
-            opussharp_ms_decoder_ctl_i(st, request, data);
-        
 #if NET8_0_OR_GREATER
         [LibraryImport(DllName)]
-        private static unsafe partial int opussharp_ms_decoder_ctl_p(OpusMSDecoderSafeHandle st, int request, void* data);
+        public static partial int opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle st, int request, int data);
 #else
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe int opussharp_ms_decoder_ctl_p(OpusMSDecoderSafeHandle st, int request, void* data);
+        public static extern int opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle st, int request, int data);
 #endif
+
         /// <summary>
         /// Perform a CTL function on a <see cref="OpusMSEncoderSafeHandle"/>.
         /// </summary>
@@ -1332,8 +1654,15 @@ namespace OpusSharp.Core
         /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="DecoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
         /// <param name="data">The input/output data.</param>
         /// <returns><see cref="OpusErrorCodes"/></returns>
-        public static unsafe int opus_ms_decoder_ctl(OpusMSDecoderSafeHandle st, int request, void* data) =>
-            opussharp_ms_decoder_ctl_p(st, request, data);
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static unsafe partial int opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle st, int request,
+            void* data);
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern unsafe int opus_multistream_decoder_ctl(OpusMSDecoderSafeHandle st, int request,
+            void* data);
+#endif
 
         /// <summary>
         /// Frees an <see cref="OpusMSDecoderSafeHandle"/> allocated by <see cref="opus_multistream_decoder_create(int, int, int, int, byte*, int*)"/>.
@@ -1346,8 +1675,53 @@ namespace OpusSharp.Core
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void opus_multistream_decoder_destroy(IntPtr st);
 #endif
+    }
 
-        //Library Information
+    //Opus MultiStream Decoder Shim CTL
+    public static partial class StaticNativeOpus
+    {
+        /// <summary>
+        /// Perform an OpusSharp Shim CTL function on a <see cref="OpusMSDecoderSafeHandle"/>.
+        /// </summary>
+        /// <remarks>
+        /// Similar to the regular CTL function except it goes through a special shim to prevent invalid memory reading/writing interop. Requires an opus binary with the required shim function.
+        /// </remarks>
+        /// <param name="st">Multistream decoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="DecoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
+        /// <param name="data">The input data.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static partial int opussharp_ms_decoder_ctl_i(OpusMSDecoderSafeHandle st, int request, int data);
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int opussharp_ms_decoder_ctl_i(OpusMSDecoderSafeHandle st, int request, int data);
+#endif
+
+        /// <summary>
+        /// Perform an OpusSharp Shim CTL function on a <see cref="OpusMSDecoderSafeHandle"/>.
+        /// </summary>
+        /// <remarks>
+        /// Similar to the regular CTL function except it goes through a special shim to prevent invalid memory reading/writing interop. Requires an opus binary with the required shim function.
+        /// </remarks>
+        /// <param name="st">Multistream decoder state.</param>
+        /// <param name="request">This and all remaining parameters should be replaced by one of the convenience macros in <see cref="GenericCTL"/>, <see cref="DecoderCTL"/>, or <see cref="MultistreamCTL"/> specific encoder and decoder CTLs.</param>
+        /// <param name="data">The input/output data.</param>
+        /// <returns><see cref="OpusErrorCodes"/></returns>
+#if NET8_0_OR_GREATER
+        [LibraryImport(DllName)]
+        public static unsafe partial int
+            opussharp_ms_decoder_ctl_p(OpusMSDecoderSafeHandle st, int request, void* data);
+#else
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern unsafe int opussharp_ms_decoder_ctl_p(OpusMSDecoderSafeHandle st, int request,
+            void* data);
+#endif
+    }
+
+    //Opus Info
+    public static partial class StaticNativeOpus
+    {
         /// <summary>
         /// Gets the libopus version string.
         /// </summary>
