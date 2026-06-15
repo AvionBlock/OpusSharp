@@ -25,6 +25,6 @@
 - browser-wasm
 
 > [!NOTE]
-> - ARM32 is no longer supported by the windows OS and is no longer provided in this package.
+> - Windows ARM32 is no longer provided in this package.
 > - Android builds are 16kb aligned.
 > - Binaries are built from the official Opus `v1.6.1` release tag at `https://gitlab.xiph.org/xiph/opus.git`.

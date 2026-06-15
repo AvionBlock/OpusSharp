@@ -169,7 +169,7 @@ public sealed class NativeLibrarySmokeTests
     }
 
     [Fact]
-    public void NativesPackage_ExcludesUnsupportedWindowsRuntimes()
+    public void NativesPackage_ExcludesUnsupportedWindowsArmRuntime()
     {
         var project = File.ReadAllText(Path.Combine(
             TestNativeLibraryBootstrapper.GetRepositoryRoot(),
@@ -177,20 +177,22 @@ public sealed class NativeLibrarySmokeTests
             "OpusSharp.Natives.csproj"));
 
         Assert.Contains("runtimes\\win-arm\\**\\*", project);
-        Assert.Contains("runtimes\\win-x86\\**\\*", project);
+        Assert.DoesNotContain("runtimes\\win-x86\\**\\*", project);
     }
 
     [Fact]
-    public void WindowsNativeBuildWorkflow_HandlesDecoratedX86OpusSymbols()
+    public void WindowsNativeBuildJob_HandlesDecoratedX86OpusSymbols()
     {
-        var workflow = File.ReadAllText(Path.Combine(
+        var gitlabCi = File.ReadAllText(Path.Combine(
             TestNativeLibraryBootstrapper.GetRepositoryRoot(),
-            ".github",
-            "workflows",
-            "OpusCompile.yml"));
+            ".gitlab-ci.yml"));
 
-        Assert.Contains("_?opus_\\S+", workflow);
-        Assert.Contains("$raw.Substring(1) + '=' + $raw", workflow);
+        Assert.Contains("External\\s+\\|\\s+(opus_\\S+)", gitlabCi);
+        Assert.Contains("-replace '^_', ''", gitlabCi);
+        Assert.Contains("link /DLL /OUT:opus.dll /DEF:opus.def opus_shim.obj Release\\opus.lib", gitlabCi);
+        Assert.DoesNotContain("_?opus_\\S+", gitlabCi);
+        Assert.DoesNotContain("/WHOLEARCHIVE", gitlabCi);
+        Assert.DoesNotContain("opus.includes.rsp", gitlabCi);
     }
 
     [Fact]
@@ -454,7 +456,21 @@ public sealed class NativeLibrarySmokeTests
 
         public static string GetRepositoryRoot()
         {
-            return Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../../"));
+            var directory = new DirectoryInfo(AppContext.BaseDirectory);
+
+            while (directory is not null)
+            {
+                if (File.Exists(Path.Combine(directory.FullName, "OpusSharp.sln")) &&
+                    Directory.Exists(Path.Combine(directory.FullName, "OpusSharp.Natives")))
+                {
+                    return directory.FullName;
+                }
+
+                directory = directory.Parent;
+            }
+
+            throw new DirectoryNotFoundException(
+                $"Could not find repository root from '{AppContext.BaseDirectory}'.");
         }
 
         public static string GetOutputNativeLibraryPath()
