@@ -15,4 +15,16 @@
       <ForceLoad>True</ForceLoad>
     </NativeReference>
   </ItemGroup>
+
+  <Target Name="_OpusSharpRegisterBrowserWasmPInvokeModule"
+          BeforeTargets="_GenerateManagedToNative"
+          Condition="(
+            '$(RuntimeIdentifier)' == 'browser-wasm'
+            or $([System.String]::Copy('$(RuntimeIdentifiers)').Contains('browser-wasm'))
+            or '$([MSBuild]::GetTargetPlatformIdentifier($(TargetFramework)))' == 'browser'
+          )">
+    <ItemGroup>
+      <_WasmPInvokeModules Include="opus" />
+    </ItemGroup>
+  </Target>
 </Project>

@@ -161,7 +161,7 @@ namespace OpusSharp.Core.Static
         }
 
         /// <inheritdoc/>
-        public int Ctl(EncoderCTL request)
+        public virtual int Ctl(EncoderCTL request)
         {
             ThrowIfDisposed();
             var result = StaticNativeOpus.opus_encoder_ctl(_handler, (int)request);
@@ -170,66 +170,66 @@ namespace OpusSharp.Core.Static
         }
 
         /// <inheritdoc/>
-        public int Ctl(EncoderCTL request, int value)
+        public virtual int Ctl(EncoderCTL request, int value)
         {
             ThrowIfDisposed();
-            var result = StaticNativeOpus.opus_encoder_ctl(_handler, (int)request, value);
+            var result = StaticNativeOpus.opussharp_encoder_ctl_i(_handler, (int)request, value);
             CheckError(result);
             return result;
         }
 
         /// <inheritdoc/>
-        public unsafe int Ctl<T>(EncoderCTL request, ref T value) where T : unmanaged
+        public virtual unsafe int Ctl<T>(EncoderCTL request, ref T value) where T : unmanaged
         {
             ThrowIfDisposed();
             fixed (void* valuePtr = &value)
             {
-                var result = StaticNativeOpus.opus_encoder_ctl(_handler, (int)request, valuePtr);
+                var result = StaticNativeOpus.opussharp_encoder_ctl_p(_handler, (int)request, valuePtr);
                 CheckError(result);
                 return result;
             }
         }
 
         /// <inheritdoc/>
-        public unsafe int Ctl<T>(EncoderCTL request, ref T value, int value2) where T : unmanaged
+        public virtual unsafe int Ctl<T>(EncoderCTL request, ref T value, int value2) where T : unmanaged
         {
             ThrowIfDisposed();
             fixed (void* valuePtr = &value)
             {
-                var result = StaticNativeOpus.opus_encoder_ctl(_handler, (int)request, valuePtr, value2);
+                var result = StaticNativeOpus.opussharp_encoder_ctl_pi(_handler, (int)request, valuePtr, value2);
                 CheckError(result);
                 return result;
             }
         }
 
         /// <inheritdoc/>
-        public unsafe int Ctl<T>(EncoderCTL request, int value, ref T value2) where T : unmanaged
+        public virtual unsafe int Ctl<T>(EncoderCTL request, int value, ref T value2) where T : unmanaged
         {
             ThrowIfDisposed();
             fixed (void* value2Ptr = &value2)
             {
-                var result = StaticNativeOpus.opus_encoder_ctl(_handler, (int)request, value, value2Ptr);
+                var result = StaticNativeOpus.opussharp_encoder_ctl_ip(_handler, (int)request, value, value2Ptr);
                 CheckError(result);
                 return result;
             }
         }
 
         /// <inheritdoc/>
-        public unsafe int Ctl<T, T2>(EncoderCTL request, ref T value, ref T2 value2)
+        public virtual unsafe int Ctl<T, T2>(EncoderCTL request, ref T value, ref T2 value2)
             where T : unmanaged where T2 : unmanaged
         {
             ThrowIfDisposed();
             fixed (void* valuePtr = &value)
             fixed (void* value2Ptr = &value2)
             {
-                var result = StaticNativeOpus.opus_encoder_ctl(_handler, (int)request, valuePtr, value2Ptr);
+                var result = StaticNativeOpus.opussharp_encoder_ctl_pp(_handler, (int)request, valuePtr, value2Ptr);
                 CheckError(result);
                 return result;
             }
         }
 
         /// <inheritdoc/>
-        public int Ctl(GenericCTL request)
+        public virtual int Ctl(GenericCTL request)
         {
             ThrowIfDisposed();
             var result = StaticNativeOpus.opus_encoder_ctl(_handler, (int)request);
@@ -238,21 +238,21 @@ namespace OpusSharp.Core.Static
         }
 
         /// <inheritdoc/>
-        public int Ctl(GenericCTL request, int value)
+        public virtual int Ctl(GenericCTL request, int value)
         {
             ThrowIfDisposed();
-            var result = StaticNativeOpus.opus_encoder_ctl(_handler, (int)request, value);
+            var result = StaticNativeOpus.opussharp_encoder_ctl_i(_handler, (int)request, value);
             CheckError(result);
             return result;
         }
 
         /// <inheritdoc/>
-        public unsafe int Ctl<T>(GenericCTL request, ref T value) where T : unmanaged
+        public virtual unsafe int Ctl<T>(GenericCTL request, ref T value) where T : unmanaged
         {
             ThrowIfDisposed();
             fixed (void* valuePtr = &value)
             {
-                var result = StaticNativeOpus.opus_encoder_ctl(_handler, (int)request, valuePtr);
+                var result = StaticNativeOpus.opussharp_encoder_ctl_p(_handler, (int)request, valuePtr);
                 CheckError(result);
                 return result;
             }

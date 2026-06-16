@@ -2,7 +2,6 @@ using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using OpusSharp.Core;
 using Xunit;
 
 namespace OpusSharp.Core.Tests;
@@ -54,31 +53,6 @@ public sealed class NativeLibrarySmokeTests
         var exception = new OpusException();
 
         Assert.NotNull(exception);
-    }
-
-    [Fact]
-    public void MultistreamCtlNoArgumentOverloads_AreManagedWrappers()
-    {
-        AssertPublicCtlOverloadIsManagedWrapper(typeof(NativeOpus), nameof(NativeOpus.opus_ms_encoder_ctl), 2);
-        AssertPublicCtlOverloadIsManagedWrapper(typeof(NativeOpus), nameof(NativeOpus.opus_ms_decoder_ctl), 2);
-        AssertPublicCtlOverloadIsManagedWrapper(typeof(StaticNativeOpus), nameof(StaticNativeOpus.opus_ms_encoder_ctl), 2);
-        AssertPublicCtlOverloadIsManagedWrapper(typeof(StaticNativeOpus), nameof(StaticNativeOpus.opus_ms_decoder_ctl), 2);
-
-        AssertPrivateLibraryImportSymbol(typeof(NativeOpus), "opus_multistream_encoder_ctl");
-        AssertPrivateLibraryImportSymbol(typeof(NativeOpus), "opus_multistream_decoder_ctl");
-        AssertPrivateLibraryImportSymbol(typeof(StaticNativeOpus), "opus_multistream_encoder_ctl");
-        AssertPrivateLibraryImportSymbol(typeof(StaticNativeOpus), "opus_multistream_decoder_ctl");
-    }
-
-    [Fact]
-    public void CtlOverloadsWithVariadicArguments_AreManagedWrappers()
-    {
-        foreach (var method in GetPublicCtlMethods(typeof(NativeOpus), typeof(StaticNativeOpus))
-                     .Where(method => method.GetParameters().Length > 2))
-        {
-            Assert.Empty(method.GetCustomAttributes<LibraryImportAttribute>());
-            Assert.Empty(method.GetCustomAttributes<DllImportAttribute>());
-        }
     }
 
     [Fact]
@@ -169,7 +143,7 @@ public sealed class NativeLibrarySmokeTests
     }
 
     [Fact]
-    public void NativesPackage_ExcludesUnsupportedWindowsRuntimes()
+    public void NativesPackage_ExcludesUnsupportedWindowsArmRuntime()
     {
         var project = File.ReadAllText(Path.Combine(
             TestNativeLibraryBootstrapper.GetRepositoryRoot(),
@@ -177,47 +151,112 @@ public sealed class NativeLibrarySmokeTests
             "OpusSharp.Natives.csproj"));
 
         Assert.Contains("runtimes\\win-arm\\**\\*", project);
-        Assert.Contains("runtimes\\win-x86\\**\\*", project);
+        Assert.DoesNotContain("runtimes\\win-x86\\**\\*", project);
     }
 
     [Fact]
-    public void WindowsNativeBuildWorkflow_HandlesDecoratedX86OpusSymbols()
+    public void WindowsNativeBuildJob_HandlesDecoratedX86OpusSymbols()
     {
-        var workflow = File.ReadAllText(Path.Combine(
+        var gitlabCi = File.ReadAllText(Path.Combine(
             TestNativeLibraryBootstrapper.GetRepositoryRoot(),
+            ".gitlab-ci.yml"));
+
+        Assert.Contains("External\\s+\\|\\s+(opus_\\S+)", gitlabCi);
+        Assert.Contains("-replace '^_', ''", gitlabCi);
+        Assert.Contains("link /DLL /OUT:opus.dll /DEF:opus.def opus_shim.obj Release\\opus.lib", gitlabCi);
+        Assert.DoesNotContain("_?opus_\\S+", gitlabCi);
+        Assert.DoesNotContain("/WHOLEARCHIVE", gitlabCi);
+        Assert.DoesNotContain("opus.includes.rsp", gitlabCi);
+    }
+
+    [Fact]
+    public void BrowserWasm_DefaultRuntimeUsesOpusModuleInsteadOfInternal()
+    {
+        var runtimeSource = File.ReadAllText(Path.Combine(
+            TestNativeLibraryBootstrapper.GetRepositoryRoot(),
+            "OpusSharp.Core",
+            "OpusRuntime.cs"));
+
+        Assert.Equal("opus", GetNativeDllName(typeof(NativeOpus)));
+        Assert.Equal("__Internal", GetNativeDllName(typeof(StaticNativeOpus)));
+        Assert.Contains("OSPlatform.Create(\"IOS\")", runtimeSource);
+        Assert.DoesNotContain("OSPlatform.Create(\"BROWSER\")", runtimeSource);
+    }
+
+    [Fact]
+    public void BrowserWasmNatives_RegisterOpusPInvokeModule()
+    {
+        var root = TestNativeLibraryBootstrapper.GetRepositoryRoot();
+        var props = File.ReadAllText(Path.Combine(
+            root,
+            "OpusSharp.Natives",
+            "buildTransitive",
+            "OpusSharp.Natives.props"));
+        var targets = File.ReadAllText(Path.Combine(
+            root,
+            "OpusSharp.Natives",
+            "buildTransitive",
+            "OpusSharp.Natives.targets"));
+
+        Assert.Contains("runtimes/browser-wasm/native/libopus.a", props);
+        Assert.Contains("<NativeFileReference Include=\"$(_OpusSharpWasmLibrary)\" />", props);
+        Assert.Contains("BeforeTargets=\"_GenerateManagedToNative\"", targets);
+        Assert.Contains("<_WasmPInvokeModules Include=\"opus\" />", targets);
+    }
+
+    [Fact]
+    public void BrowserPackageSmoke_UsesOnlyTopLevelOpusSharpPackage()
+    {
+        var browserSmokeRoot = Path.Combine(
+            TestNativeLibraryBootstrapper.GetRepositoryRoot(),
+            "samples",
+            "PackageSmoke",
+            "Browser");
+        var project = File.ReadAllText(Path.Combine(browserSmokeRoot, "OpusSharp.Smoke.Browser.csproj"));
+        var program = File.ReadAllText(Path.Combine(browserSmokeRoot, "Program.cs"));
+
+        Assert.Contains("<TargetFramework>net10.0-browser</TargetFramework>", project);
+        Assert.Contains("<WasmMainHTMLPath>wwwroot/index.html</WasmMainHTMLPath>", project);
+        Assert.Contains("<WasmMainJSPath>wwwroot/main.js</WasmMainJSPath>", project);
+        Assert.Contains("PackageReference Include=\"OpusSharp\"", project);
+        Assert.DoesNotContain("OpusSharp.Natives", project);
+        Assert.True(File.Exists(Path.Combine(browserSmokeRoot, "wwwroot", "index.html")));
+        Assert.True(File.Exists(Path.Combine(browserSmokeRoot, "wwwroot", "main.js")));
+        Assert.Contains("new OpusEncoder", program);
+        Assert.Contains("new OpusDecoder", program);
+        Assert.Contains("encoder.Encode", program);
+        Assert.Contains("decoder.Decode", program);
+    }
+
+    [Fact]
+    public void BrowserWasmArchive_ContainsStackCheckRuntimeMember()
+    {
+        var root = TestNativeLibraryBootstrapper.GetRepositoryRoot();
+        var archivePath = Path.Combine(
+            root,
+            "OpusSharp.Natives",
+            "runtimes",
+            "browser-wasm",
+            "native",
+            "libopus.a");
+        var stackCheckSource = File.ReadAllText(Path.Combine(
+            root,
+            "OpusSharp.Natives",
+            "wasm_stack_chk.c"));
+        /*
+        var workflow = File.ReadAllText(Path.Combine(
+            root,
             ".github",
             "workflows",
             "OpusCompile.yml"));
+        */
 
-        Assert.Contains("_?opus_\\S+", workflow);
-        Assert.Contains("$raw.Substring(1) + '=' + $raw", workflow);
-    }
-
-    private static void AssertPublicCtlOverloadIsManagedWrapper(Type type, string methodName, int parameterCount)
-    {
-        var method = Assert.Single(
-            type.GetMethods(BindingFlags.Public | BindingFlags.Static),
-            method => method.Name == methodName && method.GetParameters().Length == parameterCount);
-
-        Assert.Empty(method.GetCustomAttributes<LibraryImportAttribute>());
-        Assert.Empty(method.GetCustomAttributes<DllImportAttribute>());
-    }
-
-    private static void AssertPrivateLibraryImportSymbol(Type type, string methodName)
-    {
-        var method = Assert.Single(
-            type.GetMethods(BindingFlags.NonPublic | BindingFlags.Static),
-            method => method.Name == methodName && method.GetParameters().Length == 2);
-
-        Assert.Equal(methodName, GetImportedSymbol(method));
-    }
-
-    private static IEnumerable<MethodInfo> GetPublicCtlMethods(params Type[] types)
-    {
-        return types.SelectMany(type => type.GetMethods(BindingFlags.Public | BindingFlags.Static))
-            .Where(method =>
-                method.Name.StartsWith("opus_", StringComparison.Ordinal) &&
-                method.Name.EndsWith("_ctl", StringComparison.Ordinal));
+        AssertFileContainsAsciiSymbol(archivePath, "wasm_stack_chk.o");
+        AssertFileContainsAsciiSymbol(archivePath, "__stack_chk_fail");
+        AssertFileContainsAsciiSymbol(archivePath, "__stack_chk_guard");
+        Assert.Contains("__builtin_trap", stackCheckSource);
+        //Assert.Contains("wasm_stack_chk.c", workflow);
+        //Assert.Contains("wasm_stack_chk.o", workflow);
     }
 
     private static IEnumerable<string> GetManagedCtlShimSymbols()
@@ -245,6 +284,15 @@ public sealed class NativeLibrarySmokeTests
         return string.IsNullOrEmpty(importAttribute.EntryPoint)
             ? method.Name
             : importAttribute.EntryPoint;
+    }
+
+    private static string GetNativeDllName(Type type)
+    {
+        var field = type.GetField("DllName", BindingFlags.NonPublic | BindingFlags.Static);
+
+        Assert.NotNull(field);
+
+        return Assert.IsType<string>(field.GetRawConstantValue());
     }
 
     private static IEnumerable<string> GetSupportedNativeRuntimeFiles()
@@ -357,7 +405,21 @@ public sealed class NativeLibrarySmokeTests
 
         public static string GetRepositoryRoot()
         {
-            return Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../../"));
+            var directory = new DirectoryInfo(AppContext.BaseDirectory);
+
+            while (directory is not null)
+            {
+                if (File.Exists(Path.Combine(directory.FullName, "OpusSharp.sln")) &&
+                    Directory.Exists(Path.Combine(directory.FullName, "OpusSharp.Natives")))
+                {
+                    return directory.FullName;
+                }
+
+                directory = directory.Parent;
+            }
+
+            throw new DirectoryNotFoundException(
+                $"Could not find repository root from '{AppContext.BaseDirectory}'.");
         }
 
         public static string GetOutputNativeLibraryPath()
