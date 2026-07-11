@@ -9,6 +9,9 @@ compiles the opus binaries using a github actions file which is available [here]
 > SafeHandlers and NativeOpus functions are exposed and fully documented. However to get a minimal setup working, check
 > the example below.
 
+> [!NOTE]
+> If you are viewing this on GitHub, you are looking at a mirror. Actual development happens over at https://gitlab.avion.team/opussharp/OpusSharp
+
 ## Encoder Example
 
 Simple encoder example for initializing and encoding. You of course can use `short[]` or `float[]` arrays to encode as
