@@ -3,6 +3,7 @@
 
   <PropertyGroup>
     <OpusSharpSmokeVersion>$(OpusSharpVersion)</OpusSharpSmokeVersion>
-    <RestoreSources>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\local-nuget'));https://api.nuget.org/v3/index.json</RestoreSources>
+    <_OpusSharpSmokeLocalNuGet>$([MSBuild]::NormalizeDirectory('$(MSBuildThisFileDirectory)', '..', '..', 'local-nuget'))</_OpusSharpSmokeLocalNuGet>
+    <RestoreSources>$(_OpusSharpSmokeLocalNuGet);https://api.nuget.org/v3/index.json</RestoreSources>
   </PropertyGroup>
 </Project>

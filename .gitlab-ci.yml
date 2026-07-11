@@ -21,6 +21,7 @@ variables:
   DOTNET_CLI_TELEMETRY_OPTOUT: "1"
   DOTNET_NOLOGO: "1"
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1"
+  DOTNET_SDK_CHANNEL: "9.0"
   NUGET_PACKAGES: "$CI_PROJECT_DIR/.nuget/packages"
   OPUS_REPOSITORY: "https://gitlab.xiph.org/xiph/opus.git"
   OPUS_VERSION: "1.6.1"
@@ -57,11 +58,29 @@ cache:
       export DOTNET_CLI_HOME="$CI_PROJECT_DIR/.dotnet-home"
       export NUGET_PACKAGES="$CI_PROJECT_DIR/.nuget/packages"
       export PATH="/opt/homebrew/bin:/opt/homebrew/opt/libtool/libexec/gnubin:/opt/homebrew/opt/llvm/bin:/usr/local/bin:/usr/local/opt/libtool/libexec/gnubin:/usr/local/opt/llvm/bin:$PATH"
-      if [ -x "$HOME/.dotnet/dotnet" ]; then
+      if [ "${USE_LOCAL_DOTNET_SDK:-false}" = "true" ]; then
+        export DOTNET_ROOT="$CI_PROJECT_DIR/.dotnet-sdk"
+        mkdir -p "$DOTNET_ROOT"
+        if [ ! -x "$DOTNET_ROOT/dotnet" ] || ! "$DOTNET_ROOT/dotnet" --list-sdks | grep -q "^${DOTNET_SDK_CHANNEL%%.*}\\."; then
+          curl -fsSL https://dot.net/v1/dotnet-install.sh -o "$CI_PROJECT_DIR/.dotnet-install.sh"
+          bash "$CI_PROJECT_DIR/.dotnet-install.sh" --channel "$DOTNET_SDK_CHANNEL" --install-dir "$DOTNET_ROOT" --no-path
+        fi
+        export PATH="$DOTNET_ROOT:$PATH"
+      elif [ -x "$HOME/.dotnet/dotnet" ]; then
         export DOTNET_ROOT="$HOME/.dotnet"
         export PATH="$DOTNET_ROOT:$PATH"
       fi
       mkdir -p "$DOTNET_CLI_HOME" "$NUGET_PACKAGES"
+
+.macos_dotnet:
+  extends: .macos_shell
+  variables:
+    USE_LOCAL_DOTNET_SDK: "true"
+  cache:
+    key: macos-dotnet-sdk
+    paths:
+      - .dotnet-sdk/
+      - .nuget/packages/
 
 test:core:linux:
   stage: test
@@ -90,7 +109,7 @@ test:core:windows:
 
 test:core:macos:
   stage: test
-  extends: .macos_shell
+  extends: .macos_dotnet
   script:
     - dotnet --info
     - dotnet test ./OpusSharp.Core.Tests/OpusSharp.Core.Tests.csproj --configuration Release --logger "trx;LogFileName=test-results.trx" --results-directory ./TestResults
@@ -788,21 +807,22 @@ smoke:host:windows:
 
 smoke:host:macos:
   stage: smoke
-  extends: .macos_shell
+  extends: .macos_dotnet
   needs:
     - job: pack:packages
       artifacts: true
   script:
+    - dotnet restore ./samples/PackageSmoke/Host/OpusSharp.Smoke.Host.csproj
     - dotnet run --project ./samples/PackageSmoke/Host/OpusSharp.Smoke.Host.csproj --configuration Release
 
 smoke:ios:
   stage: smoke
-  extends: .macos_shell
+  extends: .macos_dotnet
   needs:
     - job: pack:packages
       artifacts: true
   script:
-    - dotnet workload install ios
+    - dotnet workload install ios --skip-manifest-update
     - dotnet build ./samples/PackageSmoke/iOS/OpusSharp.Smoke.iOS.csproj --configuration Release -f net9.0-ios -p:RuntimeIdentifier=iossimulator-arm64
 
 smoke:browser:
